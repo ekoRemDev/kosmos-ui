@@ -164,7 +164,7 @@ class _Primary extends CTA {
           constraints: themeData.constraints,
           decoration: BoxDecoration(
               color: themeData.backgroundColor ?? (gradient != null ? null : Theme.of(context).primaryColor),
-              gradient: gradient,
+              gradient: gradient ?? themeData.gradient,
               borderRadius: BorderRadius.circular(radius ?? themeData.borderRadius ?? 7),
               border: border ?? themeData.border),
           child: Material(
@@ -181,6 +181,7 @@ class _Primary extends CTA {
                   ? Center(
                       child: LoaderClassique(
                         radius: (height ?? getResponsiveValue(context, defaultValue: 54, desktop: themeData.heightInWeb, phone: themeData.heightInMobile))! / 5,
+                        activeColor: themeData.loaderColor,
                       ),
                     )
                   : child ??
@@ -261,7 +262,7 @@ class _Secondary extends CTA {
           constraints: themeData.constraints,
           decoration: BoxDecoration(
             color: themeData.backgroundColor,
-            gradient: gradient,
+            gradient: gradient ?? themeData.gradient,
             borderRadius: BorderRadius.circular(radius ?? themeData.borderRadius ?? 7),
             border: border ?? themeData.border,
           ),
@@ -279,6 +280,7 @@ class _Secondary extends CTA {
                   ? Center(
                       child: LoaderClassique(
                         radius: (height ?? getResponsiveValue(context, defaultValue: 54, desktop: themeData.heightInWeb, phone: themeData.heightInMobile))! / 5,
+                        activeColor: themeData.loaderColor,
                       ),
                     )
                   : child ??

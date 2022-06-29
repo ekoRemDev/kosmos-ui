@@ -13,6 +13,8 @@ class CtaThemeData {
   final Color? backgroundColor;
   final double? borderRadius;
   final BoxBorder? border;
+  final LinearGradient? gradient;
+  final Color? loaderColor;
 
   const CtaThemeData({
     this.width,
@@ -27,5 +29,7 @@ class CtaThemeData {
     this.textButtonStyle,
     this.borderRadius,
     this.border,
+    this.gradient,
+    this.loaderColor,
   });
 }
