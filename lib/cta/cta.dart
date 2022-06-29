@@ -1,8 +1,10 @@
 import 'package:core_kosmos/core_kosmos.dart';
 import 'package:flutter/material.dart';
 import 'package:ui_kosmos_v4/cta/theme.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:ui_kosmos_v4/micro_element/micro_element.dart';
 
-abstract class CTA extends StatelessWidget {
+abstract class CTA extends HookWidget {
   final double? height;
   final double? width;
   final double? radius;
@@ -13,7 +15,7 @@ abstract class CTA extends StatelessWidget {
   final String? textButton;
   final TextStyle? textButtonStyle;
   final double? distanceBetweenIconText;
-  final VoidCallback? onTap;
+  final Function? onTap;
   final VoidCallback? onDoubleTap;
   final bool circleOnTap;
   final Color? backgroundColor;
@@ -56,7 +58,7 @@ abstract class CTA extends StatelessWidget {
     final String? textButton,
     final TextStyle? textButtonStyle,
     final double? distanceBetweenIconText,
-    final VoidCallback? onTap,
+    final Function? onTap,
     final VoidCallback? onDoubleTap,
     final CtaThemeData? theme,
     final String? themeName,
@@ -74,7 +76,7 @@ abstract class CTA extends StatelessWidget {
     final String? textButton,
     final TextStyle? textButtonStyle,
     final double? distanceBetweenIconText,
-    final VoidCallback? onTap,
+    final Function? onTap,
     final VoidCallback? onDoubleTap,
     final CtaThemeData? theme,
     final String? themeName,
@@ -87,7 +89,7 @@ abstract class CTA extends StatelessWidget {
     final double? width,
     final double? radiusOnTap,
     final bool circleOnTap,
-    final VoidCallback? onTap,
+    final Function? onTap,
     final VoidCallback? onDoubleTap,
     final String? textButton,
     final TextStyle? textButtonStyle,
@@ -101,7 +103,7 @@ abstract class CTA extends StatelessWidget {
     final double? height,
     final double? width,
     final double? radius,
-    final VoidCallback? onTap,
+    final Function? onTap,
     final VoidCallback? onDoubleTap,
     final IconData? backIcon,
     final Color backgroundColor,
@@ -125,7 +127,7 @@ class _Primary extends CTA {
     final String? textButton,
     final TextStyle? textButtonStyle,
     final double? distanceBetweenIconText,
-    final VoidCallback? onTap,
+    final Function? onTap,
     final VoidCallback? onDoubleTap,
     final CtaThemeData? theme,
     final String? themeName,
@@ -152,6 +154,8 @@ class _Primary extends CTA {
   @override
   Widget build(BuildContext context) {
     final themeData = loadThemeData(theme, themeName ?? "primary_button", () => const CtaThemeData())!;
+    var state = useState(false);
+
     return Material(
         type: MaterialType.transparency,
         child: Container(
@@ -166,33 +170,43 @@ class _Primary extends CTA {
           child: Material(
             type: MaterialType.transparency,
             child: InkWell(
-              onTap: onTap,
+              onTap: () async {
+                state.value = true;
+                if (onTap != null) await onTap!();
+                state.value = false;
+              },
               onDoubleTap: onDoubleTap,
               borderRadius: BorderRadius.circular(radius ?? themeData.borderRadius ?? 7),
-              child: child ??
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      beforeIcon != null
-                          ? Icon(
-                              beforeIcon,
-                              color: Colors.white,
-                            )
-                          : const SizedBox(),
-                      SizedBox(width: beforeIcon != null ? distanceBetweenIconText ?? themeData.distanceBetweenIconText ?? 10 : 0),
-                      Text(
-                        textButton ?? 'Button_Text',
-                        style: textButtonStyle ?? const TextStyle(color: Colors.white),
+              child: state.value
+                  ? Center(
+                      child: LoaderClassique(
+                        radius: (height ?? getResponsiveValue(context, defaultValue: 54, desktop: themeData.heightInWeb, phone: themeData.heightInMobile))! / 5,
                       ),
-                      SizedBox(width: afterIcon != null ? distanceBetweenIconText ?? themeData.distanceBetweenIconText ?? 10 : 0),
-                      afterIcon != null
-                          ? Icon(
-                              afterIcon,
-                              color: Colors.white,
-                            )
-                          : const SizedBox()
-                    ],
-                  ),
+                    )
+                  : child ??
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          beforeIcon != null
+                              ? Icon(
+                                  beforeIcon,
+                                  color: Colors.white,
+                                )
+                              : const SizedBox(),
+                          SizedBox(width: beforeIcon != null ? distanceBetweenIconText ?? themeData.distanceBetweenIconText ?? 10 : 0),
+                          Text(
+                            textButton ?? 'Button_Text',
+                            style: textButtonStyle ?? const TextStyle(color: Colors.white),
+                          ),
+                          SizedBox(width: afterIcon != null ? distanceBetweenIconText ?? themeData.distanceBetweenIconText ?? 10 : 0),
+                          afterIcon != null
+                              ? Icon(
+                                  afterIcon,
+                                  color: Colors.white,
+                                )
+                              : const SizedBox()
+                        ],
+                      ),
             ),
           ),
         ));
@@ -210,7 +224,7 @@ class _Secondary extends CTA {
     final String? textButton,
     final TextStyle? textButtonStyle,
     final double? distanceBetweenIconText,
-    final VoidCallback? onTap,
+    final Function? onTap,
     final VoidCallback? onDoubleTap,
     final CtaThemeData? theme,
     final String? themeName,
@@ -237,6 +251,8 @@ class _Secondary extends CTA {
   @override
   Widget build(BuildContext context) {
     final themeData = loadThemeData(theme, themeName ?? "secondary_button", () => const CtaThemeData())!;
+    var state = useState(false);
+
     return Material(
         type: MaterialType.transparency,
         child: Container(
@@ -252,33 +268,43 @@ class _Secondary extends CTA {
           child: Material(
             type: MaterialType.transparency,
             child: InkWell(
-              onTap: onTap,
+              onTap: () async {
+                state.value = true;
+                if (onTap != null) await onTap!();
+                state.value = false;
+              },
               onDoubleTap: onDoubleTap,
               borderRadius: BorderRadius.circular(radius ?? themeData.borderRadius ?? 7),
-              child: child ??
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      beforeIcon != null
-                          ? Icon(
-                              beforeIcon,
-                              color: textButtonStyle?.color ?? themeData.textButtonStyle?.color ?? Colors.white,
-                            )
-                          : const SizedBox(),
-                      SizedBox(width: beforeIcon != null ? distanceBetweenIconText ?? themeData.distanceBetweenIconText ?? 10 : 0),
-                      Text(
-                        textButton ?? 'Button_Text',
-                        style: textButtonStyle ?? themeData.textButtonStyle ?? const TextStyle(color: Colors.white),
+              child: state.value
+                  ? Center(
+                      child: LoaderClassique(
+                        radius: (height ?? getResponsiveValue(context, defaultValue: 54, desktop: themeData.heightInWeb, phone: themeData.heightInMobile))! / 5,
                       ),
-                      SizedBox(width: afterIcon != null ? distanceBetweenIconText ?? themeData.distanceBetweenIconText ?? 10 : 0),
-                      afterIcon != null
-                          ? Icon(
-                              afterIcon,
-                              color: textButtonStyle?.color ?? themeData.textButtonStyle?.color ?? Colors.white,
-                            )
-                          : const SizedBox()
-                    ],
-                  ),
+                    )
+                  : child ??
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          beforeIcon != null
+                              ? Icon(
+                                  beforeIcon,
+                                  color: textButtonStyle?.color ?? themeData.textButtonStyle?.color ?? Colors.white,
+                                )
+                              : const SizedBox(),
+                          SizedBox(width: beforeIcon != null ? distanceBetweenIconText ?? themeData.distanceBetweenIconText ?? 10 : 0),
+                          Text(
+                            textButton ?? 'Button_Text',
+                            style: textButtonStyle ?? themeData.textButtonStyle ?? const TextStyle(color: Colors.white),
+                          ),
+                          SizedBox(width: afterIcon != null ? distanceBetweenIconText ?? themeData.distanceBetweenIconText ?? 10 : 0),
+                          afterIcon != null
+                              ? Icon(
+                                  afterIcon,
+                                  color: textButtonStyle?.color ?? themeData.textButtonStyle?.color ?? Colors.white,
+                                )
+                              : const SizedBox()
+                        ],
+                      ),
             ),
           ),
         ));
@@ -292,7 +318,7 @@ class _Tiers extends CTA {
     final double? radiusOnTap,
     final bool circleOnTap = false,
     final Icon? icon,
-    final VoidCallback? onTap,
+    final Function? onTap,
     final VoidCallback? onDoubleTap,
     final String? textButton,
     final TextStyle? textButtonStyle,
@@ -319,7 +345,9 @@ class _Tiers extends CTA {
     final themeData = loadThemeData(theme, themeName ?? "tiers_button", () => const CtaThemeData())!;
     return InkWell(
       borderRadius: BorderRadius.circular(circleOnTap ? 1000 : radius ?? themeData.borderRadius ?? 14),
-      onTap: onTap,
+      onTap: () async {
+        if (onTap != null) await onTap!();
+      },
       onDoubleTap: onDoubleTap,
       child: Container(
         width: width,
@@ -358,7 +386,7 @@ class _Back extends CTA {
     final double? width,
     final double? radius,
     final IconData? backIcon,
-    final VoidCallback? onTap,
+    final Function? onTap,
     final VoidCallback? onDoubleTap,
     final Color backgroundColor = Colors.white,
     final CtaThemeData? theme,
@@ -383,7 +411,9 @@ class _Back extends CTA {
     return Material(
         type: MaterialType.transparency,
         child: InkWell(
-          onTap: onTap,
+          onTap: () async {
+            if (onTap != null) await onTap!();
+          },
           onDoubleTap: onDoubleTap,
           child: Container(
             height: formatHeight(height ?? getResponsiveValue(context, defaultValue: 47, desktop: themeData.heightInWeb, phone: themeData.heightInMobile)),
