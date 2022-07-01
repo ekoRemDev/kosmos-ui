@@ -219,7 +219,7 @@ class ProgressBar extends StatelessWidget {
                 if (showPercentage ?? false)
                   Positioned(
                     child: Text(
-                      "${percent.toInt().toString()}%",
+                      "${(current / max * 100).toInt()}%",
                       style: percentageStyle ?? themeData.percentageStyle ?? TextStyle(color: Colors.white, fontSize: sp(14), fontWeight: FontWeight.w600),
                     ),
                     left: formatWidth(11),
