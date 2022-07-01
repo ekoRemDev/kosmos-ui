@@ -1,6 +1,8 @@
+import 'dart:html' as html;
 import 'dart:io';
 
 import 'package:core_kosmos/core_kosmos.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:ui_kosmos_v4/form/theme.dart';
@@ -17,7 +19,7 @@ abstract class Input extends HookWidget {
   final String? svgIconPath;
   final VoidCallback? onTap;
   final VoidCallback? onDoubleTap;
-  final File? image;
+  final PlatformFile? image;
   final BoxDecoration? boxDecoration;
   final double? inkRadius;
   final EdgeInsets? contentPadding;
@@ -29,10 +31,17 @@ abstract class Input extends HookWidget {
   final CustomFormFieldThemeData? theme;
 
   final List<FileNameItem>? listNameFiles;
-  final Function(File?)? onChanged;
-  final File? defaultFile;
-  final List<File?>? defaultFileList;
-  final Function(List<File?>?)? onMultipleChanged;
+  final Function(PlatformFile?)? onChanged;
+  final PlatformFile? defaultFile;
+  final List<PlatformFile>? defaultFileList;
+  final Function(List<PlatformFile>?)? onMultipleChanged;
+
+  final String? desc;
+  final Widget? header;
+  final Widget? footer;
+  final bool? isValid;
+
+  final List<PlatformFile>? defaultFiles;
 
   const Input({
     this.theme,
@@ -59,6 +68,11 @@ abstract class Input extends HookWidget {
     this.onChanged,
     this.defaultFileList,
     this.onMultipleChanged,
+    this.desc,
+    this.footer,
+    this.header,
+    this.defaultFiles,
+    this.isValid,
     Key? key,
   }) : super(key: key);
 
@@ -72,7 +86,7 @@ abstract class Input extends HookWidget {
     final VoidCallback? postFieldOnClick,
     final VoidCallback? onTap,
     final VoidCallback? onDoubleTap,
-    final File? image,
+    final PlatformFile? image,
     final BoxDecoration? boxDecoration,
     final double? inkRadius,
     final EdgeInsets? contentPadding,
@@ -81,8 +95,8 @@ abstract class Input extends HookWidget {
     final Color? iconColor,
     final double? widthImage,
     final CustomFormFieldThemeData? theme,
-    final Function(File?)? onChanged,
-    final File? defaultFile,
+    final Function(PlatformFile?)? onChanged,
+    final PlatformFile? defaultFile,
   }) = _OneImage;
 
   const factory Input.files({
@@ -101,9 +115,34 @@ abstract class Input extends HookWidget {
     final Color? iconColor,
     final List<FileNameItem>? listNameFiles,
     final CustomFormFieldThemeData? theme,
-    final List<File?>? defaultFileList,
-    final Function(List<File?>?)? onMultipleChanged,
+    final List<PlatformFile>? defaultFileList,
+    final Function(List<PlatformFile>?)? onMultipleChanged,
   }) = _MultipleFile;
+
+  const factory Input.validatedFile({
+    final String? svgIconPath,
+    final VoidCallback? onTap,
+    final VoidCallback? onDoubleTap,
+    final BoxDecoration? boxDecoration,
+    final double? inkRadius,
+    final EdgeInsets? contentPadding,
+    final String? fieldName,
+    final TextStyle? fieldNameStyle,
+    final String? fieldPostRedirection,
+    final TextStyle? fieldPostRedirectionStyle,
+    final VoidCallback? postFieldOnClick,
+    final TextStyle? textStyle,
+    final Color? iconColor,
+    final double? widthImage,
+    final CustomFormFieldThemeData? theme,
+    final Function(PlatformFile?)? onChanged,
+    final List<PlatformFile>? defaultFiles,
+    final String? desc,
+    final Widget? header,
+    final Widget? footer,
+    final double? height,
+    final bool? isValid,
+  }) = _ValidatedFile;
 
   @override
   Widget build(BuildContext context) => Container();
@@ -111,16 +150,16 @@ abstract class Input extends HookWidget {
 
 class _OneImage extends Input {
   const _OneImage({
+    final double? height,
+    final String? svgIconPath,
     final String? fieldName,
     final TextStyle? fieldNameStyle,
     final String? fieldPostRedirection,
     final TextStyle? fieldPostRedirectionStyle,
     final VoidCallback? postFieldOnClick,
-    final double? height,
-    final String? svgIconPath,
     final VoidCallback? onTap,
     final VoidCallback? onDoubleTap,
-    final File? image,
+    final PlatformFile? image,
     final BoxDecoration? boxDecoration,
     final double? inkRadius,
     final EdgeInsets? contentPadding,
@@ -129,8 +168,8 @@ class _OneImage extends Input {
     final Color? iconColor,
     final double? widthImage,
     final CustomFormFieldThemeData? theme,
-    final Function(File?)? onChanged,
-    final File? defaultFile,
+    final Function(PlatformFile?)? onChanged,
+    final PlatformFile? defaultFile,
   }) : super(
           height: height,
           svgIconPath: svgIconPath,
@@ -156,7 +195,7 @@ class _OneImage extends Input {
   @override
   Widget build(BuildContext context) {
     final themeData = loadThemeData(theme, "input_field", () => const CustomFormFieldThemeData())!;
-    final state = useState<File?>(defaultFile);
+    final state = useState<PlatformFile?>(defaultFile);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -217,7 +256,7 @@ class _OneImage extends Input {
                                 Container(
                                   width: formatWidth(widthImage ?? themeData.pickerImageWidth ?? 81),
                                   decoration: BoxDecoration(
-                                    image: DecorationImage(image: FileImage(state.value!), fit: BoxFit.cover),
+                                    // image: DecorationImage(image: FileImage(state.value!), fit: BoxFit.cover),
                                     borderRadius: BorderRadius.circular(imageRadius ?? themeData.pickerImageRadius ?? 5),
                                   ),
                                 ),
@@ -307,8 +346,8 @@ class _MultipleFile extends Input {
     final TextStyle? fieldPostRedirectionStyle,
     final VoidCallback? postFieldOnClick,
     final CustomFormFieldThemeData? theme,
-    final List<File?>? defaultFileList,
-    final Function(List<File?>?)? onMultipleChanged,
+    final List<PlatformFile>? defaultFileList,
+    final Function(List<PlatformFile>?)? onMultipleChanged,
   }) : super(
           svgIconPath: svgIconPath,
           onTap: onTap,
@@ -331,7 +370,7 @@ class _MultipleFile extends Input {
   @override
   Widget build(BuildContext context) {
     final themeData = loadThemeData(theme, "input_field", () => const CustomFormFieldThemeData())!;
-    final state = useState<List<File?>?>(defaultFileList);
+    final state = useState<List<PlatformFile>?>(defaultFileList);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -395,14 +434,14 @@ class _MultipleFile extends Input {
                                               return Row(
                                                 children: [
                                                   FileNameItem(
-                                                    fileName: e!.path.split("/").last,
+                                                    fileName: e.name,
                                                     onClear: () {
                                                       if (state.value == null) return;
                                                       if ((state.value?.length ?? 0) == 1) {
                                                         state.value = null;
                                                         return;
                                                       }
-                                                      List<File?>? ret = [];
+                                                      List<PlatformFile>? ret = [];
                                                       for (final t in state.value!) {
                                                         if (e != t) ret.add(t);
                                                       }
@@ -510,6 +549,288 @@ class _MultipleFile extends Input {
                               ],
                       ),
                     )),
+              ),
+            )),
+      ],
+    );
+  }
+}
+
+class _ValidatedFile extends Input {
+  const _ValidatedFile({
+    final String? svgIconPath,
+    final VoidCallback? onTap,
+    final VoidCallback? onDoubleTap,
+    final BoxDecoration? boxDecoration,
+    final double? inkRadius,
+    final EdgeInsets? contentPadding,
+    final String? fieldName,
+    final TextStyle? fieldNameStyle,
+    final String? fieldPostRedirection,
+    final TextStyle? fieldPostRedirectionStyle,
+    final VoidCallback? postFieldOnClick,
+    final TextStyle? textStyle,
+    final Color? iconColor,
+    final double? height,
+    final double? widthImage,
+    final CustomFormFieldThemeData? theme,
+    final Function(PlatformFile?)? onChanged,
+    final List<PlatformFile>? defaultFiles,
+    final String? desc,
+    final Widget? header,
+    final Widget? footer,
+    final bool? isValid,
+  }) : super(
+          svgIconPath: svgIconPath,
+          onTap: onTap,
+          height: height,
+          onDoubleTap: onDoubleTap,
+          boxDecoration: boxDecoration,
+          inkRadius: inkRadius,
+          contentPadding: contentPadding,
+          fieldName: fieldName,
+          fieldNameStyle: fieldNameStyle,
+          fieldPostRedirection: fieldPostRedirection,
+          fieldPostRedirectionStyle: fieldPostRedirectionStyle,
+          postFieldOnClick: postFieldOnClick,
+          textStyle: textStyle,
+          iconColor: iconColor,
+          widthImage: widthImage,
+          theme: theme,
+          onChanged: onChanged,
+          defaultFiles: defaultFiles,
+          desc: desc,
+          header: header,
+          footer: footer,
+          isValid: isValid,
+        );
+
+  @override
+  Widget build(BuildContext context) {
+    final themeData = loadThemeData(theme, "input_field", () => const CustomFormFieldThemeData())!;
+    final state = useState<List<PlatformFile>?>(defaultFiles);
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          children: [
+            fieldName != null
+                ? Text(
+                    fieldName!,
+                    style: fieldNameStyle ?? themeData.fieldNameStyle ?? const TextStyle(color: Color(0xFF02132B), fontSize: 12, fontWeight: FontWeight.w500),
+                  )
+                : Container(),
+            fieldPostRedirection == null ? const SizedBox() : const Spacer(),
+            fieldPostRedirection == null
+                ? const SizedBox()
+                : InkWell(
+                    onTap: postFieldOnClick,
+                    child: Text(
+                      fieldPostRedirection!,
+                      style: fieldPostRedirectionStyle ??
+                          themeData.fieldPostRedirectionStyle ??
+                          const TextStyle(
+                            color: Color(0xFF02132B),
+                            fontSize: 12,
+                            fontWeight: FontWeight.w600,
+                            decoration: TextDecoration.underline,
+                          ),
+                    )),
+          ],
+        ),
+        sh(7),
+        Material(
+            type: MaterialType.transparency,
+            child: Container(
+              height: height,
+              constraints: themeData.pickerConstraints ?? const BoxConstraints(minHeight: 108),
+              decoration: boxDecoration ?? themeData.pickerDecoration ?? BoxDecoration(color: const Color(0xFF02132B).withOpacity(0.03), borderRadius: BorderRadius.circular(7)),
+              child: Material(
+                type: MaterialType.transparency,
+                child: InkWell(
+                  borderRadius: BorderRadius.circular(inkRadius ?? 7),
+                  onTap: () async {
+                    if (onTap != null) onTap!();
+                    FilePickerResult? result = await FilePicker.platform.pickFiles();
+
+                    if (result != null) {
+                      state.value = result.files;
+                    } else {}
+                    if (onMultipleChanged != null) onMultipleChanged!(state.value);
+                  },
+                  onDoubleTap: onDoubleTap,
+                  child: Padding(
+                    padding: contentPadding ?? themeData.contentPadding ?? const EdgeInsets.fromLTRB(26, 6, 26, 6),
+                    child: Stack(
+                      alignment: Alignment.center,
+                      children: (state.value != null && state.value!.isNotEmpty)
+                          ? [
+                              Align(
+                                alignment: Alignment.center,
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: state.value != null
+                                      ? [
+                                          sh(10),
+                                          header != null
+                                              ? header!
+                                              : Center(
+                                                  child: Row(
+                                                    mainAxisSize: MainAxisSize.min,
+                                                    children: [
+                                                      svgIconPath == null
+                                                          ? Icon(
+                                                              Icons.cloud_upload_outlined,
+                                                              color: iconColor ?? themeData.pickerIconColor ?? const Color(0xFF02132B).withOpacity(0.41),
+                                                            )
+                                                          : SvgPicture.asset(
+                                                              svgIconPath!,
+                                                              color: iconColor ?? themeData.pickerIconColor ?? const Color(0xFF02132B).withOpacity(0.41),
+                                                            ),
+                                                      sw(4),
+                                                      Text(
+                                                        'Appuyez pour modifier le fichier',
+                                                        textAlign: TextAlign.center,
+                                                        style: textStyle ??
+                                                            themeData.fieldStyle ??
+                                                            TextStyle(fontSize: sp(13), fontWeight: FontWeight.w500, color: const Color(0xFF02132B).withOpacity(0.41)),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                          sh(10),
+                                          Divider(height: .5, color: Colors.black.withOpacity(.15)),
+                                          sh(20),
+                                          isValid ?? true
+                                              ? Container(
+                                                  width: formatWidth(34),
+                                                  height: formatWidth(34),
+                                                  decoration: BoxDecoration(
+                                                    color: const Color(0xFF2BD184),
+                                                    borderRadius: BorderRadius.circular(34),
+                                                  ),
+                                                  child: const Center(child: Icon(Icons.check_rounded, color: Colors.white, size: 24)),
+                                                )
+                                              : Container(
+                                                  width: formatWidth(34),
+                                                  height: formatWidth(34),
+                                                  decoration: BoxDecoration(
+                                                    color: const Color(0xFFEA1C1C),
+                                                    borderRadius: BorderRadius.circular(34),
+                                                  ),
+                                                  child: const Center(child: Icon(Icons.close_rounded, color: Colors.white, size: 24)),
+                                                ),
+                                          sh(6),
+                                          Center(
+                                            child: Column(
+                                              crossAxisAlignment: CrossAxisAlignment.center,
+                                              children: [
+                                                Row(
+                                                  mainAxisSize: MainAxisSize.max,
+                                                  children: [
+                                                    Opacity(
+                                                      opacity: 0,
+                                                      child: Icon(
+                                                        Icons.close,
+                                                        color: const Color(0xFF02132B).withOpacity(0.41),
+                                                      ),
+                                                    ),
+                                                    Expanded(
+                                                      child: Center(
+                                                        child: Text(
+                                                          state.value!.first.name,
+                                                          overflow: TextOverflow.ellipsis,
+                                                          style: TextStyle(color: const Color(0xFF02132B), fontSize: sp(13), fontWeight: FontWeight.w500),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    InkWell(
+                                                      onTap: () {
+                                                        state.value = null;
+                                                        if (onMultipleChanged != null) onMultipleChanged!(state.value);
+                                                      },
+                                                      child: const Icon(Icons.close, color: Color(0xFF02132B)),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ]
+                                      : [
+                                          Column(
+                                            mainAxisAlignment: MainAxisAlignment.center,
+                                            crossAxisAlignment: CrossAxisAlignment.center,
+                                            children: [
+                                              svgIconPath == null
+                                                  ? Icon(
+                                                      Icons.cloud_upload_outlined,
+                                                      color: iconColor ?? themeData.pickerIconColor ?? const Color(0xFF02132B).withOpacity(0.41),
+                                                    )
+                                                  : SvgPicture.asset(
+                                                      svgIconPath!,
+                                                      color: iconColor ?? themeData.pickerIconColor ?? const Color(0xFF02132B).withOpacity(0.41),
+                                                    ),
+                                              sw(7),
+                                              Text(
+                                                'Appuyez pour choisir une / des fichier(s)',
+                                                style: textStyle ??
+                                                    themeData.fieldStyle ??
+                                                    TextStyle(
+                                                      fontSize: sp(13),
+                                                      fontWeight: FontWeight.w500,
+                                                      color: const Color(0xFF02132B).withOpacity(0.41),
+                                                    ),
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                ),
+                              ),
+                            ]
+                          : [
+                              Align(
+                                alignment: Alignment.center,
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    svgIconPath == null
+                                        ? Icon(
+                                            Icons.cloud_upload_outlined,
+                                            color: iconColor ?? themeData.pickerIconColor ?? const Color(0xFF02132B).withOpacity(0.41),
+                                          )
+                                        : SvgPicture.asset(
+                                            svgIconPath!,
+                                            color: iconColor ?? themeData.pickerIconColor ?? const Color(0xFF02132B).withOpacity(0.41),
+                                          ),
+                                    sh(7),
+                                    Text(
+                                      'Appuyez pour choisir un fichier',
+                                      style: textStyle ??
+                                          themeData.hintStyle ??
+                                          TextStyle(
+                                            fontSize: 13,
+                                            fontWeight: FontWeight.w500,
+                                            color: const Color(0xFF02132B).withOpacity(0.41),
+                                          ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              if (desc != null)
+                                Positioned(
+                                  bottom: 0,
+                                  left: 0,
+                                  right: 0,
+                                  child: Text(desc!, textAlign: TextAlign.center, style: TextStyle(fontSize: sp(11), fontWeight: FontWeight.w500, color: const Color(0xFF02132B))),
+                                )
+                            ],
+                    ),
+                  ),
+                ),
               ),
             )),
       ],

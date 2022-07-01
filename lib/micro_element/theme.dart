@@ -19,6 +19,7 @@ class ProgressBarThemeData {
   final Duration? duration;
   final TextStyle? style;
   final BorderRadiusGeometry? borderRadius;
+  final TextStyle? percentageStyle;
 
   const ProgressBarThemeData({
     this.backColor,
@@ -27,5 +28,6 @@ class ProgressBarThemeData {
     this.height,
     this.style,
     this.borderRadius,
+    this.percentageStyle,
   });
 }
