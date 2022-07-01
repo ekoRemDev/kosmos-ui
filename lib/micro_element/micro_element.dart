@@ -155,6 +155,8 @@ class ProgressBar extends StatelessWidget {
   final String? customSmallTitle;
   final String? customBigTitle;
   final ProgressBarThemeData? theme;
+  final bool? showPercentage;
+  final TextStyle? percentageStyle;
 
   const ProgressBar({
     Key? key,
@@ -169,7 +171,10 @@ class ProgressBar extends StatelessWidget {
     this.customSmallTitle,
     this.textStyle,
     this.theme,
+    this.showPercentage,
+    this.percentageStyle,
   }) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     final themeData = loadThemeData(theme, "progress_bar", () => const ProgressBarThemeData())!;
@@ -211,6 +216,16 @@ class ProgressBar extends StatelessWidget {
                     borderRadius: borderRadius ?? themeData.borderRadius ?? BorderRadius.circular(8),
                   ),
                 ),
+                if (showPercentage ?? false)
+                  Positioned(
+                    child: Text(
+                      "${percent.toInt().toString()}%",
+                      style: percentageStyle ?? themeData.percentageStyle ?? TextStyle(color: Colors.white, fontSize: sp(14), fontWeight: FontWeight.w600),
+                    ),
+                    left: formatWidth(11),
+                    top: 0,
+                    bottom: 0,
+                  ),
               ],
             );
           },

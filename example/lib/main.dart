@@ -1,7 +1,11 @@
+import 'dart:typed_data';
+
+import 'package:core_kosmos/core_package.dart';
 import 'package:flutter/material.dart';
-import 'package:get_it/get_it.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 import 'package:ui_kosmos_v4/cta/cta.dart';
+import 'package:ui_kosmos_v4/form/input.dart';
+import 'package:file_picker/file_picker.dart';
 
 void main() {
   runApp(const MyApp());
@@ -45,6 +49,8 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  List<PlatformFile>? items;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,13 +60,23 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
+          children: [
             CTA.primary(
               textButton: 'Primary CTA',
               onTap: () async {
                 await Future.delayed(const Duration(seconds: 5));
               },
-            )
+            ),
+            sh(80),
+            SizedBox(
+              width: 284,
+              child: Input.validatedFile(
+                height: 200,
+                fieldName: "Test",
+                desc: "Format PDF",
+                defaultFiles: items,
+              ),
+            ),
           ],
         ),
       ),
