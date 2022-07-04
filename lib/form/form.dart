@@ -1222,7 +1222,6 @@ class _Select extends TextFormUpdated {
               child: DropdownButton(
                 borderRadius: BorderRadius.circular(radius ?? themeData.selectRadius ?? 7),
                 elevation: 0,
-                focusColor: Colors.black,
                 underline: const SizedBox(),
                 hint: Text(
                   hintText ?? "Sélectionner",
