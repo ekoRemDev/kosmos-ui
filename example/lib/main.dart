@@ -6,6 +6,7 @@ import 'package:responsive_framework/responsive_framework.dart';
 import 'package:ui_kosmos_v4/cta/cta.dart';
 import 'package:ui_kosmos_v4/form/input.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:ui_kosmos_v4/micro_element/micro_element.dart';
 
 void main() {
   runApp(const MyApp());
@@ -77,6 +78,12 @@ class _MyHomePageState extends State<MyHomePage> {
                 defaultFiles: items,
               ),
             ),
+            sh(80),
+            SizedBox(
+              height: 100,
+              width: 800,
+              child: ProgressBar.separated(max: 5, current: 2, items: const ["1", "2", "3", "4", "5"], showPercentage: true),
+            )
           ],
         ),
       ),
