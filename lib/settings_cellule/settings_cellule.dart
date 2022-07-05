@@ -16,11 +16,15 @@ class SettingsCellule extends StatelessWidget {
 
   final Color? backgroundColor;
   final Color? iconBackgroundColor;
+  final Color? activeBackgroundColor;
+  final Color? activeIconBackgroundColor;
   final Color? overlayColor;
   final double? radius;
 
   final String? themeName;
   final SettingsCelluleThemeData? theme;
+
+  final bool isActive;
 
   const SettingsCellule({
     this.radius,
@@ -31,6 +35,8 @@ class SettingsCellule extends StatelessWidget {
     this.subtitle,
     this.subtitleStyle,
     required this.onClick,
+    this.activeBackgroundColor,
+    this.activeIconBackgroundColor,
     this.image,
     this.icon,
     this.svg,
@@ -38,6 +44,7 @@ class SettingsCellule extends StatelessWidget {
     this.overlayColor,
     this.theme,
     this.themeName,
+    this.isActive = false,
     Key? key,
   }) : super(key: key);
 
@@ -54,9 +61,15 @@ class SettingsCellule extends StatelessWidget {
           ),
       child: TextButton(
         style: ButtonStyle(
-          backgroundColor: themeData.backgroundColor ?? MaterialStateProperty.resolveWith((states) => backgroundColor ?? const Color(0xFF02132B).withOpacity(0.03)),
-          overlayColor: themeData.overlayColor ??
-              MaterialStateProperty.resolveWith((states) => overlayColor ?? darkenOrLighten(backgroundColor ?? const Color(0xFF02132B).withOpacity(0.03))),
+          backgroundColor: MaterialStateProperty.resolveWith((states) {
+            if (!isActive) {
+              return themeData.backgroundColor ?? backgroundColor ?? const Color(0xFF02132B).withOpacity(0.03);
+            } else {
+              return themeData.activeBackgroundColor ?? activeBackgroundColor ?? const Color(0xFF02132B).withOpacity(0.03);
+            }
+          }),
+          overlayColor: MaterialStateProperty.resolveWith(
+              (states) => themeData.overlayColor ?? overlayColor ?? darkenOrLighten(backgroundColor ?? const Color(0xFF02132B).withOpacity(0.03))),
           shape: themeData.shape ?? MaterialStateProperty.resolveWith((states) => RoundedRectangleBorder(borderRadius: BorderRadius.circular((radius ?? 7)))),
         ),
         onPressed: onClick,
@@ -70,7 +83,11 @@ class SettingsCellule extends StatelessWidget {
                       width: formatWidth(themeData.imageWidth ?? 37),
                       decoration: image != null
                           ? BoxDecoration(shape: BoxShape.circle, image: DecorationImage(image: image!))
-                          : BoxDecoration(shape: BoxShape.circle, color: Theme.of(context).primaryColor),
+                          : BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: isActive
+                                  ? (themeData.activeIconBackgroundColor ?? activeIconBackgroundColor ?? const Color(0xFF02132B).withOpacity(0.03))
+                                  : (themeData.iconBackgroundColor ?? iconBackgroundColor ?? Theme.of(context).primaryColor)),
                       child: icon ?? svg ?? const SizedBox(),
                     )
                   : const SizedBox(),
