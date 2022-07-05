@@ -9,8 +9,10 @@ class SettingsCelluleThemeData {
   final double? imageWidth;
   final double? imageHeight;
 
-  final MaterialStateProperty<Color?>? backgroundColor;
-  final MaterialStateProperty<Color?>? overlayColor;
+  final Color? backgroundColor;
+  final Color? activeBackgroundColor;
+  final Color? activeIconBackgroundColor;
+  final Color? overlayColor;
   final MaterialStateProperty<OutlinedBorder?>? shape;
 
   final double? horizontalPadding;
@@ -29,5 +31,7 @@ class SettingsCelluleThemeData {
     this.shape,
     this.horizontalPadding,
     this.verticalPadding,
+    this.activeBackgroundColor,
+    this.activeIconBackgroundColor,
   });
 }
