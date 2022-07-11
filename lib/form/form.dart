@@ -1334,6 +1334,7 @@ class _TextArea extends TextFormUpdated {
           scrollPadding: EdgeInsets.zero,
           keyboardType: TextInputType.multiline,
           focusNode: focusNode,
+          initialValue: defaultValue,
           maxLines: maxLine?.toInt() ?? themeData.maxLine?.toInt() ?? 4,
           minLines: maxLine?.toInt() ?? themeData.maxLine?.toInt(),
           onFieldSubmitted: (String val) {
