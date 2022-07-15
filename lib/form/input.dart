@@ -1,5 +1,4 @@
-import 'dart:html' as html;
-import 'dart:io';
+// ignore_for_file: avoid_web_libraries_in_flutter
 
 import 'package:core_kosmos/core_kosmos.dart';
 import 'package:file_picker/file_picker.dart';
