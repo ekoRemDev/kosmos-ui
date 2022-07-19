@@ -207,7 +207,7 @@ class _Range extends CustomSlider {
         ),
         const SizedBox(height: 7),
         SliderTheme(
-          data: theme.copyWith(rangeThumbShape: CustomRangeShape(rangeValues: state.value)),
+          data: theme.copyWith(trackHeight: 2, rangeThumbShape: CustomRangeShape(rangeValues: state.value)),
           child: SizedBox(
             width: double.infinity,
             child: RangeSlider(
