@@ -76,7 +76,7 @@ class NutsActivityIndicatorState extends State<LoaderClassique> with SingleTicke
           animationController: _animationController!,
           radius: widget.radius ?? themeData.radius ?? 30,
           tickCount: widget.tickCount!,
-          activeColor: widget.activeColor ?? widget.activeColor ?? const Color(0xFF02132B),
+          activeColor: widget.activeColor ?? themeData.activeColor ?? const Color(0xFF02132B),
           relativeWidth: widget.relativeWidth,
           startRatio: widget.startRatio!,
           endRatio: widget.endRatio!,
