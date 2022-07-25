@@ -216,7 +216,7 @@ class _Primary extends CTA {
                       ),
                     )
                   : child ??
-                      (loading
+                      (!loading
                           ? Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
