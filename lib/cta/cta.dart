@@ -25,6 +25,7 @@ abstract class CTA extends HookWidget {
   final String? themeName;
   final BoxBorder? border;
   final LinearGradient? gradient;
+  final bool loading;
 
   const CTA({
     this.height,
@@ -47,6 +48,7 @@ abstract class CTA extends HookWidget {
     this.themeName,
     this.border,
     this.gradient,
+    this.loading = false,
     Key? key,
   }) : super(key: key);
 
@@ -67,6 +69,7 @@ abstract class CTA extends HookWidget {
     final String? themeName,
     final BoxBorder? border,
     final LinearGradient? gradient,
+    final bool loading,
   }) = _Primary;
 
   const factory CTA.secondary({
@@ -86,6 +89,7 @@ abstract class CTA extends HookWidget {
     final String? themeName,
     final BoxBorder? border,
     final LinearGradient? gradient,
+    final bool loading,
   }) = _Secondary;
 
   const factory CTA.tiers({
@@ -140,6 +144,7 @@ class _Primary extends CTA {
     final String? themeName,
     final BoxBorder? border,
     final LinearGradient? gradient,
+    final bool loading = false,
   }) : super(
           height: height,
           width: width,
@@ -157,6 +162,7 @@ class _Primary extends CTA {
           themeName: themeName,
           border: border,
           gradient: gradient,
+          loading: loading,
         );
 
   @override
@@ -173,8 +179,12 @@ class _Primary extends CTA {
                 ? 1
                 : 0.5,
         child: Container(
-          height: formatHeight(height ?? getResponsiveValue(context, defaultValue: 54, desktop: themeData.heightInWeb, phone: themeData.heightInMobile)),
-          width: formatWidth(width ?? getResponsiveValue(context, defaultValue: double.infinity, desktop: themeData.widthInWeb, phone: themeData.widthInMobile)),
+          height: formatHeight(height ??
+              getResponsiveValue(context,
+                  defaultValue: 54, desktop: themeData.heightInWeb, phone: themeData.heightInMobile)),
+          width: formatWidth(width ??
+              getResponsiveValue(context,
+                  defaultValue: double.infinity, desktop: themeData.widthInWeb, phone: themeData.widthInMobile)),
           constraints: themeData.constraints,
           decoration: BoxDecoration(
               color: themeData.backgroundColor ?? (gradient != null ? null : Theme.of(context).primaryColor),
@@ -196,34 +206,47 @@ class _Primary extends CTA {
               child: state.value
                   ? Center(
                       child: LoaderClassique(
-                        radius: (height ?? getResponsiveValue(context, defaultValue: 54, desktop: themeData.heightInWeb, phone: themeData.heightInMobile))! / 5,
+                        radius: (height ??
+                                getResponsiveValue(context,
+                                    defaultValue: 54,
+                                    desktop: themeData.heightInWeb,
+                                    phone: themeData.heightInMobile))! /
+                            5,
                         activeColor: themeData.loaderColor,
                       ),
                     )
                   : child ??
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          beforeIcon != null
-                              ? Icon(
-                                  beforeIcon,
-                                  color: Colors.white,
-                                )
-                              : const SizedBox(),
-                          SizedBox(width: beforeIcon != null ? distanceBetweenIconText ?? themeData.distanceBetweenIconText ?? 10 : 0),
-                          Text(
-                            textButton ?? 'Button_Text',
-                            style: textButtonStyle ?? const TextStyle(color: Colors.white),
-                          ),
-                          SizedBox(width: afterIcon != null ? distanceBetweenIconText ?? themeData.distanceBetweenIconText ?? 10 : 0),
-                          afterIcon != null
-                              ? Icon(
-                                  afterIcon,
-                                  color: Colors.white,
-                                )
-                              : const SizedBox()
-                        ],
-                      ),
+                      (loading
+                          ? Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                beforeIcon != null
+                                    ? Icon(
+                                        beforeIcon,
+                                        color: Colors.white,
+                                      )
+                                    : const SizedBox(),
+                                SizedBox(
+                                    width: beforeIcon != null
+                                        ? distanceBetweenIconText ?? themeData.distanceBetweenIconText ?? 10
+                                        : 0),
+                                Text(
+                                  textButton ?? 'Button_Text',
+                                  style: textButtonStyle ?? const TextStyle(color: Colors.white),
+                                ),
+                                SizedBox(
+                                    width: afterIcon != null
+                                        ? distanceBetweenIconText ?? themeData.distanceBetweenIconText ?? 10
+                                        : 0),
+                                afterIcon != null
+                                    ? Icon(
+                                        afterIcon,
+                                        color: Colors.white,
+                                      )
+                                    : const SizedBox()
+                              ],
+                            )
+                          : Transform.scale(scale: 0.6, child: const LoaderClassique(activeColor: Colors.white))),
             ),
           ),
         ),
@@ -250,6 +273,7 @@ class _Secondary extends CTA {
     final String? themeName,
     final BoxBorder? border,
     final LinearGradient? gradient,
+    final bool loading = false,
   }) : super(
           height: height,
           width: width,
@@ -267,6 +291,7 @@ class _Secondary extends CTA {
           themeName: themeName,
           border: border,
           gradient: gradient,
+          loading: loading,
         );
 
   @override
