@@ -38,13 +38,13 @@ dependencies:
   ##############
   # Responsive #
   ##############
-  responsive_framework: 0.1.7
+  responsive_framework: ^0.2.0
 
   core_kosmos:
     git:
       publish_to: 'none'
       url: https://gitlab+deploy-token-1160077:Lk-H1hsQ6GFff5xvsM-n@gitlab.com/package16/package-core.git
-      ref: main
+      ref: 423d083d1732be56080b7d205e70608491031883
 
   ui_kosmos_v4:
     path: ../

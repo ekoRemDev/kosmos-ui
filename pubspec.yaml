@@ -20,13 +20,15 @@ dependencies:
   auto_size_text: ^3.0.0
   cached_network_image: ^3.2.0
   hooks_riverpod: ^1.0.3
-  file_picker: 4.5.1
+  file_picker: ^4.6.1
 
   core_kosmos:
     git:
       publish_to: 'none'
       url: https://gitlab+deploy-token-1160077:Lk-H1hsQ6GFff5xvsM-n@gitlab.com/package16/package-core.git
-      ref: main
+      ref: 423d083d1732be56080b7d205e70608491031883
+      # ref: main
+
 
 dev_dependencies:
   flutter_test:
