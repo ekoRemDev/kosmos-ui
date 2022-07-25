@@ -44,7 +44,8 @@ dependencies:
     git:
       publish_to: 'none'
       url: https://gitlab+deploy-token-1160077:Lk-H1hsQ6GFff5xvsM-n@gitlab.com/package16/package-core.git
-      ref: 423d083d1732be56080b7d205e70608491031883
+      # ref: 423d083d1732be56080b7d205e70608491031883
+      ref: main
 
   ui_kosmos_v4:
     path: ../
