@@ -26,8 +26,8 @@ dependencies:
     git:
       publish_to: 'none'
       url: https://gitlab+deploy-token-1160077:Lk-H1hsQ6GFff5xvsM-n@gitlab.com/package16/package-core.git
-      ref: 423d083d1732be56080b7d205e70608491031883
-      # ref: main
+      # ref: 423d083d1732be56080b7d205e70608491031883
+      ref: main
 
 
 dev_dependencies:
