@@ -39,6 +39,7 @@ dependencies:
   # Responsive #
   ##############
   responsive_framework: ^0.2.0
+  flutter_screenutil: ^5.5.3+2
 
   core_kosmos:
     git:
