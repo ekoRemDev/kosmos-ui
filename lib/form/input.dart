@@ -1,5 +1,7 @@
 // ignore_for_file: avoid_web_libraries_in_flutter
 
+import 'dart:io';
+
 import 'package:core_kosmos/core_kosmos.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
@@ -39,6 +41,7 @@ abstract class Input extends HookWidget {
   final Widget? header;
   final Widget? footer;
   final bool? isValid;
+  final File? imageMobile;
 
   final List<PlatformFile>? defaultFiles;
 
@@ -72,6 +75,7 @@ abstract class Input extends HookWidget {
     this.header,
     this.defaultFiles,
     this.isValid,
+    this.imageMobile,
     Key? key,
   }) : super(key: key);
 
@@ -96,6 +100,7 @@ abstract class Input extends HookWidget {
     final CustomFormFieldThemeData? theme,
     final Function(PlatformFile?)? onChanged,
     final PlatformFile? defaultFile,
+    final File? imageMobile,
   }) = _OneImage;
 
   const factory Input.files({
@@ -169,6 +174,7 @@ class _OneImage extends Input {
     final CustomFormFieldThemeData? theme,
     final Function(PlatformFile?)? onChanged,
     final PlatformFile? defaultFile,
+    final File? imageMobile,
   }) : super(
           height: height,
           svgIconPath: svgIconPath,
@@ -190,6 +196,7 @@ class _OneImage extends Input {
           theme: theme,
           onChanged: onChanged,
           defaultFile: defaultFile,
+          imageMobile: imageMobile,
         );
   @override
   Widget build(BuildContext context) {
@@ -204,7 +211,9 @@ class _OneImage extends Input {
             fieldName != null
                 ? Text(
                     fieldName!,
-                    style: fieldNameStyle ?? themeData.fieldNameStyle ?? const TextStyle(color: Color(0xFF02132B), fontSize: 12, fontWeight: FontWeight.w500),
+                    style: fieldNameStyle ??
+                        themeData.fieldNameStyle ??
+                        const TextStyle(color: Color(0xFF02132B), fontSize: 12, fontWeight: FontWeight.w500),
                   )
                 : Container(),
             fieldPostRedirection == null ? const SizedBox() : const Spacer(),
@@ -247,7 +256,9 @@ class _OneImage extends Input {
                     },
                     onDoubleTap: onDoubleTap,
                     child: Padding(
-                      padding: state.value != null ? (contentPadding ?? themeData.contentPadding ?? const EdgeInsets.fromLTRB(7, 6, 30, 6)) : EdgeInsets.zero,
+                      padding: state.value != null
+                          ? (contentPadding ?? themeData.contentPadding ?? const EdgeInsets.fromLTRB(7, 6, 30, 6))
+                          : EdgeInsets.zero,
                       child: Stack(
                         alignment: Alignment.centerLeft,
                         children: state.value != null
@@ -255,8 +266,9 @@ class _OneImage extends Input {
                                 Container(
                                   width: formatWidth(widthImage ?? themeData.pickerImageWidth ?? 81),
                                   decoration: BoxDecoration(
-                                    // image: DecorationImage(image: FileImage(state.value!), fit: BoxFit.cover),
-                                    borderRadius: BorderRadius.circular(imageRadius ?? themeData.pickerImageRadius ?? 5),
+                                    image: DecorationImage(image: FileImage(imageMobile!), fit: BoxFit.cover),
+                                    borderRadius:
+                                        BorderRadius.circular(imageRadius ?? themeData.pickerImageRadius ?? 5),
                                   ),
                                 ),
                                 Align(
@@ -268,11 +280,15 @@ class _OneImage extends Input {
                                       svgIconPath == null
                                           ? Icon(
                                               Icons.cloud_upload_outlined,
-                                              color: iconColor ?? themeData.pickerIconColor ?? const Color(0xFF02132B).withOpacity(0.41),
+                                              color: iconColor ??
+                                                  themeData.pickerIconColor ??
+                                                  const Color(0xFF02132B).withOpacity(0.41),
                                             )
                                           : SvgPicture.asset(
                                               svgIconPath!,
-                                              color: iconColor ?? themeData.pickerIconColor ?? const Color(0xFF02132B).withOpacity(0.41),
+                                              color: iconColor ??
+                                                  themeData.pickerIconColor ??
+                                                  const Color(0xFF02132B).withOpacity(0.41),
                                             ),
                                       const SizedBox(height: 7),
                                       SizedBox(
@@ -282,7 +298,10 @@ class _OneImage extends Input {
                                             textAlign: TextAlign.right,
                                             style: textStyle ??
                                                 themeData.hintStyle ??
-                                                TextStyle(fontSize: sp(13), fontWeight: FontWeight.w500, color: const Color(0xFF02132B).withOpacity(0.41)),
+                                                TextStyle(
+                                                    fontSize: sp(13),
+                                                    fontWeight: FontWeight.w500,
+                                                    color: const Color(0xFF02132B).withOpacity(0.41)),
                                           )),
                                     ],
                                   ),
@@ -290,19 +309,22 @@ class _OneImage extends Input {
                               ]
                             : [
                                 Align(
-                                  alignment: Alignment.topRight,
+                                  alignment: Alignment.center,
                                   child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.end,
-                                    crossAxisAlignment: CrossAxisAlignment.end,
+                                    mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       svgIconPath == null
                                           ? Icon(
                                               Icons.cloud_upload_outlined,
-                                              color: iconColor ?? themeData.pickerIconColor ?? const Color(0xFF02132B).withOpacity(0.41),
+                                              color: iconColor ??
+                                                  themeData.pickerIconColor ??
+                                                  const Color(0xFF02132B).withOpacity(0.41),
                                             )
                                           : SvgPicture.asset(
                                               svgIconPath!,
-                                              color: iconColor ?? themeData.pickerIconColor ?? const Color(0xFF02132B).withOpacity(0.41),
+                                              color: iconColor ??
+                                                  themeData.pickerIconColor ??
+                                                  const Color(0xFF02132B).withOpacity(0.41),
                                             ),
                                       sh(7),
                                       Text(
@@ -379,7 +401,9 @@ class _MultipleFile extends Input {
             fieldName != null
                 ? Text(
                     fieldName!,
-                    style: fieldNameStyle ?? themeData.fieldNameStyle ?? const TextStyle(color: Color(0xFF02132B), fontSize: 12, fontWeight: FontWeight.w500),
+                    style: fieldNameStyle ??
+                        themeData.fieldNameStyle ??
+                        const TextStyle(color: Color(0xFF02132B), fontSize: 12, fontWeight: FontWeight.w500),
                   )
                 : Container(),
             fieldPostRedirection == null ? const SizedBox() : const Spacer(),
@@ -405,7 +429,10 @@ class _MultipleFile extends Input {
             type: MaterialType.transparency,
             child: Container(
               constraints: themeData.pickerConstraints ?? const BoxConstraints(minHeight: 108),
-              decoration: boxDecoration ?? themeData.pickerDecoration ?? BoxDecoration(color: const Color(0xFF02132B).withOpacity(0.03), borderRadius: BorderRadius.circular(7)),
+              decoration: boxDecoration ??
+                  themeData.pickerDecoration ??
+                  BoxDecoration(
+                      color: const Color(0xFF02132B).withOpacity(0.03), borderRadius: BorderRadius.circular(7)),
               child: Material(
                 type: MaterialType.transparency,
                 child: InkWell(
@@ -461,11 +488,15 @@ class _MultipleFile extends Input {
                                                     svgIconPath == null
                                                         ? Icon(
                                                             Icons.cloud_upload_outlined,
-                                                            color: iconColor ?? themeData.pickerIconColor ?? const Color(0xFF02132B).withOpacity(0.41),
+                                                            color: iconColor ??
+                                                                themeData.pickerIconColor ??
+                                                                const Color(0xFF02132B).withOpacity(0.41),
                                                           )
                                                         : SvgPicture.asset(
                                                             svgIconPath!,
-                                                            color: iconColor ?? themeData.pickerIconColor ?? const Color(0xFF02132B).withOpacity(0.41),
+                                                            color: iconColor ??
+                                                                themeData.pickerIconColor ??
+                                                                const Color(0xFF02132B).withOpacity(0.41),
                                                           ),
                                                     sh(7),
                                                     SizedBox(
@@ -475,7 +506,10 @@ class _MultipleFile extends Input {
                                                         textAlign: TextAlign.center,
                                                         style: textStyle ??
                                                             themeData.fieldStyle ??
-                                                            TextStyle(fontSize: sp(13), fontWeight: FontWeight.w500, color: const Color(0xFF02132B).withOpacity(0.41)),
+                                                            TextStyle(
+                                                                fontSize: sp(13),
+                                                                fontWeight: FontWeight.w500,
+                                                                color: const Color(0xFF02132B).withOpacity(0.41)),
                                                       ),
                                                     ),
                                                   ],
@@ -491,11 +525,15 @@ class _MultipleFile extends Input {
                                                 svgIconPath == null
                                                     ? Icon(
                                                         Icons.cloud_upload_outlined,
-                                                        color: iconColor ?? themeData.pickerIconColor ?? const Color(0xFF02132B).withOpacity(0.41),
+                                                        color: iconColor ??
+                                                            themeData.pickerIconColor ??
+                                                            const Color(0xFF02132B).withOpacity(0.41),
                                                       )
                                                     : SvgPicture.asset(
                                                         svgIconPath!,
-                                                        color: iconColor ?? themeData.pickerIconColor ?? const Color(0xFF02132B).withOpacity(0.41),
+                                                        color: iconColor ??
+                                                            themeData.pickerIconColor ??
+                                                            const Color(0xFF02132B).withOpacity(0.41),
                                                       ),
                                                 sw(7),
                                                 Text(
@@ -524,11 +562,15 @@ class _MultipleFile extends Input {
                                       svgIconPath == null
                                           ? Icon(
                                               Icons.cloud_upload_outlined,
-                                              color: iconColor ?? themeData.pickerIconColor ?? const Color(0xFF02132B).withOpacity(0.41),
+                                              color: iconColor ??
+                                                  themeData.pickerIconColor ??
+                                                  const Color(0xFF02132B).withOpacity(0.41),
                                             )
                                           : SvgPicture.asset(
                                               svgIconPath!,
-                                              color: iconColor ?? themeData.pickerIconColor ?? const Color(0xFF02132B).withOpacity(0.41),
+                                              color: iconColor ??
+                                                  themeData.pickerIconColor ??
+                                                  const Color(0xFF02132B).withOpacity(0.41),
                                             ),
                                       sh(7),
                                       Text(
@@ -617,7 +659,9 @@ class _ValidatedFile extends Input {
             fieldName != null
                 ? Text(
                     fieldName!,
-                    style: fieldNameStyle ?? themeData.fieldNameStyle ?? const TextStyle(color: Color(0xFF02132B), fontSize: 12, fontWeight: FontWeight.w500),
+                    style: fieldNameStyle ??
+                        themeData.fieldNameStyle ??
+                        const TextStyle(color: Color(0xFF02132B), fontSize: 12, fontWeight: FontWeight.w500),
                   )
                 : Container(),
             fieldPostRedirection == null ? const SizedBox() : const Spacer(),
@@ -644,7 +688,10 @@ class _ValidatedFile extends Input {
             child: Container(
               height: height,
               constraints: themeData.pickerConstraints ?? const BoxConstraints(minHeight: 108),
-              decoration: boxDecoration ?? themeData.pickerDecoration ?? BoxDecoration(color: const Color(0xFF02132B).withOpacity(0.03), borderRadius: BorderRadius.circular(7)),
+              decoration: boxDecoration ??
+                  themeData.pickerDecoration ??
+                  BoxDecoration(
+                      color: const Color(0xFF02132B).withOpacity(0.03), borderRadius: BorderRadius.circular(7)),
               child: Material(
                 type: MaterialType.transparency,
                 child: InkWell(
@@ -682,11 +729,15 @@ class _ValidatedFile extends Input {
                                                       svgIconPath == null
                                                           ? Icon(
                                                               Icons.cloud_upload_outlined,
-                                                              color: iconColor ?? themeData.pickerIconColor ?? const Color(0xFF02132B).withOpacity(0.41),
+                                                              color: iconColor ??
+                                                                  themeData.pickerIconColor ??
+                                                                  const Color(0xFF02132B).withOpacity(0.41),
                                                             )
                                                           : SvgPicture.asset(
                                                               svgIconPath!,
-                                                              color: iconColor ?? themeData.pickerIconColor ?? const Color(0xFF02132B).withOpacity(0.41),
+                                                              color: iconColor ??
+                                                                  themeData.pickerIconColor ??
+                                                                  const Color(0xFF02132B).withOpacity(0.41),
                                                             ),
                                                       sw(4),
                                                       Text(
@@ -694,7 +745,10 @@ class _ValidatedFile extends Input {
                                                         textAlign: TextAlign.center,
                                                         style: textStyle ??
                                                             themeData.fieldStyle ??
-                                                            TextStyle(fontSize: sp(13), fontWeight: FontWeight.w500, color: const Color(0xFF02132B).withOpacity(0.41)),
+                                                            TextStyle(
+                                                                fontSize: sp(13),
+                                                                fontWeight: FontWeight.w500,
+                                                                color: const Color(0xFF02132B).withOpacity(0.41)),
                                                       ),
                                                     ],
                                                   ),
@@ -710,7 +764,8 @@ class _ValidatedFile extends Input {
                                                     color: const Color(0xFF2BD184),
                                                     borderRadius: BorderRadius.circular(34),
                                                   ),
-                                                  child: const Center(child: Icon(Icons.check_rounded, color: Colors.white, size: 24)),
+                                                  child: const Center(
+                                                      child: Icon(Icons.check_rounded, color: Colors.white, size: 24)),
                                                 )
                                               : Container(
                                                   width: formatWidth(34),
@@ -719,7 +774,8 @@ class _ValidatedFile extends Input {
                                                     color: const Color(0xFFEA1C1C),
                                                     borderRadius: BorderRadius.circular(34),
                                                   ),
-                                                  child: const Center(child: Icon(Icons.close_rounded, color: Colors.white, size: 24)),
+                                                  child: const Center(
+                                                      child: Icon(Icons.close_rounded, color: Colors.white, size: 24)),
                                                 ),
                                           sh(6),
                                           Center(
@@ -741,7 +797,10 @@ class _ValidatedFile extends Input {
                                                         child: Text(
                                                           state.value!.first.name,
                                                           overflow: TextOverflow.ellipsis,
-                                                          style: TextStyle(color: const Color(0xFF02132B), fontSize: sp(13), fontWeight: FontWeight.w500),
+                                                          style: TextStyle(
+                                                              color: const Color(0xFF02132B),
+                                                              fontSize: sp(13),
+                                                              fontWeight: FontWeight.w500),
                                                         ),
                                                       ),
                                                     ),
@@ -766,11 +825,15 @@ class _ValidatedFile extends Input {
                                               svgIconPath == null
                                                   ? Icon(
                                                       Icons.cloud_upload_outlined,
-                                                      color: iconColor ?? themeData.pickerIconColor ?? const Color(0xFF02132B).withOpacity(0.41),
+                                                      color: iconColor ??
+                                                          themeData.pickerIconColor ??
+                                                          const Color(0xFF02132B).withOpacity(0.41),
                                                     )
                                                   : SvgPicture.asset(
                                                       svgIconPath!,
-                                                      color: iconColor ?? themeData.pickerIconColor ?? const Color(0xFF02132B).withOpacity(0.41),
+                                                      color: iconColor ??
+                                                          themeData.pickerIconColor ??
+                                                          const Color(0xFF02132B).withOpacity(0.41),
                                                     ),
                                               sw(7),
                                               Text(
@@ -799,11 +862,15 @@ class _ValidatedFile extends Input {
                                     svgIconPath == null
                                         ? Icon(
                                             Icons.cloud_upload_outlined,
-                                            color: iconColor ?? themeData.pickerIconColor ?? const Color(0xFF02132B).withOpacity(0.41),
+                                            color: iconColor ??
+                                                themeData.pickerIconColor ??
+                                                const Color(0xFF02132B).withOpacity(0.41),
                                           )
                                         : SvgPicture.asset(
                                             svgIconPath!,
-                                            color: iconColor ?? themeData.pickerIconColor ?? const Color(0xFF02132B).withOpacity(0.41),
+                                            color: iconColor ??
+                                                themeData.pickerIconColor ??
+                                                const Color(0xFF02132B).withOpacity(0.41),
                                           ),
                                     sh(7),
                                     Text(
@@ -824,7 +891,12 @@ class _ValidatedFile extends Input {
                                   bottom: 0,
                                   left: 0,
                                   right: 0,
-                                  child: Text(desc!, textAlign: TextAlign.center, style: TextStyle(fontSize: sp(11), fontWeight: FontWeight.w500, color: const Color(0xFF02132B))),
+                                  child: Text(desc!,
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                          fontSize: sp(11),
+                                          fontWeight: FontWeight.w500,
+                                          color: const Color(0xFF02132B))),
                                 )
                             ],
                     ),
