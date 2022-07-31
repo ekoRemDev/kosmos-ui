@@ -1,13 +1,9 @@
-import 'dart:typed_data';
-
 import 'package:core_kosmos/core_package.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:responsive_framework/responsive_framework.dart';
-import 'package:ui_kosmos_v4/cta/cta.dart';
-import 'package:ui_kosmos_v4/form/input.dart';
 import 'package:file_picker/file_picker.dart';
-import 'package:ui_kosmos_v4/micro_element/micro_element.dart';
+import 'package:ui_kosmos_v4/ui_kosmos_v4.dart';
 
 void main() {
   runApp(const MyApp());
@@ -70,7 +66,25 @@ class _MyHomePageState extends State<MyHomePage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Input.image(),
+              const SizedBox(height: 400),
+              const SelectForm<String>(
+                items: [
+                  DropdownMenuItem(
+                    value: 'Value1',
+                    child: Text(
+                      'Value1',
+                    ),
+                  ),
+                  DropdownMenuItem(
+                    value: 'Value2',
+                    child: Text(
+                      'Value2',
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 400),
+              const Input.image(),
               const SizedBox(height: 400),
               CTA.primary(
                 textButton: 'Primary CTA',
@@ -94,7 +108,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 width: 800,
                 child: ProgressBar.separated(
                     max: 5, current: 2, items: const ["1", "2", "3", "4", "5"], showPercentage: true),
-              )
+              ),
             ],
           ),
         ),
