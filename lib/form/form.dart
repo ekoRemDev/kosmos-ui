@@ -150,6 +150,7 @@ class TextFormUpdated extends HookWidget {
     final bool? isUpdatable,
     final bool? filled,
     final String? Function(String?)? validator,
+    final Function(String)? onFieldSubmitted,
     final String? errorMessage,
     final String? fieldPostRedirection,
     final VoidCallback? postFieldOnClick,
@@ -280,23 +281,6 @@ class TextFormUpdated extends HookWidget {
     final void Function(String?)? onChanged,
   }) = _Immatriculation;
 
-  const factory TextFormUpdated.select({
-    final CustomFormFieldThemeData? theme,
-    final String? fieldName,
-    final String? hintText,
-    final String? value,
-    final TextStyle? fieldNameStyle,
-    final TextStyle? hintTextStyle,
-    final TextStyle? textStyle,
-    final Color? backgroundColor,
-    final double? iconSize,
-    final double? radius,
-    final IconData? icon,
-    final EdgeInsetsGeometry? contentPadding,
-    final List<DropdownMenuItem<Object>>? items,
-    final Function(Object?)? onChanged,
-  }) = _Select;
-
   const factory TextFormUpdated.textarea({
     final CustomFormFieldThemeData? theme,
     final String? fieldName,
@@ -359,6 +343,7 @@ class _Classic extends TextFormUpdated {
     final Widget? suffixChild,
     final Widget? prefixChild,
     final String? Function(String?)? validator,
+    final Function(String)? onFieldSubmitted,
     final TextInputAction? textInputAction,
     final bool? obscuringText,
     final InputBorder? focusedErrorBorder,
@@ -408,6 +393,7 @@ class _Classic extends TextFormUpdated {
           hintTextStyle: hintTextStyle,
           textStyle: textStyle,
           theme: theme,
+          onFieldSubmitted: onFieldSubmitted,
         );
 
   @override
@@ -1162,99 +1148,6 @@ class _Immatriculation extends TextFormUpdated {
               hintStyle: hintTextStyle ?? themeData.hintStyle ?? const TextStyle(color: Color(0xFF9299A4), fontSize: 13, fontWeight: FontWeight.w500)),
         ),
       ),
-    );
-  }
-}
-
-class _Select extends TextFormUpdated {
-  const _Select({
-    final CustomFormFieldThemeData? theme,
-    final String? fieldName,
-    final String? hintText,
-    final String? value,
-    final TextStyle? fieldNameStyle,
-    final TextStyle? hintTextStyle,
-    final TextStyle? textStyle,
-    final Color? backgroundColor,
-    final double? iconSize,
-    final double? radius,
-    final IconData? icon,
-    final EdgeInsetsGeometry? contentPadding,
-    final List<DropdownMenuItem<Object>>? items,
-    final Function(Object?)? onChanged,
-  }) : super(
-          theme: theme,
-          backgroundColor: backgroundColor,
-          fieldName: fieldName,
-          hintText: hintText,
-          value: value,
-          icon: icon,
-          iconSize: iconSize,
-          items: items,
-          onChangedSelect: onChanged,
-          radius: radius,
-          contentPadding: contentPadding,
-          fieldNameStyle: fieldNameStyle,
-          hintTextStyle: hintTextStyle,
-          textStyle: textStyle,
-        );
-
-  @override
-  Widget build(BuildContext context) {
-    final themeData = loadThemeData(theme, "input_field", () => const CustomFormFieldThemeData())!;
-    return Column(
-      crossAxisAlignment: themeData.fieldNameAlignment,
-      children: [
-        Text(
-          fieldName ?? "NOM FIELD",
-          style: fieldNameStyle ?? themeData.fieldNameStyle ?? const TextStyle(color: Color(0xFF02132B), fontSize: 12, fontWeight: FontWeight.w500),
-        ),
-        const SizedBox(height: 7),
-        Container(
-          height: 54,
-          decoration: BoxDecoration(
-            color: backgroundColor ?? themeData.backgroundColor ?? const Color(0xFF02132B).withOpacity(0.03),
-            borderRadius: BorderRadius.circular(radius ?? themeData.selectRadius ?? 7.0),
-          ),
-          child: Padding(
-            padding: contentPadding ?? themeData.contentPadding ?? const EdgeInsets.only(left: 20.0, right: 17),
-            child: Center(
-              child: DropdownButton(
-                borderRadius: BorderRadius.circular(radius ?? themeData.selectRadius ?? 7),
-                elevation: 0,
-                underline: const SizedBox(),
-                hint: Text(
-                  hintText ?? "Sélectionner",
-                  style: hintTextStyle ?? themeData.hintStyle ?? const TextStyle(color: Color(0xFF9299A4), fontSize: 13, fontWeight: FontWeight.w500),
-                ),
-                value: value,
-                isExpanded: true,
-                iconSize: iconSize ?? themeData.selectIconSize ?? 24.0,
-                icon: Icon(icon ?? Iconsax.arrow_down_14),
-                style: textStyle ??
-                    themeData.fieldStyle ??
-                    const TextStyle(color: Color(0xFF02132B), fontSize: 13, fontWeight: FontWeight.w500).copyWith(color: const Color(0xFF02132B)),
-                items: items ??
-                    const [
-                      DropdownMenuItem(
-                        value: 'Value1',
-                        child: Text(
-                          'Value1',
-                        ),
-                      ),
-                      DropdownMenuItem(
-                        value: 'Value2',
-                        child: Text(
-                          'Value2',
-                        ),
-                      ),
-                    ],
-                onChanged: onChangedSelect ?? (_) {},
-              ),
-            ),
-          ),
-        ),
-      ],
     );
   }
 }
