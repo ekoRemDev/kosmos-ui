@@ -179,12 +179,8 @@ class _Primary extends CTA {
                 ? 1
                 : 0.5,
         child: Container(
-          height: formatHeight(height ??
-              getResponsiveValue(context,
-                  defaultValue: 54, desktop: themeData.heightInWeb, phone: themeData.heightInMobile)),
-          width: formatWidth(width ??
-              getResponsiveValue(context,
-                  defaultValue: double.infinity, desktop: themeData.widthInWeb, phone: themeData.widthInMobile)),
+          height: formatHeight(height ?? getResponsiveValue(context, defaultValue: 54, desktop: themeData.heightInWeb, phone: themeData.heightInMobile)),
+          width: formatWidth(width ?? getResponsiveValue(context, defaultValue: double.infinity, desktop: themeData.widthInWeb, phone: themeData.widthInMobile)),
           constraints: themeData.constraints,
           decoration: BoxDecoration(
               color: themeData.backgroundColor ?? (gradient != null ? null : Theme.of(context).primaryColor),
@@ -206,12 +202,7 @@ class _Primary extends CTA {
               child: state.value
                   ? Center(
                       child: LoaderClassique(
-                        radius: (height ??
-                                getResponsiveValue(context,
-                                    defaultValue: 54,
-                                    desktop: themeData.heightInWeb,
-                                    phone: themeData.heightInMobile))! /
-                            5,
+                        radius: (height ?? getResponsiveValue(context, defaultValue: 54, desktop: themeData.heightInWeb, phone: themeData.heightInMobile))! / 5,
                         activeColor: themeData.loaderColor,
                       ),
                     )
@@ -226,18 +217,12 @@ class _Primary extends CTA {
                                         color: Colors.white,
                                       )
                                     : const SizedBox(),
-                                SizedBox(
-                                    width: beforeIcon != null
-                                        ? distanceBetweenIconText ?? themeData.distanceBetweenIconText ?? 10
-                                        : 0),
+                                SizedBox(width: beforeIcon != null ? distanceBetweenIconText ?? themeData.distanceBetweenIconText ?? 10 : 0),
                                 Text(
                                   textButton ?? 'Button_Text',
-                                  style: textButtonStyle ?? const TextStyle(color: Colors.white),
+                                  style: textButtonStyle ?? themeData.textButtonStyle ?? const TextStyle(color: Colors.white),
                                 ),
-                                SizedBox(
-                                    width: afterIcon != null
-                                        ? distanceBetweenIconText ?? themeData.distanceBetweenIconText ?? 10
-                                        : 0),
+                                SizedBox(width: afterIcon != null ? distanceBetweenIconText ?? themeData.distanceBetweenIconText ?? 10 : 0),
                                 afterIcon != null
                                     ? Icon(
                                         afterIcon,
