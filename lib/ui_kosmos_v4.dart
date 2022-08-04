@@ -3,7 +3,7 @@ library ui_kosmos_v4;
 export 'package:ui_kosmos_v4/cta/cta.dart' show CTA;
 export 'package:ui_kosmos_v4/form/form.dart' show TextFormUpdated;
 export 'package:ui_kosmos_v4/form/select_form.dart' show SelectForm;
-export 'package:ui_kosmos_v4/form/input.dart' show Input, FileNameItem;
+export 'package:ui_kosmos_v4/input/input.dart' show Input, FileNameItem;
 export 'package:ui_kosmos_v4/micro_element/micro_element.dart' show LoaderClassique, ProgressBar, ThreeBounce;
 export 'package:ui_kosmos_v4/alert/alert.dart' show Alert;
 export 'package:ui_kosmos_v4/notif/notif.dart' show NotifBanner, NotifBannerPosition;
