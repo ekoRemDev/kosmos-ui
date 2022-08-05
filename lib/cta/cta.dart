@@ -422,7 +422,7 @@ class _Tiers extends CTA {
                         width: 9.5,
                       )
                     : const SizedBox(),
-                textButton != null ? Text(textButton!, style: textButtonStyle) : const SizedBox(),
+                textButton != null ? Text(textButton!, style: textButtonStyle ?? themeData.textButtonStyle) : const SizedBox(),
               ],
             ),
           ),
