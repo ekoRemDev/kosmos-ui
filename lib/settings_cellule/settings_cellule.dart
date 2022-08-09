@@ -58,8 +58,7 @@ class SettingsCellule extends StatelessWidget {
       constraints: themeData.constraints ??
           BoxConstraints(
             minHeight: 60,
-            maxWidth: execInCaseOfPlatfom(
-                () => getResponsiveValue(context, defaultValue: 293, tablet: double.infinity), () => double.infinity),
+            maxWidth: execInCaseOfPlatfom(() => getResponsiveValue(context, defaultValue: 293, tablet: double.infinity), () => double.infinity),
             minWidth: formatWidth(293),
           ),
       child: TextButton(
@@ -68,42 +67,30 @@ class SettingsCellule extends StatelessWidget {
             if (!isActive) {
               return themeData.backgroundColor ?? backgroundColor ?? const Color(0xFF02132B).withOpacity(0.03);
             } else {
-              return themeData.activeBackgroundColor ??
-                  activeBackgroundColor ??
-                  const Color(0xFF02132B).withOpacity(0.03);
+              return themeData.activeBackgroundColor ?? activeBackgroundColor ?? const Color(0xFF02132B).withOpacity(0.03);
             }
           }),
-          overlayColor: MaterialStateProperty.resolveWith((states) =>
-              themeData.overlayColor ??
-              overlayColor ??
-              darkenOrLighten(backgroundColor ?? const Color(0xFF02132B).withOpacity(0.03))),
-          shape: themeData.shape ??
-              MaterialStateProperty.resolveWith(
-                  (states) => RoundedRectangleBorder(borderRadius: BorderRadius.circular((radius ?? 7)))),
+          overlayColor: MaterialStateProperty.resolveWith((states) => themeData.overlayColor ?? overlayColor ?? darkenOrLighten(backgroundColor ?? const Color(0xFF02132B).withOpacity(0.03))),
+          shape: themeData.shape ?? MaterialStateProperty.resolveWith((states) => RoundedRectangleBorder(borderRadius: BorderRadius.circular((radius ?? 7)))),
         ),
         onPressed: onClick,
         child: Row(
           children: [
             Padding(
-              padding: EdgeInsets.symmetric(
-                  horizontal: themeData.horizontalPadding ?? 10, vertical: themeData.verticalPadding ?? 0),
+              padding: EdgeInsets.symmetric(horizontal: themeData.horizontalPadding ?? 10, vertical: themeData.verticalPadding ?? 0),
               child: (icon != null || svg != null || image != null)
                   ? Container(
                       height: formatHeight(themeData.imageHeight ?? 37),
                       width: formatWidth(themeData.imageWidth ?? 37),
+                      clipBehavior: Clip.hardEdge,
                       decoration: image != null
-                          ? BoxDecoration(
-                              shape: BoxShape.circle, image: DecorationImage(image: image!, fit: BoxFit.cover))
+                          ? BoxDecoration(shape: BoxShape.circle, image: DecorationImage(image: image!, fit: BoxFit.cover))
                           : BoxDecoration(
                               shape: BoxShape.circle,
                               gradient: iconBackgroundGradient,
                               color: isActive
-                                  ? (themeData.activeIconBackgroundColor ??
-                                      activeIconBackgroundColor ??
-                                      const Color(0xFF02132B).withOpacity(0.03))
-                                  : (themeData.iconBackgroundColor ??
-                                      iconBackgroundColor ??
-                                      Theme.of(context).primaryColor)),
+                                  ? (themeData.activeIconBackgroundColor ?? activeIconBackgroundColor ?? const Color(0xFF02132B).withOpacity(0.03))
+                                  : (themeData.iconBackgroundColor ?? iconBackgroundColor ?? Theme.of(context).primaryColor)),
                       child: icon ?? svg ?? const SizedBox(),
                     )
                   : const SizedBox(),
@@ -117,9 +104,7 @@ class SettingsCellule extends StatelessWidget {
                       Expanded(
                         child: Text(
                           title ?? 'Titre',
-                          style: titleStyle ??
-                              themeData.titleStyle ??
-                              const TextStyle(color: Color(0xFF02132B), fontSize: 13, fontWeight: FontWeight.w500),
+                          style: titleStyle ?? themeData.titleStyle ?? const TextStyle(color: Color(0xFF02132B), fontSize: 13, fontWeight: FontWeight.w500),
                         ),
                       ),
                     ],
@@ -127,12 +112,7 @@ class SettingsCellule extends StatelessWidget {
                   subtitle != null
                       ? Text(
                           subtitle!,
-                          style: subtitleStyle ??
-                              themeData.subtitleStyle ??
-                              TextStyle(
-                                  color: const Color(0xFF02132B).withOpacity(0.65),
-                                  fontSize: 11,
-                                  fontWeight: FontWeight.w500),
+                          style: subtitleStyle ?? themeData.subtitleStyle ?? TextStyle(color: const Color(0xFF02132B).withOpacity(0.65), fontSize: 11, fontWeight: FontWeight.w500),
                         )
                       : const SizedBox(),
                 ],
