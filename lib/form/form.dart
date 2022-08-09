@@ -345,7 +345,6 @@ class _Classic extends TextFormUpdated {
     final Widget? suffixChild,
     final Widget? prefixChild,
     final String? Function(String?)? validator,
-    final Function(String)? onFieldSubmitted,
     final TextInputAction? textInputAction,
     final bool? obscuringText,
     final InputBorder? focusedErrorBorder,
@@ -396,7 +395,6 @@ class _Classic extends TextFormUpdated {
           hintTextStyle: hintTextStyle,
           textStyle: textStyle,
           theme: theme,
-          onFieldSubmitted: onFieldSubmitted,
         );
 
   @override

@@ -15,6 +15,7 @@ abstract class CustomSlider extends HookWidget {
   final TextStyle? fieldNameStyle;
   final double? value;
   final RangeValues? rangeValue;
+  final CustomSliderThumbShape? customSliderThumbShape;
 
   const CustomSlider({
     Key? key,
@@ -37,6 +38,7 @@ abstract class CustomSlider extends HookWidget {
     this.fieldNameStyle,
     this.value,
     this.rangeValue,
+    this.customSliderThumbShape = const CustomSliderThumbShape(elevation: 0, pressedElevation: 0),
   }) : super(key: key);
 
   const factory CustomSlider.slider({
@@ -50,6 +52,7 @@ abstract class CustomSlider extends HookWidget {
     final String? fieldName,
     final TextStyle? fieldNameStyle,
     final double? value,
+    final CustomSliderThumbShape? customSliderThumbShape,
   }) = _Slider;
 
   const factory CustomSlider.range({
@@ -71,6 +74,7 @@ abstract class CustomSlider extends HookWidget {
 
 class _Slider extends CustomSlider {
   const _Slider({
+    final CustomSliderThumbShape? customSliderThumbShape,
     final SliderThemeData theme = const SliderThemeData(
       trackHeight: 2,
       trackShape: RectangularSliderTrackShape(),
@@ -78,7 +82,6 @@ class _Slider extends CustomSlider {
       inactiveTrackColor: Color(0xFFBFC3C9),
       thumbColor: Color(0xFF02132B),
       overlayShape: RoundSliderOverlayShape(overlayRadius: 0),
-      thumbShape: CustomSliderThumbShape(elevation: 0, pressedElevation: 0),
     ),
     final double min = 0,
     final double max = 100,
@@ -100,6 +103,7 @@ class _Slider extends CustomSlider {
           fieldPostRedirectionStyle: fieldPostRedirectionStyle,
           postFieldOnClick: postFieldOnClick,
           value: value,
+          customSliderThumbShape: customSliderThumbShape,
         );
 
   @override
@@ -113,7 +117,8 @@ class _Slider extends CustomSlider {
           children: [
             Text(
               fieldName ?? "",
-              style: fieldNameStyle ?? const TextStyle(color: Color(0xFF02132B), fontSize: 12, fontWeight: FontWeight.w500),
+              style: fieldNameStyle ??
+                  const TextStyle(color: Color(0xFF02132B), fontSize: 12, fontWeight: FontWeight.w500),
             ),
             fieldPostRedirection == null ? const SizedBox() : const Spacer(),
             fieldPostRedirection == null
@@ -122,14 +127,15 @@ class _Slider extends CustomSlider {
                     onTap: postFieldOnClick,
                     child: Text(
                       fieldPostRedirection ?? "",
-                      style: fieldPostRedirectionStyle ?? const TextStyle(color: Color(0xFF02132B), fontSize: 12, fontWeight: FontWeight.w600),
+                      style: fieldPostRedirectionStyle ??
+                          const TextStyle(color: Color(0xFF02132B), fontSize: 12, fontWeight: FontWeight.w600),
                     ),
                   ),
           ],
         ),
         const SizedBox(height: 7),
         SliderTheme(
-          data: theme,
+          data: theme.copyWith(thumbShape: customSliderThumbShape),
           child: SizedBox(
             width: double.infinity,
             child: Slider(
@@ -191,7 +197,8 @@ class _Range extends CustomSlider {
           children: [
             Text(
               fieldName ?? "",
-              style: fieldNameStyle ?? const TextStyle(color: Color(0xFF02132B), fontSize: 12, fontWeight: FontWeight.w500),
+              style: fieldNameStyle ??
+                  const TextStyle(color: Color(0xFF02132B), fontSize: 12, fontWeight: FontWeight.w500),
             ),
             fieldPostRedirection == null ? const SizedBox() : const Spacer(),
             fieldPostRedirection == null
@@ -200,7 +207,8 @@ class _Range extends CustomSlider {
                     onTap: postFieldOnClick,
                     child: Text(
                       fieldPostRedirection ?? "",
-                      style: fieldPostRedirectionStyle ?? const TextStyle(color: Color(0xFF02132B), fontSize: 12, fontWeight: FontWeight.w600),
+                      style: fieldPostRedirectionStyle ??
+                          const TextStyle(color: Color(0xFF02132B), fontSize: 12, fontWeight: FontWeight.w600),
                     ),
                   ),
           ],

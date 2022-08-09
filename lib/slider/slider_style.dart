@@ -10,6 +10,9 @@ class CustomSliderThumbShape extends SliderComponentShape {
     this.pressedElevation = 6.0,
     this.insideColor = Colors.white,
     this.insideRadius,
+    this.stringNumber,
+    this.ajustString = 1.8,
+    
   });
 
   final double enabledThumbRadius;
@@ -20,6 +23,9 @@ class CustomSliderThumbShape extends SliderComponentShape {
 
   final Color insideColor;
   final double? insideRadius;
+
+  final String? stringNumber;
+  final double ajustString;
 
   @override
   Size getPreferredSize(bool isEnabled, bool isDiscrete) {
@@ -61,6 +67,20 @@ class CustomSliderThumbShape extends SliderComponentShape {
       begin: elevation,
       end: pressedElevation,
     );
+
+    TextSpan span = TextSpan(
+      style: TextStyle(
+        fontSize: 16,
+        fontWeight: FontWeight.w400,
+        color: sliderTheme.thumbColor,
+      ),
+      text: stringNumber ?? "${(value * 100).toInt()}",
+    );
+
+    TextPainter tp = TextPainter(text: span, textAlign: TextAlign.center, textDirection: TextDirection.ltr);
+    tp.layout();
+
+    tp.paint(canvas, Offset(center.dx - tp.width / ajustString, center.dy / 2 + 16));
 
     final double evaluatedElevation = elevationTween.evaluate(activationAnimation);
     final Path path = Path()..addArc(Rect.fromCenter(center: center, width: 2 * radius, height: 2 * radius), 0, pi * 2);

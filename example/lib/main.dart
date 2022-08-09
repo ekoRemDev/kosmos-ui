@@ -54,6 +54,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   List<PlatformFile>? items;
+  double value = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -90,6 +91,18 @@ class _MyHomePageState extends State<MyHomePage> {
                 textButton: 'Primary CTA',
                 onTap: () async {
                   await Future.delayed(const Duration(seconds: 5));
+                },
+              ),
+              sh(80),
+              CustomSlider.slider(
+                min: 0,
+                max: 100,
+                customSliderThumbShape: CustomSliderThumbShape(
+                    elevation: 0, pressedElevation: 0, stringNumber: "${(value).toInt()} km", ajustString: 2.2),
+                onChanged: (p0) {
+                  setState(() {
+                    value = p0;
+                  });
                 },
               ),
               sh(80),
