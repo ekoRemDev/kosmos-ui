@@ -14,10 +14,12 @@ class SelectForm<T> extends StatelessWidget {
   final Color? backgroundColor;
   final double? iconSize;
   final double? radius;
+  final double? radiusDropDown;
   final IconData? icon;
   final EdgeInsetsGeometry? contentPadding;
   final List<DropdownMenuItem<T>>? items;
   final Function(T?)? onChangedSelect;
+  final String? Function(T?)? validator;
 
   const SelectForm({
     this.theme,
@@ -30,10 +32,12 @@ class SelectForm<T> extends StatelessWidget {
     this.backgroundColor,
     this.iconSize,
     this.radius,
+    this.radiusDropDown,
     this.icon,
     this.contentPadding,
     this.items,
     this.onChangedSelect,
+    this.validator,
     Key? key,
   }) : super(key: key);
 
@@ -59,10 +63,9 @@ class SelectForm<T> extends StatelessWidget {
           child: Padding(
             padding: contentPadding ?? themeData.contentPadding ?? const EdgeInsets.only(left: 20.0, right: 17),
             child: Center(
-              child: DropdownButton<T>(
-                borderRadius: BorderRadius.circular(radius ?? themeData.selectRadius ?? 7),
+              child: DropdownButtonFormField<T>(
+                borderRadius: BorderRadius.circular(radiusDropDown ?? themeData.selectRadiusDropDown ?? 7),
                 elevation: 0,
-                underline: const SizedBox(),
                 hint: Text(
                   hintText ?? "Sélectionner",
                   style: hintTextStyle ??
@@ -79,6 +82,7 @@ class SelectForm<T> extends StatelessWidget {
                         .copyWith(color: const Color(0xFF02132B)),
                 items: items ?? <DropdownMenuItem<T>>[],
                 onChanged: onChangedSelect ?? (_) {},
+                validator: validator,
               ),
             ),
           ),

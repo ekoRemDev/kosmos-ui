@@ -422,7 +422,7 @@ class _Tiers extends CTA {
                         width: 9.5,
                       )
                     : const SizedBox(),
-                textButton != null ? Text(textButton!, style: textButtonStyle ?? themeData.textButtonStyle) : const SizedBox(),
+                textButton != null ? Text(textButton!, style: textButtonStyle) : const SizedBox(),
               ],
             ),
           ),
@@ -481,7 +481,7 @@ class _Back extends CTA {
               height: formatHeight(height ?? getResponsiveValue(context, defaultValue: 47, desktop: themeData.heightInWeb, phone: themeData.heightInMobile)),
               width: formatHeight(height ?? getResponsiveValue(context, defaultValue: 47, desktop: themeData.widthInWeb, phone: themeData.widthInMobile)),
               decoration: BoxDecoration(
-                color: backgroundColor ?? themeData.backgroundColor,
+                color: backgroundColor,
                 borderRadius: BorderRadius.circular(radius ?? themeData.borderRadius ?? 14),
                 border: border ?? themeData.border,
               ),
