@@ -25,6 +25,7 @@ class CustomFormFieldThemeData {
   final PhoneNumber? initialPhoneValue;
 
   final double? selectRadius;
+  final double? selectRadiusDropDown;
   final double? selectIconSize;
 
   final BoxDecoration? pickerDecoration;
@@ -55,6 +56,7 @@ class CustomFormFieldThemeData {
     this.hintStyle,
     this.initialPhoneValue,
     this.selectRadius,
+    this.selectRadiusDropDown,
     this.selectIconSize,
     this.pickerDecoration,
     this.pickerConstraints,
