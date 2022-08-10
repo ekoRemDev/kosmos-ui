@@ -256,12 +256,12 @@ class _OneImage extends Input {
                     },
                     onDoubleTap: onDoubleTap,
                     child: Padding(
-                      padding: state.value != null
+                      padding: state.value != null || imageMobile != null
                           ? (contentPadding ?? themeData.contentPadding ?? const EdgeInsets.fromLTRB(7, 6, 30, 6))
                           : EdgeInsets.zero,
                       child: Stack(
                         alignment: Alignment.centerLeft,
-                        children: state.value != null
+                        children: state.value != null || imageMobile != null
                             ? [
                                 Container(
                                   width: formatWidth(widthImage ?? themeData.pickerImageWidth ?? 81),
