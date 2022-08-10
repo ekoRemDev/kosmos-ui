@@ -69,16 +69,13 @@ class SelectForm<T> extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final themeData = loadThemeData(theme, "input_field", () => const CustomFormFieldThemeData())!;
-    final state = useState(false);
     final stateObscure = useState(obscuringText ?? false);
     return Column(
       crossAxisAlignment: themeData.fieldNameAlignment,
       children: [
         Text(
           fieldName ?? "NOM FIELD",
-          style: fieldNameStyle ??
-              themeData.fieldNameStyle ??
-              const TextStyle(color: Color(0xFF02132B), fontSize: 12, fontWeight: FontWeight.w500),
+          style: fieldNameStyle ?? themeData.fieldNameStyle ?? const TextStyle(color: Color(0xFF02132B), fontSize: 12, fontWeight: FontWeight.w500),
         ),
         const SizedBox(height: 7),
         Container(
@@ -95,77 +92,53 @@ class SelectForm<T> extends HookWidget {
                 elevation: 0,
                 hint: Text(
                   hintText ?? "Sélectionner",
-                  style: hintTextStyle ??
-                      themeData.hintStyle ??
-                      const TextStyle(color: Color(0xFF9299A4), fontSize: 13, fontWeight: FontWeight.w500),
+                  style: hintTextStyle ?? themeData.hintStyle ?? const TextStyle(color: Color(0xFF9299A4), fontSize: 13, fontWeight: FontWeight.w500),
                 ),
                 value: value,
                 isExpanded: true,
                 iconSize: iconSize ?? themeData.selectIconSize ?? 24.0,
                 icon: Icon(icon ?? Iconsax.arrow_down_14),
-                style: textStyle ??
-                    themeData.fieldStyle ??
-                    const TextStyle(color: Color(0xFF02132B), fontSize: 13, fontWeight: FontWeight.w500)
-                        .copyWith(color: const Color(0xFF02132B)),
+                style: textStyle ?? themeData.fieldStyle ?? const TextStyle(color: Color(0xFF02132B), fontSize: 13, fontWeight: FontWeight.w500).copyWith(color: const Color(0xFF02132B)),
                 items: items ?? <DropdownMenuItem<T>>[],
                 onChanged: onChangedSelect ?? (_) {},
                 validator: validator,
+                decoration: InputDecoration(
+                    errorStyle: const TextStyle(fontSize: 12, height: 0),
+                    prefixIcon: prefixChild,
+                    suffixIcon: isUpdatable == true
+                        ? InkWell(
+                            child: !stateObscure.value ? (suffixChild ?? const SizedBox()) : suffixChildActive ?? suffixChild ?? const SizedBox(),
+                            onTap: () {
+                              stateObscure.value = !stateObscure.value;
+                            },
+                          )
+                        : suffixChild,
+                    prefixIconConstraints: prefixChildBoxConstraint ?? themeData.prefixChildBoxConstraint,
+                    suffixIconConstraints: suffixChildBoxConstraint ?? themeData.suffixChildBoxConstraint,
+                    filled: filled ?? true,
+                    fillColor: backgroundColor ?? themeData.backgroundColor ?? const Color(0xFF02132B).withOpacity(0.03),
+                    contentPadding: contentPadding ?? themeData.contentPadding ?? const EdgeInsets.fromLTRB(9.5, 17.5, 9.5, 17.5),
+                    focusedErrorBorder: focusedErrorBorder ??
+                        themeData.focusedErrorBorder ??
+                        OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(6),
+                            borderSide: const BorderSide(
+                              color: Colors.redAccent,
+                              width: 0.5,
+                            )),
+                    errorBorder: errorBorder ??
+                        themeData.errorBorder ??
+                        OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(6),
+                            borderSide: const BorderSide(
+                              color: Colors.red,
+                              width: 0.5,
+                            )),
+                    focusedBorder: focusedBorder ?? themeData.focusedBorder,
+                    border: border ?? themeData.border ?? UnderlineInputBorder(borderRadius: BorderRadius.circular(6), borderSide: BorderSide.none),
+                    hintText: hintText ?? "Placeholder",
+                    hintStyle: hintTextStyle ?? themeData.hintStyle ?? const TextStyle(color: Color(0xFF9299A4), fontSize: 13, fontWeight: FontWeight.w500)),
               ),
-              value: value,
-              isExpanded: true,
-              iconSize: iconSize ?? themeData.selectIconSize ?? 24.0,
-              icon: Icon(icon ?? Iconsax.arrow_down_14),
-              style: textStyle ??
-                  themeData.fieldStyle ??
-                  const TextStyle(color: Color(0xFF02132B), fontSize: 13, fontWeight: FontWeight.w500)
-                      .copyWith(color: const Color(0xFF02132B)),
-              items: items ?? <DropdownMenuItem<T>>[],
-              onChanged: onChangedSelect ?? (_) {},
-              validator: validator,
-              decoration: InputDecoration(
-                  errorStyle: const TextStyle(fontSize: 12, height: 0),
-                  prefixIcon: prefixChild,
-                  suffixIcon: isUpdatable == true
-                      ? InkWell(
-                          child: !stateObscure.value
-                              ? (suffixChild ?? const SizedBox())
-                              : suffixChildActive ?? suffixChild ?? const SizedBox(),
-                          onTap: () {
-                            stateObscure.value = !stateObscure.value;
-                          },
-                        )
-                      : suffixChild,
-                  prefixIconConstraints: prefixChildBoxConstraint ?? themeData.prefixChildBoxConstraint,
-                  suffixIconConstraints: suffixChildBoxConstraint ?? themeData.suffixChildBoxConstraint,
-                  filled: filled ?? true,
-                  fillColor:
-                      backgroundColor ?? themeData.backgroundColor ?? const Color(0xFF02132B).withOpacity(0.03),
-                  contentPadding:
-                      contentPadding ?? themeData.contentPadding ?? const EdgeInsets.fromLTRB(9.5, 17.5, 9.5, 17.5),
-                  focusedErrorBorder: focusedErrorBorder ??
-                      themeData.focusedErrorBorder ??
-                      OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(6),
-                          borderSide: const BorderSide(
-                            color: Colors.redAccent,
-                            width: 0.5,
-                          )),
-                  errorBorder: errorBorder ??
-                      themeData.errorBorder ??
-                      OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(6),
-                          borderSide: const BorderSide(
-                            color: Colors.red,
-                            width: 0.5,
-                          )),
-                  focusedBorder: focusedBorder ?? themeData.focusedBorder,
-                  border: border ??
-                      themeData.border ??
-                      UnderlineInputBorder(borderRadius: BorderRadius.circular(6), borderSide: BorderSide.none),
-                  hintText: hintText ?? "Placeholder",
-                  hintStyle: hintTextStyle ??
-                      themeData.hintStyle ??
-                      const TextStyle(color: Color(0xFF9299A4), fontSize: 13, fontWeight: FontWeight.w500)),
             ),
           ),
         ),
