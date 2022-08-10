@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:core_kosmos/core_package.dart';
+import 'package:example/imagePicker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:responsive_framework/responsive_framework.dart';
@@ -56,6 +59,8 @@ class _MyHomePageState extends State<MyHomePage> {
   List<PlatformFile>? items;
   double value = 0;
 
+  File? image;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -68,21 +73,36 @@ class _MyHomePageState extends State<MyHomePage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const SizedBox(height: 400),
-              const SelectForm<String>(
-                items: [
-                  DropdownMenuItem(
-                    value: 'Value1',
-                    child: Text(
-                      'Value1',
+              Input.image(
+                imageMobile: image,
+                onTap: () {
+                  getImage(
+                      context: context,
+                      onImageSelected: ((_) {
+                        setState(() {
+                          image = _;
+                        });
+                      }));
+                },
+              ),
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 10),
+                child: SelectForm<String>(
+                  items: [
+                    DropdownMenuItem(
+                      value: 'Value1',
+                      child: Text(
+                        'Value1',
+                      ),
                     ),
-                  ),
-                  DropdownMenuItem(
-                    value: 'Value2',
-                    child: Text(
-                      'Value2',
+                    DropdownMenuItem(
+                      value: 'Value2',
+                      child: Text(
+                        'Value2',
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
               const SizedBox(height: 400),
               const Input.image(),
@@ -99,9 +119,9 @@ class _MyHomePageState extends State<MyHomePage> {
                 max: 100,
                 customSliderThumbShape: CustomSliderThumbShape(
                     elevation: 0, pressedElevation: 0, stringNumber: "${(value).toInt()} km", ajustString: 2.2),
-                onChanged: (p0) {
+                onChanged: (_) {
                   setState(() {
-                    value = p0;
+                    value = _;
                   });
                 },
               ),

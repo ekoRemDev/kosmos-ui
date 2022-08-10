@@ -50,6 +50,8 @@ dependencies:
 
   ui_kosmos_v4:
     path: ../
+  image_cropper: ^3.0.0
+  image_picker: ^0.8.5+3
 
 dev_dependencies:
   flutter_test:
