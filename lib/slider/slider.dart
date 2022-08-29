@@ -66,6 +66,7 @@ abstract class CustomSlider extends HookWidget {
     final String? fieldName,
     final TextStyle? fieldNameStyle,
     final RangeValues? rangeValue,
+    final CustomSliderThumbShape? customSliderThumbShape,
   }) = _Range;
 
   @override
@@ -117,8 +118,7 @@ class _Slider extends CustomSlider {
           children: [
             Text(
               fieldName ?? "",
-              style: fieldNameStyle ??
-                  const TextStyle(color: Color(0xFF02132B), fontSize: 12, fontWeight: FontWeight.w500),
+              style: fieldNameStyle ?? const TextStyle(color: Color(0xFF02132B), fontSize: 12, fontWeight: FontWeight.w500),
             ),
             fieldPostRedirection == null ? const SizedBox() : const Spacer(),
             fieldPostRedirection == null
@@ -127,8 +127,7 @@ class _Slider extends CustomSlider {
                     onTap: postFieldOnClick,
                     child: Text(
                       fieldPostRedirection ?? "",
-                      style: fieldPostRedirectionStyle ??
-                          const TextStyle(color: Color(0xFF02132B), fontSize: 12, fontWeight: FontWeight.w600),
+                      style: fieldPostRedirectionStyle ?? const TextStyle(color: Color(0xFF02132B), fontSize: 12, fontWeight: FontWeight.w600),
                     ),
                   ),
           ],
@@ -173,6 +172,7 @@ class _Range extends CustomSlider {
     final String? fieldName,
     final TextStyle? fieldNameStyle,
     final RangeValues? rangeValue,
+    final CustomSliderThumbShape? customSliderThumbShape,
   }) : super(
           theme: theme,
           min: min,
@@ -184,6 +184,7 @@ class _Range extends CustomSlider {
           fieldPostRedirectionStyle: fieldPostRedirectionStyle,
           postFieldOnClick: postFieldOnClick,
           rangeValue: rangeValue,
+          customSliderThumbShape: customSliderThumbShape,
         );
 
   @override
@@ -197,8 +198,7 @@ class _Range extends CustomSlider {
           children: [
             Text(
               fieldName ?? "",
-              style: fieldNameStyle ??
-                  const TextStyle(color: Color(0xFF02132B), fontSize: 12, fontWeight: FontWeight.w500),
+              style: fieldNameStyle ?? const TextStyle(color: Color(0xFF02132B), fontSize: 12, fontWeight: FontWeight.w500),
             ),
             fieldPostRedirection == null ? const SizedBox() : const Spacer(),
             fieldPostRedirection == null
@@ -207,15 +207,14 @@ class _Range extends CustomSlider {
                     onTap: postFieldOnClick,
                     child: Text(
                       fieldPostRedirection ?? "",
-                      style: fieldPostRedirectionStyle ??
-                          const TextStyle(color: Color(0xFF02132B), fontSize: 12, fontWeight: FontWeight.w600),
+                      style: fieldPostRedirectionStyle ?? const TextStyle(color: Color(0xFF02132B), fontSize: 12, fontWeight: FontWeight.w600),
                     ),
                   ),
           ],
         ),
         const SizedBox(height: 7),
         SliderTheme(
-          data: theme.copyWith(trackHeight: 2, rangeThumbShape: CustomRangeShape(rangeValues: state.value)),
+          data: theme.copyWith(trackHeight: 2, rangeThumbShape: CustomRangeShape(rangeValues: state.value), thumbShape: customSliderThumbShape),
           child: SizedBox(
             width: double.infinity,
             child: RangeSlider(
