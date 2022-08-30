@@ -26,6 +26,7 @@ abstract class CTA extends HookWidget {
   final BoxBorder? border;
   final LinearGradient? gradient;
   final bool loading;
+  final Color? iconColor;
 
   const CTA({
     this.height,
@@ -49,6 +50,7 @@ abstract class CTA extends HookWidget {
     this.border,
     this.gradient,
     this.loading = false,
+    this.iconColor,
     Key? key,
   }) : super(key: key);
 
@@ -120,6 +122,7 @@ abstract class CTA extends HookWidget {
     final CtaThemeData? theme,
     final String? themeName,
     final BoxBorder? border,
+    final Color? iconColor,
   }) = _Back;
 
   @override
@@ -445,6 +448,7 @@ class _Back extends CTA {
     final CtaThemeData? theme,
     final String? themeName,
     final BoxBorder? border,
+    final Color? iconColor,
   }) : super(
           height: height,
           width: width,
@@ -457,6 +461,7 @@ class _Back extends CTA {
           theme: theme,
           themeName: themeName,
           border: border,
+          iconColor: iconColor,
         );
 
   @override
@@ -487,7 +492,7 @@ class _Back extends CTA {
               ),
               child: Material(
                 type: MaterialType.transparency,
-                child: Icon(backIcon ?? Icons.arrow_back_ios_new_rounded),
+                child: Icon(backIcon ?? Icons.arrow_back_ios_new_rounded, color: iconColor ?? Colors.black),
               ),
             ),
           ),
