@@ -116,6 +116,7 @@ abstract class Cards extends StatelessWidget {
     final Widget? imageWidget,
     final CustomCardsThemeData? theme,
     final String? themeName,
+    final Color? starColor,
   }) = _Five;
 
   const factory Cards.six({
@@ -275,10 +276,8 @@ class _One extends StatelessWidget implements Cards {
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
-                                  Text(title,
-                                      style: titleStyle ?? themeData.titleStyle ?? TextStyle(fontSize: sp(13), fontWeight: FontWeight.w600, color: const Color(0xFF02132B))),
-                                  Text(subTitle,
-                                      style: subTitleStyle ?? themeData.subTitleStyle ?? TextStyle(fontSize: sp(10), fontWeight: FontWeight.w400, color: const Color(0xFF5A6575))),
+                                  Text(title, style: titleStyle ?? themeData.titleStyle ?? TextStyle(fontSize: sp(13), fontWeight: FontWeight.w600, color: const Color(0xFF02132B))),
+                                  Text(subTitle, style: subTitleStyle ?? themeData.subTitleStyle ?? TextStyle(fontSize: sp(10), fontWeight: FontWeight.w400, color: const Color(0xFF5A6575))),
                                 ],
                               ),
                             )
@@ -287,8 +286,7 @@ class _One extends StatelessWidget implements Cards {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(title, style: titleStyle ?? themeData.titleStyle ?? TextStyle(fontSize: sp(13), fontWeight: FontWeight.w600, color: const Color(0xFF02132B))),
-                                Text(subTitle,
-                                    style: subTitleStyle ?? themeData.subTitleStyle ?? TextStyle(fontSize: sp(10), fontWeight: FontWeight.w400, color: const Color(0xFF5A6575))),
+                                Text(subTitle, style: subTitleStyle ?? themeData.subTitleStyle ?? TextStyle(fontSize: sp(10), fontWeight: FontWeight.w400, color: const Color(0xFF5A6575))),
                               ],
                             ),
                     )
@@ -365,9 +363,7 @@ class _Two extends StatelessWidget implements Cards {
         child: Container(
           constraints: boxConstraints ??
               themeData.constraints ??
-              (horizontal
-                  ? const BoxConstraints(minHeight: 125, minWidth: 315, maxHeight: 125, maxWidth: 315)
-                  : const BoxConstraints(minHeight: 176, minWidth: 139, maxHeight: 176, maxWidth: 139)),
+              (horizontal ? const BoxConstraints(minHeight: 125, minWidth: 315, maxHeight: 125, maxWidth: 315) : const BoxConstraints(minHeight: 176, minWidth: 139, maxHeight: 176, maxWidth: 139)),
           decoration: BoxDecoration(color: backgroundColor ?? themeData.backgroundColor ?? Colors.white, borderRadius: BorderRadius.circular(radius ?? themeData.radius ?? 10)),
           child: Material(
             type: MaterialType.transparency,
@@ -422,14 +418,10 @@ class _Two extends StatelessWidget implements Cards {
                                       crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
                                         Text(miniTitle,
-                                            style: miniTitleStyle ??
-                                                themeData.miniTitleStyle ??
-                                                TextStyle(fontSize: sp(9), fontWeight: FontWeight.w400, color: const Color(0xFF02132B)),
+                                            style: miniTitleStyle ?? themeData.miniTitleStyle ?? TextStyle(fontSize: sp(9), fontWeight: FontWeight.w400, color: const Color(0xFF02132B)),
                                             textAlign: TextAlign.left),
                                         Text(miniSubtitle,
-                                            style: miniSubtitleStyle ??
-                                                themeData.miniSubTitleStyle ??
-                                                TextStyle(fontSize: sp(7), fontWeight: FontWeight.w400, color: const Color(0xFF5A6575)),
+                                            style: miniSubtitleStyle ?? themeData.miniSubTitleStyle ?? TextStyle(fontSize: sp(7), fontWeight: FontWeight.w400, color: const Color(0xFF5A6575)),
                                             textAlign: TextAlign.left),
                                       ],
                                     ),
@@ -614,9 +606,7 @@ class _Three extends StatelessWidget implements Cards {
     final themeData = loadThemeData(theme, themeName ?? "cards_third", () => const CustomCardsThemeData())!;
 
     return Container(
-      constraints: boxConstraints ??
-          themeData.constraints ??
-          BoxConstraints(minHeight: formatHeight(186), minWidth: formatWidth(146), maxHeight: formatHeight(186), maxWidth: formatWidth(146)),
+      constraints: boxConstraints ?? themeData.constraints ?? BoxConstraints(minHeight: formatHeight(186), minWidth: formatWidth(146), maxHeight: formatHeight(186), maxWidth: formatWidth(146)),
       decoration: image != null
           ? BoxDecoration(image: DecorationImage(image: image, fit: BoxFit.cover), borderRadius: BorderRadius.circular(radius ?? themeData.radius ?? 10))
           : BoxDecoration(
@@ -657,8 +647,7 @@ class _Three extends StatelessWidget implements Cards {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(title,
-                                    style: titleStyle ?? themeData.titleStyle ?? TextStyle(fontSize: sp(12), fontWeight: FontWeight.w600, color: const Color(0xFF02132B)),
-                                    textAlign: TextAlign.left),
+                                    style: titleStyle ?? themeData.titleStyle ?? TextStyle(fontSize: sp(12), fontWeight: FontWeight.w600, color: const Color(0xFF02132B)), textAlign: TextAlign.left),
                                 Text(subTitle,
                                     style: subTitleStyle ?? themeData.subTitleStyle ?? TextStyle(fontSize: sp(10), fontWeight: FontWeight.w400, color: const Color(0xFF5A6575)),
                                     textAlign: TextAlign.left),
@@ -750,9 +739,7 @@ class _Fourth extends StatelessWidget implements Cards {
         type: MaterialType.transparency,
         child: Container(
           constraints: boxConstraints ??
-              (horizontal
-                  ? const BoxConstraints(minHeight: 96, minWidth: 312, maxHeight: 96, maxWidth: 312)
-                  : const BoxConstraints(minHeight: 156, minWidth: 158, maxHeight: 156, maxWidth: 158)),
+              (horizontal ? const BoxConstraints(minHeight: 96, minWidth: 312, maxHeight: 96, maxWidth: 312) : const BoxConstraints(minHeight: 156, minWidth: 158, maxHeight: 156, maxWidth: 158)),
           decoration: BoxDecoration(
             color: backgroundColor ?? themeData.backgroundColor ?? Colors.white,
             borderRadius: BorderRadius.circular(radius ?? themeData.radius ?? 10),
@@ -798,8 +785,7 @@ class _Fourth extends StatelessWidget implements Cards {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(title,
-                                    style: titleStyle ?? themeData.titleStyle ?? TextStyle(fontSize: sp(11), fontWeight: FontWeight.w600, color: const Color(0xFF02132B)),
-                                    textAlign: TextAlign.left),
+                                    style: titleStyle ?? themeData.titleStyle ?? TextStyle(fontSize: sp(11), fontWeight: FontWeight.w600, color: const Color(0xFF02132B)), textAlign: TextAlign.left),
                                 Text(subTitle,
                                     style: subTitleStyle ?? themeData.subTitleStyle ?? TextStyle(fontSize: sp(10), fontWeight: FontWeight.w400, color: const Color(0xFF5A6575)),
                                     textAlign: TextAlign.left),
@@ -878,6 +864,7 @@ class _Five extends StatelessWidget implements Cards {
   final Widget? imageWidget;
   final CustomCardsThemeData? theme;
   final String? themeName;
+  final Color? starColor;
 
   const _Five({
     this.title = 'Anna Clark',
@@ -900,6 +887,7 @@ class _Five extends StatelessWidget implements Cards {
     this.imageWidget,
     this.theme,
     this.themeName,
+    this.starColor,
     Key? key,
   }) : super(key: key);
 
@@ -937,7 +925,7 @@ class _Five extends StatelessWidget implements Cards {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Text(mark, style: markTextStyle ?? themeData.markTextStyle ?? TextStyle(fontSize: sp(11), fontWeight: FontWeight.w400, color: const Color(0xFF5A6575))),
-                          const Icon(Icons.star_rate_rounded, color: Color(0xFF02132B), size: 16),
+                          Icon(Icons.star_rate_rounded, color: starColor ?? const Color(0xFF02132B), size: 16),
                         ],
                       ),
                     ),
@@ -1079,9 +1067,7 @@ class _Six extends StatelessWidget implements Cards {
     return Material(
         type: MaterialType.transparency,
         child: Container(
-          constraints: boxConstraints ??
-              themeData.constraints ??
-              BoxConstraints(minHeight: formatHeight(125), minWidth: formatWidth(315), maxHeight: formatHeight(125), maxWidth: formatWidth(315)),
+          constraints: boxConstraints ?? themeData.constraints ?? BoxConstraints(minHeight: formatHeight(125), minWidth: formatWidth(315), maxHeight: formatHeight(125), maxWidth: formatWidth(315)),
           decoration: BoxDecoration(
             color: backgroundColor ?? themeData.backgroundColor ?? Colors.white,
             borderRadius: BorderRadius.circular(radius ?? themeData.radius ?? 10),
@@ -1137,8 +1123,7 @@ class _Six extends StatelessWidget implements Cards {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(title, style: titleStyle ?? themeData.titleStyle ?? TextStyle(fontSize: sp(13), fontWeight: FontWeight.w600, color: const Color(0xFF02132B))),
-                          Text(subTitle,
-                              style: subTitleStyle ?? themeData.subTitleStyle ?? TextStyle(fontSize: sp(10), fontWeight: FontWeight.w400, color: const Color(0xFF5A6575))),
+                          Text(subTitle, style: subTitleStyle ?? themeData.subTitleStyle ?? TextStyle(fontSize: sp(10), fontWeight: FontWeight.w400, color: const Color(0xFF5A6575))),
                           const Spacer(),
                           Container(
                             height: 0.5,
@@ -1156,14 +1141,11 @@ class _Six extends StatelessWidget implements Cards {
                               const SizedBox(width: 6),
                               Column(
                                 children: [
-                                  Text(miniTitle,
-                                      style: miniTitleStyle ?? themeData.miniTitleStyle ?? TextStyle(fontSize: sp(9), fontWeight: FontWeight.w400, color: const Color(0xFF02132B))),
+                                  Text(miniTitle, style: miniTitleStyle ?? themeData.miniTitleStyle ?? TextStyle(fontSize: sp(9), fontWeight: FontWeight.w400, color: const Color(0xFF02132B))),
                                   Row(
                                     children: [
                                       Text(miniSubtitle,
-                                          style: miniSubtitleStyle ??
-                                              themeData.miniSubTitleStyle ??
-                                              TextStyle(fontSize: sp(7), fontWeight: FontWeight.w400, color: const Color(0xFF5A6575))),
+                                          style: miniSubtitleStyle ?? themeData.miniSubTitleStyle ?? TextStyle(fontSize: sp(7), fontWeight: FontWeight.w400, color: const Color(0xFF5A6575))),
                                       iconMiniSubTitle ?? const Icon(Icons.star_rate_rounded, color: Color(0xFF02132B), size: 10),
                                     ],
                                   ),
@@ -1191,8 +1173,7 @@ class _Six extends StatelessWidget implements Cards {
                                   ? Container(
                                       height: 34,
                                       width: 99,
-                                      decoration: BoxDecoration(
-                                          color: statusColor ?? const Color(0xFF02132B).withOpacity(0.03), borderRadius: BorderRadius.circular(radius ?? themeData.radius ?? 10)),
+                                      decoration: BoxDecoration(color: statusColor ?? const Color(0xFF02132B).withOpacity(0.03), borderRadius: BorderRadius.circular(radius ?? themeData.radius ?? 10)),
                                       child: Center(
                                         child: Text(
                                           statusText,
@@ -1300,12 +1281,9 @@ class _Seven extends StatelessWidget implements Cards {
                             mainAxisAlignment: MainAxisAlignment.end,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(title,
-                                  style: titleStyle ?? themeData.titleStyle ?? TextStyle(fontSize: sp(14), fontWeight: FontWeight.w600, color: Colors.white),
-                                  textAlign: TextAlign.left),
+                              Text(title, style: titleStyle ?? themeData.titleStyle ?? TextStyle(fontSize: sp(14), fontWeight: FontWeight.w600, color: Colors.white), textAlign: TextAlign.left),
                               Text(subTitle,
-                                  style: subTitleStyle ?? themeData.subTitleStyle ?? TextStyle(fontSize: sp(10), fontWeight: FontWeight.w400, color: Colors.white),
-                                  textAlign: TextAlign.left),
+                                  style: subTitleStyle ?? themeData.subTitleStyle ?? TextStyle(fontSize: sp(10), fontWeight: FontWeight.w400, color: Colors.white), textAlign: TextAlign.left),
                             ],
                           ),
                         ),
@@ -1482,16 +1460,14 @@ class _Nine extends StatelessWidget implements Cards {
                             padding: EdgeInsets.all(formatWidth(16)),
                             child: Column(mainAxisAlignment: MainAxisAlignment.start, crossAxisAlignment: CrossAxisAlignment.start, children: [
                               Text(title,
-                                  style: titleStyle ?? themeData.titleStyle ?? TextStyle(fontSize: sp(13), fontWeight: FontWeight.w600, color: const Color(0xFF02132B)),
-                                  textAlign: TextAlign.left),
+                                  style: titleStyle ?? themeData.titleStyle ?? TextStyle(fontSize: sp(13), fontWeight: FontWeight.w600, color: const Color(0xFF02132B)), textAlign: TextAlign.left),
                               const Spacer(),
                               Text(subTitle,
                                   style: subTitleStyle ?? themeData.subTitleStyle ?? TextStyle(fontSize: sp(10), fontWeight: FontWeight.w400, color: const Color(0xFF5A6575)),
                                   textAlign: TextAlign.left),
                               const Spacer(),
                               Text(desc,
-                                  style: descStyle ?? themeData.descStyle ?? TextStyle(fontSize: sp(12), fontWeight: FontWeight.w400, color: const Color(0xFF02132B)),
-                                  textAlign: TextAlign.left),
+                                  style: descStyle ?? themeData.descStyle ?? TextStyle(fontSize: sp(12), fontWeight: FontWeight.w400, color: const Color(0xFF02132B)), textAlign: TextAlign.left),
                             ]),
                           ),
                         ),
