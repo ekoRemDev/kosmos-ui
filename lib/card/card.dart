@@ -95,6 +95,7 @@ abstract class Cards extends StatelessWidget {
     final String? themeName,
     final String? tagContent,
     final TextStyle? tagStyle,
+    final Widget? tagWidget,
   }) = _Fourth;
 
   const factory Cards.five({
@@ -710,6 +711,7 @@ class _Fourth extends StatelessWidget implements Cards {
   final CustomCardsThemeData? theme;
   final String? themeName;
   final String? tagContent;
+  final Widget? tagWidget;
   final TextStyle? tagStyle;
 
   const _Fourth({
@@ -730,6 +732,7 @@ class _Fourth extends StatelessWidget implements Cards {
     this.themeName,
     this.tagContent,
     this.tagStyle,
+    this.tagWidget,
     Key? key,
   }) : super(key: key);
 
@@ -769,17 +772,18 @@ class _Fourth extends StatelessWidget implements Cards {
                             padding: const EdgeInsets.only(top: 6, right: 7),
                             child: Align(
                               alignment: Alignment.topRight,
-                              child: Container(
-                                height: 21,
-                                width: 34,
-                                decoration: BoxDecoration(borderRadius: BorderRadius.circular(5), color: const Color(0xFF02132B)),
-                                child: Center(
-                                  child: Text(
-                                    tagContent ?? 'Tag',
-                                    style: tagStyle ?? themeData.tagStyle ?? TextStyle(fontSize: sp(7), fontWeight: FontWeight.w500, color: Colors.white),
+                              child: tagWidget ??
+                                  Container(
+                                    height: 21,
+                                    width: 34,
+                                    decoration: BoxDecoration(borderRadius: BorderRadius.circular(5), color: const Color(0xFF02132B)),
+                                    child: Center(
+                                      child: Text(
+                                        tagContent ?? 'Tag',
+                                        style: tagStyle ?? themeData.tagStyle ?? TextStyle(fontSize: sp(7), fontWeight: FontWeight.w500, color: Colors.white),
+                                      ),
+                                    ),
                                   ),
-                                ),
-                              ),
                             ),
                           ),
                           Padding(
