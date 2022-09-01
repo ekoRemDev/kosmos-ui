@@ -93,6 +93,8 @@ abstract class Cards extends StatelessWidget {
     final bool horizontal,
     final CustomCardsThemeData? theme,
     final String? themeName,
+    final String? tagContent,
+    final TextStyle? tagStyle,
   }) = _Fourth;
 
   const factory Cards.five({
@@ -738,6 +740,7 @@ class _Fourth extends StatelessWidget implements Cards {
     return Material(
         type: MaterialType.transparency,
         child: Container(
+          clipBehavior: Clip.hardEdge,
           constraints: boxConstraints ??
               (horizontal ? const BoxConstraints(minHeight: 96, minWidth: 312, maxHeight: 96, maxWidth: 312) : const BoxConstraints(minHeight: 156, minWidth: 158, maxHeight: 156, maxWidth: 158)),
           decoration: BoxDecoration(
@@ -753,14 +756,15 @@ class _Fourth extends StatelessWidget implements Cards {
                 child: Stack(
                   children: !horizontal
                       ? [
-                          imageWidget ??
-                              Container(
-                                height: 96,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(7),
-                                  color: const Color(0xFF02132B).withOpacity(0.50),
-                                ),
-                              ),
+                          Container(
+                            height: 96,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(7),
+                              color: const Color(0xFF02132B).withOpacity(0.50),
+                            ),
+                            clipBehavior: Clip.hardEdge,
+                            child: imageWidget,
+                          ),
                           Padding(
                             padding: const EdgeInsets.only(top: 6, right: 7),
                             child: Align(
