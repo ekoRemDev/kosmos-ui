@@ -74,6 +74,8 @@ class _MyHomePageState extends State<MyHomePage> {
             children: [
               const SizedBox(height: 400),
               Input.image(
+                urlImage:
+                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTdSGVuStFxj_Dnv9V9qlzkor22IRPIglGkVA&usqp=CAU",
                 imageMobile: image,
                 onTap: () {
                   getImage(
