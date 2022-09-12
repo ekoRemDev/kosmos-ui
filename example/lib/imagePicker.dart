@@ -10,7 +10,9 @@ final ImagePicker _picker = ImagePicker();
 
 Future<File?> _getImage(ImageSource source) async {
   XFile? image = await _picker.pickImage(source: source);
-  return (File(image!.path));
+  if(image!=null) {
+    return (File(image.path));
+  }
 }
 
 Future<File?> _cropImage(XFile? image) async {
