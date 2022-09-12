@@ -2,6 +2,7 @@
 
 import 'dart:io';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:core_kosmos/core_kosmos.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
@@ -42,6 +43,7 @@ abstract class Input extends HookWidget {
   final Widget? footer;
   final bool? isValid;
   final File? imageMobile;
+  final String? urlImage;
 
   final List<PlatformFile>? defaultFiles;
 
@@ -60,6 +62,7 @@ abstract class Input extends HookWidget {
     this.textStyle,
     this.iconColor,
     this.widthImage,
+    this.urlImage,
     this.listNameFiles,
     this.fieldName,
     this.fieldNameStyle,
@@ -88,6 +91,7 @@ abstract class Input extends HookWidget {
     final TextStyle? fieldPostRedirectionStyle,
     final VoidCallback? postFieldOnClick,
     final VoidCallback? onTap,
+    final String? urlImage,
     final VoidCallback? onDoubleTap,
     final PlatformFile? image,
     final BoxDecoration? boxDecoration,
@@ -158,6 +162,7 @@ class _OneImage extends Input {
     final String? svgIconPath,
     final String? fieldName,
     final TextStyle? fieldNameStyle,
+    final String? urlImage,
     final String? fieldPostRedirection,
     final TextStyle? fieldPostRedirectionStyle,
     final VoidCallback? postFieldOnClick,
@@ -181,6 +186,7 @@ class _OneImage extends Input {
           onTap: onTap,
           onDoubleTap: onDoubleTap,
           image: image,
+          urlImage: urlImage,
           boxDecoration: boxDecoration,
           inkRadius: inkRadius,
           contentPadding: contentPadding,
@@ -256,21 +262,32 @@ class _OneImage extends Input {
                     },
                     onDoubleTap: onDoubleTap,
                     child: Padding(
-                      padding: state.value != null || imageMobile != null
+                      padding: state.value != null || imageMobile != null || urlImage != null
                           ? (contentPadding ?? themeData.contentPadding ?? const EdgeInsets.fromLTRB(7, 6, 30, 6))
                           : EdgeInsets.zero,
                       child: Stack(
                         alignment: Alignment.centerLeft,
-                        children: state.value != null || imageMobile != null
+                        children: state.value != null || imageMobile != null || urlImage != null
                             ? [
-                                Container(
-                                  width: formatWidth(widthImage ?? themeData.pickerImageWidth ?? 81),
-                                  decoration: BoxDecoration(
-                                    image: DecorationImage(image: FileImage(imageMobile!), fit: BoxFit.cover),
-                                    borderRadius:
-                                        BorderRadius.circular(imageRadius ?? themeData.pickerImageRadius ?? 5),
-                                  ),
-                                ),
+                                imageMobile != null
+                                    ? Container(
+                                        width: formatWidth(widthImage ?? themeData.pickerImageWidth ?? 81),
+                                        decoration: BoxDecoration(
+                                          image: DecorationImage(image: FileImage(imageMobile!), fit: BoxFit.cover),
+                                          borderRadius:
+                                              BorderRadius.circular(imageRadius ?? themeData.pickerImageRadius ?? 5),
+                                        ),
+                                      )
+                                    : Container(
+                                        width: formatWidth(widthImage ?? themeData.pickerImageWidth ?? 81),
+                                        child: ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(imageRadius ?? themeData.pickerImageRadius ?? 5),
+                                          child: CachedNetworkImage(
+                                            imageUrl: urlImage!,
+                                            fit: BoxFit.cover,
+                                          ),
+                                        )),
                                 Align(
                                   alignment: Alignment.centerRight,
                                   child: Column(
