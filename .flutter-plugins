@@ -1,14 +1,14 @@
 # This is a generated file; do not edit or check into version control.
-file_picker=/Users/kosmosdigital/Documents/sdk/flutter/.pub-cache/hosted/pub.dartlang.org/file_picker-4.6.1/
-flutter_plugin_android_lifecycle=/Users/kosmosdigital/Documents/sdk/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_plugin_android_lifecycle-2.0.7/
-fluttertoast=/Users/kosmosdigital/Documents/sdk/flutter/.pub-cache/hosted/pub.dartlang.org/fluttertoast-8.0.9/
-libphonenumber=/Users/kosmosdigital/Documents/sdk/flutter/.pub-cache/hosted/pub.dartlang.org/libphonenumber-2.0.2/
-libphonenumber_plugin=/Users/kosmosdigital/Documents/sdk/flutter/.pub-cache/hosted/pub.dartlang.org/libphonenumber_plugin-0.2.3/
-libphonenumber_web=/Users/kosmosdigital/Documents/sdk/flutter/.pub-cache/hosted/pub.dartlang.org/libphonenumber_web-0.2.0+1/
-path_provider=/Users/kosmosdigital/Documents/sdk/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider-2.0.11/
-path_provider_android=/Users/kosmosdigital/Documents/sdk/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider_android-2.0.20/
-path_provider_ios=/Users/kosmosdigital/Documents/sdk/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider_ios-2.0.11/
-path_provider_linux=/Users/kosmosdigital/Documents/sdk/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider_linux-2.1.7/
-path_provider_macos=/Users/kosmosdigital/Documents/sdk/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider_macos-2.0.6/
-path_provider_windows=/Users/kosmosdigital/Documents/sdk/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider_windows-2.0.7/
-sqflite=/Users/kosmosdigital/Documents/sdk/flutter/.pub-cache/hosted/pub.dartlang.org/sqflite-2.0.3+1/
+file_picker=/Users/kosmosdigital/development/flutter/.pub-cache/hosted/pub.dartlang.org/file_picker-4.6.1/
+flutter_plugin_android_lifecycle=/Users/kosmosdigital/development/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_plugin_android_lifecycle-2.0.7/
+fluttertoast=/Users/kosmosdigital/development/flutter/.pub-cache/hosted/pub.dartlang.org/fluttertoast-8.0.9/
+libphonenumber=/Users/kosmosdigital/development/flutter/.pub-cache/hosted/pub.dartlang.org/libphonenumber-2.0.2/
+libphonenumber_plugin=/Users/kosmosdigital/development/flutter/.pub-cache/hosted/pub.dartlang.org/libphonenumber_plugin-0.2.3/
+libphonenumber_web=/Users/kosmosdigital/development/flutter/.pub-cache/hosted/pub.dartlang.org/libphonenumber_web-0.2.0+1/
+path_provider=/Users/kosmosdigital/development/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider-2.0.11/
+path_provider_android=/Users/kosmosdigital/development/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider_android-2.0.20/
+path_provider_ios=/Users/kosmosdigital/development/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider_ios-2.0.11/
+path_provider_linux=/Users/kosmosdigital/development/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider_linux-2.1.7/
+path_provider_macos=/Users/kosmosdigital/development/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider_macos-2.0.6/
+path_provider_windows=/Users/kosmosdigital/development/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider_windows-2.0.7/
+sqflite=/Users/kosmosdigital/development/flutter/.pub-cache/hosted/pub.dartlang.org/sqflite-2.0.3+1/
