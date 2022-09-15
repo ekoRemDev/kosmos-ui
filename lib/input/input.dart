@@ -260,7 +260,8 @@ class _OneImage extends Input {
                     },
                     onDoubleTap: onDoubleTap,
                     child: Padding(
-                      padding: state.value != null || imageMobile != null || urlImage != null ? (contentPadding ?? themeData.contentPadding ?? const EdgeInsets.fromLTRB(7, 6, 30, 6)) : EdgeInsets.zero,
+                      padding:
+                          state.value != null || imageMobile != null || urlImage != null ? (contentPadding ?? themeData.contentPadding ?? const EdgeInsets.fromLTRB(7, 6, 30, 6)) : EdgeInsets.zero,
                       child: Stack(
                         alignment: Alignment.centerLeft,
                         children: state.value != null || imageMobile != null || urlImage != null || image != null
@@ -500,7 +501,9 @@ class _MultipleFile extends Input {
                                                       child: Text(
                                                         'Appuyez pour modifier la / les fichier(s)',
                                                         textAlign: TextAlign.center,
-                                                        style: textStyle ?? themeData.fieldStyle ?? TextStyle(fontSize: sp(13), fontWeight: FontWeight.w500, color: const Color(0xFF02132B).withOpacity(0.41)),
+                                                        style: textStyle ??
+                                                            themeData.fieldStyle ??
+                                                            TextStyle(fontSize: sp(13), fontWeight: FontWeight.w500, color: const Color(0xFF02132B).withOpacity(0.41)),
                                                       ),
                                                     ),
                                                   ],
@@ -632,7 +635,7 @@ class _ValidatedFile extends Input {
   @override
   Widget build(BuildContext context) {
     final themeData = loadThemeData(theme, "input_field", () => const CustomFormFieldThemeData())!;
-    final state = useState<List<PlatformFile>?>(defaultFiles);
+    final state = useState<PlatformFile?>(defaultFile);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -679,16 +682,16 @@ class _ValidatedFile extends Input {
                     FilePickerResult? result = await FilePicker.platform.pickFiles();
 
                     if (result != null) {
-                      state.value = result.files;
-                    } else {}
-                    if (onMultipleChanged != null) onMultipleChanged!(state.value);
+                      state.value = result.files.single;
+                    }
+                    if (onChanged != null) onChanged!(state.value);
                   },
                   onDoubleTap: onDoubleTap,
                   child: Padding(
                     padding: contentPadding ?? themeData.contentPadding ?? const EdgeInsets.fromLTRB(26, 6, 26, 6),
                     child: Stack(
                       alignment: Alignment.center,
-                      children: (state.value != null && state.value!.isNotEmpty)
+                      children: (state.value != null)
                           ? [
                               Align(
                                 alignment: Alignment.center,
@@ -717,7 +720,9 @@ class _ValidatedFile extends Input {
                                                       Text(
                                                         'Appuyez pour modifier le fichier',
                                                         textAlign: TextAlign.center,
-                                                        style: textStyle ?? themeData.fieldStyle ?? TextStyle(fontSize: sp(13), fontWeight: FontWeight.w500, color: const Color(0xFF02132B).withOpacity(0.41)),
+                                                        style: textStyle ??
+                                                            themeData.fieldStyle ??
+                                                            TextStyle(fontSize: sp(13), fontWeight: FontWeight.w500, color: const Color(0xFF02132B).withOpacity(0.41)),
                                                       ),
                                                     ],
                                                   ),
@@ -762,7 +767,7 @@ class _ValidatedFile extends Input {
                                                     Expanded(
                                                       child: Center(
                                                         child: Text(
-                                                          state.value!.first.name,
+                                                          state.value!.name,
                                                           overflow: TextOverflow.ellipsis,
                                                           style: TextStyle(color: const Color(0xFF02132B), fontSize: sp(13), fontWeight: FontWeight.w500),
                                                         ),
@@ -771,7 +776,7 @@ class _ValidatedFile extends Input {
                                                     InkWell(
                                                       onTap: () {
                                                         state.value = null;
-                                                        if (onMultipleChanged != null) onMultipleChanged!(state.value);
+                                                        if (onChanged != null) onChanged!(state.value);
                                                       },
                                                       child: const Icon(Icons.close, color: Color(0xFF02132B)),
                                                     ),
