@@ -113,6 +113,8 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ),
               const SizedBox(height: 400),
+              const Cards.five(),
+              const SizedBox(height: 400),
               const Input.image(),
               const SizedBox(height: 400),
               CTA.primary(
