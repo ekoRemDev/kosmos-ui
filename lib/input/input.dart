@@ -105,7 +105,7 @@ abstract class Input extends HookWidget {
     final Function(PlatformFile?)? onChanged,
     final PlatformFile? defaultFile,
     final File? imageMobile,
-    final Widget child,
+    final Widget? child,
   }) = _OneImage;
 
   const factory Input.files({
