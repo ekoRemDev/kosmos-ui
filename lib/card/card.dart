@@ -246,33 +246,33 @@ class _One extends StatelessWidget implements Cards {
     return Material(
         type: MaterialType.transparency,
         child: Container(
-          constraints: boxConstraints ?? themeData.constraints ?? const BoxConstraints(minHeight: 125, minWidth: 135, maxHeight: 125, maxWidth: 135),
+          constraints: boxConstraints ?? themeData.constraints ?? BoxConstraints(minHeight: formatHeight(125), minWidth: formatWidth(135), maxHeight: formatHeight(125), maxWidth: formatWidth(135)),
           decoration: BoxDecoration(
             color: backgroundColor ?? themeData.backgroundColor ?? Colors.white,
-            borderRadius: BorderRadius.circular(radius ?? themeData.radius ?? 10),
+            borderRadius: BorderRadius.circular(radius ?? themeData.radius ?? formatWidth(10)),
           ),
           child: Material(
             type: MaterialType.transparency,
             child: InkWell(
                 onTap: onTap,
                 onDoubleTap: onDoubleTap,
-                borderRadius: BorderRadius.circular(radius ?? themeData.radius ?? 10),
+                borderRadius: BorderRadius.circular(radius ?? themeData.radius ?? formatWidth(10)),
                 child: Stack(
                   children: [
                     Padding(
-                      padding: paddingImage ?? themeData.paddingImage ?? const EdgeInsets.all(8.0),
+                      padding: paddingImage ?? themeData.paddingImage ?? EdgeInsets.all(formatWidth(8.0)),
                       child: imageWidget ??
                           Container(
-                            height: 68,
-                            width: 122,
+                            height: formatHeight(68),
+                            width: formatWidth(122),
                             decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(7),
+                              borderRadius: BorderRadius.circular(formatWidth(7)),
                               color: const Color(0xFF02132B),
                             ),
                           ),
                     ),
                     Padding(
-                      padding: paddingText ?? themeData.paddingText ?? (center ? const EdgeInsets.only(bottom: 9) : const EdgeInsets.only(left: 14, bottom: 9)),
+                      padding: paddingText ?? themeData.paddingText ?? (center ? EdgeInsets.only(bottom: formatHeight(9)) : EdgeInsets.only(left: formatWidth(14), bottom: formatHeight(9))),
                       child: center
                           ? Center(
                               child: Column(
@@ -366,14 +366,15 @@ class _Two extends StatelessWidget implements Cards {
         child: Container(
           constraints: boxConstraints ??
               themeData.constraints ??
-              (horizontal ? const BoxConstraints(minHeight: 125, minWidth: 315, maxHeight: 125, maxWidth: 315) : const BoxConstraints(minHeight: 176, minWidth: 139, maxHeight: 176, maxWidth: 139)),
-          decoration: BoxDecoration(color: backgroundColor ?? themeData.backgroundColor ?? Colors.white, borderRadius: BorderRadius.circular(radius ?? themeData.radius ?? 10)),
+              (horizontal ? BoxConstraints(minHeight: formatHeight(125), minWidth: formatWidth(315), maxHeight: formatHeight(125), maxWidth: formatWidth(315)) :
+              BoxConstraints(minHeight: formatHeight(176), minWidth: formatWidth(139), maxHeight: formatHeight(176), maxWidth: formatWidth(139))),
+          decoration: BoxDecoration(color: backgroundColor ?? themeData.backgroundColor ?? Colors.white, borderRadius: BorderRadius.circular(radius ?? themeData.radius ?? formatWidth(10))),
           child: Material(
             type: MaterialType.transparency,
             child: InkWell(
                 onTap: onTap,
                 onDoubleTap: onDoubleTap,
-                borderRadius: BorderRadius.circular(radius ?? themeData.radius ?? 10),
+                borderRadius: BorderRadius.circular(radius ?? themeData.radius ?? formatWidth(10)),
                 child: Stack(
                   children: !horizontal
                       ? [
@@ -381,15 +382,15 @@ class _Two extends StatelessWidget implements Cards {
                             padding: paddingImage ?? themeData.paddingImage ?? EdgeInsets.zero,
                             child: imageWidget ??
                                 Container(
-                                  height: 101,
+                                  height: formatHeight(101),
                                   decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(radius ?? themeData.radius ?? 10),
+                                    borderRadius: BorderRadius.circular(radius ?? themeData.radius ?? formatWidth(10)),
                                     color: const Color(0xFF02132B),
                                   ),
                                 ),
                           ),
                           Padding(
-                            padding: paddingText ?? themeData.paddingText ?? const EdgeInsets.only(left: 14, bottom: 9),
+                            padding: paddingText ?? themeData.paddingText ?? EdgeInsets.only(left: formatWidth(14), bottom: formatHeight(9)),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.end,
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -409,8 +410,8 @@ class _Two extends StatelessWidget implements Cards {
                                   children: [
                                     miniImageWidget ??
                                         Container(
-                                          height: 19,
-                                          width: 19,
+                                          height: formatHeight(19),
+                                          width: formatWidth(19),
                                           decoration: const BoxDecoration(
                                             shape: BoxShape.circle,
                                             color: Color(0xFF02132B),
@@ -437,14 +438,14 @@ class _Two extends StatelessWidget implements Cards {
                           Align(
                             alignment: Alignment.bottomRight,
                             child: Padding(
-                              padding: doublePointPadding ?? themeData.paddingDoublePoint ?? const EdgeInsets.only(bottom: 7),
+                              padding: doublePointPadding ?? themeData.paddingDoublePoint ?? EdgeInsets.only(bottom: formatHeight(7)),
                               child: InkWell(
-                                borderRadius: BorderRadius.circular(radius ?? themeData.radius ?? 10),
+                                borderRadius: BorderRadius.circular(radius ?? themeData.radius ?? formatWidth(10)),
                                 onTap: doublePointonTap,
                                 onDoubleTap: doublePointonDoubleTap,
                                 child: SizedBox(
-                                  height: (doublePointSize ?? themeData.doublePointSize ?? const Size(23, 23)).height,
-                                  width: (doublePointSize ?? themeData.doublePointSize ?? const Size(23, 23)).width,
+                                  height: (doublePointSize ?? themeData.doublePointSize ?? Size(formatWidth(23), formatHeight(23))).height,
+                                  width: (doublePointSize ?? themeData.doublePointSize ?? Size(formatWidth(23), formatHeight(23))).width,
                                   child: doublePointWidget ??
                                       Column(mainAxisAlignment: MainAxisAlignment.center, children: [
                                         Container(
@@ -452,10 +453,10 @@ class _Two extends StatelessWidget implements Cards {
                                           width: 3,
                                           decoration: const BoxDecoration(shape: BoxShape.circle, color: Color(0xFF9199A7)),
                                         ),
-                                        const SizedBox(height: 3),
+                                        SizedBox(height: formatHeight(3)),
                                         Container(
-                                          height: 3,
-                                          width: 3,
+                                          height: formatHeight(3),
+                                          width: formatWidth(3),
                                           decoration: const BoxDecoration(shape: BoxShape.circle, color: Color(0xFF9199A7)),
                                         ),
                                       ]),
@@ -468,30 +469,30 @@ class _Two extends StatelessWidget implements Cards {
                           Row(
                             children: [
                               Container(
-                                width: 134,
+                                width: formatWidth(134),
                                 decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(radius ?? themeData.radius ?? 10),
+                                  borderRadius: BorderRadius.circular(radius ?? themeData.radius ?? formatWidth(10)),
                                   color: const Color(0xFF02132B),
                                 ),
                               ),
                               Padding(
-                                padding: const EdgeInsets.only(left: 13.0),
+                                padding: EdgeInsets.only(left: formatWidth(13.0)),
                                 child: Column(mainAxisAlignment: MainAxisAlignment.center, crossAxisAlignment: CrossAxisAlignment.start, children: [
                                   Text(title, style: titleStyle, textAlign: TextAlign.left),
                                   Text(subTitle, style: subTitleStyle, textAlign: TextAlign.left),
-                                  const SizedBox(height: 10),
+                                  SizedBox(height: formatHeight(10)),
                                   Row(
                                     children: [
                                       miniImageWidget ??
                                           Container(
-                                            height: 19,
-                                            width: 19,
+                                            height: formatHeight(19),
+                                            width: formatWidth(19),
                                             decoration: const BoxDecoration(
                                               shape: BoxShape.circle,
                                               color: Color(0xFF02132B),
                                             ),
                                           ),
-                                      const SizedBox(width: 6),
+                                      SizedBox(width: formatWidth(6)),
                                       Column(
                                         crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
@@ -508,25 +509,25 @@ class _Two extends StatelessWidget implements Cards {
                           Align(
                             alignment: Alignment.bottomRight,
                             child: Padding(
-                              padding: doublePointPadding ?? themeData.paddingDoublePoint ?? const EdgeInsets.only(bottom: 7),
+                              padding: doublePointPadding ?? themeData.paddingDoublePoint ?? EdgeInsets.only(bottom: formatHeight(7)),
                               child: InkWell(
-                                borderRadius: BorderRadius.circular(radius ?? themeData.radius ?? 10),
+                                borderRadius: BorderRadius.circular(radius ?? themeData.radius ?? formatWidth(10)),
                                 onTap: doublePointonTap,
                                 onDoubleTap: doublePointonDoubleTap,
                                 child: SizedBox(
-                                  height: (doublePointSize ?? themeData.doublePointSize ?? const Size(23, 23)).height,
-                                  width: (doublePointSize ?? themeData.doublePointSize ?? const Size(23, 23)).width,
+                                  height: (doublePointSize ?? themeData.doublePointSize ?? Size(formatWidth(23), formatHeight(23))).height,
+                                  width: (doublePointSize ?? themeData.doublePointSize ?? Size(formatWidth(23), formatHeight(23))).width,
                                   child: doublePointWidget ??
                                       Column(mainAxisAlignment: MainAxisAlignment.center, children: [
                                         Container(
-                                          height: 3,
-                                          width: 3,
+                                          height: formatHeight(3),
+                                          width: formatWidth(3),
                                           decoration: const BoxDecoration(shape: BoxShape.circle, color: Color(0xFF9199A7)),
                                         ),
-                                        const SizedBox(height: 3),
+                                        SizedBox(height: formatHeight(3)),
                                         Container(
-                                          height: 3,
-                                          width: 3,
+                                          height: formatHeight(3),
+                                          width: formatWidth(3),
                                           decoration: const BoxDecoration(shape: BoxShape.circle, color: Color(0xFF9199A7)),
                                         ),
                                       ]),
@@ -611,41 +612,41 @@ class _Three extends StatelessWidget implements Cards {
     return Container(
       constraints: boxConstraints ?? themeData.constraints ?? BoxConstraints(minHeight: formatHeight(186), minWidth: formatWidth(146), maxHeight: formatHeight(186), maxWidth: formatWidth(146)),
       decoration: image != null
-          ? BoxDecoration(image: DecorationImage(image: image, fit: BoxFit.cover), borderRadius: BorderRadius.circular(radius ?? themeData.radius ?? 10))
+          ? BoxDecoration(image: DecorationImage(image: image, fit: BoxFit.cover), borderRadius: BorderRadius.circular(radius ?? themeData.radius ?? formatWidth(10)))
           : BoxDecoration(
               color: backgroundColor ?? const Color(0xFF02132B),
-              borderRadius: BorderRadius.circular(radius ?? themeData.radius ?? 10),
+              borderRadius: BorderRadius.circular(radius ?? themeData.radius ?? formatWidth(10)),
             ),
       child: Material(
         type: MaterialType.transparency,
         child: InkWell(
             onTap: onTap,
             onDoubleTap: onDoubleTap,
-            borderRadius: BorderRadius.circular(radius ?? themeData.radius ?? 10),
+            borderRadius: BorderRadius.circular(radius ?? themeData.radius ?? formatWidth(10)),
             child: Stack(children: [
               Align(
                   alignment: Alignment.bottomCenter,
                   child: Container(
-                    height: 50,
+                    height: formatHeight(50),
                     decoration: BoxDecoration(
                       color: themeData.backgroundColor ?? Colors.white,
-                      borderRadius: BorderRadius.circular(radius ?? themeData.radius ?? 10),
+                      borderRadius: BorderRadius.circular(radius ?? themeData.radius ?? formatWidth(10)),
                     ),
                     child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 8),
+                        padding: EdgeInsets.symmetric(horizontal: formatWidth(8)),
                         child: Row(
                           children: [
                             subImageWidget ??
                                 Container(
-                                  height: 30,
-                                  width: 30,
+                                  height: formatHeight(30),
+                                  width: formatWidth(30),
                                   decoration: const BoxDecoration(
                                     shape: BoxShape.circle,
                                     color: Color(0xFF02132B),
                                   ),
                                 ),
-                            const SizedBox(width: 7),
+                            SizedBox(width: formatWidth(7)),
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -658,25 +659,25 @@ class _Three extends StatelessWidget implements Cards {
                             ),
                             const Spacer(),
                             InkWell(
-                              borderRadius: BorderRadius.circular(radius ?? themeData.radius ?? 10),
+                              borderRadius: BorderRadius.circular(radius ?? themeData.radius ?? formatWidth(10)),
                               onTap: doublePointonTap,
                               onDoubleTap: doublePointonDoubleTap,
                               child: SizedBox(
-                                height: (doublePointSize ?? themeData.doublePointSize ?? const Size(23, 23)).height,
-                                width: (doublePointSize ?? themeData.doublePointSize ?? const Size(23, 23)).width,
+                                height: (doublePointSize ?? themeData.doublePointSize ?? Size(formatWidth(23), formatHeight(23))).height,
+                                width: (doublePointSize ?? themeData.doublePointSize ?? Size(formatWidth(23), formatHeight(23))).width,
                                 child: doublePointWidget ??
                                     Column(
                                       mainAxisAlignment: MainAxisAlignment.center,
                                       children: [
                                         Container(
-                                          height: 3,
-                                          width: 3,
+                                          height: formatHeight(3),
+                                          width: formatWidth(3),
                                           decoration: const BoxDecoration(shape: BoxShape.circle, color: Color(0xFF9199A7)),
                                         ),
-                                        const SizedBox(height: 3),
+                                        SizedBox(height: formatHeight(3)),
                                         Container(
-                                          height: 3,
-                                          width: 3,
+                                          height: formatHeight(3),
+                                          width: formatWidth(3),
                                           decoration: const BoxDecoration(shape: BoxShape.circle, color: Color(0xFF9199A7)),
                                         ),
                                       ],
@@ -745,37 +746,38 @@ class _Fourth extends StatelessWidget implements Cards {
         child: Container(
           clipBehavior: Clip.hardEdge,
           constraints: boxConstraints ??
-              (horizontal ? const BoxConstraints(minHeight: 96, minWidth: 312, maxHeight: 96, maxWidth: 312) : const BoxConstraints(minHeight: 156, minWidth: 158, maxHeight: 156, maxWidth: 158)),
+              (horizontal ? BoxConstraints(minHeight: formatHeight(96), minWidth: formatWidth(312), maxHeight: formatHeight(96), maxWidth: formatWidth(312)) :
+              BoxConstraints(minHeight: formatHeight(156), minWidth: formatWidth(158), maxHeight: formatHeight(156), maxWidth: formatWidth(158))),
           decoration: BoxDecoration(
             color: backgroundColor ?? themeData.backgroundColor ?? Colors.white,
-            borderRadius: BorderRadius.circular(radius ?? themeData.radius ?? 10),
+            borderRadius: BorderRadius.circular(radius ?? themeData.radius ?? formatWidth(10)),
           ),
           child: Material(
             type: MaterialType.transparency,
             child: InkWell(
                 onTap: onTap,
                 onDoubleTap: onDoubleTap,
-                borderRadius: BorderRadius.circular(radius ?? themeData.radius ?? 10),
+                borderRadius: BorderRadius.circular(radius ?? themeData.radius ?? formatWidth(10)),
                 child: Stack(
                   children: !horizontal
                       ? [
                           Container(
                             height: 96,
                             decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(7),
+                              borderRadius: BorderRadius.circular(formatWidth(7)),
                               color: const Color(0xFF02132B).withOpacity(0.50),
                             ),
                             clipBehavior: Clip.hardEdge,
                             child: imageWidget,
                           ),
                           Padding(
-                            padding: const EdgeInsets.only(top: 6, right: 7),
+                            padding: EdgeInsets.only(top: formatHeight(6), right: formatWidth(7)),
                             child: Align(
                               alignment: Alignment.topRight,
                               child: tagWidget ??
                                   Container(
-                                    height: 21,
-                                    width: 34,
+                                    height: formatHeight(21),
+                                    width: formatWidth(34),
                                     decoration: BoxDecoration(borderRadius: BorderRadius.circular(5), color: const Color(0xFF02132B)),
                                     child: Center(
                                       child: Text(
@@ -806,16 +808,16 @@ class _Fourth extends StatelessWidget implements Cards {
                             children: [
                               imageWidget ??
                                   Container(
-                                    width: 156,
+                                    width: formatWidth(156),
                                     decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(7),
+                                      borderRadius: BorderRadius.circular(formatWidth(7)),
                                       color: const Color(0xFF02132B).withOpacity(0.50),
                                     ),
                                   ),
-                              const SizedBox(width: 12),
+                              SizedBox(width: formatWidth(12)),
                               Expanded(
                                 child: Padding(
-                                  padding: const EdgeInsets.fromLTRB(12.5, 12.5, 24, 9),
+                                  padding: EdgeInsets.fromLTRB(formatWidth(12.5), formatHeight(12.5), formatWidth(24), formatHeight(9)),
                                   child: Column(
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
@@ -829,18 +831,19 @@ class _Fourth extends StatelessWidget implements Cards {
                             ],
                           ),
                           Padding(
-                            padding: const EdgeInsets.only(top: 6, left: 7),
+                            padding: EdgeInsets.only(top: formatHeight(6), left: formatWidth(7)),
                             child: Align(
                               alignment: Alignment.topLeft,
                               child: Container(
-                                height: 21,
-                                width: 34,
-                                decoration: BoxDecoration(borderRadius: BorderRadius.circular(5), color: const Color(0xFF02132B)),
-                                child: const Center(
-                                    child: Text(
-                                  'Tag',
-                                  style: TextStyle(fontSize: 7, fontWeight: FontWeight.w500, color: Colors.white),
-                                )),
+                                height: formatHeight(21),
+                                width: formatWidth(34),
+                                decoration: BoxDecoration(borderRadius: BorderRadius.circular(formatWidth(5)), color: const Color(0xFF02132B)),
+                                child: Center(
+                                  child: Text(
+                                    'Tag',
+                                    style: TextStyle(fontSize: sp(7), fontWeight: FontWeight.w500, color: Colors.white),
+                                  )
+                                ),
                               ),
                             ),
                           ),
@@ -916,18 +919,18 @@ class _Five extends StatelessWidget implements Cards {
               ),
           decoration: BoxDecoration(
             color: backgroundColor ?? themeData.backgroundColor ?? Colors.white,
-            borderRadius: BorderRadius.circular(radius ?? themeData.radius ?? 10),
+            borderRadius: BorderRadius.circular(radius ?? themeData.radius ?? formatWidth(10)),
           ),
           child: Material(
             type: MaterialType.transparency,
             child: InkWell(
                 onTap: onTap,
                 onDoubleTap: onDoubleTap,
-                borderRadius: BorderRadius.circular(radius ?? themeData.radius ?? 10),
+                borderRadius: BorderRadius.circular(radius ?? themeData.radius ?? formatWidth(10)),
                 child: Stack(
                   children: [
                     Padding(
-                      padding: const EdgeInsets.only(top: 8, right: 10),
+                      padding: EdgeInsets.only(top: formatHeight(8), right: formatWidth(10)),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         crossAxisAlignment: CrossAxisAlignment.center,
@@ -938,7 +941,7 @@ class _Five extends StatelessWidget implements Cards {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(bottom: 8, right: 10),
+                      padding: EdgeInsets.only(bottom: formatHeight(8), right: formatWidth(10)),
                       child: Align(
                         alignment: Alignment.bottomRight,
                         child: Text(
@@ -955,16 +958,16 @@ class _Five extends StatelessWidget implements Cards {
                           child: bigImage
                               ? imageWidget ??
                                   Container(
-                                    width: 99,
+                                    width: formatWidth(99),
                                     decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(7),
+                                      borderRadius: BorderRadius.circular(formatWidth(7)),
                                       color: const Color(0xFF02132B),
                                     ),
                                   )
                               : imageWidget ??
                                   Container(
-                                    height: 40,
-                                    width: 40,
+                                    height: formatHeight(40),
+                                    width: formatWidth(40),
                                     decoration: const BoxDecoration(
                                       shape: BoxShape.circle,
                                       color: Color(0xFF02132B),
@@ -973,7 +976,7 @@ class _Five extends StatelessWidget implements Cards {
                         ),
                         Expanded(
                           child: Padding(
-                            padding: const EdgeInsets.fromLTRB(0, 13, 14, 26),
+                            padding: EdgeInsets.fromLTRB(formatWidth(0), formatHeight(13), formatWidth(14), formatHeight(26)),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -987,11 +990,17 @@ class _Five extends StatelessWidget implements Cards {
                                   style: subTitleStyle ?? themeData.subTitleStyle ?? TextStyle(fontSize: sp(11), fontWeight: FontWeight.w400, color: const Color(0xFF5A6575)),
                                   textAlign: TextAlign.left,
                                 ),
-                                const Spacer(),
-                                Text(
-                                  desc,
-                                  style: descStyle ?? themeData.descStyle ?? TextStyle(fontSize: sp(12), fontWeight: FontWeight.w400, color: const Color(0xFF02132B)),
-                                  textAlign: TextAlign.left,
+                                Expanded(
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        desc,
+                                        style: descStyle ?? themeData.descStyle ?? TextStyle(fontSize: sp(12), fontWeight: FontWeight.w400, color: const Color(0xFF02132B)),
+                                        textAlign: TextAlign.left,
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ],
                             ),
@@ -1078,45 +1087,45 @@ class _Six extends StatelessWidget implements Cards {
           constraints: boxConstraints ?? themeData.constraints ?? BoxConstraints(minHeight: formatHeight(125), minWidth: formatWidth(315), maxHeight: formatHeight(125), maxWidth: formatWidth(315)),
           decoration: BoxDecoration(
             color: backgroundColor ?? themeData.backgroundColor ?? Colors.white,
-            borderRadius: BorderRadius.circular(radius ?? themeData.radius ?? 10),
+            borderRadius: BorderRadius.circular(radius ?? themeData.radius ?? formatWidth(10)),
           ),
           child: Material(
             type: MaterialType.transparency,
             child: InkWell(
                 onTap: onTap,
                 onDoubleTap: onDoubleTap,
-                borderRadius: BorderRadius.circular(radius ?? themeData.radius ?? 10),
+                borderRadius: BorderRadius.circular(radius ?? themeData.radius ?? formatWidth(10)),
                 child: Stack(
                   children: [
                     Align(
                       alignment: Alignment.topRight,
                       child: Padding(
-                        padding: threePointWidgetPadding ?? themeData.paddingTriplePoint ?? const EdgeInsets.only(top: 7, right: 4),
+                        padding: threePointWidgetPadding ?? themeData.paddingTriplePoint ?? EdgeInsets.only(top: formatHeight(7), right: formatWidth(4)),
                         child: InkWell(
                           onTap: onTapThreePoint,
-                          borderRadius: BorderRadius.circular(radius ?? themeData.radius ?? 10),
+                          borderRadius: BorderRadius.circular(radius ?? themeData.radius ?? formatWidth(10)),
                           child: SizedBox(
-                            height: 30,
-                            width: 30,
+                            height: formatHeight(30),
+                            width: formatWidth(30),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 Container(
-                                  height: 3,
-                                  width: 3,
+                                  height: formatHeight(3),
+                                  width: formatWidth(3),
                                   decoration: const BoxDecoration(shape: BoxShape.circle, color: Color(0xFF9199A7)),
                                 ),
                                 const SizedBox(height: 2),
                                 Container(
-                                  height: 3,
-                                  width: 3,
+                                  height: formatHeight(3),
+                                  width: formatWidth(3),
                                   decoration: const BoxDecoration(shape: BoxShape.circle, color: Color(0xFF9199A7)),
                                 ),
                                 const SizedBox(height: 2),
                                 Container(
-                                  height: 3,
-                                  width: 3,
+                                  height: formatHeight(3),
+                                  width: formatWidth(3),
                                   decoration: const BoxDecoration(shape: BoxShape.circle, color: Color(0xFF9199A7)),
                                 ),
                               ],
@@ -1126,7 +1135,7 @@ class _Six extends StatelessWidget implements Cards {
                       ),
                     ),
                     Padding(
-                      padding: contentPadding ?? themeData.paddingContent ?? const EdgeInsets.fromLTRB(17, 17, 16, 19),
+                      padding: contentPadding ?? themeData.paddingContent ?? EdgeInsets.fromLTRB(formatWidth(17), formatHeight(17), formatWidth(16), formatHeight(19)),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -1134,7 +1143,7 @@ class _Six extends StatelessWidget implements Cards {
                           Text(subTitle, style: subTitleStyle ?? themeData.subTitleStyle ?? TextStyle(fontSize: sp(10), fontWeight: FontWeight.w400, color: const Color(0xFF5A6575))),
                           const Spacer(),
                           Container(
-                            height: 0.5,
+                            height: formatHeight(0.5),
                             color: const Color(0xFF02132B).withOpacity(0.17),
                           ),
                           const Spacer(),
@@ -1142,11 +1151,11 @@ class _Six extends StatelessWidget implements Cards {
                             children: [
                               imageWidget ??
                                   Container(
-                                    height: 27,
-                                    width: 27,
+                                    height: formatHeight(27),
+                                    width: formatWidth(27),
                                     decoration: const BoxDecoration(shape: BoxShape.circle, color: Color(0xFF02132B)),
                                   ),
-                              const SizedBox(width: 6),
+                              SizedBox(width: formatWidth(6)),
                               Column(
                                 children: [
                                   Text(miniTitle, style: miniTitleStyle ?? themeData.miniTitleStyle ?? TextStyle(fontSize: sp(9), fontWeight: FontWeight.w400, color: const Color(0xFF02132B))),
@@ -1165,9 +1174,9 @@ class _Six extends StatelessWidget implements Cards {
                                       onTap: onTapIconButton,
                                       child: iconButton ??
                                           Container(
-                                            height: 34,
-                                            width: 34,
-                                            decoration: BoxDecoration(color: const Color(0xFF02132B), borderRadius: BorderRadius.circular(radius ?? themeData.radius ?? 10)),
+                                            height: formatHeight(34),
+                                            width: formatWidth(34),
+                                            decoration: BoxDecoration(color: const Color(0xFF02132B), borderRadius: BorderRadius.circular(radius ?? themeData.radius ?? formatWidth(10))),
                                             child: const Icon(
                                               Iconsax.message,
                                               color: Colors.white,
@@ -1176,16 +1185,16 @@ class _Six extends StatelessWidget implements Cards {
                                           ),
                                     )
                                   : const SizedBox(),
-                              const SizedBox(width: 9),
+                              SizedBox(width: formatWidth(9)),
                               withStatus
                                   ? Container(
-                                      height: 34,
-                                      width: 99,
-                                      decoration: BoxDecoration(color: statusColor ?? const Color(0xFF02132B).withOpacity(0.03), borderRadius: BorderRadius.circular(radius ?? themeData.radius ?? 10)),
+                                      height: formatHeight(34),
+                                      width: formatWidth(99),
+                                      decoration: BoxDecoration(color: statusColor ?? const Color(0xFF02132B).withOpacity(0.03), borderRadius: BorderRadius.circular(radius ?? themeData.radius ?? formatWidth(10))),
                                       child: Center(
                                         child: Text(
                                           statusText,
-                                          style: statusTextStyle ?? TextStyle(color: const Color(0xFF02132B).withOpacity(0.65), fontWeight: FontWeight.w500, fontSize: 10),
+                                          style: statusTextStyle ?? TextStyle(color: const Color(0xFF02132B).withOpacity(0.65), fontWeight: FontWeight.w500, fontSize: sp(10)),
                                         ),
                                       ),
                                     )
@@ -1267,19 +1276,19 @@ class _Seven extends StatelessWidget implements Cards {
 
     return Container(
       constraints: boxConstraints ?? BoxConstraints(minHeight: formatHeight(190), minWidth: formatWidth(315), maxHeight: formatHeight(190), maxWidth: formatWidth(315)),
-      padding: contentPadding ?? (!variant ? const EdgeInsets.fromLTRB(19, 0, 7, 13) : EdgeInsets.zero),
+      padding: contentPadding ?? (!variant ? EdgeInsets.fromLTRB(formatWidth(19), formatHeight(0), formatWidth(7), formatHeight(13)) : EdgeInsets.zero),
       decoration: image != null
-          ? BoxDecoration(image: DecorationImage(image: image, fit: BoxFit.cover), borderRadius: BorderRadius.circular(radius ?? themeData.radius ?? 10))
+          ? BoxDecoration(image: DecorationImage(image: image, fit: BoxFit.cover), borderRadius: BorderRadius.circular(radius ?? themeData.radius ?? formatWidth(10)))
           : BoxDecoration(
               color: backgroundColor ?? const Color(0xFF02132B),
-              borderRadius: BorderRadius.circular(radius ?? themeData.radius ?? 10),
+              borderRadius: BorderRadius.circular(radius ?? themeData.radius ?? formatWidth(10)),
             ),
       child: Material(
         type: MaterialType.transparency,
         child: InkWell(
             onTap: onTap,
             onDoubleTap: onDoubleTap,
-            borderRadius: BorderRadius.circular(radius ?? themeData.radius ?? 10),
+            borderRadius: BorderRadius.circular(radius ?? themeData.radius ?? formatWidth(10)),
             child: Stack(
                 children: !variant
                     ? [
@@ -1298,23 +1307,23 @@ class _Seven extends StatelessWidget implements Cards {
                         Align(
                           alignment: Alignment.bottomRight,
                           child: InkWell(
-                            borderRadius: BorderRadius.circular(radius ?? themeData.radius ?? 10),
+                            borderRadius: BorderRadius.circular(radius ?? themeData.radius ?? formatWidth(10)),
                             onTap: doublePointonTap,
                             onDoubleTap: doublePointonDoubleTap,
                             child: SizedBox(
-                              height: (doublePointSize ?? themeData.doublePointSize ?? const Size(23, 23)).height,
-                              width: (doublePointSize ?? themeData.doublePointSize ?? const Size(23, 23)).width,
+                              height: (doublePointSize ?? themeData.doublePointSize ?? Size(formatWidth(23), formatHeight(23))).height,
+                              width: (doublePointSize ?? themeData.doublePointSize ?? Size(formatWidth(23), formatHeight(23))).width,
                               child: doublePointWidget ??
                                   Column(mainAxisAlignment: MainAxisAlignment.center, children: [
                                     Container(
-                                      height: 3,
-                                      width: 3,
+                                      height: formatHeight(3),
+                                      width: formatWidth(3),
                                       decoration: const BoxDecoration(shape: BoxShape.circle, color: Colors.white),
                                     ),
-                                    const SizedBox(height: 3),
+                                    SizedBox(height: formatHeight(3)),
                                     Container(
-                                      height: 3,
-                                      width: 3,
+                                      height: formatHeight(3),
+                                      width: formatWidth(3),
                                       decoration: const BoxDecoration(shape: BoxShape.circle, color: Colors.white),
                                     ),
                                   ]),
@@ -1324,7 +1333,7 @@ class _Seven extends StatelessWidget implements Cards {
                       ]
                     : [
                         Padding(
-                          padding: const EdgeInsets.only(left: 19, bottom: 13),
+                          padding: EdgeInsets.only(left: formatWidth(19), bottom: formatHeight(13)),
                           child: Align(
                             alignment: Alignment.bottomLeft,
                             child: Text(
@@ -1335,32 +1344,32 @@ class _Seven extends StatelessWidget implements Cards {
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(right: 19, bottom: 15),
+                          padding: EdgeInsets.only(right: formatWidth(19), bottom: formatHeight(15)),
                           child: Align(alignment: Alignment.bottomRight, child: Text(subTitle, style: subTitleStyle, textAlign: TextAlign.left)),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(top: 8, right: 9),
+                          padding: EdgeInsets.only(top: formatHeight(8), right: formatWidth(9)),
                           child: Align(
                             alignment: Alignment.topRight,
                             child: InkWell(
-                              borderRadius: BorderRadius.circular(radius ?? themeData.radius ?? 10),
+                              borderRadius: BorderRadius.circular(radius ?? themeData.radius ?? formatWidth(10)),
                               onTap: doublePointonTap,
                               onDoubleTap: doublePointonDoubleTap,
                               child: Container(
-                                height: (doublePointSize ?? themeData.doublePointSize ?? const Size(23, 23)).height,
-                                width: (doublePointSize ?? themeData.doublePointSize ?? const Size(23, 23)).width,
+                                height: (doublePointSize ?? themeData.doublePointSize ?? Size(formatWidth(23), formatHeight(23))).height,
+                                width: (doublePointSize ?? themeData.doublePointSize ?? Size(formatWidth(23), formatHeight(23))).width,
                                 decoration: BoxDecoration(color: Colors.black.withOpacity(0.5), shape: BoxShape.circle),
                                 child: doublePointWidget ??
                                     Column(mainAxisAlignment: MainAxisAlignment.center, crossAxisAlignment: CrossAxisAlignment.center, children: [
                                       Container(
-                                        height: 3,
-                                        width: 3,
+                                        height: formatHeight(3),
+                                        width: formatWidth(3),
                                         decoration: const BoxDecoration(shape: BoxShape.circle, color: Colors.white),
                                       ),
-                                      const SizedBox(height: 3),
+                                      SizedBox(height: formatHeight(3)),
                                       Container(
-                                        height: 3,
-                                        width: 3,
+                                        height: formatHeight(3),
+                                        width: formatWidth(3),
                                         decoration: const BoxDecoration(shape: BoxShape.circle, color: Colors.white),
                                       ),
                                     ]),
@@ -1431,17 +1440,17 @@ class _Nine extends StatelessWidget implements Cards {
     return Material(
         type: MaterialType.transparency,
         child: Container(
-          constraints: boxConstraints ?? const BoxConstraints(minHeight: 125, minWidth: 315, maxHeight: 125, maxWidth: 315),
+          constraints: boxConstraints ?? BoxConstraints(minHeight: formatHeight(125), minWidth: formatWidth(315), maxHeight: formatHeight(125), maxWidth: formatWidth(315)),
           decoration: BoxDecoration(
             color: backgroundColor ?? themeData.backgroundColor ?? Colors.white,
-            borderRadius: BorderRadius.circular(radius ?? themeData.radius ?? 10),
+            borderRadius: BorderRadius.circular(radius ?? themeData.radius ?? formatWidth(10)),
           ),
           child: Material(
             type: MaterialType.transparency,
             child: InkWell(
                 onTap: onTap,
                 onDoubleTap: onDoubleTap,
-                borderRadius: BorderRadius.circular(radius ?? themeData.radius ?? 10),
+                borderRadius: BorderRadius.circular(radius ?? themeData.radius ?? formatWidth(10)),
                 child: Stack(
                   children: [
                     Row(
@@ -1450,14 +1459,14 @@ class _Nine extends StatelessWidget implements Cards {
                           padding: paddingImage ?? themeData.paddingImage ?? EdgeInsets.only(left: formatWidth(7), bottom: formatHeight(6), top: formatHeight(6)),
                           child: imageWidget ??
                               Container(
-                                width: 120,
+                                width: formatWidth(120),
                                 decoration: imageProvider != null
                                     ? BoxDecoration(
-                                        borderRadius: BorderRadius.circular(radius ?? themeData.radius ?? 10),
+                                        borderRadius: BorderRadius.circular(radius ?? themeData.radius ?? formatWidth(10)),
                                         image: DecorationImage(image: imageProvider!),
                                       )
                                     : BoxDecoration(
-                                        borderRadius: BorderRadius.circular(radius ?? themeData.radius ?? 10),
+                                        borderRadius: BorderRadius.circular(radius ?? themeData.radius ?? formatWidth(10)),
                                         color: const Color(0xFF02132B),
                                       ),
                               ),
@@ -1486,23 +1495,23 @@ class _Nine extends StatelessWidget implements Cards {
                       child: Padding(
                         padding: doublePointPadding ?? themeData.paddingDoublePoint ?? EdgeInsets.only(top: formatHeight(7), right: formatWidth(3)),
                         child: InkWell(
-                          borderRadius: BorderRadius.circular(radius ?? themeData.radius ?? 10),
+                          borderRadius: BorderRadius.circular(radius ?? themeData.radius ?? formatWidth(10)),
                           onTap: doublePointonTap,
                           onDoubleTap: doublePointonDoubleTap,
                           child: SizedBox(
-                            height: (doublePointSize ?? themeData.doublePointSize ?? const Size(23, 23)).height,
-                            width: (doublePointSize ?? themeData.doublePointSize ?? const Size(23, 23)).width,
+                            height: (doublePointSize ?? themeData.doublePointSize ?? Size(formatWidth(23), formatHeight(23))).height,
+                            width: (doublePointSize ?? themeData.doublePointSize ?? Size(formatWidth(23), formatHeight(23))).width,
                             child: doublePointWidget ??
                                 Column(mainAxisAlignment: MainAxisAlignment.center, children: [
                                   Container(
-                                    height: 3,
-                                    width: 3,
+                                    height: formatHeight(3),
+                                    width: formatWidth(3),
                                     decoration: const BoxDecoration(shape: BoxShape.circle, color: Color(0xFF9199A7)),
                                   ),
                                   sh(3),
                                   Container(
-                                    height: 3,
-                                    width: 3,
+                                    height: formatHeight(3),
+                                    width: formatWidth(3),
                                     decoration: const BoxDecoration(shape: BoxShape.circle, color: Color(0xFF9199A7)),
                                   ),
                                 ]),
