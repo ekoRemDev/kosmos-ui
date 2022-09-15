@@ -270,10 +270,15 @@ class _OneImage extends Input {
                           : EdgeInsets.zero,
                       child: Stack(
                         alignment: Alignment.centerLeft,
-                        children: state.value != null || imageMobile != null || urlImage != null || image != null
+                        children: state.value != null ||
+                                imageMobile != null ||
+                                urlImage != null ||
+                                image != null ||
+                                child != null
                             ? [
                                 child != null
                                     ? Container(
+                                        child: child,
                                         width: formatWidth(widthImage ?? themeData.pickerImageWidth ?? 81),
                                         decoration: BoxDecoration(
                                           borderRadius:
