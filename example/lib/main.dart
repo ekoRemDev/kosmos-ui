@@ -74,9 +74,6 @@ class _MyHomePageState extends State<MyHomePage> {
             children: [
               const SizedBox(height: 400),
               Input.image(
-                // urlImage:
-                //     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTdSGVuStFxj_Dnv9V9qlzkor22IRPIglGkVA&usqp=CAU",
-                //imageMobile: image,
                 image: image,
                 onTap: () async {
                   FilePickerResult? res = await FilePicker.platform.pickFiles();
@@ -113,6 +110,8 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ),
               const SizedBox(height: 400),
+              const Cards.five(),
+              const SizedBox(height: 400),
               const Input.image(),
               const SizedBox(height: 400),
               CTA.primary(
@@ -125,7 +124,8 @@ class _MyHomePageState extends State<MyHomePage> {
               CustomSlider.slider(
                 min: 0,
                 max: 100,
-                customSliderThumbShape: CustomSliderThumbShape(elevation: 0, pressedElevation: 0, stringNumber: "${(value).toInt()} km", ajustString: 2.2),
+                customSliderThumbShape: CustomSliderThumbShape(
+                    elevation: 0, pressedElevation: 0, stringNumber: "${(value).toInt()} km", ajustString: 2.2),
                 onChanged: (_) {
                   setState(() {
                     value = _;
@@ -146,7 +146,8 @@ class _MyHomePageState extends State<MyHomePage> {
               SizedBox(
                 height: 100,
                 width: 800,
-                child: ProgressBar.separated(max: 5, current: 2, items: const ["1", "2", "3", "4", "5"], showPercentage: true),
+                child: ProgressBar.separated(
+                    max: 5, current: 2, items: const ["1", "2", "3", "4", "5"], showPercentage: true),
               ),
             ],
           ),
