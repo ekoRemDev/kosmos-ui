@@ -54,6 +54,8 @@ class SettingsCellule extends StatelessWidget {
   Widget build(BuildContext context) {
     final themeData = loadThemeData(theme, themeName ?? "settings_cellule", () => const SettingsCelluleThemeData())!;
 
+    printInDebug("$isActive && ${themeData.activeBackgroundColor}");
+
     return InkWell(
       onTap: onClick,
       child: Container(
