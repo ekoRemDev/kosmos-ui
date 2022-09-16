@@ -54,26 +54,22 @@ class SettingsCellule extends StatelessWidget {
   Widget build(BuildContext context) {
     final themeData = loadThemeData(theme, themeName ?? "settings_cellule", () => const SettingsCelluleThemeData())!;
 
-    return ConstrainedBox(
-      constraints: themeData.constraints ??
-          BoxConstraints(
-            minHeight: 60,
-            maxWidth: double.infinity,
-            minWidth: formatWidth(293),
-          ),
-      child: TextButton(
-        style: ButtonStyle(
-          backgroundColor: MaterialStateProperty.resolveWith((states) {
-            if (!isActive) {
-              return themeData.backgroundColor ?? backgroundColor ?? const Color(0xFF02132B).withOpacity(0.03);
-            } else {
-              return themeData.activeBackgroundColor ?? activeBackgroundColor ?? const Color(0xFF02132B).withOpacity(0.03);
-            }
-          }),
-          overlayColor: MaterialStateProperty.resolveWith((states) => themeData.overlayColor ?? overlayColor ?? darkenOrLighten(backgroundColor ?? const Color(0xFF02132B).withOpacity(0.03))),
-          shape: themeData.shape ?? MaterialStateProperty.resolveWith((states) => RoundedRectangleBorder(borderRadius: BorderRadius.circular((radius ?? 7)))),
+    return InkWell(
+      onTap: onClick,
+      child: Container(
+        constraints: themeData.constraints ??
+            BoxConstraints(
+              minHeight: 60,
+              maxWidth: double.infinity,
+              minWidth: formatWidth(293),
+            ),
+        decoration: BoxDecoration(
+          color: isActive
+              ? themeData.activeBackgroundColor ?? activeBackgroundColor ?? const Color(0xFF02132B).withOpacity(0.03)
+              : themeData.backgroundColor ?? backgroundColor ?? const Color(0xFF02132B).withOpacity(0.03),
+          borderRadius: BorderRadius.circular((radius ?? 7)),
         ),
-        onPressed: onClick,
+        clipBehavior: Clip.hardEdge,
         child: Row(
           children: [
             Padding(
