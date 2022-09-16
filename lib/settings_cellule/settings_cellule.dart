@@ -4,9 +4,11 @@ import 'package:ui_kosmos_v4/settings_cellule/theme.dart';
 
 class SettingsCellule extends StatelessWidget {
   final String? title;
-  final TextStyle? titleStyle;
   final String? subtitle;
+  final TextStyle? titleStyle;
   final TextStyle? subtitleStyle;
+  final TextStyle? activeTitleStyle;
+  final TextStyle? activeSubtitleStyle;
   final VoidCallback onClick;
   final Widget? switchNotif;
 
@@ -39,6 +41,8 @@ class SettingsCellule extends StatelessWidget {
     this.activeBackgroundColor,
     this.activeIconBackgroundColor,
     this.iconBackgroundGradient,
+    this.activeSubtitleStyle,
+    this.activeTitleStyle,
     this.image,
     this.icon,
     this.svg,
@@ -53,8 +57,6 @@ class SettingsCellule extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final themeData = loadThemeData(theme, themeName ?? "settings_cellule", () => const SettingsCelluleThemeData())!;
-
-    printInDebug("$isActive && ${themeData.activeBackgroundColor}");
 
     return InkWell(
       onTap: onClick,
@@ -102,7 +104,9 @@ class SettingsCellule extends StatelessWidget {
                       Expanded(
                         child: Text(
                           title ?? 'Titre',
-                          style: titleStyle ?? themeData.titleStyle ?? const TextStyle(color: Color(0xFF02132B), fontSize: 13, fontWeight: FontWeight.w500),
+                          style: isActive
+                              ? activeTitleStyle ?? themeData.activeTitleStyle ?? const TextStyle(color: Color(0xFF02132B), fontSize: 13, fontWeight: FontWeight.w500)
+                              : titleStyle ?? themeData.titleStyle ?? const TextStyle(color: Color(0xFF02132B), fontSize: 13, fontWeight: FontWeight.w500),
                         ),
                       ),
                     ],
@@ -110,7 +114,9 @@ class SettingsCellule extends StatelessWidget {
                   subtitle != null
                       ? Text(
                           subtitle!,
-                          style: subtitleStyle ?? themeData.subtitleStyle ?? TextStyle(color: const Color(0xFF02132B).withOpacity(0.65), fontSize: 11, fontWeight: FontWeight.w500),
+                          style: isActive
+                              ? activeSubtitleStyle ?? themeData.activeSubtitleStyle ?? TextStyle(color: const Color(0xFF02132B).withOpacity(0.65), fontSize: 11, fontWeight: FontWeight.w500)
+                              : subtitleStyle ?? themeData.subtitleStyle ?? TextStyle(color: const Color(0xFF02132B).withOpacity(0.65), fontSize: 11, fontWeight: FontWeight.w500),
                         )
                       : const SizedBox(),
                 ],

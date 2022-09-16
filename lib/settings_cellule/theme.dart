@@ -17,6 +17,8 @@ class SettingsCelluleThemeData {
 
   final double? horizontalPadding;
   final double? verticalPadding;
+  final TextStyle? activeTitleStyle;
+  final TextStyle? activeSubtitleStyle;
 
   const SettingsCelluleThemeData({
     this.titleStyle,
@@ -33,5 +35,7 @@ class SettingsCelluleThemeData {
     this.verticalPadding,
     this.activeBackgroundColor,
     this.activeIconBackgroundColor,
+    this.activeSubtitleStyle,
+    this.activeTitleStyle,
   });
 }
