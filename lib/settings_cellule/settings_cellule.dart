@@ -58,7 +58,7 @@ class SettingsCellule extends StatelessWidget {
       constraints: themeData.constraints ??
           BoxConstraints(
             minHeight: 60,
-            maxWidth: execInCaseOfPlatfom(() => getResponsiveValue(context, defaultValue: 293, tablet: double.infinity), () => double.infinity),
+            maxWidth: double.infinity,
             minWidth: formatWidth(293),
           ),
       child: TextButton(
