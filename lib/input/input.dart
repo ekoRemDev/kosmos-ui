@@ -922,13 +922,6 @@ class _ValidatedFile extends Input {
                                                             ),
                                                           ),
                                                         ),
-                                                        InkWell(
-                                                          onTap: () {
-                                                            state.value = null;
-                                                            if (onChanged != null) onChanged!(state.value);
-                                                          },
-                                                          child: const Icon(Icons.close, color: Color(0xFF02132B)),
-                                                        ),
                                                       ],
                                                     ),
                                                   ],
