@@ -151,6 +151,7 @@ abstract class Input extends HookWidget {
     final Widget? footer,
     final double? height,
     final bool? isValid,
+    final PlatformFile? defaultFile,
   }) = _ValidatedFile;
 
   @override
@@ -614,6 +615,7 @@ class _ValidatedFile extends Input {
     final CustomFormFieldThemeData? theme,
     final Function(PlatformFile?)? onChanged,
     final List<PlatformFile>? defaultFiles,
+    final PlatformFile? defaultFile,
     final String? desc,
     final Widget? header,
     final Widget? footer,
@@ -639,6 +641,7 @@ class _ValidatedFile extends Input {
           defaultFiles: defaultFiles,
           desc: desc,
           header: header,
+          defaultFile: defaultFile,
           footer: footer,
           isValid: isValid,
         );
