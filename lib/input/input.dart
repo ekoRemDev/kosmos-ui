@@ -845,7 +845,7 @@ class _ValidatedFile extends Input {
                                     child: Column(
                                       mainAxisAlignment: MainAxisAlignment.start,
                                       crossAxisAlignment: CrossAxisAlignment.center,
-                                      children: state.value != null
+                                      children: defaultFileName != null
                                           ? [
                                               sh(10),
                                               header != null
