@@ -483,10 +483,10 @@ class _Back extends CTA {
                 : null,
             onDoubleTap: onDoubleTap,
             child: Container(
-              height: formatHeight(height ?? getResponsiveValue(context, defaultValue: 47, desktop: themeData.heightInWeb, phone: themeData.heightInMobile)),
-              width: formatHeight(height ?? getResponsiveValue(context, defaultValue: 47, desktop: themeData.widthInWeb, phone: themeData.widthInMobile)),
+              height: formatHeight(height ?? themeData.height ?? getResponsiveValue(context, defaultValue: 47, desktop: themeData.heightInWeb, phone: themeData.heightInMobile)),
+              width: formatHeight(height ?? themeData.height ?? getResponsiveValue(context, defaultValue: 47, desktop: themeData.widthInWeb, phone: themeData.widthInMobile)),
               decoration: BoxDecoration(
-                color: backgroundColor,
+                color: backgroundColor ?? themeData.backgroundColor ?? Colors.transparent,
                 borderRadius: BorderRadius.circular(radius ?? themeData.borderRadius ?? 14),
                 border: border ?? themeData.border,
               ),
