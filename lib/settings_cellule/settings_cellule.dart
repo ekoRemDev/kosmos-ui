@@ -68,9 +68,7 @@ class SettingsCellule extends StatelessWidget {
               minWidth: formatWidth(293),
             ),
         decoration: BoxDecoration(
-          color: isActive
-              ? themeData.activeBackgroundColor ?? activeBackgroundColor ?? const Color(0xFF02132B).withOpacity(0.03)
-              : themeData.backgroundColor ?? backgroundColor ?? const Color(0xFF02132B).withOpacity(0.03),
+          color: isActive ? themeData.activeBackgroundColor ?? activeBackgroundColor ?? const Color(0xFF02132B).withOpacity(0.03) : themeData.backgroundColor ?? backgroundColor ?? const Color(0xFF02132B).withOpacity(0.03),
           borderRadius: BorderRadius.circular((radius ?? 7)),
         ),
         clipBehavior: Clip.hardEdge,
@@ -87,10 +85,8 @@ class SettingsCellule extends StatelessWidget {
                           ? BoxDecoration(shape: BoxShape.circle, image: DecorationImage(image: image!, fit: BoxFit.cover))
                           : BoxDecoration(
                               shape: BoxShape.circle,
-                              gradient: iconBackgroundGradient,
-                              color: isActive
-                                  ? (themeData.activeIconBackgroundColor ?? activeIconBackgroundColor ?? const Color(0xFF02132B).withOpacity(0.03))
-                                  : (themeData.iconBackgroundColor ?? iconBackgroundColor ?? Theme.of(context).primaryColor)),
+                              gradient: themeData.iconBackgroundGradient ?? iconBackgroundGradient,
+                              color: isActive ? (themeData.activeIconBackgroundColor ?? activeIconBackgroundColor ?? const Color(0xFF02132B).withOpacity(0.03)) : (themeData.iconBackgroundColor ?? iconBackgroundColor ?? Theme.of(context).primaryColor)),
                       child: icon ?? svg ?? const SizedBox(),
                     )
                   : const SizedBox(),
