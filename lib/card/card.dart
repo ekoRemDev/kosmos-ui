@@ -10,6 +10,7 @@ abstract class Cards extends StatelessWidget {
     final String subTitle,
     final TextStyle titleStyle,
     final TextStyle subTitleStyle,
+    final int subtitleMaxLine,
     final bool center,
     final BoxConstraints boxConstraints,
     final VoidCallback? onTap,
@@ -103,6 +104,7 @@ abstract class Cards extends StatelessWidget {
     final String subTitle,
     final TextStyle titleStyle,
     final TextStyle subTitleStyle,
+    final int descMaxLine,
     final String desc,
     final TextStyle descStyle,
     final String mark,
@@ -206,6 +208,7 @@ class _One extends StatelessWidget implements Cards {
   final String subTitle;
   final TextStyle? titleStyle;
   final TextStyle? subTitleStyle;
+  final int subtitleMaxLine;
   final bool center;
   final BoxConstraints? boxConstraints;
   final VoidCallback? onTap;
@@ -224,6 +227,7 @@ class _One extends StatelessWidget implements Cards {
     this.subTitle = 'Sous-titre',
     this.titleStyle,
     this.subTitleStyle,
+    this.subtitleMaxLine = 2,
     this.center = false,
     this.boxConstraints,
     this.onTap,
@@ -366,8 +370,9 @@ class _Two extends StatelessWidget implements Cards {
         child: Container(
           constraints: boxConstraints ??
               themeData.constraints ??
-              (horizontal ? BoxConstraints(minHeight: formatHeight(125), minWidth: formatWidth(315), maxHeight: formatHeight(125), maxWidth: formatWidth(315)) :
-              BoxConstraints(minHeight: formatHeight(176), minWidth: formatWidth(139), maxHeight: formatHeight(176), maxWidth: formatWidth(139))),
+              (horizontal
+                  ? BoxConstraints(minHeight: formatHeight(125), minWidth: formatWidth(315), maxHeight: formatHeight(125), maxWidth: formatWidth(315))
+                  : BoxConstraints(minHeight: formatHeight(176), minWidth: formatWidth(139), maxHeight: formatHeight(176), maxWidth: formatWidth(139))),
           decoration: BoxDecoration(color: backgroundColor ?? themeData.backgroundColor ?? Colors.white, borderRadius: BorderRadius.circular(radius ?? themeData.radius ?? formatWidth(10))),
           child: Material(
             type: MaterialType.transparency,
@@ -746,8 +751,9 @@ class _Fourth extends StatelessWidget implements Cards {
         child: Container(
           clipBehavior: Clip.hardEdge,
           constraints: boxConstraints ??
-              (horizontal ? BoxConstraints(minHeight: formatHeight(96), minWidth: formatWidth(312), maxHeight: formatHeight(96), maxWidth: formatWidth(312)) :
-              BoxConstraints(minHeight: formatHeight(156), minWidth: formatWidth(158), maxHeight: formatHeight(156), maxWidth: formatWidth(158))),
+              (horizontal
+                  ? BoxConstraints(minHeight: formatHeight(96), minWidth: formatWidth(312), maxHeight: formatHeight(96), maxWidth: formatWidth(312))
+                  : BoxConstraints(minHeight: formatHeight(156), minWidth: formatWidth(158), maxHeight: formatHeight(156), maxWidth: formatWidth(158))),
           decoration: BoxDecoration(
             color: backgroundColor ?? themeData.backgroundColor ?? Colors.white,
             borderRadius: BorderRadius.circular(radius ?? themeData.radius ?? formatWidth(10)),
@@ -839,11 +845,10 @@ class _Fourth extends StatelessWidget implements Cards {
                                 width: formatWidth(34),
                                 decoration: BoxDecoration(borderRadius: BorderRadius.circular(formatWidth(5)), color: const Color(0xFF02132B)),
                                 child: Center(
-                                  child: Text(
-                                    'Tag',
-                                    style: TextStyle(fontSize: sp(7), fontWeight: FontWeight.w500, color: Colors.white),
-                                  )
-                                ),
+                                    child: Text(
+                                  'Tag',
+                                  style: TextStyle(fontSize: sp(7), fontWeight: FontWeight.w500, color: Colors.white),
+                                )),
                               ),
                             ),
                           ),
@@ -860,6 +865,7 @@ class _Five extends StatelessWidget implements Cards {
   final TextStyle? titleStyle;
   final TextStyle? subTitleStyle;
   final String desc;
+  final int descMaxLine;
   final TextStyle? descStyle;
   final String mark;
   final TextStyle? markTextStyle;
@@ -884,6 +890,7 @@ class _Five extends StatelessWidget implements Cards {
     this.subTitleStyle,
     this.desc = 'Lorem ipsum dolor sit amet, consectet adipiscing elit. Sedeu iaculis enim, vitae',
     this.descStyle,
+    this.descMaxLine = 3,
     this.mark = '5/5',
     this.markTextStyle,
     this.bottomTitle = '25 € /h',
@@ -996,6 +1003,7 @@ class _Five extends StatelessWidget implements Cards {
                                     children: [
                                       Text(
                                         desc,
+                                        maxLines: descMaxLine,
                                         style: descStyle ?? themeData.descStyle ?? TextStyle(fontSize: sp(12), fontWeight: FontWeight.w400, color: const Color(0xFF02132B)),
                                         textAlign: TextAlign.left,
                                       ),
@@ -1190,7 +1198,8 @@ class _Six extends StatelessWidget implements Cards {
                                   ? Container(
                                       height: formatHeight(34),
                                       width: formatWidth(99),
-                                      decoration: BoxDecoration(color: statusColor ?? const Color(0xFF02132B).withOpacity(0.03), borderRadius: BorderRadius.circular(radius ?? themeData.radius ?? formatWidth(10))),
+                                      decoration: BoxDecoration(
+                                          color: statusColor ?? const Color(0xFF02132B).withOpacity(0.03), borderRadius: BorderRadius.circular(radius ?? themeData.radius ?? formatWidth(10))),
                                       child: Center(
                                         child: Text(
                                           statusText,
