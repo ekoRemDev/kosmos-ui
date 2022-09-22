@@ -137,7 +137,7 @@ class _Secondary extends StatelessWidget implements Header {
   final ImageProvider? imageProvider;
   final String title;
   final String title_2;
-  final String subTitle;
+  final String? subTitle;
   final TextStyle? subTitleStyle;
   final TextStyle? titleStyle;
   final TextStyle? title2Style;
@@ -151,7 +151,7 @@ class _Secondary extends StatelessWidget implements Header {
       {this.reverse = false,
       this.title = 'Bonjour',
       this.title_2 = ', Anna 👋',
-      this.subTitle = 'Vendredi 17 mars',
+      this.subTitle,
       this.subTitleStyle,
       this.imageProvider,
       this.titleStyle,
@@ -183,7 +183,7 @@ class _Secondary extends StatelessWidget implements Header {
                           themeData.title2Style ??
                           const TextStyle(color: Color(0xFF02132B), fontSize: 21, fontWeight: FontWeight.w600),
                     ),
-                    TextSpan(
+                    if (subTitle != null) TextSpan(
                       text: "\n$subTitle",
                       style: subTitleStyle ??
                           themeData.subTitleStyle ??
