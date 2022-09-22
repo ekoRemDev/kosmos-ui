@@ -85,7 +85,7 @@ class SettingsCellule extends StatelessWidget {
                           ? BoxDecoration(shape: BoxShape.circle, image: DecorationImage(image: image!, fit: BoxFit.cover))
                           : BoxDecoration(
                               shape: BoxShape.circle,
-                              gradient: isActive ? (themeData.iconBackgroundGradient ?? iconBackgroundGradient) : null,
+                              gradient: !isActive ? (themeData.iconBackgroundGradient ?? iconBackgroundGradient) : null,
                               color: isActive ? (themeData.activeIconBackgroundColor ?? activeIconBackgroundColor ?? const Color(0xFF02132B).withOpacity(0.03)) : (themeData.iconBackgroundColor ?? iconBackgroundColor ?? Theme.of(context).primaryColor)),
                       child: icon ?? svg ?? const SizedBox(),
                     )
