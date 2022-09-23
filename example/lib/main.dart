@@ -73,7 +73,13 @@ class _MyHomePageState extends State<MyHomePage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               sh(80),
-              const Header.secondary(),
+              SettingsCellule(
+                backgroundGradient: const LinearGradient(
+                          begin: Alignment.bottomCenter,
+                          end: Alignment.topRight,
+                          colors: [Colors.blue, Colors.purple]),
+                onClick: () {},
+              ),  
               const SizedBox(height: 400),
               Input.image(
                 image: image,

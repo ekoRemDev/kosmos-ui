@@ -20,7 +20,10 @@ class SettingsCelluleThemeData {
   final TextStyle? activeTitleStyle;
   final TextStyle? activeSubtitleStyle;
 
+  final Gradient? backgroundGradient;
   final Gradient? iconBackgroundGradient;
+  final Gradient? activeBackgroundGradient;
+  final Gradient? activeIconBackgroundGradient;
 
   const SettingsCelluleThemeData({
     this.titleStyle,
@@ -37,8 +40,11 @@ class SettingsCelluleThemeData {
     this.verticalPadding,
     this.activeBackgroundColor,
     this.activeIconBackgroundColor,
-    this.activeSubtitleStyle,
     this.activeTitleStyle,
+    this.activeSubtitleStyle,
+    this.backgroundGradient,
     this.iconBackgroundGradient,
+    this.activeBackgroundGradient,
+    this.activeIconBackgroundGradient,
   });
 }
