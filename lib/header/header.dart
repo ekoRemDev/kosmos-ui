@@ -179,16 +179,17 @@ class _Secondary extends StatelessWidget implements Header {
                   TextSpan(text: 'Bonjour', children: [
                     TextSpan(
                       text: ', Anna 👋',
+                      
                       style: title2Style ??
                           themeData.title2Style ??
                           const TextStyle(color: Color(0xFF02132B), fontSize: 21, fontWeight: FontWeight.w600),
                     ),
-                    if (subTitle != null) TextSpan(
+                    if (subTitle != null && subTitle!.isNotEmpty) TextSpan(
                       text: "\n$subTitle",
                       style: subTitleStyle ??
                           themeData.subTitleStyle ??
                           const TextStyle(color: Color(0xFF737D8A), fontSize: 11, fontWeight: FontWeight.w500),
-                    ),
+                     )
                   ]),
                   style: titleStyle ??
                       themeData.titleStyle ??
