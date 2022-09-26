@@ -74,7 +74,7 @@ class SettingsCellule extends StatelessWidget {
               minWidth: formatWidth(293),
             ),
         decoration: BoxDecoration(
-          gradient: isActive ? (themeData.activeBackgroundGradient ?? activeBackgroundGradient ?? const LinearGradient(colors: [Colors.white, Colors.black])) : themeData.backgroundGradient ?? backgroundGradient ?? const LinearGradient(colors: [Colors.black, Colors.white]),
+          gradient: isActive ? (themeData.activeBackgroundGradient ?? activeBackgroundGradient) : themeData.backgroundGradient ?? backgroundGradient,
           color: (themeData.activeBackgroundGradient == null && activeBackgroundGradient == null && themeData.backgroundGradient == null && backgroundGradient == null) ? (isActive ? themeData.activeBackgroundColor ?? activeBackgroundColor ?? const Color(0xFF02132B).withOpacity(0.03) : themeData.backgroundColor ?? backgroundColor ?? const Color(0xFF02132B).withOpacity(0.03)) : null,
           borderRadius: BorderRadius.circular((radius ?? 7)),
         ),
@@ -92,7 +92,7 @@ class SettingsCellule extends StatelessWidget {
                           ? BoxDecoration(shape: BoxShape.circle, image: DecorationImage(image: image!, fit: BoxFit.cover))
                           : BoxDecoration(
                               shape: BoxShape.circle,
-                              gradient: isActive ? (themeData.activeIconBackgroundGradient ?? activeIconBackgroundGradient ?? const LinearGradient(colors: [Colors.white, Colors.black])) : themeData.iconBackgroundGradient ?? iconBackgroundGradient ?? const LinearGradient(colors: [Colors.black, Colors.white]),
+                              gradient: isActive ? (themeData.activeIconBackgroundGradient ?? activeIconBackgroundGradient) : themeData.iconBackgroundGradient ?? iconBackgroundGradient,
                               color: (themeData.iconBackgroundGradient == null && iconBackgroundGradient == null && themeData.activeIconBackgroundGradient == null && activeIconBackgroundGradient == null) ? (isActive ? themeData.activeIconBackgroundColor ?? activeIconBackgroundColor ?? const Color(0xFF02132B).withOpacity(0.03) : themeData.iconBackgroundColor ?? iconBackgroundColor ?? const Color(0xFF02132B).withOpacity(0.03)) : null
                         ),
                       child: icon ?? svg ?? const SizedBox(),
