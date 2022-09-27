@@ -13,8 +13,11 @@ class SettingsCellule extends StatelessWidget {
   final Widget? switchNotif;
 
   final ImageProvider? image;
-  final Widget? icon;
   final Widget? svg;
+
+  final IconData? icon;
+  final Color? iconColor;
+  final Color? activeIconColor;
 
   final Color? backgroundColor;
   final Color? iconBackgroundColor;
@@ -35,12 +38,15 @@ class SettingsCellule extends StatelessWidget {
   const SettingsCellule({
     this.radius,
     this.switchNotif,
-    this.iconBackgroundColor,
     this.title,
     this.titleStyle,
     this.subtitle,
     this.subtitleStyle,
     required this.onClick,
+    this.iconColor,
+    this.backgroundColor,
+    this.iconBackgroundColor,
+    this.activeIconColor,
     this.activeBackgroundColor,
     this.activeIconBackgroundColor,
     this.backgroundGradient,
@@ -52,7 +58,6 @@ class SettingsCellule extends StatelessWidget {
     this.image,
     this.icon,
     this.svg,
-    this.backgroundColor,
     this.overlayColor,
     this.theme,
     this.themeName,
@@ -66,6 +71,7 @@ class SettingsCellule extends StatelessWidget {
       activeBackgroundGradient: LinearGradient(colors: [Colors.blue, Colors.purple]),
       activeIconBackgroundColor: Colors.white,
       iconBackgroundGradient: LinearGradient(colors: [Colors.blue, Colors.purple]),
+      
     ))!;
 
     return InkWell(
@@ -99,7 +105,7 @@ class SettingsCellule extends StatelessWidget {
                               gradient: isActive ? (activeIconBackgroundColor == null && themeData.activeIconBackgroundColor == null ? activeIconBackgroundGradient ?? themeData.activeIconBackgroundGradient : null) : (iconBackgroundColor == null && themeData.iconBackgroundColor == null ? iconBackgroundGradient ?? themeData.iconBackgroundGradient : null),
                               color: isActive ? activeIconBackgroundColor ?? themeData.activeIconBackgroundColor ?? (activeIconBackgroundGradient == null && themeData.activeIconBackgroundGradient == null ? const Color(0xFF02132B).withOpacity(0.03) : null) : iconBackgroundColor ?? themeData.iconBackgroundColor ?? (iconBackgroundGradient == null && themeData.iconBackgroundGradient == null ? const Color(0xFF02132B).withOpacity(0.03) : null)
                         ),
-                      child: icon ?? svg ?? const SizedBox(),
+                      child: icon != null ? Icon(icon, color: isActive ? activeIconColor ?? themeData.activeIconColor : iconColor ?? themeData.iconColor) : svg ?? const SizedBox(),
                     )
                   : const SizedBox(),
             ),

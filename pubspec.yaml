@@ -27,6 +27,7 @@ dependencies:
       publish_to: 'none'
       url: https://gitlab+deploy-token-1160077:Lk-H1hsQ6GFff5xvsM-n@gitlab.com/package16/package-core.git
       ref: main
+  image_picker: ^0.8.5+3
 
 
 dev_dependencies:

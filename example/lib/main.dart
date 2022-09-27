@@ -82,7 +82,9 @@ class _MyHomePageState extends State<MyHomePage> {
               sh(80),
               SettingsCellule(
                 onClick: () {},
-                icon: Icon(Icons.abc),
+                icon: Icons.facebook,
+                iconColor: Colors.white,
+                activeIconColor: Colors.blue,
               ),  
               const SizedBox(height: 400),
               Input.image(
