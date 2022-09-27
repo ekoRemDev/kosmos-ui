@@ -1,24 +1,29 @@
 import 'package:flutter/material.dart';
 
 class SettingsCelluleThemeData {
-  final TextStyle? titleStyle;
-  final TextStyle? subtitleStyle;
-  final double? radius;
-  final Color? iconBackgroundColor;
-  final BoxConstraints? constraints;
-  final double? imageWidth;
-  final double? imageHeight;
-
-  final Color? backgroundColor;
-  final Color? activeBackgroundColor;
-  final Color? activeIconBackgroundColor;
-  final Color? overlayColor;
   final MaterialStateProperty<OutlinedBorder?>? shape;
 
-  final double? horizontalPadding;
-  final double? verticalPadding;
+  final TextStyle? titleStyle;
+  final TextStyle? subtitleStyle;
   final TextStyle? activeTitleStyle;
   final TextStyle? activeSubtitleStyle;
+
+  final double? radius;
+  final double? imageWidth;
+  final double? imageHeight;
+  final double? verticalPadding;
+  final double? horizontalPadding;
+
+  final BoxConstraints? constraints;
+
+  final Color? overlayColor;
+
+  final Color? iconColor;
+  final Color? backgroundColor;
+  final Color? iconBackgroundColor;
+  final Color? activeIconColor;
+  final Color? activeBackgroundColor;
+  final Color? activeIconBackgroundColor;
 
   final Gradient? backgroundGradient;
   final Gradient? iconBackgroundGradient;
@@ -26,22 +31,24 @@ class SettingsCelluleThemeData {
   final Gradient? activeIconBackgroundGradient;
 
   const SettingsCelluleThemeData({
+    this.shape,
     this.titleStyle,
     this.subtitleStyle,
-    this.radius,
-    this.backgroundColor,
-    this.iconBackgroundColor,
-    this.overlayColor,
-    this.constraints,
-    this.imageHeight,
-    this.imageWidth,
-    this.shape,
-    this.horizontalPadding,
-    this.verticalPadding,
-    this.activeBackgroundColor,
-    this.activeIconBackgroundColor,
     this.activeTitleStyle,
     this.activeSubtitleStyle,
+    this.radius,
+    this.imageWidth,
+    this.imageHeight,
+    this.verticalPadding,
+    this.horizontalPadding,
+    this.constraints,
+    this.overlayColor,
+    this.iconColor,
+    this.backgroundColor,
+    this.iconBackgroundColor,
+    this.activeIconColor,
+    this.activeBackgroundColor,
+    this.activeIconBackgroundColor,
     this.backgroundGradient,
     this.iconBackgroundGradient,
     this.activeBackgroundGradient,
