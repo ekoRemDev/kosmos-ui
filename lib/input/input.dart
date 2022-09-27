@@ -5,10 +5,8 @@ import 'dart:io';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:core_kosmos/core_kosmos.dart';
 import 'package:file_picker/file_picker.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:ui_kosmos_v4/form/theme.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
@@ -35,7 +33,7 @@ abstract class Input extends HookWidget {
   final CustomFormFieldThemeData? theme;
 
   final List<FileNameItem>? listNameFiles;
-  final Function(dynamic)? onChanged;
+  final Function(PlatformFile?)? onChanged;
   final PlatformFile? defaultFile;
   final List<PlatformFile>? defaultFileList;
   final Function(List<PlatformFile>?)? onMultipleChanged;
@@ -106,7 +104,7 @@ abstract class Input extends HookWidget {
     final Color? iconColor,
     final double? widthImage,
     final CustomFormFieldThemeData? theme,
-    final Function(dynamic)? onChanged,
+    final Function(PlatformFile?)? onChanged,
     final PlatformFile? defaultFile,
     final File? imageMobile,
     final Widget? child,
@@ -148,7 +146,7 @@ abstract class Input extends HookWidget {
     final Color? iconColor,
     final double? widthImage,
     final CustomFormFieldThemeData? theme,
-    final Function(dynamic)? onChanged,
+    final Function(PlatformFile?)? onChanged,
     final List<PlatformFile>? defaultFiles,
     final String? desc,
     final Widget? header,
@@ -185,7 +183,7 @@ class _OneImage extends Input {
     final double? widthImage,
     final Widget? child,
     final CustomFormFieldThemeData? theme,
-    final Function(dynamic)? onChanged,
+    final Function(PlatformFile?)? onChanged,
     final PlatformFile? defaultFile,
     final File? imageMobile,
   }) : super(
@@ -216,7 +214,7 @@ class _OneImage extends Input {
   @override
   Widget build(BuildContext context) {
     final themeData = loadThemeData(theme, "input_field", () => const CustomFormFieldThemeData())!;
-    final state = useState<dynamic>(defaultFile);
+    final state = useState<PlatformFile?>(defaultFile);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -263,23 +261,8 @@ class _OneImage extends Input {
                 type: MaterialType.transparency,
                 child: InkWell(
                     borderRadius: BorderRadius.circular(inkRadius ?? 7),
-                    onTap: () async {
-                      if (kIsWeb) {
-                        FilePickerResult? result = await FilePicker.platform.pickFiles(
-                          type: FileType.custom,
-                          allowedExtensions: ['jpg', 'png'],
-                        );
-                        if (result?.files.single != null) {
-                          state.value = result?.files.single;
-                        }
-                      } else {
-                        final ImagePicker _picker = ImagePicker();
-                        final XFile? image = await _picker.pickImage(source: ImageSource.camera);
-                        if (image != null) {
-                          state.value = image;
-                        }
-                      }
-                      if (onTap != null) onTap!();
+                    onTap: () {
+                      if (onTap != null) onTap!(); //TODO picker for web and mobile
                       if (onChanged != null) onChanged!(state.value);
                     },
                     onDoubleTap: onDoubleTap,
@@ -290,46 +273,38 @@ class _OneImage extends Input {
                         alignment: Alignment.centerLeft,
                         children: state.value != null || imageMobile != null || urlImage != null || image != null || child != null
                             ? [
-                                state.value != null
+                                child != null
                                     ? Container(
-                                        child: kIsWeb ? Image.memory((state.value as PlatformFile).bytes!) : Image.file(File((state.value as XFile).path)),
+                                        child: child,
                                         width: formatWidth(widthImage ?? themeData.pickerImageWidth ?? 81),
                                         decoration: BoxDecoration(
                                           borderRadius: BorderRadius.circular(imageRadius ?? themeData.pickerImageRadius ?? 5),
                                         ),
                                       )
-                                    : child != null
+                                    : imageMobile != null
                                         ? Container(
-                                            child: child,
                                             width: formatWidth(widthImage ?? themeData.pickerImageWidth ?? 81),
                                             decoration: BoxDecoration(
+                                              image: DecorationImage(image: FileImage(imageMobile!), fit: BoxFit.cover),
                                               borderRadius: BorderRadius.circular(imageRadius ?? themeData.pickerImageRadius ?? 5),
                                             ),
                                           )
-                                        : imageMobile != null
-                                            ? Container(
+                                        : image != null
+                                            ? SizedBox(
                                                 width: formatWidth(widthImage ?? themeData.pickerImageWidth ?? 81),
-                                                decoration: BoxDecoration(
-                                                  image: DecorationImage(image: FileImage(imageMobile!), fit: BoxFit.cover),
+                                                child: ClipRRect(
                                                   borderRadius: BorderRadius.circular(imageRadius ?? themeData.pickerImageRadius ?? 5),
-                                                ),
-                                              )
-                                            : image != null
-                                                ? SizedBox(
-                                                    width: formatWidth(widthImage ?? themeData.pickerImageWidth ?? 81),
-                                                    child: ClipRRect(
-                                                      borderRadius: BorderRadius.circular(imageRadius ?? themeData.pickerImageRadius ?? 5),
-                                                      child: Image.memory(image!.bytes!),
-                                                    ))
-                                                : SizedBox(
-                                                    width: formatWidth(widthImage ?? themeData.pickerImageWidth ?? 81),
-                                                    child: ClipRRect(
-                                                      borderRadius: BorderRadius.circular(imageRadius ?? themeData.pickerImageRadius ?? 5),
-                                                      child: CachedNetworkImage(
-                                                        imageUrl: urlImage!,
-                                                        fit: BoxFit.cover,
-                                                      ),
-                                                    )),
+                                                  child: Image.memory(image!.bytes!),
+                                                ))
+                                            : SizedBox(
+                                                width: formatWidth(widthImage ?? themeData.pickerImageWidth ?? 81),
+                                                child: ClipRRect(
+                                                  borderRadius: BorderRadius.circular(imageRadius ?? themeData.pickerImageRadius ?? 5),
+                                                  child: CachedNetworkImage(
+                                                    imageUrl: urlImage!,
+                                                    fit: BoxFit.cover,
+                                                  ),
+                                                )),
                                 Align(
                                   alignment: Alignment.centerRight,
                                   child: Column(
@@ -641,7 +616,7 @@ class _ValidatedFile extends Input {
     final double? height,
     final double? widthImage,
     final CustomFormFieldThemeData? theme,
-    final Function(dynamic)? onChanged,
+    final Function(PlatformFile?)? onChanged,
     final List<PlatformFile>? defaultFiles,
     final PlatformFile? defaultFile,
     final String? defaultFileName,
