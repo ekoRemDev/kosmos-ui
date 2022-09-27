@@ -13,9 +13,9 @@ class SettingsCellule extends StatelessWidget {
   final Widget? switchNotif;
 
   final ImageProvider? image;
-  final Widget? svg;
 
   final Widget? icon;
+  final Widget? activeIcon;
   final Color? iconColor;
   final Color? activeIconColor;
 
@@ -57,7 +57,7 @@ class SettingsCellule extends StatelessWidget {
     this.activeSubtitleStyle,
     this.image,
     this.icon,
-    this.svg,
+    this.activeIcon,
     this.overlayColor,
     this.theme,
     this.themeName,
@@ -101,7 +101,7 @@ class SettingsCellule extends StatelessWidget {
           children: [
             Padding(
               padding: EdgeInsets.symmetric(horizontal: themeData.horizontalPadding ?? 10, vertical: themeData.verticalPadding ?? 0),
-              child: (icon != null || svg != null || image != null)
+              child: (icon != null || image != null)
                   ? Container(
                       height: formatHeight(themeData.imageHeight ?? 37),
                       width: formatWidth(themeData.imageWidth ?? 37),
@@ -120,7 +120,7 @@ class SettingsCellule extends StatelessWidget {
                                   : iconBackgroundColor ??
                                       themeData.iconBackgroundColor ??
                                       (iconBackgroundGradient == null && themeData.iconBackgroundGradient == null ? const Color(0xFF02132B).withOpacity(0.03) : null)),
-                      child: icon != null ? icon! : (svg != null ? svg! : null),
+                      child: isActive ? activeIcon ?? icon : icon,
                     )
                   : const SizedBox(),
             ),
