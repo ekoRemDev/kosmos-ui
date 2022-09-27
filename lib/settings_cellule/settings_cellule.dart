@@ -56,13 +56,17 @@ class SettingsCellule extends StatelessWidget {
     this.overlayColor,
     this.theme,
     this.themeName,
-    this.isActive = true,
+    this.isActive = false,
     Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final themeData = loadThemeData(theme, themeName ?? "settings_cellule", () => const SettingsCelluleThemeData())!;
+    final themeData = loadThemeData(theme, themeName ?? "settings_cellule", () => const SettingsCelluleThemeData(
+      activeBackgroundGradient: LinearGradient(colors: [Colors.blue, Colors.purple]),
+      activeIconBackgroundColor: Colors.white,
+      iconBackgroundGradient: LinearGradient(colors: [Colors.blue, Colors.purple]),
+    ))!;
 
     return InkWell(
       onTap: onClick,
@@ -74,8 +78,8 @@ class SettingsCellule extends StatelessWidget {
               minWidth: formatWidth(293),
             ),
         decoration: BoxDecoration(
-          gradient: isActive ? (themeData.activeBackgroundGradient ?? activeBackgroundGradient) : themeData.backgroundGradient ?? backgroundGradient,
-          color: isActive ? (themeData.activeBackgroundGradient == null && activeBackgroundGradient == null ? themeData.activeBackgroundColor ?? activeBackgroundColor ?? const Color(0xFF02132B).withOpacity(0.03) : null) : (themeData.backgroundGradient == null && backgroundGradient == null ? themeData.backgroundColor ?? backgroundColor ?? const Color(0xFF02132B).withOpacity(0.03) : null),
+          gradient: isActive ? (activeBackgroundColor == null && themeData.activeBackgroundColor == null ? activeBackgroundGradient ?? themeData.activeBackgroundGradient : null) : (backgroundColor == null && themeData.backgroundColor == null ? backgroundGradient ?? themeData.backgroundGradient : null),
+          color: isActive ? activeBackgroundColor ?? themeData.activeBackgroundColor ?? (activeBackgroundGradient == null && themeData.activeBackgroundGradient == null ? const Color(0xFF02132B).withOpacity(0.03) : null) : backgroundColor ?? themeData.backgroundColor ?? (backgroundGradient == null && themeData.backgroundGradient == null ? const Color(0xFF02132B).withOpacity(0.03) : null),
           borderRadius: BorderRadius.circular((radius ?? 7)),
         ),
         clipBehavior: Clip.hardEdge,
@@ -92,8 +96,8 @@ class SettingsCellule extends StatelessWidget {
                           ? BoxDecoration(shape: BoxShape.circle, image: DecorationImage(image: image!, fit: BoxFit.cover))
                           : BoxDecoration(
                               shape: BoxShape.circle,
-                              gradient: isActive ? (themeData.activeIconBackgroundGradient ?? activeIconBackgroundGradient) : themeData.iconBackgroundGradient ?? iconBackgroundGradient,
-                              color: isActive ? (themeData.activeIconBackgroundGradient == null && activeIconBackgroundGradient == null ? themeData.activeIconBackgroundColor ?? activeIconBackgroundColor ?? const Color(0xFF02132B).withOpacity(0.03) : null) : (themeData.iconBackgroundGradient == null && iconBackgroundGradient == null ? themeData.iconBackgroundColor ?? iconBackgroundColor ?? const Color(0xFF02132B).withOpacity(0.03) : null)
+                              gradient: isActive ? (activeIconBackgroundColor == null && themeData.activeIconBackgroundColor == null ? activeIconBackgroundGradient ?? themeData.activeIconBackgroundGradient : null) : (iconBackgroundColor == null && themeData.iconBackgroundColor == null ? iconBackgroundGradient ?? themeData.iconBackgroundGradient : null),
+                              color: isActive ? activeIconBackgroundColor ?? themeData.activeIconBackgroundColor ?? (activeIconBackgroundGradient == null && themeData.activeIconBackgroundGradient == null ? const Color(0xFF02132B).withOpacity(0.03) : null) : iconBackgroundColor ?? themeData.iconBackgroundColor ?? (iconBackgroundGradient == null && themeData.iconBackgroundGradient == null ? const Color(0xFF02132B).withOpacity(0.03) : null)
                         ),
                       child: icon ?? svg ?? const SizedBox(),
                     )

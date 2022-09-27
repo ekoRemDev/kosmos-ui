@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:ui_kosmos_v4/cta/theme.dart';
 import 'package:ui_kosmos_v4/ui_kosmos_v4.dart';
 
 void main() {
@@ -72,6 +73,10 @@ class _MyHomePageState extends State<MyHomePage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              sh(80),
+              CTA.back(
+                theme: CtaThemeData(backgroundColor: Colors.transparent),
+              ),
               sh(80),
               Header.secondary(),
               sh(80),
