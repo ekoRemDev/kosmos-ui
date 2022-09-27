@@ -15,7 +15,7 @@ class SettingsCellule extends StatelessWidget {
   final ImageProvider? image;
   final Widget? svg;
 
-  final IconData? icon;
+  final Widget? icon;
   final Color? iconColor;
   final Color? activeIconColor;
 
@@ -67,12 +67,14 @@ class SettingsCellule extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final themeData = loadThemeData(theme, themeName ?? "settings_cellule", () => const SettingsCelluleThemeData(
-      activeBackgroundGradient: LinearGradient(colors: [Colors.blue, Colors.purple]),
-      activeIconBackgroundColor: Colors.white,
-      iconBackgroundGradient: LinearGradient(colors: [Colors.blue, Colors.purple]),
-      
-    ))!;
+    final themeData = loadThemeData(
+        theme,
+        themeName ?? "settings_cellule",
+        () => const SettingsCelluleThemeData(
+              activeBackgroundGradient: LinearGradient(colors: [Colors.blue, Colors.purple]),
+              activeIconBackgroundColor: Colors.white,
+              iconBackgroundGradient: LinearGradient(colors: [Colors.blue, Colors.purple]),
+            ))!;
 
     return InkWell(
       onTap: onClick,
@@ -84,8 +86,14 @@ class SettingsCellule extends StatelessWidget {
               minWidth: formatWidth(293),
             ),
         decoration: BoxDecoration(
-          gradient: isActive ? (activeBackgroundColor == null && themeData.activeBackgroundColor == null ? activeBackgroundGradient ?? themeData.activeBackgroundGradient : null) : (backgroundColor == null && themeData.backgroundColor == null ? backgroundGradient ?? themeData.backgroundGradient : null),
-          color: isActive ? activeBackgroundColor ?? themeData.activeBackgroundColor ?? (activeBackgroundGradient == null && themeData.activeBackgroundGradient == null ? const Color(0xFF02132B).withOpacity(0.03) : null) : backgroundColor ?? themeData.backgroundColor ?? (backgroundGradient == null && themeData.backgroundGradient == null ? const Color(0xFF02132B).withOpacity(0.03) : null),
+          gradient: isActive
+              ? (activeBackgroundColor == null && themeData.activeBackgroundColor == null ? activeBackgroundGradient ?? themeData.activeBackgroundGradient : null)
+              : (backgroundColor == null && themeData.backgroundColor == null ? backgroundGradient ?? themeData.backgroundGradient : null),
+          color: isActive
+              ? activeBackgroundColor ??
+                  themeData.activeBackgroundColor ??
+                  (activeBackgroundGradient == null && themeData.activeBackgroundGradient == null ? const Color(0xFF02132B).withOpacity(0.03) : null)
+              : backgroundColor ?? themeData.backgroundColor ?? (backgroundGradient == null && themeData.backgroundGradient == null ? const Color(0xFF02132B).withOpacity(0.03) : null),
           borderRadius: BorderRadius.circular((radius ?? 7)),
         ),
         clipBehavior: Clip.hardEdge,
@@ -102,10 +110,17 @@ class SettingsCellule extends StatelessWidget {
                           ? BoxDecoration(shape: BoxShape.circle, image: DecorationImage(image: image!, fit: BoxFit.cover))
                           : BoxDecoration(
                               shape: BoxShape.circle,
-                              gradient: isActive ? (activeIconBackgroundColor == null && themeData.activeIconBackgroundColor == null ? activeIconBackgroundGradient ?? themeData.activeIconBackgroundGradient : null) : (iconBackgroundColor == null && themeData.iconBackgroundColor == null ? iconBackgroundGradient ?? themeData.iconBackgroundGradient : null),
-                              color: isActive ? activeIconBackgroundColor ?? themeData.activeIconBackgroundColor ?? (activeIconBackgroundGradient == null && themeData.activeIconBackgroundGradient == null ? const Color(0xFF02132B).withOpacity(0.03) : null) : iconBackgroundColor ?? themeData.iconBackgroundColor ?? (iconBackgroundGradient == null && themeData.iconBackgroundGradient == null ? const Color(0xFF02132B).withOpacity(0.03) : null)
-                        ),
-                      child: icon != null ? Icon(icon, color: isActive ? activeIconColor ?? themeData.activeIconColor : iconColor ?? themeData.iconColor) : svg ?? const SizedBox(),
+                              gradient: isActive
+                                  ? (activeIconBackgroundColor == null && themeData.activeIconBackgroundColor == null ? activeIconBackgroundGradient ?? themeData.activeIconBackgroundGradient : null)
+                                  : (iconBackgroundColor == null && themeData.iconBackgroundColor == null ? iconBackgroundGradient ?? themeData.iconBackgroundGradient : null),
+                              color: isActive
+                                  ? activeIconBackgroundColor ??
+                                      themeData.activeIconBackgroundColor ??
+                                      (activeIconBackgroundGradient == null && themeData.activeIconBackgroundGradient == null ? const Color(0xFF02132B).withOpacity(0.03) : null)
+                                  : iconBackgroundColor ??
+                                      themeData.iconBackgroundColor ??
+                                      (iconBackgroundGradient == null && themeData.iconBackgroundGradient == null ? const Color(0xFF02132B).withOpacity(0.03) : null)),
+                      child: icon != null ? icon! : (svg != null ? svg! : null),
                     )
                   : const SizedBox(),
             ),
