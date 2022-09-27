@@ -444,7 +444,7 @@ class _Back extends CTA {
     final IconData? backIcon,
     final Function? onTap,
     final VoidCallback? onDoubleTap,
-    final Color backgroundColor = Colors.white,
+    final Color? backgroundColor,
     final CtaThemeData? theme,
     final String? themeName,
     final BoxBorder? border,
