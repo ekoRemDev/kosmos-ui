@@ -362,6 +362,7 @@ class _Tiers extends CTA {
     final double? radiusOnTap,
     final bool? isEnabled,
     final bool circleOnTap = false,
+    final widget? child,
     final Icon? icon,
     final Function? onTap,
     final VoidCallback? onDoubleTap,
@@ -376,6 +377,7 @@ class _Tiers extends CTA {
           radius: radiusOnTap,
           onTap: onTap,
           onDoubleTap: onDoubleTap,
+          child: child,
           icon: icon,
           isEnabled: isEnabled,
           textButton: textButton,
@@ -416,7 +418,7 @@ class _Tiers extends CTA {
           ),
           padding: const EdgeInsets.all(15.0),
           child: IntrinsicWidth(
-            child: Row(
+            child: child ?? Row(
               mainAxisSize: MainAxisSize.min,
               children: [
                 icon != null ? icon! : const SizedBox(),
