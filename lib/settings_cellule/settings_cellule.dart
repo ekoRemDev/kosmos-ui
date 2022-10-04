@@ -19,6 +19,10 @@ class SettingsCellule extends StatelessWidget {
   final Color? iconColor;
   final Color? activeIconColor;
 
+  final IconData? icon;
+  final Color? iconColor;
+  final Color? activeIconColor;
+
   final Color? backgroundColor;
   final Color? iconBackgroundColor;
   final Color? activeBackgroundColor;
