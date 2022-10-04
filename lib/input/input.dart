@@ -262,7 +262,8 @@ class _OneImage extends Input {
                 child: InkWell(
                     borderRadius: BorderRadius.circular(inkRadius ?? 7),
                     onTap: () {
-                      if (onTap != null) onTap!(); //TODO picker for web and mobile
+                      if (onTap != null) onTap!();
+                      //TODO picker for web and mobile
                       if (onChanged != null) onChanged!(state.value);
                     },
                     onDoubleTap: onDoubleTap,
@@ -273,38 +274,46 @@ class _OneImage extends Input {
                         alignment: Alignment.centerLeft,
                         children: state.value != null || imageMobile != null || urlImage != null || image != null || child != null
                             ? [
-                                child != null
+                                state.value != null
                                     ? Container(
-                                        child: child,
+                                        child: Image.file(File.fromRawPath(state.value!.bytes!)),
                                         width: formatWidth(widthImage ?? themeData.pickerImageWidth ?? 81),
                                         decoration: BoxDecoration(
                                           borderRadius: BorderRadius.circular(imageRadius ?? themeData.pickerImageRadius ?? 5),
                                         ),
                                       )
-                                    : imageMobile != null
+                                    : child != null
                                         ? Container(
+                                            child: child,
                                             width: formatWidth(widthImage ?? themeData.pickerImageWidth ?? 81),
                                             decoration: BoxDecoration(
-                                              image: DecorationImage(image: FileImage(imageMobile!), fit: BoxFit.cover),
                                               borderRadius: BorderRadius.circular(imageRadius ?? themeData.pickerImageRadius ?? 5),
                                             ),
                                           )
-                                        : image != null
-                                            ? SizedBox(
+                                        : imageMobile != null
+                                            ? Container(
                                                 width: formatWidth(widthImage ?? themeData.pickerImageWidth ?? 81),
-                                                child: ClipRRect(
+                                                decoration: BoxDecoration(
+                                                  image: DecorationImage(image: FileImage(imageMobile!), fit: BoxFit.cover),
                                                   borderRadius: BorderRadius.circular(imageRadius ?? themeData.pickerImageRadius ?? 5),
-                                                  child: Image.memory(image!.bytes!),
-                                                ))
-                                            : SizedBox(
-                                                width: formatWidth(widthImage ?? themeData.pickerImageWidth ?? 81),
-                                                child: ClipRRect(
-                                                  borderRadius: BorderRadius.circular(imageRadius ?? themeData.pickerImageRadius ?? 5),
-                                                  child: CachedNetworkImage(
-                                                    imageUrl: urlImage!,
-                                                    fit: BoxFit.cover,
-                                                  ),
-                                                )),
+                                                ),
+                                              )
+                                            : image != null
+                                                ? SizedBox(
+                                                    width: formatWidth(widthImage ?? themeData.pickerImageWidth ?? 81),
+                                                    child: ClipRRect(
+                                                      borderRadius: BorderRadius.circular(imageRadius ?? themeData.pickerImageRadius ?? 5),
+                                                      child: Image.memory(image!.bytes!),
+                                                    ))
+                                                : SizedBox(
+                                                    width: formatWidth(widthImage ?? themeData.pickerImageWidth ?? 81),
+                                                    child: ClipRRect(
+                                                      borderRadius: BorderRadius.circular(imageRadius ?? themeData.pickerImageRadius ?? 5),
+                                                      child: CachedNetworkImage(
+                                                        imageUrl: urlImage!,
+                                                        fit: BoxFit.cover,
+                                                      ),
+                                                    )),
                                 Align(
                                   alignment: Alignment.centerRight,
                                   child: Column(
