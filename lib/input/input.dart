@@ -258,6 +258,7 @@ class _OneImage extends Input {
                     borderRadius: BorderRadius.circular(themeData.selectRadius ?? 7),
                   ),
               child: Material(
+                clipBehavior: Clip.hardEdge,
                 type: MaterialType.transparency,
                 child: InkWell(
                     borderRadius: BorderRadius.circular(inkRadius ?? 7),
@@ -278,6 +279,7 @@ class _OneImage extends Input {
                                     ? Container(
                                         child: Image.file(File.fromRawPath(state.value!.bytes!)),
                                         width: formatWidth(widthImage ?? themeData.pickerImageWidth ?? 81),
+                                        clipBehavior: Clip.hardEdge,
                                         decoration: BoxDecoration(
                                           borderRadius: BorderRadius.circular(imageRadius ?? themeData.pickerImageRadius ?? 5),
                                         ),
@@ -286,6 +288,7 @@ class _OneImage extends Input {
                                         ? Container(
                                             child: child,
                                             width: formatWidth(widthImage ?? themeData.pickerImageWidth ?? 81),
+                                            clipBehavior: Clip.hardEdge,
                                             decoration: BoxDecoration(
                                               borderRadius: BorderRadius.circular(imageRadius ?? themeData.pickerImageRadius ?? 5),
                                             ),
@@ -293,6 +296,7 @@ class _OneImage extends Input {
                                         : imageMobile != null
                                             ? Container(
                                                 width: formatWidth(widthImage ?? themeData.pickerImageWidth ?? 81),
+                                                clipBehavior: Clip.hardEdge,
                                                 decoration: BoxDecoration(
                                                   image: DecorationImage(image: FileImage(imageMobile!), fit: BoxFit.cover),
                                                   borderRadius: BorderRadius.circular(imageRadius ?? themeData.pickerImageRadius ?? 5),
