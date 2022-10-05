@@ -43,6 +43,7 @@ class TextFormUpdated extends HookWidget {
   final InputBorder? focusedBorder;
   final InputBorder? border;
   final Color? cursorColor;
+  final String? subFieldText;
 
   //SELECT FORM
   final String? value;
@@ -106,6 +107,7 @@ class TextFormUpdated extends HookWidget {
     this.focusedBorder,
     this.border,
     this.fieldPostRedirectionStyle,
+    this.subFieldText,
 
     //SELECT FORM
     this.icon,
@@ -173,6 +175,7 @@ class TextFormUpdated extends HookWidget {
     final TextInputType? textInputType,
     final String? defaultValue,
     final Function(String)? onChanged,
+    final String? subFieldText,
   }) = _Classic;
 
   const factory TextFormUpdated.phoneNumber({
@@ -207,6 +210,7 @@ class TextFormUpdated extends HookWidget {
     final InputBorder? focusedBorder,
     final InputBorder? border,
     final TextEditingController? controller,
+    final String? subFieldText,
   }) = _PhoneNumber;
 
   const factory TextFormUpdated.dateTime({
@@ -244,6 +248,7 @@ class TextFormUpdated extends HookWidget {
     final InputBorder? focusedBorder,
     final InputBorder? border,
     final TextEditingController? controller,
+    final String? subFieldText,
   }) = _DateTime;
 
   factory TextFormUpdated.immatriculation({
@@ -280,6 +285,7 @@ class TextFormUpdated extends HookWidget {
     final InputBorder? border,
     final String? defaultValue,
     final void Function(String?)? onChanged,
+    final String? subFieldText,
   }) = _Immatriculation;
 
   const factory TextFormUpdated.textarea({
@@ -310,6 +316,7 @@ class TextFormUpdated extends HookWidget {
     final double? maxLine,
     final double? minLine,
     final String? Function(String?)? validator,
+    final String? subFieldText,
   }) = _TextArea;
 
   @override
@@ -357,6 +364,7 @@ class _Classic extends TextFormUpdated {
     final String? defaultValue,
     final Widget? suffixChildActive,
     final Function(String)? onChanged,
+    final String? subFieldText,
   }) : super(
           inputFormatters: inputFormatters,
           textInputType: textInputType,
@@ -395,6 +403,7 @@ class _Classic extends TextFormUpdated {
           hintTextStyle: hintTextStyle,
           textStyle: textStyle,
           theme: theme,
+          subFieldText: subFieldText,
         );
 
   @override
@@ -418,9 +427,7 @@ class _Classic extends TextFormUpdated {
                 : fieldName != null
                     ? Text(
                         fieldName!,
-                        style: fieldNameStyle ??
-                            themeData.fieldNameStyle ??
-                            const TextStyle(color: Color(0xFF02132B), fontSize: 12, fontWeight: FontWeight.w500),
+                        style: fieldNameStyle ?? themeData.fieldNameStyle ?? const TextStyle(color: Color(0xFF02132B), fontSize: 12, fontWeight: FontWeight.w500),
                       )
                     : Container(),
             fieldPostRedirection == null ? const SizedBox() : const Spacer(),
@@ -458,19 +465,14 @@ class _Classic extends TextFormUpdated {
           controller: controller,
           obscuringCharacter: themeData.obscuringCharacter ?? '*',
           initialValue: controller == null ? defaultValue : null,
-          style: textStyle ??
-              themeData.fieldStyle ??
-              const TextStyle(color: Color(0xFF02132B), fontSize: 13, fontWeight: FontWeight.w500)
-                  .copyWith(color: const Color(0xFF02132B)),
+          style: textStyle ?? themeData.fieldStyle ?? const TextStyle(color: Color(0xFF02132B), fontSize: 13, fontWeight: FontWeight.w500).copyWith(color: const Color(0xFF02132B)),
           cursorColor: cursorColor ?? themeData.cursorColor ?? const Color(0xFF02132B),
           decoration: InputDecoration(
               errorStyle: const TextStyle(fontSize: 12, height: 0),
               prefixIcon: prefixChild,
               suffixIcon: isUpdatable == true
                   ? InkWell(
-                      child: !stateObscure.value
-                          ? (suffixChild ?? const SizedBox())
-                          : suffixChildActive ?? suffixChild ?? const SizedBox(),
+                      child: !stateObscure.value ? (suffixChild ?? const SizedBox()) : suffixChildActive ?? suffixChild ?? const SizedBox(),
                       onTap: () {
                         stateObscure.value = !stateObscure.value;
                       },
@@ -480,8 +482,7 @@ class _Classic extends TextFormUpdated {
               suffixIconConstraints: suffixChildBoxConstraint ?? themeData.suffixChildBoxConstraint,
               filled: filled ?? true,
               fillColor: backgroundColor ?? themeData.backgroundColor ?? const Color(0xFF02132B).withOpacity(0.03),
-              contentPadding:
-                  contentPadding ?? themeData.contentPadding ?? const EdgeInsets.fromLTRB(9.5, 17.5, 9.5, 17.5),
+              contentPadding: contentPadding ?? themeData.contentPadding ?? const EdgeInsets.fromLTRB(9.5, 17.5, 9.5, 17.5),
               focusedErrorBorder: focusedErrorBorder ??
                   themeData.focusedErrorBorder ??
                   OutlineInputBorder(
@@ -499,14 +500,14 @@ class _Classic extends TextFormUpdated {
                         width: 0.5,
                       )),
               focusedBorder: focusedBorder ?? themeData.focusedBorder,
-              border: border ??
-                  themeData.border ??
-                  UnderlineInputBorder(borderRadius: BorderRadius.circular(6), borderSide: BorderSide.none),
+              border: border ?? themeData.border ?? UnderlineInputBorder(borderRadius: BorderRadius.circular(6), borderSide: BorderSide.none),
               hintText: hintText ?? "Placeholder",
-              hintStyle: hintTextStyle ??
-                  themeData.hintStyle ??
-                  const TextStyle(color: Color(0xFF9299A4), fontSize: 13, fontWeight: FontWeight.w500)),
+              hintStyle: hintTextStyle ?? themeData.hintStyle ?? const TextStyle(color: Color(0xFF9299A4), fontSize: 13, fontWeight: FontWeight.w500)),
         ),
+        if (subFieldText != null) ...[
+          sh(4),
+          Text(subFieldText!, style: themeData.subFieldTextStyle ?? TextStyle(fontSize: sp(11), color: Colors.black.withOpacity(.75), fontWeight: FontWeight.w500)),
+        ],
       ],
     );
   }
@@ -545,6 +546,7 @@ class _PhoneNumber extends TextFormUpdated {
     final InputBorder? focusedBorder,
     final InputBorder? border,
     final TextEditingController? controller,
+    final String? subFieldText,
   }) : super(
           theme: theme,
           initialPhoneValue: initialPhoneValue,
@@ -577,6 +579,7 @@ class _PhoneNumber extends TextFormUpdated {
           fieldNameStyle: fieldNameStyle,
           hintTextStyle: hintTextStyle,
           textStyle: textStyle,
+          subFieldText: subFieldText,
         );
 
   @override
@@ -597,9 +600,7 @@ class _PhoneNumber extends TextFormUpdated {
                   )
                 : Text(
                     fieldName ?? "",
-                    style: fieldNameStyle ??
-                        themeData.fieldNameStyle ??
-                        const TextStyle(color: Color(0xFF02132B), fontSize: 12, fontWeight: FontWeight.w500),
+                    style: fieldNameStyle ?? themeData.fieldNameStyle ?? const TextStyle(color: Color(0xFF02132B), fontSize: 12, fontWeight: FontWeight.w500),
                   ),
             fieldPostRedirection == null ? const SizedBox() : const Spacer(),
             fieldPostRedirection == null
@@ -659,8 +660,7 @@ class _PhoneNumber extends TextFormUpdated {
             suffixIconConstraints: suffixChildBoxConstraint ?? themeData.suffixChildBoxConstraint,
             filled: filled ?? true,
             fillColor: backgroundColor ?? themeData.backgroundColor ?? const Color(0xFF02132B).withOpacity(0.03),
-            contentPadding:
-                contentPadding ?? themeData.contentPadding ?? const EdgeInsets.fromLTRB(9.5, 17.5, 9.5, 17.5),
+            contentPadding: contentPadding ?? themeData.contentPadding ?? const EdgeInsets.fromLTRB(9.5, 17.5, 9.5, 17.5),
             focusedErrorBorder: focusedErrorBorder ??
                 themeData.focusedErrorBorder ??
                 OutlineInputBorder(
@@ -678,27 +678,23 @@ class _PhoneNumber extends TextFormUpdated {
                       width: 0.5,
                     )),
             focusedBorder: focusedBorder ?? themeData.focusedBorder,
-            border: border ??
-                themeData.border ??
-                UnderlineInputBorder(borderRadius: BorderRadius.circular(6), borderSide: BorderSide.none),
+            border: border ?? themeData.border ?? UnderlineInputBorder(borderRadius: BorderRadius.circular(6), borderSide: BorderSide.none),
             hintText: hintText ?? "6 00 00 00 00",
-            hintStyle: hintTextStyle ??
-                themeData.hintStyle ??
-                const TextStyle(color: Color(0xFF9299A4), fontSize: 13, fontWeight: FontWeight.w500),
+            hintStyle: hintTextStyle ?? themeData.hintStyle ?? const TextStyle(color: Color(0xFF9299A4), fontSize: 13, fontWeight: FontWeight.w500),
           ),
           ignoreBlank: true,
-          textStyle: textStyle ??
-              themeData.fieldStyle ??
-              const TextStyle(color: Color(0xFF02132B), fontSize: 12, fontWeight: FontWeight.w500),
-          selectorTextStyle: textStyle ??
-              themeData.fieldStyle ??
-              const TextStyle(color: Color(0xFF02132B), fontSize: 12, fontWeight: FontWeight.w500),
+          textStyle: textStyle ?? themeData.fieldStyle ?? const TextStyle(color: Color(0xFF02132B), fontSize: 12, fontWeight: FontWeight.w500),
+          selectorTextStyle: textStyle ?? themeData.fieldStyle ?? const TextStyle(color: Color(0xFF02132B), fontSize: 12, fontWeight: FontWeight.w500),
           errorMessage: "Format téléphone invalide",
           textFieldController: controller,
           formatInput: true,
           keyboardType: const TextInputType.numberWithOptions(signed: true, decimal: true),
           inputBorder: const OutlineInputBorder(),
         ),
+        if (subFieldText != null) ...[
+          sh(4),
+          Text(subFieldText!, style: themeData.subFieldTextStyle ?? TextStyle(fontSize: sp(11), color: Colors.black.withOpacity(.75), fontWeight: FontWeight.w500)),
+        ],
       ],
     );
   }
@@ -740,6 +736,7 @@ class _DateTime extends TextFormUpdated {
     final InputBorder? focusedBorder,
     final InputBorder? border,
     final TextEditingController? controller,
+    final String? subFieldText,
   }) : super(
           theme: theme,
           controller: controller,
@@ -775,6 +772,7 @@ class _DateTime extends TextFormUpdated {
           fieldNameStyle: fieldNameStyle,
           hintTextStyle: hintTextStyle,
           textStyle: textStyle,
+          subFieldText: subFieldText,
         );
 
   @override
@@ -795,9 +793,7 @@ class _DateTime extends TextFormUpdated {
                   )
                 : Text(
                     fieldName ?? "",
-                    style: fieldNameStyle ??
-                        themeData.fieldNameStyle ??
-                        const TextStyle(color: Color(0xFF02132B), fontSize: 12, fontWeight: FontWeight.w500),
+                    style: fieldNameStyle ?? themeData.fieldNameStyle ?? const TextStyle(color: Color(0xFF02132B), fontSize: 12, fontWeight: FontWeight.w500),
                   ),
             fieldPostRedirection == null ? const SizedBox() : const Spacer(),
             fieldPostRedirection == null
@@ -860,10 +856,7 @@ class _DateTime extends TextFormUpdated {
           validator: validatorDate,
           obscureText: obscuringText ?? false,
           initialValue: controller == null ? defaultDate : null,
-          style: textStyle ??
-              themeData.fieldStyle ??
-              const TextStyle(color: Color(0xFF02132B), fontSize: 12, fontWeight: FontWeight.w500)
-                  .copyWith(color: const Color(0xFF02132B)),
+          style: textStyle ?? themeData.fieldStyle ?? const TextStyle(color: Color(0xFF02132B), fontSize: 12, fontWeight: FontWeight.w500).copyWith(color: const Color(0xFF02132B)),
           decoration: InputDecoration(
             prefixIcon: prefixChild,
             suffixIcon: error ?? false
@@ -885,8 +878,7 @@ class _DateTime extends TextFormUpdated {
             suffixIconConstraints: suffixChildBoxConstraint ?? themeData.suffixChildBoxConstraint,
             filled: filled ?? true,
             fillColor: backgroundColor ?? themeData.backgroundColor ?? const Color(0xFF02132B).withOpacity(0.03),
-            contentPadding:
-                contentPadding ?? themeData.contentPadding ?? const EdgeInsets.fromLTRB(9.5, 17.5, 9.5, 17.5),
+            contentPadding: contentPadding ?? themeData.contentPadding ?? const EdgeInsets.fromLTRB(9.5, 17.5, 9.5, 17.5),
             focusedErrorBorder: focusedErrorBorder ??
                 themeData.focusedErrorBorder ??
                 OutlineInputBorder(
@@ -904,15 +896,15 @@ class _DateTime extends TextFormUpdated {
                       width: 0.5,
                     )),
             focusedBorder: focusedBorder ?? themeData.focusedBorder,
-            border: border ??
-                themeData.border ??
-                UnderlineInputBorder(borderRadius: BorderRadius.circular(6), borderSide: BorderSide.none),
+            border: border ?? themeData.border ?? UnderlineInputBorder(borderRadius: BorderRadius.circular(6), borderSide: BorderSide.none),
             hintText: hintText ?? "00/00/0000",
-            hintStyle: hintTextStyle ??
-                themeData.hintStyle ??
-                const TextStyle(color: Color(0xFF9299A4), fontSize: 13, fontWeight: FontWeight.w500),
+            hintStyle: hintTextStyle ?? themeData.hintStyle ?? const TextStyle(color: Color(0xFF9299A4), fontSize: 13, fontWeight: FontWeight.w500),
           ),
         ),
+        if (subFieldText != null) ...[
+          sh(4),
+          Text(subFieldText!, style: themeData.subFieldTextStyle ?? TextStyle(fontSize: sp(11), color: Colors.black.withOpacity(.75), fontWeight: FontWeight.w500)),
+        ],
       ],
     );
   }
@@ -961,6 +953,7 @@ class _Immatriculation extends TextFormUpdated {
     final InputBorder? border,
     final String? defaultValue,
     final void Function(String?)? onChanged,
+    final String? subFieldText,
   }) : super(
           theme: theme,
           fieldName: fieldName,
@@ -995,6 +988,7 @@ class _Immatriculation extends TextFormUpdated {
           textStyle: textStyle,
           onChanged: onChanged,
           defaultValue: defaultValue,
+          subFieldText: subFieldText,
         );
 
   @override
@@ -1017,9 +1011,7 @@ class _Immatriculation extends TextFormUpdated {
                 : fieldName != null
                     ? Text(
                         fieldName!,
-                        style: fieldNameStyle ??
-                            themeData.fieldNameStyle ??
-                            const TextStyle(color: Color(0xFF02132B), fontSize: 12, fontWeight: FontWeight.w500),
+                        style: fieldNameStyle ?? themeData.fieldNameStyle ?? const TextStyle(color: Color(0xFF02132B), fontSize: 12, fontWeight: FontWeight.w500),
                       )
                     : Container(),
             fieldPostRedirection == null ? const SizedBox() : const Spacer(),
@@ -1050,9 +1042,7 @@ class _Immatriculation extends TextFormUpdated {
               focusNode ?? FocusNode(),
               false,
               (_) {
-                onChanged != null
-                    ? onChanged!(form0Controller.text + form1Controller.text + form2Controller.text)
-                    : null;
+                onChanged != null ? onChanged!(form0Controller.text + form1Controller.text + form2Controller.text) : null;
                 if (_.length >= 2) FocusScope.of(context).requestFocus(form1Node);
               },
               form0Controller,
@@ -1067,9 +1057,7 @@ class _Immatriculation extends TextFormUpdated {
               form1Node,
               false,
               (_) {
-                onChanged != null
-                    ? onChanged!(form0Controller.text + form1Controller.text + form2Controller.text)
-                    : null;
+                onChanged != null ? onChanged!(form0Controller.text + form1Controller.text + form2Controller.text) : null;
                 if (_.length >= 3) FocusScope.of(context).requestFocus(form2Node);
                 if (_.isEmpty) FocusScope.of(context).requestFocus(focusNode);
               },
@@ -1085,9 +1073,7 @@ class _Immatriculation extends TextFormUpdated {
               form2Node,
               true,
               (_) {
-                onChanged != null
-                    ? onChanged!(form0Controller.text + form1Controller.text + form2Controller.text)
-                    : null;
+                onChanged != null ? onChanged!(form0Controller.text + form1Controller.text + form2Controller.text) : null;
                 if (_.length >= 2 && nextFocusNode != null) {
                   FocusScope.of(context).requestFocus(nextFocusNode);
                 } else if (_.length >= 2) {
@@ -1100,7 +1086,11 @@ class _Immatriculation extends TextFormUpdated {
               themeData,
             ),
           ],
-        )
+        ),
+        if (subFieldText != null) ...[
+          sh(4),
+          Text(subFieldText!, style: themeData.subFieldTextStyle ?? TextStyle(fontSize: sp(11), color: Colors.black.withOpacity(.75), fontWeight: FontWeight.w500)),
+        ],
       ],
     );
   }
@@ -1136,18 +1126,13 @@ class _Immatriculation extends TextFormUpdated {
               : null,
           onFieldSubmitted: lastForm_
               ? (String val) {
-                  onFieldSubmitted != null
-                      ? onFieldSubmitted!(form0Controller.text + form1Controller.text + form2Controller.text)
-                      : null;
+                  onFieldSubmitted != null ? onFieldSubmitted!(form0Controller.text + form1Controller.text + form2Controller.text) : null;
                   FocusScope.of(context).requestFocus(nextFocusNode);
                 }
               : (_) {},
           obscureText: obscuringText ?? false,
           obscuringCharacter: themeData.obscuringCharacter ?? '*',
-          style: textStyle ??
-              themeData.fieldStyle ??
-              const TextStyle(color: Color(0xFF02132B), fontSize: 13, fontWeight: FontWeight.w500)
-                  .copyWith(color: const Color(0xFF02132B)),
+          style: textStyle ?? themeData.fieldStyle ?? const TextStyle(color: Color(0xFF02132B), fontSize: 13, fontWeight: FontWeight.w500).copyWith(color: const Color(0xFF02132B)),
           cursorColor: cursorColor ?? themeData.cursorColor ?? const Color(0xFF02132B),
           decoration: InputDecoration(
               errorStyle: const TextStyle(fontSize: 12, height: 0),
@@ -1171,8 +1156,7 @@ class _Immatriculation extends TextFormUpdated {
               suffixIconConstraints: suffixChildBoxConstraint ?? themeData.suffixChildBoxConstraint,
               filled: filled ?? true,
               fillColor: backgroundColor ?? themeData.backgroundColor ?? const Color(0xFF02132B).withOpacity(0.03),
-              contentPadding:
-                  contentPadding ?? themeData.contentPadding ?? const EdgeInsets.fromLTRB(9.5, 17.5, 9.5, 17.5),
+              contentPadding: contentPadding ?? themeData.contentPadding ?? const EdgeInsets.fromLTRB(9.5, 17.5, 9.5, 17.5),
               focusedErrorBorder: focusedErrorBorder ??
                   themeData.focusedErrorBorder ??
                   OutlineInputBorder(
@@ -1190,14 +1174,10 @@ class _Immatriculation extends TextFormUpdated {
                         width: 0.5,
                       )),
               focusedBorder: focusedBorder ?? themeData.focusedBorder,
-              border: border ??
-                  themeData.border ??
-                  UnderlineInputBorder(borderRadius: BorderRadius.circular(6), borderSide: BorderSide.none),
+              border: border ?? themeData.border ?? UnderlineInputBorder(borderRadius: BorderRadius.circular(6), borderSide: BorderSide.none),
               hintText: hintText_,
               // hintText: placeholder != null ? placeholder!.substring(5, 7) : "00",
-              hintStyle: hintTextStyle ??
-                  themeData.hintStyle ??
-                  const TextStyle(color: Color(0xFF9299A4), fontSize: 13, fontWeight: FontWeight.w500)),
+              hintStyle: hintTextStyle ?? themeData.hintStyle ?? const TextStyle(color: Color(0xFF9299A4), fontSize: 13, fontWeight: FontWeight.w500)),
         ),
       ),
     );
@@ -1233,6 +1213,7 @@ class _TextArea extends TextFormUpdated {
     final double? maxLine,
     final double? minLine,
     final String? Function(String?)? validator,
+    String? subFieldText,
   }) : super(
           theme: theme,
           fieldName: fieldName,
@@ -1261,6 +1242,7 @@ class _TextArea extends TextFormUpdated {
           nextFocusNode: nextFocusNode,
           minLine: minLine,
           maxLine: maxLine,
+          subFieldText: subFieldText,
         );
   @override
   Widget build(BuildContext context) {
@@ -1271,9 +1253,7 @@ class _TextArea extends TextFormUpdated {
       children: [
         Text(
           fieldName ?? "NOM FIELD",
-          style: fieldNameStyle ??
-              themeData.fieldNameStyle ??
-              const TextStyle(color: Color(0xFF02132B), fontSize: 12, fontWeight: FontWeight.w500),
+          style: fieldNameStyle ?? themeData.fieldNameStyle ?? const TextStyle(color: Color(0xFF02132B), fontSize: 12, fontWeight: FontWeight.w500),
         ),
         sh(7),
         TextFormField(
@@ -1291,10 +1271,7 @@ class _TextArea extends TextFormUpdated {
           validator: validator,
           onChanged: onChanged,
           controller: controller,
-          style: textStyle ??
-              themeData.fieldStyle ??
-              const TextStyle(color: Color(0xFF02132B), fontSize: 13, fontWeight: FontWeight.w500)
-                  .copyWith(color: const Color(0xFF02132B)),
+          style: textStyle ?? themeData.fieldStyle ?? const TextStyle(color: Color(0xFF02132B), fontSize: 13, fontWeight: FontWeight.w500).copyWith(color: const Color(0xFF02132B)),
           cursorColor: cursorColor ?? themeData.cursorColor ?? const Color(0xFF02132B),
           decoration: InputDecoration(
               errorStyle: const TextStyle(fontSize: 12, height: 0),
@@ -1318,8 +1295,7 @@ class _TextArea extends TextFormUpdated {
               suffixIconConstraints: suffixChildBoxConstraint ?? themeData.suffixChildBoxConstraint,
               filled: filled ?? true,
               fillColor: backgroundColor ?? themeData.backgroundColor ?? const Color(0xFF02132B).withOpacity(0.03),
-              contentPadding:
-                  contentPadding ?? themeData.contentPadding ?? const EdgeInsets.fromLTRB(9.5, 17.5, 9.5, 17.5),
+              contentPadding: contentPadding ?? themeData.contentPadding ?? const EdgeInsets.fromLTRB(9.5, 17.5, 9.5, 17.5),
               focusedErrorBorder: focusedErrorBorder ??
                   themeData.focusedErrorBorder ??
                   OutlineInputBorder(
@@ -1337,14 +1313,14 @@ class _TextArea extends TextFormUpdated {
                         width: 0.5,
                       )),
               focusedBorder: focusedBorder ?? themeData.focusedBorder,
-              border: border ??
-                  themeData.border ??
-                  UnderlineInputBorder(borderRadius: BorderRadius.circular(6), borderSide: BorderSide.none),
+              border: border ?? themeData.border ?? UnderlineInputBorder(borderRadius: BorderRadius.circular(6), borderSide: BorderSide.none),
               hintText: hintText ?? "Placeholder",
-              hintStyle: hintTextStyle ??
-                  themeData.hintStyle ??
-                  const TextStyle(color: Color(0xFF9299A4), fontSize: 13, fontWeight: FontWeight.w500)),
+              hintStyle: hintTextStyle ?? themeData.hintStyle ?? const TextStyle(color: Color(0xFF9299A4), fontSize: 13, fontWeight: FontWeight.w500)),
         ),
+        if (subFieldText != null) ...[
+          sh(4),
+          Text(subFieldText!, style: themeData.subFieldTextStyle ?? TextStyle(fontSize: sp(11), color: Colors.black.withOpacity(.75), fontWeight: FontWeight.w500)),
+        ],
       ],
     );
   }
