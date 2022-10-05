@@ -33,6 +33,7 @@ class SelectForm<T> extends HookWidget {
   final List<DropdownMenuItem<T>>? items;
   final Function(T?)? onChangedSelect;
   final String? Function(T?)? validator;
+  final String? subFieldText;
 
   const SelectForm({
     this.theme,
@@ -63,6 +64,7 @@ class SelectForm<T> extends HookWidget {
     this.items,
     this.onChangedSelect,
     this.validator,
+    this.subFieldText,
     Key? key,
   }) : super(key: key);
 
@@ -131,6 +133,10 @@ class SelectForm<T> extends HookWidget {
               hintText: hintText ?? "Placeholder",
               hintStyle: hintTextStyle ?? themeData.hintStyle ?? const TextStyle(color: Color(0xFF9299A4), fontSize: 13, fontWeight: FontWeight.w500)),
         ),
+        if (subFieldText != null) ...[
+          sh(4),
+          Text(subFieldText!, style: themeData.subFieldTextStyle ?? TextStyle(fontSize: sp(11), color: Colors.black.withOpacity(.75), fontWeight: FontWeight.w500)),
+        ],
       ],
     );
   }
