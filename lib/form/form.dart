@@ -1,3 +1,5 @@
+// ignore_for_file: unused_local_variable
+
 import 'package:core_kosmos/core_kosmos.dart';
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:flutter/material.dart';
@@ -486,7 +488,7 @@ class _Classic extends TextFormUpdated {
               focusedErrorBorder: focusedErrorBorder ??
                   themeData.focusedErrorBorder ??
                   OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(6),
+                      borderRadius: BorderRadius.circular(radius ?? 6),
                       borderSide: const BorderSide(
                         color: Colors.redAccent,
                         width: 0.5,
@@ -494,13 +496,15 @@ class _Classic extends TextFormUpdated {
               errorBorder: errorBorder ??
                   themeData.errorBorder ??
                   OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(6),
+                      borderRadius: BorderRadius.circular(radius ?? 6),
                       borderSide: const BorderSide(
                         color: Colors.red,
                         width: 0.5,
                       )),
               focusedBorder: focusedBorder ?? themeData.focusedBorder,
-              border: border ?? themeData.border ?? UnderlineInputBorder(borderRadius: BorderRadius.circular(6), borderSide: BorderSide.none),
+              border: border ??
+                  themeData.border ??
+                  UnderlineInputBorder(borderRadius: BorderRadius.circular(radius ?? 6), borderSide: BorderSide.none),
               hintText: hintText ?? "Placeholder",
               hintStyle: hintTextStyle ?? themeData.hintStyle ?? const TextStyle(color: Color(0xFF9299A4), fontSize: 13, fontWeight: FontWeight.w500)),
         ),

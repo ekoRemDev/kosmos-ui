@@ -1,7 +1,7 @@
-import 'dart:io';
+// ignore_for_file: unnecessary_import
 
 import 'package:core_kosmos/core_package.dart';
-import 'package:example/imagePicker.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:responsive_framework/responsive_framework.dart';
@@ -64,6 +64,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    int taped = 0;
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
@@ -73,95 +74,48 @@ class _MyHomePageState extends State<MyHomePage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              sh(80),
+              sh(40),
               CTA.back(
-                theme: CtaThemeData(backgroundColor: Colors.transparent),
-              ),
-              sh(80),
-              Header.secondary(),
-              sh(80),
-              SettingsCellule(
-                onClick: () {},
-                icon: Icons.facebook,
-                iconColor: Colors.white,
-                activeIconColor: Colors.blue,
-              ),  
-              const SizedBox(height: 400),
-              Input.image(
-                image: image,
-                onTap: () async {
-                  FilePickerResult? res = await FilePicker.platform.pickFiles();
-                  setState(() {
-                    image = res?.files[0];
-                    print(image.toString());
-                  });
-                  // getImage(
-                  //     context: context,
-                  //     onImageSelected: ((_) {
-                  //       setState(() {
-                  //         image = _;
-                  //       });
-                  //     }));
+                theme: const CtaThemeData(
+                  backgroundColor: Colors.blue,
+                ),
+                onTap: () {
+                  taped++;
+                  printInDebug(taped);
                 },
               ),
-              const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 10),
-                child: SelectForm<String>(
-                  items: [
-                    DropdownMenuItem(
-                      value: 'Value1',
-                      child: Text(
-                        'Value1',
-                      ),
-                    ),
-                    DropdownMenuItem(
-                      value: 'Value2',
-                      child: Text(
-                        'Value2',
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(height: 400),
-              const Cards.five(),
-              const SizedBox(height: 400),
-              const Input.image(),
-              const SizedBox(height: 400),
+              sh(40),
               CTA.primary(
-                textButton: 'Primary CTA',
-                onTap: () async {
-                  await Future.delayed(const Duration(seconds: 5));
+                textButton: 'CtaPrimary',
+                onTap: () {
+                  taped++;
+                  printInDebug(taped);
                 },
               ),
-              sh(80),
-              CustomSlider.slider(
-                min: 0,
-                max: 100,
-                customSliderThumbShape: CustomSliderThumbShape(
-                    elevation: 0, pressedElevation: 0, stringNumber: "${(value).toInt()} km", ajustString: 2.2),
-                onChanged: (_) {
-                  setState(() {
-                    value = _;
-                  });
-                },
-              ),
-              sh(80),
-              SizedBox(
-                width: 284,
-                child: Input.validatedFile(
-                  height: 200,
-                  fieldName: "Test",
-                  desc: "Format PDF",
-                  defaultFiles: items,
+              sh(40),
+              CTA.secondary(
+                theme: const CtaThemeData(
+                  backgroundColor: Colors.blue,
                 ),
+                textButton: 'CtaSecondary',
+                textButtonStyle: const TextStyle(
+                  color: Colors.black,
+                ),
+                onTap: () {
+                  taped++;
+                  printInDebug(taped);
+                },
               ),
-              sh(80),
-              SizedBox(
-                height: 100,
-                width: 800,
-                child: ProgressBar.separated(
-                    max: 5, current: 2, items: const ["1", "2", "3", "4", "5"], showPercentage: true),
+              sh(40),
+              CTA.tiers(
+                textButton: 'CtaTiers',
+                textButtonStyle: const TextStyle(
+                  color: Colors.black,
+                ),
+                onTap: () {
+                  taped++;
+                  printInDebug(taped);
+                },
               ),
             ],
           ),
