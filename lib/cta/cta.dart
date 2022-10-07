@@ -67,6 +67,7 @@ abstract class CTA extends HookWidget {
     final double? distanceBetweenIconText,
     final Function? onTap,
     final VoidCallback? onDoubleTap,
+    final Color? backgroundColor,
     final CtaThemeData? theme,
     final String? themeName,
     final BoxBorder? border,
@@ -87,6 +88,7 @@ abstract class CTA extends HookWidget {
     final double? distanceBetweenIconText,
     final Function? onTap,
     final VoidCallback? onDoubleTap,
+    final Color? backgroundColor,
     final CtaThemeData? theme,
     final String? themeName,
     final BoxBorder? border,
@@ -105,6 +107,7 @@ abstract class CTA extends HookWidget {
     final TextStyle? textButtonStyle,
     final Widget? child,
     final Icon? icon,
+    final Color? backgroundColor,
     final CtaThemeData? theme,
     final bool? isEnabled,
     final String? themeName,
@@ -144,30 +147,32 @@ class _Primary extends CTA {
     final double? distanceBetweenIconText,
     final Function? onTap,
     final VoidCallback? onDoubleTap,
+    final Color? backgroundColor,
     final CtaThemeData? theme,
     final String? themeName,
     final BoxBorder? border,
     final LinearGradient? gradient,
     final bool loading = false,
   }) : super(
-          height: height,
-          width: width,
-          radius: radius,
-          isEnabled: isEnabled,
-          child: child,
-          beforeIcon: beforeIcon,
-          afterIcon: afterIcon,
-          textButton: textButton,
-          textButtonStyle: textButtonStyle,
-          distanceBetweenIconText: distanceBetweenIconText,
-          onTap: onTap,
-          onDoubleTap: onDoubleTap,
-          theme: theme,
-          themeName: themeName,
-          border: border,
-          gradient: gradient,
-          loading: loading,
-        );
+    height: height,
+    width: width,
+    radius: radius,
+    isEnabled: isEnabled,
+    child: child,
+    beforeIcon: beforeIcon,
+    afterIcon: afterIcon,
+    textButton: textButton,
+    textButtonStyle: textButtonStyle,
+    distanceBetweenIconText: distanceBetweenIconText,
+    onTap: onTap,
+    onDoubleTap: onDoubleTap,
+    backgroundColor: backgroundColor,
+    theme: theme,
+    themeName: themeName,
+    border: border,
+    gradient: gradient,
+    loading: loading,
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -177,65 +182,59 @@ class _Primary extends CTA {
     return Material(
       type: MaterialType.transparency,
       child: Opacity(
-        opacity: isEnabled == null
-            ? 1
-            : isEnabled!
-                ? 1
-                : 0.5,
-        child: Container(
-          height: formatHeight(height ?? getResponsiveValue(context, defaultValue: 54, desktop: themeData.heightInWeb, phone: themeData.heightInMobile)),
-          width: formatWidth(width ?? getResponsiveValue(context, defaultValue: double.infinity, desktop: themeData.widthInWeb, phone: themeData.widthInMobile)),
-          constraints: themeData.constraints,
-          decoration: BoxDecoration(
-              color: themeData.backgroundColor ?? (gradient != null ? null : Theme.of(context).primaryColor),
+        opacity: isEnabled == null ? 1 : (isEnabled! ? 1 : 0.5),
+        child: InkWell(
+          borderRadius: BorderRadius.circular(radius ?? themeData.borderRadius ?? 7),
+          onTap: isEnabled == null || isEnabled! ? () async {
+            state.value = true;
+            if (onTap != null) await onTap!();
+            state.value = false;
+          } : null,
+          onDoubleTap: onDoubleTap,
+          child: Container(
+            height: formatHeight(height ?? getResponsiveValue(context, defaultValue: 54, desktop: themeData.heightInWeb, phone: themeData.heightInMobile)),
+            width: formatWidth(width ?? getResponsiveValue(context, defaultValue: double.infinity, desktop: themeData.widthInWeb, phone: themeData.widthInMobile)),
+            constraints: themeData.constraints,
+            decoration: BoxDecoration(
+              color: backgroundColor ?? themeData.backgroundColor ?? (gradient != null ? null : Theme.of(context).primaryColor),
               gradient: gradient ?? themeData.gradient,
               borderRadius: BorderRadius.circular(radius ?? themeData.borderRadius ?? 7),
               border: border ?? themeData.border),
-          child: Material(
-            type: MaterialType.transparency,
-            child: InkWell(
-              onTap: isEnabled == null || isEnabled!
-                  ? () async {
-                      state.value = true;
-                      if (onTap != null) await onTap!();
-                      state.value = false;
-                    }
-                  : null,
-              onDoubleTap: onDoubleTap,
-              borderRadius: BorderRadius.circular(radius ?? themeData.borderRadius ?? 7),
-              child: state.value
-                  ? Center(
-                      child: LoaderClassique(
-                        radius: (height ?? getResponsiveValue(context, defaultValue: 54, desktop: themeData.heightInWeb, phone: themeData.heightInMobile))! / 5,
-                        activeColor: themeData.loaderColor,
-                      ),
-                    )
-                  : child ??
-                      (!loading
-                          ? Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                beforeIcon != null
-                                    ? Icon(
-                                        beforeIcon,
-                                        color: Colors.white,
-                                      )
-                                    : const SizedBox(),
-                                SizedBox(width: beforeIcon != null ? distanceBetweenIconText ?? themeData.distanceBetweenIconText ?? 10 : 0),
-                                Text(
-                                  textButton ?? 'Button_Text',
-                                  style: textButtonStyle ?? themeData.textButtonStyle ?? const TextStyle(color: Colors.white),
-                                ),
-                                SizedBox(width: afterIcon != null ? distanceBetweenIconText ?? themeData.distanceBetweenIconText ?? 10 : 0),
-                                afterIcon != null
-                                    ? Icon(
-                                        afterIcon,
-                                        color: Colors.white,
-                                      )
-                                    : const SizedBox()
-                              ],
-                            )
-                          : Transform.scale(scale: 0.6, child: const LoaderClassique(activeColor: Colors.white))),
+            child: Material(
+              type: MaterialType.transparency,
+              child: InkWell(
+                borderRadius: BorderRadius.circular(radius ?? themeData.borderRadius ?? 7),
+                onTap: isEnabled == null || isEnabled! ? () async {
+                  state.value = true;
+                  if (onTap != null) await onTap!();
+                  state.value = false;
+                } : null,
+                onDoubleTap: onDoubleTap,
+                child: state.value ? Center(
+                  child: LoaderClassique(
+                    radius: (height ?? getResponsiveValue(context, defaultValue: 54, desktop: themeData.heightInWeb, phone: themeData.heightInMobile))! / 5,
+                    activeColor: themeData.loaderColor,
+                  ),
+                ) : child ?? (!loading ? Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    beforeIcon != null ? Icon(
+                      beforeIcon,
+                      color: Colors.white,
+                    ) : const SizedBox(),
+                    SizedBox(width: beforeIcon != null ? distanceBetweenIconText ?? themeData.distanceBetweenIconText ?? 10 : 0),
+                    Text(
+                      textButton ?? 'Button_Text',
+                      style: textButtonStyle ?? themeData.textButtonStyle ?? const TextStyle(color: Colors.white),
+                    ),
+                    SizedBox(width: afterIcon != null ? distanceBetweenIconText ?? themeData.distanceBetweenIconText ?? 10 : 0),
+                    afterIcon != null ? Icon(
+                      afterIcon,
+                      color: Colors.white,
+                    ) : const SizedBox()
+                  ],
+                ) : Transform.scale(scale: 0.6, child: const LoaderClassique(activeColor: Colors.white))),
+              ),
             ),
           ),
         ),
@@ -258,30 +257,32 @@ class _Secondary extends CTA {
     final double? distanceBetweenIconText,
     final Function? onTap,
     final VoidCallback? onDoubleTap,
+    final Color? backgroundColor,
     final CtaThemeData? theme,
     final String? themeName,
     final BoxBorder? border,
     final LinearGradient? gradient,
     final bool loading = false,
   }) : super(
-          height: height,
-          width: width,
-          radius: radius,
-          child: child,
-          beforeIcon: beforeIcon,
-          isEnabled: isEnabled,
-          afterIcon: afterIcon,
-          textButton: textButton,
-          textButtonStyle: textButtonStyle,
-          distanceBetweenIconText: distanceBetweenIconText,
-          onTap: onTap,
-          onDoubleTap: onDoubleTap,
-          theme: theme,
-          themeName: themeName,
-          border: border,
-          gradient: gradient,
-          loading: loading,
-        );
+    height: height,
+    width: width,
+    radius: radius,
+    child: child,
+    beforeIcon: beforeIcon,
+    isEnabled: isEnabled,
+    afterIcon: afterIcon,
+    textButton: textButton,
+    textButtonStyle: textButtonStyle,
+    distanceBetweenIconText: distanceBetweenIconText,
+    onTap: onTap,
+    onDoubleTap: onDoubleTap,
+    theme: theme,
+    backgroundColor: backgroundColor,
+    themeName: themeName,
+    border: border,
+    gradient: gradient,
+    loading: loading,
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -289,19 +290,23 @@ class _Secondary extends CTA {
     var state = useState(false);
 
     return Material(
-        type: MaterialType.transparency,
-        child: Opacity(
-          opacity: isEnabled == null
-              ? 1
-              : isEnabled!
-                  ? 1
-                  : 0.5,
+      type: MaterialType.transparency,
+      child: Opacity(
+        opacity: isEnabled == null ? 1 : (isEnabled! ? 1 : 0.5),
+        child: InkWell(
+          borderRadius: BorderRadius.circular(radius ?? themeData.borderRadius ?? 7),
+          onTap: isEnabled == null || isEnabled! ? () async {
+            state.value = true;
+            if (onTap != null) await onTap!();
+            state.value = false;
+          } : null,
+          onDoubleTap: onDoubleTap,
           child: Container(
             height: formatHeight(height ?? getResponsiveValue(context, defaultValue: 54, desktop: themeData.heightInWeb, phone: themeData.heightInMobile)),
             width: formatWidth(width ?? getResponsiveValue(context, defaultValue: double.infinity, desktop: themeData.widthInWeb, phone: themeData.widthInMobile)),
             constraints: themeData.constraints,
             decoration: BoxDecoration(
-              color: themeData.backgroundColor,
+              color: backgroundColor ?? themeData.backgroundColor ?? Colors.blue,
               gradient: gradient ?? themeData.gradient,
               borderRadius: BorderRadius.circular(radius ?? themeData.borderRadius ?? 7),
               border: border ?? themeData.border,
@@ -309,50 +314,43 @@ class _Secondary extends CTA {
             child: Material(
               type: MaterialType.transparency,
               child: InkWell(
-                onTap: isEnabled == null || isEnabled!
-                    ? () async {
-                        state.value = true;
-                        if (onTap != null) await onTap!();
-                        state.value = false;
-                      }
-                    : null,
-                onDoubleTap: onDoubleTap,
                 borderRadius: BorderRadius.circular(radius ?? themeData.borderRadius ?? 7),
-                child: state.value
-                    ? Center(
-                        child: LoaderClassique(
-                          radius: (height ?? getResponsiveValue(context, defaultValue: 54, desktop: themeData.heightInWeb, phone: themeData.heightInMobile))! / 5,
-                          activeColor: themeData.loaderColor,
-                        ),
-                      )
-                    : child ??
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            beforeIcon != null
-                                ? Icon(
-                                    beforeIcon,
-                                    color: textButtonStyle?.color ?? themeData.textButtonStyle?.color ?? Colors.white,
-                                  )
-                                : const SizedBox(),
-                            SizedBox(width: beforeIcon != null ? distanceBetweenIconText ?? themeData.distanceBetweenIconText ?? 10 : 0),
-                            Text(
-                              textButton ?? 'Button_Text',
-                              style: textButtonStyle ?? themeData.textButtonStyle ?? const TextStyle(color: Colors.white),
-                            ),
-                            SizedBox(width: afterIcon != null ? distanceBetweenIconText ?? themeData.distanceBetweenIconText ?? 10 : 0),
-                            afterIcon != null
-                                ? Icon(
-                                    afterIcon,
-                                    color: textButtonStyle?.color ?? themeData.textButtonStyle?.color ?? Colors.white,
-                                  )
-                                : const SizedBox()
-                          ],
-                        ),
+                onTap: isEnabled == null || isEnabled! ? () async {
+                  state.value = true;
+                  if (onTap != null) await onTap!();
+                  state.value = false;
+                } : null,
+                onDoubleTap: onDoubleTap,
+                child: state.value ? Center(
+                  child: LoaderClassique(
+                    radius: (height ?? getResponsiveValue(context, defaultValue: 54, desktop: themeData.heightInWeb, phone: themeData.heightInMobile))! / 5,
+                    activeColor: themeData.loaderColor,
+                  ),
+                ) : child ?? Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    beforeIcon != null ? Icon(
+                      beforeIcon,
+                      color: textButtonStyle?.color ?? themeData.textButtonStyle?.color ?? Colors.white,
+                    ) : const SizedBox(),
+                    SizedBox(width: beforeIcon != null ? distanceBetweenIconText ?? themeData.distanceBetweenIconText ?? 10 : 0),
+                    Text(
+                      textButton ?? 'Button_Text',
+                      style: textButtonStyle ?? themeData.textButtonStyle ?? const TextStyle(color: Colors.white),
+                    ),
+                    SizedBox(width: afterIcon != null ? distanceBetweenIconText ?? themeData.distanceBetweenIconText ?? 10 : 0),
+                    afterIcon != null ? Icon(
+                      afterIcon,
+                      color: textButtonStyle?.color ?? themeData.textButtonStyle?.color ?? Colors.white,
+                    ) : const SizedBox()
+                  ],
+                ),
               ),
             ),
           ),
-        ));
+        ),
+      )
+    );
   }
 }
 
@@ -369,67 +367,68 @@ class _Tiers extends CTA {
     final VoidCallback? onDoubleTap,
     final String? textButton,
     final TextStyle? textButtonStyle,
+    final Color? backgroundColor,
+    final LinearGradient? gradient,
     final CtaThemeData? theme,
     final String? themeName,
     final BoxBorder? border,
   }) : super(
-          height: height,
-          width: width,
-          radius: radiusOnTap,
-          onTap: onTap,
-          onDoubleTap: onDoubleTap,
-          child: child,
-          icon: icon,
-          isEnabled: isEnabled,
-          textButton: textButton,
-          textButtonStyle: textButtonStyle,
-          circleOnTap: circleOnTap,
-          theme: theme,
-          themeName: themeName,
-          border: border,
-        );
+    height: height,
+    width: width,
+    radius: radiusOnTap,
+    onTap: onTap,
+    onDoubleTap: onDoubleTap,
+    child: child,
+    icon: icon,
+    isEnabled: isEnabled,
+    textButton: textButton,
+    textButtonStyle: textButtonStyle,
+    circleOnTap: circleOnTap,
+    backgroundColor: backgroundColor,
+    gradient: gradient,
+    theme: theme,
+    themeName: themeName,
+    border: border,
+  );
 
   @override
   Widget build(BuildContext context) {
     final themeData = loadThemeData(theme, themeName ?? "tiers_button", () => const CtaThemeData())!;
-    return Opacity(
-      opacity: isEnabled == null
-          ? 1
-          : isEnabled!
-              ? 1
-              : 0.5,
-      child: InkWell(
-        borderRadius: BorderRadius.circular(circleOnTap ? 1000 : radius ?? themeData.borderRadius ?? 14),
-        onTap: isEnabled == null || isEnabled!
-            ? () async {
-                if (onTap != null) await onTap!();
-              }
-            : null,
-        onDoubleTap: onDoubleTap,
-        child: Container(
-          width: width,
-          height: height,
-          constraints: BoxConstraints(
-            minHeight: formatHeight(height ?? getResponsiveValue(context, defaultValue: 54, desktop: themeData.widthInWeb, phone: themeData.widthInMobile)),
-            minWidth: formatHeight(height ?? getResponsiveValue(context, defaultValue: 54, desktop: themeData.heightInWeb, phone: themeData.heightInMobile)),
-          ),
-          decoration: BoxDecoration(
-            border: border ?? themeData.border,
-            borderRadius: BorderRadius.all(Radius.circular(themeData.borderRadius ?? 0)),
-          ),
-          padding: const EdgeInsets.all(15.0),
-          child: IntrinsicWidth(
-            child: child ?? Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                icon != null ? icon! : const SizedBox(),
-                icon != null && textButton != null
-                    ? const SizedBox(
-                        width: 9.5,
-                      )
-                    : const SizedBox(),
-                textButton != null ? Text(textButton!, style: textButtonStyle ?? themeData.textButtonStyle) : const SizedBox(),
-              ],
+    return Material(
+      type: MaterialType.transparency,
+      child: Opacity(
+        opacity: isEnabled == null ? 1 : (isEnabled! ? 1 : 0.5),
+        child: InkWell(
+          borderRadius: BorderRadius.circular(circleOnTap ? 1000 : radius ?? themeData.borderRadius ?? 14),
+          onTap: isEnabled == null || isEnabled! ? () async {
+            if (onTap != null) await onTap!();
+          } : null,
+          onDoubleTap: onDoubleTap,
+          child: Container(
+            width: width,
+            height: height,
+            constraints: BoxConstraints(
+              minHeight: formatHeight(height ?? getResponsiveValue(context, defaultValue: 54, desktop: themeData.widthInWeb, phone: themeData.widthInMobile)),
+              minWidth: formatWidth(height ?? getResponsiveValue(context, defaultValue: 54, desktop: themeData.heightInWeb, phone: themeData.heightInMobile)),
+            ),
+            decoration: BoxDecoration(
+              color: backgroundColor ?? themeData.backgroundColor ?? Colors.transparent,
+              gradient: gradient ?? themeData.gradient,
+              border: border ?? themeData.border,
+              borderRadius: BorderRadius.circular(circleOnTap ? 1000 : radius ?? themeData.borderRadius ?? 14),
+            ),
+            padding: const EdgeInsets.all(15.0),
+            child: IntrinsicWidth(
+              child: child ?? Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  icon != null ? icon! : const SizedBox(),
+                  icon != null && textButton != null ? const SizedBox(
+                    width: 9.5,
+                  ) : const SizedBox(),
+                  textButton != null ? Text(textButton!, style: textButtonStyle ?? themeData.textButtonStyle) : const SizedBox(),
+                ],
+              ),
             ),
           ),
         ),
@@ -448,57 +447,63 @@ class _Back extends CTA {
     final Function? onTap,
     final VoidCallback? onDoubleTap,
     final Color? backgroundColor,
+    final LinearGradient? gradient,
     final CtaThemeData? theme,
     final String? themeName,
     final BoxBorder? border,
     final Color? iconColor,
   }) : super(
-          height: height,
-          width: width,
-          isEnabled: isEnabled,
-          radius: radius,
-          onTap: onTap,
-          onDoubleTap: onDoubleTap,
-          backIcon: backIcon,
-          backgroundColor: backgroundColor,
-          theme: theme,
-          themeName: themeName,
-          border: border,
-          iconColor: iconColor,
-        );
+    height: height,
+    width: width,
+    isEnabled: isEnabled,
+    radius: radius,
+    onTap: onTap,
+    onDoubleTap: onDoubleTap,
+    backIcon: backIcon,
+    backgroundColor: backgroundColor,
+    gradient: gradient,
+    theme: theme,
+    themeName: themeName,
+    border: border,
+    iconColor: iconColor,
+  );
 
   @override
   Widget build(BuildContext context) {
     final themeData = loadThemeData(theme, themeName ?? "back_button", () => const CtaThemeData())!;
     return Material(
-        type: MaterialType.transparency,
-        child: Opacity(
-          opacity: isEnabled == null
-              ? 1
-              : isEnabled!
-                  ? 1
-                  : 0.5,
-          child: InkWell(
-            onTap: isEnabled == null || isEnabled!
-                ? () async {
-                    if (onTap != null) await onTap!();
-                  }
-                : null,
-            onDoubleTap: onDoubleTap,
-            child: Container(
-              height: formatHeight(height ?? themeData.height ?? getResponsiveValue(context, defaultValue: 47, desktop: themeData.heightInWeb, phone: themeData.heightInMobile)),
-              width: formatHeight(height ?? themeData.height ?? getResponsiveValue(context, defaultValue: 47, desktop: themeData.widthInWeb, phone: themeData.widthInMobile)),
-              decoration: BoxDecoration(
-                color: backgroundColor ?? themeData.backgroundColor ?? Colors.transparent,
+      type: MaterialType.transparency,
+      child: Opacity(
+        opacity: isEnabled == null ? 1 : (isEnabled! ? 1 : 0.5),
+        child: InkWell(
+          borderRadius: BorderRadius.circular(radius ?? themeData.borderRadius ?? 14),
+          onTap: isEnabled == null || isEnabled! ? () async {
+            if (onTap != null) await onTap!();
+          } : null,
+          onDoubleTap: onDoubleTap,
+          child: Container(
+            height: formatHeight(height ?? themeData.height ?? getResponsiveValue(context, defaultValue: 47, desktop: themeData.heightInWeb, phone: themeData.heightInMobile)),
+            width: formatWidth(height ?? themeData.height ?? getResponsiveValue(context, defaultValue: 47, desktop: themeData.widthInWeb, phone: themeData.widthInMobile)),
+            decoration: BoxDecoration(
+              color: backgroundColor ?? themeData.backgroundColor ?? Colors.transparent,
+              gradient: gradient ?? gradient,
+              border: border ?? themeData.border,
+              borderRadius: BorderRadius.circular(radius ?? themeData.borderRadius ?? 14),
+            ),
+            child: Material(
+              type: MaterialType.transparency,
+              child: InkWell(
                 borderRadius: BorderRadius.circular(radius ?? themeData.borderRadius ?? 14),
-                border: border ?? themeData.border,
-              ),
-              child: Material(
-                type: MaterialType.transparency,
-                child: Icon(backIcon ?? Icons.arrow_back_ios_new_rounded, color: iconColor ?? Colors.black),
+                onTap: isEnabled == null || isEnabled! ? () async {
+                  if (onTap != null) await onTap!();
+                } : null,
+                onDoubleTap: onDoubleTap,
+                child: Icon(backIcon ?? Icons.arrow_back_ios_new_rounded, color: iconColor ?? Colors.black)
               ),
             ),
           ),
-        ));
+        ),
+      )
+    );
   }
 }
