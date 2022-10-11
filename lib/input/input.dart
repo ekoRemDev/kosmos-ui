@@ -707,7 +707,7 @@ class _ValidatedFile extends Input {
                   borderRadius: BorderRadius.circular(inkRadius ?? 7),
                   onTap: () async {
                     if (onTap != null) onTap!();
-                    FilePickerResult? result = await FilePicker.platform.pickFiles();
+                    FilePickerResult? result = await FilePicker.platform.pickFiles(allowedExtensions: ["pdf", "PDF"]);
 
                     if (result != null) {
                       state.value = result.files.single;
