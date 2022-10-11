@@ -298,6 +298,8 @@ class _ProgressSeparated extends ProgressBar {
       children: [
         Text(
           customSmallTitle ?? customBigTitle ?? '${(current / max * 100).toInt()}%',
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
           style: textStyle ??
               themeData.style ??
               const TextStyle(
@@ -311,6 +313,7 @@ class _ProgressSeparated extends ProgressBar {
           builder: (_, boxConstraints) {
             return Row(
               mainAxisSize: MainAxisSize.max,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 for (var i = 0; i < max; i++) ...[
                   Expanded(
@@ -344,7 +347,8 @@ class _ProgressSeparated extends ProgressBar {
                                     ),
                                     if ((showPercentage ?? false) && current >= i)
                                       Positioned(
-                                        child: Icon(Icons.check_rounded, color: Colors.white, size: sp(14)),
+                                        child: Text("en cours", style: TextStyle(color: Colors.white, fontSize: sp(9), fontWeight: FontWeight.w500)),
+                                        // Icon(Icons.check_rounded, color: Colors.white, size: sp(14)),
                                         left: formatWidth(8),
                                         top: 0,
                                         bottom: 0,
@@ -359,6 +363,8 @@ class _ProgressSeparated extends ProgressBar {
                           sh(5),
                           Text(
                             items![i],
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
                             style: themeData.style?.copyWith(fontSize: sp(12)) ??
                                 TextStyle(
                                   color: const Color(0xFF02132B),
@@ -442,9 +448,8 @@ class ThreeBounceState extends State<ThreeBounce> with SingleTickerProviderState
     );
   }
 
-  Widget _itemBuilder(int index) => widget.itemBuilder != null
-      ? widget.itemBuilder!(context, index)
-      : DecoratedBox(decoration: BoxDecoration(color: widget.color ?? themeData.activeColor, shape: BoxShape.circle));
+  Widget _itemBuilder(int index) =>
+      widget.itemBuilder != null ? widget.itemBuilder!(context, index) : DecoratedBox(decoration: BoxDecoration(color: widget.color ?? themeData.activeColor, shape: BoxShape.circle));
 }
 
 class DelayTween extends Tween<double> {
