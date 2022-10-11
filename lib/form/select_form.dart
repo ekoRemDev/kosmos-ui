@@ -1,3 +1,5 @@
+// ignore_for_file: unused_local_variable
+
 import 'package:core_kosmos/core_kosmos.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';

@@ -1,3 +1,5 @@
+// ignore_for_file: file_names, unused_element
+
 import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
@@ -13,6 +15,7 @@ Future<File?> _getImage(ImageSource source) async {
   if(image!=null) {
     return (File(image.path));
   }
+  return null;
 }
 
 Future<File?> _cropImage(XFile? image) async {
