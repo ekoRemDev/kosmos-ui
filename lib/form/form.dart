@@ -502,9 +502,7 @@ class _Classic extends TextFormUpdated {
                         width: 0.5,
                       )),
               focusedBorder: focusedBorder ?? themeData.focusedBorder,
-              border: border ??
-                  themeData.border ??
-                  UnderlineInputBorder(borderRadius: BorderRadius.circular(radius ?? 6), borderSide: BorderSide.none),
+              border: border ?? themeData.border ?? UnderlineInputBorder(borderRadius: BorderRadius.circular(radius ?? 6), borderSide: BorderSide.none),
               hintText: hintText ?? "Placeholder",
               hintStyle: hintTextStyle ?? themeData.hintStyle ?? const TextStyle(color: Color(0xFF9299A4), fontSize: 13, fontWeight: FontWeight.w500)),
         ),
@@ -628,8 +626,9 @@ class _PhoneNumber extends TextFormUpdated {
         const SizedBox(height: 7),
         InternationalPhoneNumberInput(
           autoValidateMode: AutovalidateMode.always,
-          initialValue: initialPhoneValue ?? themeData.initialPhoneValue ?? PhoneNumber(isoCode: 'FR', dialCode: '33'),
+          initialValue: initialPhoneValue,
           focusNode: focusNode,
+          locale: 'fr',
           onFieldSubmitted: (String? value) {
             FocusScope.of(context).requestFocus(nextFocusNode);
           },
