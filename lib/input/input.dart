@@ -19,6 +19,7 @@ abstract class Input extends HookWidget {
   final VoidCallback? postFieldOnClick;
   final Widget? child;
   final String? svgIconPath;
+  final bool? pdfOnly;
   final VoidCallback? onTap;
   final VoidCallback? onDoubleTap;
   final PlatformFile? image;
@@ -52,6 +53,7 @@ abstract class Input extends HookWidget {
     this.theme,
     this.height,
     this.child,
+    this.pdfOnly,
     this.svgIconPath,
     this.onTap,
     this.onDoubleTap,
@@ -133,6 +135,7 @@ abstract class Input extends HookWidget {
   const factory Input.validatedFile({
     final String? svgIconPath,
     final VoidCallback? onTap,
+    final bool? pdfOnly,
     final VoidCallback? onDoubleTap,
     final BoxDecoration? boxDecoration,
     final double? inkRadius,
@@ -268,8 +271,7 @@ class _OneImage extends Input {
                     },
                     onDoubleTap: onDoubleTap,
                     child: Padding(
-                      padding:
-                          state.value != null || imageMobile != null || urlImage != null ? (contentPadding ?? themeData.contentPadding ?? const EdgeInsets.fromLTRB(7, 6, 30, 6)) : EdgeInsets.zero,
+                      padding: state.value != null || imageMobile != null || urlImage != null ? (contentPadding ?? themeData.contentPadding ?? const EdgeInsets.fromLTRB(7, 6, 30, 6)) : EdgeInsets.zero,
                       child: Stack(
                         alignment: Alignment.centerLeft,
                         children: state.value != null || imageMobile != null || urlImage != null || image != null || child != null
@@ -525,9 +527,7 @@ class _MultipleFile extends Input {
                                                       child: Text(
                                                         'Appuyez pour modifier la / les fichier(s)',
                                                         textAlign: TextAlign.center,
-                                                        style: textStyle ??
-                                                            themeData.fieldStyle ??
-                                                            TextStyle(fontSize: sp(13), fontWeight: FontWeight.w500, color: const Color(0xFF02132B).withOpacity(0.41)),
+                                                        style: textStyle ?? themeData.fieldStyle ?? TextStyle(fontSize: sp(13), fontWeight: FontWeight.w500, color: const Color(0xFF02132B).withOpacity(0.41)),
                                                       ),
                                                     ),
                                                   ],
@@ -610,6 +610,7 @@ class _MultipleFile extends Input {
 class _ValidatedFile extends Input {
   const _ValidatedFile({
     final String? svgIconPath,
+    final bool? pdfOnly,
     final VoidCallback? onTap,
     final VoidCallback? onDoubleTap,
     final BoxDecoration? boxDecoration,
@@ -636,6 +637,7 @@ class _ValidatedFile extends Input {
   }) : super(
           svgIconPath: svgIconPath,
           onTap: onTap,
+          pdfOnly: pdfOnly,
           height: height,
           onDoubleTap: onDoubleTap,
           boxDecoration: boxDecoration,
@@ -707,7 +709,7 @@ class _ValidatedFile extends Input {
                   borderRadius: BorderRadius.circular(inkRadius ?? 7),
                   onTap: () async {
                     if (onTap != null) onTap!();
-                    FilePickerResult? result = await FilePicker.platform.pickFiles(allowedExtensions: ["pdf", "PDF"]);
+                    FilePickerResult? result = await FilePicker.platform.pickFiles(allowedExtensions: pdfOnly == true ? ["pdf", "PDF"] : null, type: pdfOnly == true ? FileType.custom : FileType.any);
 
                     if (result != null) {
                       state.value = result.files.single;
@@ -749,9 +751,7 @@ class _ValidatedFile extends Input {
                                                         child: Text(
                                                           'Appuyez pour modifier le fichier',
                                                           textAlign: TextAlign.center,
-                                                          style: textStyle ??
-                                                              themeData.fieldStyle ??
-                                                              TextStyle(fontSize: sp(13), fontWeight: FontWeight.w500, color: const Color(0xFF02132B).withOpacity(0.41)),
+                                                          style: textStyle ?? themeData.fieldStyle ?? TextStyle(fontSize: sp(13), fontWeight: FontWeight.w500, color: const Color(0xFF02132B).withOpacity(0.41)),
                                                         ),
                                                       ),
                                                     ],
@@ -877,9 +877,7 @@ class _ValidatedFile extends Input {
                                                             child: Text(
                                                               'Appuyez pour modifier le fichier',
                                                               textAlign: TextAlign.center,
-                                                              style: textStyle ??
-                                                                  themeData.fieldStyle ??
-                                                                  TextStyle(fontSize: sp(13), fontWeight: FontWeight.w500, color: const Color(0xFF02132B).withOpacity(0.41)),
+                                                              style: textStyle ?? themeData.fieldStyle ?? TextStyle(fontSize: sp(13), fontWeight: FontWeight.w500, color: const Color(0xFF02132B).withOpacity(0.41)),
                                                             ),
                                                           ),
                                                         ],
