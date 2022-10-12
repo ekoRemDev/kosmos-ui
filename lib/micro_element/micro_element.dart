@@ -345,18 +345,26 @@ class _ProgressSeparated extends ProgressBar {
                                         borderRadius: borderRadius ?? themeData.borderRadius ?? BorderRadius.circular(8),
                                       ),
                                     ),
-                                    if (showPercentage ?? false) && current == i)
-                                    Positioned(
-                                        child:  SizedBox(
-                                                height: height ?? themeData.height ?? 10,
-                                                child: Column(
-                                                  mainAxisSize: MainAxisSize.max,
-                                                  children: [Text("en cours", style: TextStyle(color: Colors.white, fontSize: sp(9), fontWeight: FontWeight.w500))],
-                                                  mainAxisAlignment: MainAxisAlignment.center,
-                                                ),
-                                              ),
-                                             if (widget.current > i)                                                                                       
-                                            Icon(Icons.check_rounded, color: Colors.white, size: sp(14)),
+                                    if ((showPercentage ?? false) && current == i)
+                                      Positioned.fill(
+                                        child: Center(
+                                            child: Row(
+                                          children: [
+                                            Text("en cours", style: TextStyle(color: Colors.white, fontSize: sp(10), fontWeight: FontWeight.w500)),
+                                          ],
+                                        )),
+                                        // Icon(Icons.check_rounded, color: Colors.white, size: sp(14)),
+                                        left: formatWidth(8),
+                                        top: 0,
+                                        bottom: 0,
+                                      ),
+                                    if (current > i)
+                                      Positioned.fill(
+                                        child: Center(
+                                            child: Row(
+                                          children: [Icon(Icons.check_rounded, color: Colors.white, size: sp(14))],
+                                        )),
+                                        // Icon(Icons.check_rounded, color: Colors.white, size: sp(14)),
                                         left: formatWidth(8),
                                         top: 0,
                                         bottom: 0,
@@ -456,8 +464,7 @@ class ThreeBounceState extends State<ThreeBounce> with SingleTickerProviderState
     );
   }
 
-  Widget _itemBuilder(int index) =>
-      widget.itemBuilder != null ? widget.itemBuilder!(context, index) : DecoratedBox(decoration: BoxDecoration(color: widget.color ?? themeData.activeColor, shape: BoxShape.circle));
+  Widget _itemBuilder(int index) => widget.itemBuilder != null ? widget.itemBuilder!(context, index) : DecoratedBox(decoration: BoxDecoration(color: widget.color ?? themeData.activeColor, shape: BoxShape.circle));
 }
 
 class DelayTween extends Tween<double> {
