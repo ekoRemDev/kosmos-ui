@@ -345,8 +345,8 @@ class _ProgressSeparated extends ProgressBar {
                                         borderRadius: borderRadius ?? themeData.borderRadius ?? BorderRadius.circular(8),
                                       ),
                                     ),
-                                    if ((showPercentage ?? false) && current == i)
-                                      Positioned(
+                                    if (showPercentage ?? false) && current == i)
+                                    Positioned(
                                         child:  SizedBox(
                                                 height: height ?? themeData.height ?? 10,
                                                 child: Column(
