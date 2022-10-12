@@ -345,18 +345,18 @@ class _ProgressSeparated extends ProgressBar {
                                         borderRadius: borderRadius ?? themeData.borderRadius ?? BorderRadius.circular(8),
                                       ),
                                     ),
-                                    if ((showPercentage ?? false) && current >= i)
+                                    if ((showPercentage ?? false) && current == i)
                                       Positioned(
-                                        child: current == i
-                                            ? SizedBox(
+                                        child:  SizedBox(
                                                 height: height ?? themeData.height ?? 10,
                                                 child: Column(
                                                   mainAxisSize: MainAxisSize.max,
                                                   children: [Text("en cours", style: TextStyle(color: Colors.white, fontSize: sp(9), fontWeight: FontWeight.w500))],
                                                   mainAxisAlignment: MainAxisAlignment.center,
                                                 ),
-                                              )
-                                            : Icon(Icons.check_rounded, color: Colors.white, size: sp(14)),
+                                              ),
+                                             if (widget.current > i)                                                                                       
+                                            Icon(Icons.check_rounded, color: Colors.white, size: sp(14)),
                                         left: formatWidth(8),
                                         top: 0,
                                         bottom: 0,
