@@ -46,6 +46,7 @@ class TextFormUpdated extends HookWidget {
   final InputBorder? border;
   final Color? cursorColor;
   final String? subFieldText;
+  final AutovalidateMode? phoneValidate;
 
   //SELECT FORM
   final String? value;
@@ -110,6 +111,7 @@ class TextFormUpdated extends HookWidget {
     this.border,
     this.fieldPostRedirectionStyle,
     this.subFieldText,
+    this.phoneValidate,
 
     //SELECT FORM
     this.icon,
@@ -212,6 +214,7 @@ class TextFormUpdated extends HookWidget {
     final InputBorder? focusedBorder,
     final String? Function(String?)? validator,
     final InputBorder? border,
+    final AutovalidateMode? phoneValidate,
     final TextEditingController? controller,
     final String? subFieldText,
   }) = _PhoneNumber;
@@ -530,6 +533,7 @@ class _PhoneNumber extends TextFormUpdated {
     final TextStyle? hintTextStyle,
     final TextStyle? textStyle,
     final String? Function(String?)? validator,
+    final AutovalidateMode? phoneValidate,
     final bool? error,
     final bool? filled,
     final String? errorMessage,
@@ -562,6 +566,7 @@ class _PhoneNumber extends TextFormUpdated {
           errorBorder: errorBorder,
           focusedBorder: focusedBorder,
           border: border,
+          phoneValidate: phoneValidate,
           validator: validator,
           error: error,
           errorMessage: errorMessage,
@@ -628,7 +633,7 @@ class _PhoneNumber extends TextFormUpdated {
         ),
         const SizedBox(height: 7),
         InternationalPhoneNumberInput(
-          autoValidateMode: AutovalidateMode.always,
+          autoValidateMode: phoneValidate ?? AutovalidateMode.onUserInteraction,
           initialValue: initialPhoneValue,
           focusNode: focusNode,
           validator: validator,
