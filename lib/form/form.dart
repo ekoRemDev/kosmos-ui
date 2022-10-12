@@ -210,6 +210,7 @@ class TextFormUpdated extends HookWidget {
     final InputBorder? focusedErrorBorder,
     final InputBorder? errorBorder,
     final InputBorder? focusedBorder,
+    final String? Function(String?)? validator,
     final InputBorder? border,
     final TextEditingController? controller,
     final String? subFieldText,
@@ -528,6 +529,7 @@ class _PhoneNumber extends TextFormUpdated {
     final TextStyle? fieldNameStyle,
     final TextStyle? hintTextStyle,
     final TextStyle? textStyle,
+    final String? Function(String?)? validator,
     final bool? error,
     final bool? filled,
     final String? errorMessage,
@@ -560,6 +562,7 @@ class _PhoneNumber extends TextFormUpdated {
           errorBorder: errorBorder,
           focusedBorder: focusedBorder,
           border: border,
+          validator: validator,
           error: error,
           errorMessage: errorMessage,
           fieldPostRedirectionStyle: fieldPostRedirectionStyle,
@@ -628,7 +631,8 @@ class _PhoneNumber extends TextFormUpdated {
           autoValidateMode: AutovalidateMode.always,
           initialValue: initialPhoneValue,
           focusNode: focusNode,
-          locale: 'fr',
+          validator: validator,
+          locale: 'FR',
           onFieldSubmitted: (String? value) {
             FocusScope.of(context).requestFocus(nextFocusNode);
           },
