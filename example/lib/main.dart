@@ -117,6 +117,12 @@ class _MyHomePageState extends State<MyHomePage> {
                   printInDebug(taped);
                 },
               ),
+              SizedBox(
+                  width: MediaQuery.of(context).size.width * .14,
+                  child: Input.validatedFile(
+                    fieldName: "Déposez votre dossier de candidature ici",
+                    height: formatHeight(208),
+                  ))
             ],
           ),
         ),

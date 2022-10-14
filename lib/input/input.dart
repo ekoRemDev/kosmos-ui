@@ -671,11 +671,14 @@ class _ValidatedFile extends Input {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Row(
+          mainAxisSize: MainAxisSize.max,
           children: [
             fieldName != null
-                ? Text(
-                    fieldName!,
-                    style: fieldNameStyle ?? themeData.fieldNameStyle ?? const TextStyle(color: Color(0xFF02132B), fontSize: 12, fontWeight: FontWeight.w500),
+                ? Expanded(
+                    child: Text(
+                      fieldName!,
+                      style: fieldNameStyle ?? themeData.fieldNameStyle ?? const TextStyle(color: Color(0xFF02132B), fontSize: 12, fontWeight: FontWeight.w500),
+                    ),
                   )
                 : Container(),
             fieldPostRedirection == null ? const SizedBox() : const Spacer(),
