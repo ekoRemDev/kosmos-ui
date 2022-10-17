@@ -76,7 +76,7 @@ abstract class NotifBanner {
 
     fToast.showToast(
         child: toast,
-        fadeDuration: themeData.fadeDuration?.inMilliseconds ?? 300,
+        fadeDuration: Duration(milliseconds: themeData.fadeDuration?.inMilliseconds ?? 300),
         toastDuration: duration ?? themeData.duration ?? const Duration(seconds: 3),
         positionedToastBuilder: (context, child) {
           return postionChild(
@@ -144,7 +144,7 @@ abstract class NotifBanner {
 
     fToast.showToast(
         child: toast,
-        fadeDuration: themeData.fadeDuration?.inMilliseconds ?? 300,
+        fadeDuration: Duration(milliseconds: themeData.fadeDuration?.inMilliseconds ?? 300),
         toastDuration: duration ?? themeData.duration ?? const Duration(seconds: 3),
         positionedToastBuilder: (context, child) {
           return postionChild(
@@ -164,7 +164,7 @@ abstract class NotifBanner {
   }) {
     fToast.showToast(
         child: child,
-        fadeDuration: 300,
+        fadeDuration: const Duration(milliseconds: 300),
         toastDuration: const Duration(seconds: 3),
         positionedToastBuilder: (context, child) {
           return postionChild(
