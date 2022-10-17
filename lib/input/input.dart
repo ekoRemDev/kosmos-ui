@@ -1016,7 +1016,7 @@ class _ValidatedFile extends Input {
                         ),
                       ),
                     ),
-                    if (pdfOnly ?? false) ...[Text("Format PDF", textAlign: TextAlign.center, style: TextStyle(fontSize: sp(11), fontWeight: FontWeight.w500, color: const Color(0xFF02132B))), sh(10)]
+                    if ((desc?.isEmpty ?? true) && (pdfOnly ?? false)) ...[Text("Format PDF", textAlign: TextAlign.center, style: TextStyle(fontSize: sp(11), fontWeight: FontWeight.w500, color: const Color(0xFF02132B))), sh(10)]
                   ],
                 ),
               ),
