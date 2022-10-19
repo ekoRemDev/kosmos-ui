@@ -42,6 +42,7 @@ abstract class Cards extends StatelessWidget {
     final String miniSubtitle,
     final TextStyle miniTitleStyle,
     final TextStyle miniSubtitleStyle,
+    final ImageProvider? miniImageProvider,
     final Widget? miniImageWidget,
     final Widget? doublePointWidget,
     final EdgeInsets doublePointPadding,
@@ -68,7 +69,8 @@ abstract class Cards extends StatelessWidget {
     final EdgeInsets paddingText,
     final ImageProvider<Object>? imageProvider,
     final String? imageUrl,
-    final Widget? subImageWidget,
+    final ImageProvider? miniImageProvider,
+    final Widget? miniImageWidget,
     final Widget? doublePointWidget,
     final EdgeInsets doublePointPadding,
     final Size doublePointSize,
@@ -118,6 +120,7 @@ abstract class Cards extends StatelessWidget {
     final double radius,
     final Color backgroundColor,
     final EdgeInsets paddingImage,
+    final ImageProvider? imageProvider,
     final Widget? imageWidget,
     final CustomCardsThemeData? theme,
     final String? themeName,
@@ -146,6 +149,7 @@ abstract class Cards extends StatelessWidget {
     final VoidCallback? onTapThreePoint,
     final double radius,
     final Color backgroundColor,
+    final ImageProvider? imageProvider,
     final Widget? imageWidget,
     final Widget? threePointWidget,
     final Icon? iconMiniSubTitle,
@@ -269,9 +273,12 @@ class _One extends StatelessWidget implements Cards {
                           Container(
                             height: formatHeight(68),
                             width: formatWidth(122),
-                            decoration: BoxDecoration(
+                            decoration: imageProvider != null ? BoxDecoration(
                               borderRadius: BorderRadius.circular(formatWidth(7)),
-                              color: const Color(0xFF02132B),
+                              image: DecorationImage(image: imageProvider!, fit: BoxFit.cover),
+                            ) : BoxDecoration(
+                              borderRadius: BorderRadius.circular(formatWidth(7)),
+                              color: const Color(0xFF02132B)
                             ),
                           ),
                     ),
@@ -321,6 +328,7 @@ class _Two extends StatelessWidget implements Cards {
   final String miniSubtitle;
   final TextStyle? miniTitleStyle;
   final TextStyle? miniSubtitleStyle;
+  final ImageProvider? miniImageProvider;
   final Widget? miniImageWidget;
   final Widget? doublePointWidget;
   final EdgeInsets? doublePointPadding;
@@ -349,6 +357,7 @@ class _Two extends StatelessWidget implements Cards {
     this.miniSubtitle = 'Sous-titre',
     this.miniTitleStyle,
     this.miniSubtitleStyle,
+    this.miniImageProvider,
     this.miniImageWidget,
     this.doublePointWidget,
     this.doublePointPadding,
@@ -388,9 +397,12 @@ class _Two extends StatelessWidget implements Cards {
                             child: imageWidget ??
                                 Container(
                                   height: formatHeight(101),
-                                  decoration: BoxDecoration(
+                                  decoration: imageProvider != null ? BoxDecoration(
                                     borderRadius: BorderRadius.circular(radius ?? themeData.radius ?? formatWidth(10)),
-                                    color: const Color(0xFF02132B),
+                                    image: DecorationImage(image: imageProvider!, fit: BoxFit.cover),
+                                  ) : BoxDecoration(
+                                    borderRadius: BorderRadius.circular(radius ?? themeData.radius ?? formatWidth(10)),
+                                    color: const Color(0xFF02132B)
                                   ),
                                 ),
                           ),
@@ -417,7 +429,10 @@ class _Two extends StatelessWidget implements Cards {
                                         Container(
                                           height: formatHeight(19),
                                           width: formatWidth(19),
-                                          decoration: const BoxDecoration(
+                                          decoration: miniImageProvider != null ? BoxDecoration(
+                                            shape: BoxShape.circle,
+                                            image: DecorationImage(image: miniImageProvider!, fit: BoxFit.cover),
+                                          ) : const BoxDecoration(
                                             shape: BoxShape.circle,
                                             color: Color(0xFF02132B),
                                           ),
@@ -557,7 +572,8 @@ class _Three extends StatelessWidget implements Cards {
   final EdgeInsets? paddingText;
   final ImageProvider? imageProvider;
   final String? imageUrl;
-  final Widget? subImageWidget;
+  final ImageProvider? miniImageProvider;
+  final Widget? miniImageWidget;
   final Widget? doublePointWidget;
   final EdgeInsets? doublePointPadding;
   final Size? doublePointSize;
@@ -580,7 +596,8 @@ class _Three extends StatelessWidget implements Cards {
     this.paddingText,
     this.imageProvider,
     this.imageUrl,
-    this.subImageWidget,
+    this.miniImageProvider,
+    this.miniImageWidget,
     this.doublePointWidget,
     this.doublePointPadding,
     this.doublePointSize,
@@ -602,7 +619,7 @@ class _Three extends StatelessWidget implements Cards {
                   return card(image);
                 },
               )
-            : imageUrl != null
+            : imageUrl == null
                 ? card(imageProvider!)
                 : card(null));
   }
@@ -613,11 +630,8 @@ class _Three extends StatelessWidget implements Cards {
     return Container(
       constraints: boxConstraints ?? themeData.constraints ?? BoxConstraints(minHeight: formatHeight(186), minWidth: formatWidth(146), maxHeight: formatHeight(186), maxWidth: formatWidth(146)),
       decoration: image != null
-          ? BoxDecoration(image: DecorationImage(image: image, fit: BoxFit.cover), borderRadius: BorderRadius.circular(radius ?? themeData.radius ?? formatWidth(10)))
-          : BoxDecoration(
-              color: backgroundColor ?? const Color(0xFF02132B),
-              borderRadius: BorderRadius.circular(radius ?? themeData.radius ?? formatWidth(10)),
-            ),
+      ? BoxDecoration(image: DecorationImage(image: image, fit: BoxFit.cover), borderRadius: BorderRadius.circular(radius ?? themeData.radius ?? formatWidth(10)))
+      : BoxDecoration(color: backgroundColor ?? const Color(0xFF02132B), borderRadius: BorderRadius.circular(radius ?? themeData.radius ?? formatWidth(10))),
       child: Material(
         type: MaterialType.transparency,
         child: InkWell(
@@ -638,11 +652,14 @@ class _Three extends StatelessWidget implements Cards {
                         padding: EdgeInsets.symmetric(horizontal: formatWidth(8)),
                         child: Row(
                           children: [
-                            subImageWidget ??
+                            miniImageWidget ??
                                 Container(
                                   height: formatHeight(30),
                                   width: formatWidth(30),
-                                  decoration: const BoxDecoration(
+                                  decoration: miniImageProvider != null ? BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    image: DecorationImage(image: miniImageProvider!, fit: BoxFit.cover)
+                                  ) : const BoxDecoration(
                                     shape: BoxShape.circle,
                                     color: Color(0xFF02132B),
                                   ),
@@ -763,11 +780,13 @@ class _Fourth extends StatelessWidget implements Cards {
                   children: !horizontal
                       ? [
                           Container(
-                            height: 96,
-                            decoration: BoxDecoration(
+                            height: formatWidth(96),
+                            decoration: imageProvider != null ? BoxDecoration(
                               borderRadius: BorderRadius.circular(formatWidth(7)),
-                              color: const Color(0xFF02132B).withOpacity(0.50),
-                              image: imageProvider != null ? DecorationImage(image: imageProvider!, fit: BoxFit.cover) : null,
+                              image: DecorationImage(image: imageProvider!, fit: BoxFit.cover),
+                            ) : BoxDecoration(
+                              borderRadius: BorderRadius.circular(formatWidth(7)),
+                              color: const Color(0xFF02132B)
                             ),
                             clipBehavior: Clip.hardEdge,
                             child: imageWidget,
@@ -871,6 +890,7 @@ class _Five extends StatelessWidget implements Cards {
   final double? radius;
   final Color? backgroundColor;
   final EdgeInsets? paddingImage;
+  final ImageProvider? imageProvider;
   final Widget? imageWidget;
   final CustomCardsThemeData? theme;
   final String? themeName;
@@ -895,6 +915,7 @@ class _Five extends StatelessWidget implements Cards {
     this.radius,
     this.backgroundColor,
     this.paddingImage,
+    this.imageProvider,
     this.imageWidget,
     this.theme,
     this.themeName,
@@ -959,7 +980,10 @@ class _Five extends StatelessWidget implements Cards {
                               ? imageWidget ??
                                   Container(
                                     width: formatWidth(99),
-                                    decoration: BoxDecoration(
+                                    decoration: imageProvider != null ? BoxDecoration(
+                                      borderRadius: BorderRadius.circular(formatWidth(7)),
+                                      image: DecorationImage(image: imageProvider!, fit: BoxFit.cover),
+                                    ) : BoxDecoration(
                                       borderRadius: BorderRadius.circular(formatWidth(7)),
                                       color: const Color(0xFF02132B),
                                     ),
@@ -968,7 +992,10 @@ class _Five extends StatelessWidget implements Cards {
                                   Container(
                                     height: formatHeight(40),
                                     width: formatWidth(40),
-                                    decoration: const BoxDecoration(
+                                    decoration: imageProvider != null ? BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      image: DecorationImage(image: imageProvider!, fit: BoxFit.cover),
+                                    ) : const BoxDecoration(
                                       shape: BoxShape.circle,
                                       color: Color(0xFF02132B),
                                     ),
@@ -1038,6 +1065,7 @@ class _Six extends StatelessWidget implements Cards {
   final VoidCallback? onTapThreePoint;
   final double? radius;
   final Color? backgroundColor;
+  final ImageProvider? imageProvider;
   final Widget? imageWidget;
   final Widget? threePointWidget;
   final Icon? iconMiniSubTitle;
@@ -1066,6 +1094,7 @@ class _Six extends StatelessWidget implements Cards {
     this.onDoubleTap,
     this.radius,
     this.backgroundColor,
+    this.imageProvider,
     this.imageWidget,
     this.onTapIconButton,
     this.iconMiniSubTitle,
@@ -1154,7 +1183,13 @@ class _Six extends StatelessWidget implements Cards {
                                   Container(
                                     height: formatHeight(27),
                                     width: formatWidth(27),
-                                    decoration: const BoxDecoration(shape: BoxShape.circle, color: Color(0xFF02132B)),
+                                    decoration: imageProvider != null ? BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      image: DecorationImage(image: imageProvider!, fit: BoxFit.cover),
+                                    ) : const BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      color: Color(0xFF02132B),
+                                    ),
                                   ),
                               SizedBox(width: formatWidth(6)),
                               Column(
@@ -1266,9 +1301,9 @@ class _Seven extends StatelessWidget implements Cards {
                   return card(image);
                 },
               )
-            : imageUrl != null
-                ? card(imageProvider!)
-                : card(null));
+            : imageUrl == null
+              ? card(imageProvider!)
+              : card(null));
   }
 
   Widget card(ImageProvider<Object>? image) {
@@ -1277,12 +1312,11 @@ class _Seven extends StatelessWidget implements Cards {
     return Container(
       constraints: boxConstraints ?? BoxConstraints(minHeight: formatHeight(190), minWidth: formatWidth(315), maxHeight: formatHeight(190), maxWidth: formatWidth(315)),
       padding: contentPadding ?? (!variant ? EdgeInsets.fromLTRB(formatWidth(19), formatHeight(0), formatWidth(7), formatHeight(13)) : EdgeInsets.zero),
-      decoration: image != null
-          ? BoxDecoration(image: DecorationImage(image: image, fit: BoxFit.cover), borderRadius: BorderRadius.circular(radius ?? themeData.radius ?? formatWidth(10)))
-          : BoxDecoration(
-              color: backgroundColor ?? const Color(0xFF02132B),
-              borderRadius: BorderRadius.circular(radius ?? themeData.radius ?? formatWidth(10)),
-            ),
+      decoration: image != null ? BoxDecoration(image: DecorationImage(image: image, fit: BoxFit.cover), borderRadius: BorderRadius.circular(radius ?? themeData.radius ?? formatWidth(10)))
+      : BoxDecoration(
+        color: backgroundColor ?? const Color(0xFF02132B),
+        borderRadius: BorderRadius.circular(radius ?? themeData.radius ?? formatWidth(10)),
+      ),
       child: Material(
         type: MaterialType.transparency,
         child: InkWell(
@@ -1456,19 +1490,17 @@ class _Nine extends StatelessWidget implements Cards {
                       children: [
                         Padding(
                           padding: paddingImage ?? themeData.paddingImage ?? EdgeInsets.only(left: formatWidth(7), bottom: formatHeight(6), top: formatHeight(6)),
-                          child: imageWidget ??
-                              Container(
-                                width: formatWidth(120),
-                                decoration: imageProvider != null
-                                    ? BoxDecoration(
-                                        borderRadius: BorderRadius.circular(radius ?? themeData.radius ?? formatWidth(10)),
-                                        image: DecorationImage(image: imageProvider!),
-                                      )
-                                    : BoxDecoration(
-                                        borderRadius: BorderRadius.circular(radius ?? themeData.radius ?? formatWidth(10)),
-                                        color: const Color(0xFF02132B),
-                                      ),
-                              ),
+                          child: imageWidget ?? Container(
+                            width: formatWidth(120),
+                            decoration: imageProvider != null
+                            ? BoxDecoration(
+                              borderRadius: BorderRadius.circular(radius ?? themeData.radius ?? formatWidth(10)),
+                              image: DecorationImage(image: imageProvider!),
+                            ) : BoxDecoration(
+                              borderRadius: BorderRadius.circular(radius ?? themeData.radius ?? formatWidth(10)),
+                              color: const Color(0xFF02132B),
+                            ),
+                          ),
                         ),
                         sw(5),
                         Expanded(
