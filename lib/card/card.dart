@@ -426,12 +426,8 @@ class _Two extends StatelessWidget implements Cards {
                                     Column(
                                       crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
-                                        Text(miniTitle,
-                                            style: miniTitleStyle ?? themeData.miniTitleStyle ?? TextStyle(fontSize: sp(9), fontWeight: FontWeight.w400, color: const Color(0xFF02132B)),
-                                            textAlign: TextAlign.left),
-                                        Text(miniSubtitle,
-                                            style: miniSubtitleStyle ?? themeData.miniSubTitleStyle ?? TextStyle(fontSize: sp(7), fontWeight: FontWeight.w400, color: const Color(0xFF5A6575)),
-                                            textAlign: TextAlign.left),
+                                        Text(miniTitle, style: miniTitleStyle ?? themeData.miniTitleStyle ?? TextStyle(fontSize: sp(9), fontWeight: FontWeight.w400, color: const Color(0xFF02132B)), textAlign: TextAlign.left),
+                                        Text(miniSubtitle, style: miniSubtitleStyle ?? themeData.miniSubTitleStyle ?? TextStyle(fontSize: sp(7), fontWeight: FontWeight.w400, color: const Color(0xFF5A6575)), textAlign: TextAlign.left),
                                       ],
                                     ),
                                     const Spacer(),
@@ -655,11 +651,8 @@ class _Three extends StatelessWidget implements Cards {
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(title,
-                                    style: titleStyle ?? themeData.titleStyle ?? TextStyle(fontSize: sp(12), fontWeight: FontWeight.w600, color: const Color(0xFF02132B)), textAlign: TextAlign.left),
-                                Text(subTitle,
-                                    style: subTitleStyle ?? themeData.subTitleStyle ?? TextStyle(fontSize: sp(10), fontWeight: FontWeight.w400, color: const Color(0xFF5A6575)),
-                                    textAlign: TextAlign.left),
+                                Text(title, style: titleStyle ?? themeData.titleStyle ?? TextStyle(fontSize: sp(12), fontWeight: FontWeight.w600, color: const Color(0xFF02132B)), textAlign: TextAlign.left),
+                                Text(subTitle, style: subTitleStyle ?? themeData.subTitleStyle ?? TextStyle(fontSize: sp(10), fontWeight: FontWeight.w400, color: const Color(0xFF5A6575)), textAlign: TextAlign.left),
                               ],
                             ),
                             const Spacer(),
@@ -756,7 +749,9 @@ class _Fourth extends StatelessWidget implements Cards {
                   : BoxConstraints(minHeight: formatHeight(156), minWidth: formatWidth(158), maxHeight: formatHeight(156), maxWidth: formatWidth(158))),
           decoration: BoxDecoration(
             color: backgroundColor ?? themeData.backgroundColor ?? Colors.white,
-            borderRadius: BorderRadius.circular(radius ?? themeData.radius ?? formatWidth(10)),
+            borderRadius: BorderRadius.circular(
+              radius ?? themeData.radius ?? formatWidth(10),
+            ),
           ),
           child: Material(
             type: MaterialType.transparency,
@@ -772,6 +767,7 @@ class _Fourth extends StatelessWidget implements Cards {
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(formatWidth(7)),
                               color: const Color(0xFF02132B).withOpacity(0.50),
+                              image: imageProvider != null ? DecorationImage(image: imageProvider!, fit: BoxFit.cover) : null,
                             ),
                             clipBehavior: Clip.hardEdge,
                             child: imageWidget,
@@ -800,11 +796,8 @@ class _Fourth extends StatelessWidget implements Cards {
                               mainAxisAlignment: MainAxisAlignment.end,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(title,
-                                    style: titleStyle ?? themeData.titleStyle ?? TextStyle(fontSize: sp(11), fontWeight: FontWeight.w600, color: const Color(0xFF02132B)), textAlign: TextAlign.left),
-                                Text(subTitle,
-                                    style: subTitleStyle ?? themeData.subTitleStyle ?? TextStyle(fontSize: sp(10), fontWeight: FontWeight.w400, color: const Color(0xFF5A6575)),
-                                    textAlign: TextAlign.left),
+                                Text(title, style: titleStyle ?? themeData.titleStyle ?? TextStyle(fontSize: sp(11), fontWeight: FontWeight.w600, color: const Color(0xFF02132B)), textAlign: TextAlign.left),
+                                Text(subTitle, style: subTitleStyle ?? themeData.subTitleStyle ?? TextStyle(fontSize: sp(10), fontWeight: FontWeight.w400, color: const Color(0xFF5A6575)), textAlign: TextAlign.left),
                               ],
                             ),
                           )
@@ -1169,8 +1162,7 @@ class _Six extends StatelessWidget implements Cards {
                                   Text(miniTitle, style: miniTitleStyle ?? themeData.miniTitleStyle ?? TextStyle(fontSize: sp(9), fontWeight: FontWeight.w400, color: const Color(0xFF02132B))),
                                   Row(
                                     children: [
-                                      Text(miniSubtitle,
-                                          style: miniSubtitleStyle ?? themeData.miniSubTitleStyle ?? TextStyle(fontSize: sp(7), fontWeight: FontWeight.w400, color: const Color(0xFF5A6575))),
+                                      Text(miniSubtitle, style: miniSubtitleStyle ?? themeData.miniSubTitleStyle ?? TextStyle(fontSize: sp(7), fontWeight: FontWeight.w400, color: const Color(0xFF5A6575))),
                                       iconMiniSubTitle ?? const Icon(Icons.star_rate_rounded, color: Color(0xFF02132B), size: 10),
                                     ],
                                   ),
@@ -1198,8 +1190,7 @@ class _Six extends StatelessWidget implements Cards {
                                   ? Container(
                                       height: formatHeight(34),
                                       width: formatWidth(99),
-                                      decoration: BoxDecoration(
-                                          color: statusColor ?? const Color(0xFF02132B).withOpacity(0.03), borderRadius: BorderRadius.circular(radius ?? themeData.radius ?? formatWidth(10))),
+                                      decoration: BoxDecoration(color: statusColor ?? const Color(0xFF02132B).withOpacity(0.03), borderRadius: BorderRadius.circular(radius ?? themeData.radius ?? formatWidth(10))),
                                       child: Center(
                                         child: Text(
                                           statusText,
@@ -1308,8 +1299,7 @@ class _Seven extends StatelessWidget implements Cards {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(title, style: titleStyle ?? themeData.titleStyle ?? TextStyle(fontSize: sp(14), fontWeight: FontWeight.w600, color: Colors.white), textAlign: TextAlign.left),
-                              Text(subTitle,
-                                  style: subTitleStyle ?? themeData.subTitleStyle ?? TextStyle(fontSize: sp(10), fontWeight: FontWeight.w400, color: Colors.white), textAlign: TextAlign.left),
+                              Text(subTitle, style: subTitleStyle ?? themeData.subTitleStyle ?? TextStyle(fontSize: sp(10), fontWeight: FontWeight.w400, color: Colors.white), textAlign: TextAlign.left),
                             ],
                           ),
                         ),
@@ -1485,15 +1475,11 @@ class _Nine extends StatelessWidget implements Cards {
                           child: Padding(
                             padding: EdgeInsets.all(formatWidth(16)),
                             child: Column(mainAxisAlignment: MainAxisAlignment.start, crossAxisAlignment: CrossAxisAlignment.start, children: [
-                              Text(title,
-                                  style: titleStyle ?? themeData.titleStyle ?? TextStyle(fontSize: sp(13), fontWeight: FontWeight.w600, color: const Color(0xFF02132B)), textAlign: TextAlign.left),
+                              Text(title, style: titleStyle ?? themeData.titleStyle ?? TextStyle(fontSize: sp(13), fontWeight: FontWeight.w600, color: const Color(0xFF02132B)), textAlign: TextAlign.left),
                               const Spacer(),
-                              Text(subTitle,
-                                  style: subTitleStyle ?? themeData.subTitleStyle ?? TextStyle(fontSize: sp(10), fontWeight: FontWeight.w400, color: const Color(0xFF5A6575)),
-                                  textAlign: TextAlign.left),
+                              Text(subTitle, style: subTitleStyle ?? themeData.subTitleStyle ?? TextStyle(fontSize: sp(10), fontWeight: FontWeight.w400, color: const Color(0xFF5A6575)), textAlign: TextAlign.left),
                               const Spacer(),
-                              Text(desc,
-                                  style: descStyle ?? themeData.descStyle ?? TextStyle(fontSize: sp(12), fontWeight: FontWeight.w400, color: const Color(0xFF02132B)), textAlign: TextAlign.left),
+                              Text(desc, style: descStyle ?? themeData.descStyle ?? TextStyle(fontSize: sp(12), fontWeight: FontWeight.w400, color: const Color(0xFF02132B)), textAlign: TextAlign.left),
                             ]),
                           ),
                         ),
