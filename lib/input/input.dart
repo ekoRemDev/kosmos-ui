@@ -1031,7 +1031,6 @@ class _ValidatedFile extends Input {
                   ),
                 ),
               )),
-        ),
       ],
     );
   }
