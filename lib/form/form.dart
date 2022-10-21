@@ -1271,11 +1271,11 @@ class _TextArea extends TextFormUpdated {
     return Column(
       crossAxisAlignment: themeData.fieldNameAlignment,
       children: [
-        Text(
-          fieldName ?? "NOM FIELD",
+        if (fieldName != null) Text(
+          fieldName!,
           style: fieldNameStyle ?? themeData.fieldNameStyle ?? const TextStyle(color: Color(0xFF02132B), fontSize: 12, fontWeight: FontWeight.w500),
         ),
-        sh(7),
+        if (fieldName != null) sh(7),
         TextFormField(
           scrollPhysics: const BouncingScrollPhysics(),
           scrollPadding: EdgeInsets.zero,
