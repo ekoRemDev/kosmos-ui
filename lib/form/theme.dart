@@ -36,8 +36,8 @@ class CustomFormFieldThemeData {
   final Color? pickerIconColor;
   final TextStyle? subFieldTextStyle;
 
-  final double? minLine;
-  final double? maxLine;
+  final int? minLine;
+  final int? maxLine;
 
   const CustomFormFieldThemeData({
     this.fieldNameAlignment = CrossAxisAlignment.start,

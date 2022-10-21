@@ -460,8 +460,6 @@ class _Classic extends TextFormUpdated {
         ),
         sh(7),
         TextFormField(
-          maxLines: maxLine,
-          minLines: minLine,
           textInputAction: textInputAction,
           validator: validator,
           keyboardType: textInputType,
