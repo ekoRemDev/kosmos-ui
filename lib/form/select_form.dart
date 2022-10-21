@@ -36,6 +36,7 @@ class SelectForm<T> extends HookWidget {
   final Function(T?)? onChangedSelect;
   final String? Function(T?)? validator;
   final String? subFieldText;
+  final List<Widget> Function(BuildContext)? selectedItemBuilder;
 
   const SelectForm({
     this.theme,
@@ -62,6 +63,7 @@ class SelectForm<T> extends HookWidget {
     this.radius,
     this.radiusDropDown,
     this.icon,
+    this.selectedItemBuilder,
     this.contentPadding,
     this.items,
     this.onChangedSelect,
@@ -90,6 +92,7 @@ class SelectForm<T> extends HookWidget {
             hintText ?? "Sélectionner",
             style: hintTextStyle ?? themeData.hintStyle ?? const TextStyle(color: Color(0xFF9299A4), fontSize: 13, fontWeight: FontWeight.w500),
           ),
+          selectedItemBuilder: selectedItemBuilder,
           value: value,
           isExpanded: true,
           iconSize: iconSize ?? themeData.selectIconSize ?? 24.0,
