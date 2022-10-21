@@ -460,7 +460,9 @@ class _Classic extends TextFormUpdated {
         ),
         sh(7),
         TextFormField(
-          textInputAction: textInputAction,
+          minLines: minLine ?? themeData.minLine ?? 1,
+          maxLines: maxLine ?? themeData.maxLine ?? 1,
+          textInputAction: (maxLine ?? 1) > 1 ? TextInputAction.newline : textInputAction,
           validator: validator,
           keyboardType: textInputType,
           focusNode: focusNode,
@@ -1271,10 +1273,11 @@ class _TextArea extends TextFormUpdated {
     return Column(
       crossAxisAlignment: themeData.fieldNameAlignment,
       children: [
-        if (fieldName != null) Text(
-          fieldName!,
-          style: fieldNameStyle ?? themeData.fieldNameStyle ?? const TextStyle(color: Color(0xFF02132B), fontSize: 12, fontWeight: FontWeight.w500),
-        ),
+        if (fieldName != null)
+          Text(
+            fieldName!,
+            style: fieldNameStyle ?? themeData.fieldNameStyle ?? const TextStyle(color: Color(0xFF02132B), fontSize: 12, fontWeight: FontWeight.w500),
+          ),
         if (fieldName != null) sh(7),
         TextFormField(
           scrollPhysics: const BouncingScrollPhysics(),
