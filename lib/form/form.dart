@@ -180,6 +180,8 @@ class TextFormUpdated extends HookWidget {
     final String? defaultValue,
     final Function(String)? onChanged,
     final String? subFieldText,
+    final int? maxLine,
+    final int? minLine,
   }) = _Classic;
 
   const factory TextFormUpdated.phoneNumber({

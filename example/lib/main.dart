@@ -1,6 +1,5 @@
 // ignore_for_file: unnecessary_import
 
-
 import 'package:core_kosmos/core_package.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -76,6 +75,7 @@ class _MyHomePageState extends State<MyHomePage> {
               sh(40),
               const TextFormUpdated.classic(
                 textInputAction: TextInputAction.newline,
+                maxLine: 5,
               )
             ],
           ),
