@@ -460,7 +460,7 @@ class _MultipleFile extends Input {
             type: MaterialType.transparency,
             child: Container(
               constraints: themeData.pickerConstraints ?? const BoxConstraints(minHeight: 108),
-              decoration: boxDecoration ?? themeData.pickerDecoration ?? BoxDecoration(color: const Color(0xFF02132B).withOpacity(0.03), borderRadius: BorderRadius.circular(7)),
+              decoration: boxDecoration ?? themeData.pickerDecoration ?? BoxDecoration(color: theme?.backgroundColor ?? const Color(0xFF02132B).withOpacity(0.03), borderRadius: BorderRadius.circular(7)),
               child: Material(
                 type: MaterialType.transparency,
                 child: InkWell(
@@ -703,29 +703,23 @@ class _ValidatedFile extends Input {
           ],
         ),
         sh(7),
-        ConstrainedBox(
-          constraints: BoxConstraints(
-            minHeight: formatHeight(108),
-            maxHeight: height ?? formatHeight(164),
-          ),
-          child: Material(
-              type: MaterialType.transparency,
-              child: Container(
-                height: height,
-                constraints: themeData.pickerConstraints ?? const BoxConstraints(minHeight: 108),
-                decoration: boxDecoration ?? themeData.pickerDecoration ?? BoxDecoration(color: const Color(0xFF02132B).withOpacity(0.03), borderRadius: BorderRadius.circular(7)),
-                child: Material(
-                  type: MaterialType.transparency,
-                  child: Column(
-                    children: [
-                      Expanded(
-                        child: Center(
-                          child: InkWell(
-                            borderRadius: BorderRadius.circular(inkRadius ?? 7),
-                            onTap: () async {
-                              if (onTap != null) onTap!();
-                              FilePickerResult? result =
-                                  await FilePicker.platform.pickFiles(allowedExtensions: pdfOnly == true ? ["pdf", "PDF"] : null, type: pdfOnly == true ? FileType.custom : FileType.any);
+        Material(
+            type: MaterialType.transparency,
+            child: Container(
+              height: height,
+              constraints: themeData.pickerConstraints ?? const BoxConstraints(minHeight: 108),
+              decoration: boxDecoration ?? themeData.pickerDecoration ?? BoxDecoration(color: theme?.backgroundColor ?? const Color(0xFF02132B).withOpacity(0.03), borderRadius: BorderRadius.circular(7)),
+              child: Material(
+                type: MaterialType.transparency,
+                child: Column(
+                  children: [
+                    Expanded(
+                      child: Center(
+                        child: InkWell(
+                          borderRadius: BorderRadius.circular(inkRadius ?? 7),
+                          onTap: () async {
+                            if (onTap != null) onTap!();
+                            FilePickerResult? result = await FilePicker.platform.pickFiles(allowedExtensions: pdfOnly == true ? ["pdf", "PDF"] : null, type: pdfOnly == true ? FileType.custom : FileType.any);
 
                               if (result != null) {
                                 state.value = result.files.single;

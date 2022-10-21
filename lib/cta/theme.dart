@@ -10,6 +10,7 @@ class CtaThemeData {
   final BoxConstraints? constraints;
   final TextStyle? textButtonStyle;
   final double? distanceBetweenIconText;
+  final Color? iconColor;
   final Color? backgroundColor;
   final double? borderRadius;
   final BoxBorder? border;
@@ -24,6 +25,7 @@ class CtaThemeData {
     this.heightInWeb,
     this.heightInMobile,
     this.constraints,
+    this.iconColor,
     this.backgroundColor,
     this.distanceBetweenIconText,
     this.textButtonStyle,
