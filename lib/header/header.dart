@@ -99,7 +99,7 @@ class _Primary extends StatelessWidget implements Header {
                       height: 40,
                       width: 40,
                       decoration: imageProvider != null
-                          ? BoxDecoration(shape: BoxShape.circle, image: DecorationImage(image: imageProvider!))
+                          ? BoxDecoration(shape: BoxShape.circle, image: DecorationImage(image: imageProvider!, fit: BoxFit.cover))
                           : const BoxDecoration(shape: BoxShape.circle, color: Color(0xFF02132B)),
                     )
                   ],
@@ -112,7 +112,7 @@ class _Primary extends StatelessWidget implements Header {
                       height: 40,
                       width: 40,
                       decoration: imageProvider != null
-                          ? BoxDecoration(shape: BoxShape.circle, image: DecorationImage(image: imageProvider!))
+                          ? BoxDecoration(shape: BoxShape.circle, image: DecorationImage(image: imageProvider!, fit: BoxFit.cover))
                           : const BoxDecoration(shape: BoxShape.circle, color: Color(0xFF02132B)),
                     ),
                     const SizedBox(width: 12),
@@ -199,7 +199,7 @@ class _Secondary extends StatelessWidget implements Header {
                   height: 40,
                   width: 40,
                   decoration: imageProvider != null
-                      ? BoxDecoration(shape: BoxShape.circle, image: DecorationImage(image: imageProvider!))
+                      ? BoxDecoration(shape: BoxShape.circle, image: DecorationImage(image: imageProvider!, fit: BoxFit.cover))
                       : const BoxDecoration(shape: BoxShape.circle, color: Color(0xFF02132B)),
                 ),
               ]
@@ -208,7 +208,7 @@ class _Secondary extends StatelessWidget implements Header {
                   height: 40,
                   width: 40,
                   decoration: imageProvider != null
-                      ? BoxDecoration(shape: BoxShape.circle, image: DecorationImage(image: imageProvider!))
+                      ? BoxDecoration(shape: BoxShape.circle, image: DecorationImage(image: imageProvider!, fit: BoxFit.cover))
                       : const BoxDecoration(shape: BoxShape.circle, color: Color(0xFF02132B)),
                 ),
                 const SizedBox(width: 14),
