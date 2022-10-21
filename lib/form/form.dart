@@ -72,8 +72,8 @@ class TextFormUpdated extends HookWidget {
   final String? defaultValue;
   final Function(String)? onChanged;
   final bool? isUpdatable;
-  final double? minLine;
-  final double? maxLine;
+  final int? minLine;
+  final int? maxLine;
 
   const TextFormUpdated({
     this.theme,
@@ -319,8 +319,6 @@ class TextFormUpdated extends HookWidget {
     final InputBorder? border,
     final Color? cursorColor,
     final String? initialValue,
-    final double? maxLine,
-    final double? minLine,
     final String? Function(String?)? validator,
     final String? subFieldText,
   }) = _TextArea;
@@ -371,6 +369,8 @@ class _Classic extends TextFormUpdated {
     final Widget? suffixChildActive,
     final Function(String)? onChanged,
     final String? subFieldText,
+    final int? maxLine,
+    final int? minLine,
   }) : super(
           inputFormatters: inputFormatters,
           textInputType: textInputType,
@@ -410,6 +410,8 @@ class _Classic extends TextFormUpdated {
           textStyle: textStyle,
           theme: theme,
           subFieldText: subFieldText,
+          maxLine: maxLine,
+          minLine: minLine,
         );
 
   @override
@@ -456,6 +458,8 @@ class _Classic extends TextFormUpdated {
         ),
         sh(7),
         TextFormField(
+          maxLines: maxLine,
+          minLines: minLine,
           textInputAction: textInputAction,
           validator: validator,
           keyboardType: textInputType,
@@ -1226,8 +1230,8 @@ class _TextArea extends TextFormUpdated {
     final InputBorder? border,
     final Color? cursorColor,
     final String? initialValue,
-    final double? maxLine,
-    final double? minLine,
+    final int? maxLine,
+    final int? minLine,
     final String? Function(String?)? validator,
     String? subFieldText,
   }) : super(

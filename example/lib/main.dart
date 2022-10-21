@@ -1,12 +1,12 @@
 // ignore_for_file: unnecessary_import
 
+
 import 'package:core_kosmos/core_package.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 import 'package:file_picker/file_picker.dart';
-import 'package:ui_kosmos_v4/cta/theme.dart';
 import 'package:ui_kosmos_v4/ui_kosmos_v4.dart';
 
 void main() {
@@ -64,7 +64,6 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    int taped = 0;
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
@@ -75,54 +74,9 @@ class _MyHomePageState extends State<MyHomePage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               sh(40),
-              CTA.back(
-                theme: const CtaThemeData(
-                  backgroundColor: Colors.blue,
-                ),
-                onTap: () {
-                  taped++;
-                  printInDebug(taped);
-                },
-              ),
-              sh(40),
-              CTA.primary(
-                textButton: 'CtaPrimary',
-                onTap: () {
-                  taped++;
-                  printInDebug(taped);
-                },
-              ),
-              sh(40),
-              CTA.secondary(
-                theme: const CtaThemeData(
-                  backgroundColor: Colors.blue,
-                ),
-                textButton: 'CtaSecondary',
-                textButtonStyle: const TextStyle(
-                  color: Colors.black,
-                ),
-                onTap: () {
-                  taped++;
-                  printInDebug(taped);
-                },
-              ),
-              sh(40),
-              CTA.tiers(
-                textButton: 'CtaTiers',
-                textButtonStyle: const TextStyle(
-                  color: Colors.black,
-                ),
-                onTap: () {
-                  taped++;
-                  printInDebug(taped);
-                },
-              ),
-              SizedBox(
-                  width: MediaQuery.of(context).size.width * .14,
-                  child: Input.validatedFile(
-                    fieldName: "Déposez votre dossier de candidature ici",
-                    height: formatHeight(208),
-                  ))
+              const TextFormUpdated.classic(
+                textInputAction: TextInputAction.newline,
+              )
             ],
           ),
         ),
