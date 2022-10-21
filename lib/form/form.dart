@@ -317,6 +317,8 @@ class TextFormUpdated extends HookWidget {
     final InputBorder? errorBorder,
     final InputBorder? focusedBorder,
     final InputBorder? border,
+    final int? minLine,
+    final int? maxLine,
     final Color? cursorColor,
     final String? initialValue,
     final String? Function(String?)? validator,
