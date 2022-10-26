@@ -460,7 +460,8 @@ class _MultipleFile extends Input {
             type: MaterialType.transparency,
             child: Container(
               constraints: themeData.pickerConstraints ?? const BoxConstraints(minHeight: 108),
-              decoration: boxDecoration ?? themeData.pickerDecoration ?? BoxDecoration(color: theme?.backgroundColor ?? const Color(0xFF02132B).withOpacity(0.03), borderRadius: BorderRadius.circular(7)),
+              decoration:
+                  boxDecoration ?? themeData.pickerDecoration ?? BoxDecoration(color: theme?.backgroundColor ?? const Color(0xFF02132B).withOpacity(0.03), borderRadius: BorderRadius.circular(7)),
               child: Material(
                 type: MaterialType.transparency,
                 child: InkWell(
@@ -708,10 +709,12 @@ class _ValidatedFile extends Input {
             child: Container(
               height: height,
               constraints: themeData.pickerConstraints ?? const BoxConstraints(minHeight: 108),
-              decoration: boxDecoration ?? themeData.pickerDecoration ?? BoxDecoration(color: theme?.backgroundColor ?? const Color(0xFF02132B).withOpacity(0.03), borderRadius: BorderRadius.circular(7)),
+              decoration:
+                  boxDecoration ?? themeData.pickerDecoration ?? BoxDecoration(color: theme?.backgroundColor ?? const Color(0xFF02132B).withOpacity(0.03), borderRadius: BorderRadius.circular(7)),
               child: Material(
                 type: MaterialType.transparency,
                 child: Column(
+                  mainAxisSize: MainAxisSize.min,
                   children: [
                     Expanded(
                       child: Center(
@@ -719,318 +722,319 @@ class _ValidatedFile extends Input {
                           borderRadius: BorderRadius.circular(inkRadius ?? 7),
                           onTap: () async {
                             if (onTap != null) onTap!();
-                            FilePickerResult? result = await FilePicker.platform.pickFiles(allowedExtensions: pdfOnly == true ? ["pdf", "PDF"] : null, type: pdfOnly == true ? FileType.custom : FileType.any);
+                            FilePickerResult? result =
+                                await FilePicker.platform.pickFiles(allowedExtensions: pdfOnly == true ? ["pdf", "PDF"] : null, type: pdfOnly == true ? FileType.custom : FileType.any);
 
-                              if (result != null) {
-                                state.value = result.files.single;
-                              }
-                              if (onChanged != null) onChanged!(state.value);
-                            },
-                            onDoubleTap: onDoubleTap,
-                            child: Padding(
-                              padding: contentPadding ?? themeData.contentPadding ?? const EdgeInsets.fromLTRB(26, 6, 26, 6),
-                              child: Stack(
-                                alignment: Alignment.center,
-                                children: (state.value != null)
-                                    ? [
-                                        Align(
-                                          alignment: Alignment.center,
-                                          child: Column(
-                                            mainAxisAlignment: MainAxisAlignment.start,
-                                            crossAxisAlignment: CrossAxisAlignment.center,
-                                            children: state.value != null
-                                                ? [
-                                                    sh(10),
-                                                    header != null
-                                                        ? header!
-                                                        : Center(
-                                                            child: Row(
-                                                              mainAxisSize: MainAxisSize.max,
-                                                              children: [
-                                                                svgIconPath == null
-                                                                    ? Icon(
-                                                                        Icons.cloud_upload_outlined,
-                                                                        color: iconColor ?? themeData.pickerIconColor ?? const Color(0xFF02132B).withOpacity(0.41),
-                                                                      )
-                                                                    : SvgPicture.asset(
-                                                                        svgIconPath!,
-                                                                        color: iconColor ?? themeData.pickerIconColor ?? const Color(0xFF02132B).withOpacity(0.41),
-                                                                      ),
-                                                                sw(4),
-                                                                Expanded(
-                                                                  child: Text(
-                                                                    'Appuyez pour modifier le fichier',
-                                                                    textAlign: TextAlign.center,
-                                                                    style: textStyle ??
-                                                                        themeData.fieldStyle ??
-                                                                        TextStyle(fontSize: sp(13), fontWeight: FontWeight.w500, color: const Color(0xFF02132B).withOpacity(0.41)),
-                                                                  ),
-                                                                ),
-                                                              ],
-                                                            ),
-                                                          ),
-                                                    sh(10),
-                                                    Divider(height: .5, color: Colors.black.withOpacity(.15)),
-                                                    sh(20),
-                                                    isValid ?? true
-                                                        ? Container(
-                                                            width: formatWidth(34),
-                                                            height: formatWidth(34),
-                                                            decoration: BoxDecoration(
-                                                              color: const Color(0xFF2BD184),
-                                                              borderRadius: BorderRadius.circular(34),
-                                                            ),
-                                                            child: const Center(child: Icon(Icons.check_rounded, color: Colors.white, size: 24)),
-                                                          )
-                                                        : Container(
-                                                            width: formatWidth(34),
-                                                            height: formatWidth(34),
-                                                            decoration: BoxDecoration(
-                                                              color: const Color(0xFFEA1C1C),
-                                                              borderRadius: BorderRadius.circular(34),
-                                                            ),
-                                                            child: const Center(child: Icon(Icons.close_rounded, color: Colors.white, size: 24)),
-                                                          ),
-                                                    sh(6),
-                                                    Center(
-                                                      child: Column(
-                                                        crossAxisAlignment: CrossAxisAlignment.center,
-                                                        children: [
-                                                          Row(
+                            if (result != null) {
+                              state.value = result.files.single;
+                            }
+                            if (onChanged != null) onChanged!(state.value);
+                          },
+                          onDoubleTap: onDoubleTap,
+                          child: Padding(
+                            padding: contentPadding ?? themeData.contentPadding ?? const EdgeInsets.fromLTRB(26, 6, 26, 6),
+                            child: Stack(
+                              alignment: Alignment.center,
+                              children: (state.value != null)
+                                  ? [
+                                      Align(
+                                        alignment: Alignment.center,
+                                        child: Column(
+                                          mainAxisAlignment: MainAxisAlignment.start,
+                                          crossAxisAlignment: CrossAxisAlignment.center,
+                                          children: state.value != null
+                                              ? [
+                                                  sh(10),
+                                                  header != null
+                                                      ? header!
+                                                      : Center(
+                                                          child: Row(
                                                             mainAxisSize: MainAxisSize.max,
                                                             children: [
-                                                              Opacity(
-                                                                opacity: 0,
-                                                                child: Icon(
-                                                                  Icons.close,
-                                                                  color: const Color(0xFF02132B).withOpacity(0.41),
-                                                                ),
-                                                              ),
+                                                              svgIconPath == null
+                                                                  ? Icon(
+                                                                      Icons.cloud_upload_outlined,
+                                                                      color: iconColor ?? themeData.pickerIconColor ?? const Color(0xFF02132B).withOpacity(0.41),
+                                                                    )
+                                                                  : SvgPicture.asset(
+                                                                      svgIconPath!,
+                                                                      color: iconColor ?? themeData.pickerIconColor ?? const Color(0xFF02132B).withOpacity(0.41),
+                                                                    ),
+                                                              sw(4),
                                                               Expanded(
-                                                                child: Center(
-                                                                  child: Text(
-                                                                    state.value!.name,
-                                                                    overflow: TextOverflow.ellipsis,
-                                                                    style: TextStyle(color: const Color(0xFF02132B), fontSize: sp(13), fontWeight: FontWeight.w500),
-                                                                  ),
+                                                                child: Text(
+                                                                  'Appuyez pour modifier le fichier',
+                                                                  textAlign: TextAlign.center,
+                                                                  style: textStyle ??
+                                                                      themeData.fieldStyle ??
+                                                                      TextStyle(fontSize: sp(13), fontWeight: FontWeight.w500, color: const Color(0xFF02132B).withOpacity(0.41)),
                                                                 ),
-                                                              ),
-                                                              InkWell(
-                                                                onTap: () {
-                                                                  state.value = null;
-                                                                  if (onChanged != null) onChanged!(state.value);
-                                                                },
-                                                                child: const Icon(Icons.close, color: Color(0xFF02132B)),
                                                               ),
                                                             ],
                                                           ),
-                                                        ],
-                                                      ),
-                                                    ),
-                                                  ]
-                                                : [
-                                                    Column(
-                                                      mainAxisAlignment: MainAxisAlignment.center,
+                                                        ),
+                                                  sh(10),
+                                                  Divider(height: .5, color: Colors.black.withOpacity(.15)),
+                                                  sh(20),
+                                                  isValid ?? true
+                                                      ? Container(
+                                                          width: formatWidth(34),
+                                                          height: formatWidth(34),
+                                                          decoration: BoxDecoration(
+                                                            color: const Color(0xFF2BD184),
+                                                            borderRadius: BorderRadius.circular(34),
+                                                          ),
+                                                          child: const Center(child: Icon(Icons.check_rounded, color: Colors.white, size: 24)),
+                                                        )
+                                                      : Container(
+                                                          width: formatWidth(34),
+                                                          height: formatWidth(34),
+                                                          decoration: BoxDecoration(
+                                                            color: const Color(0xFFEA1C1C),
+                                                            borderRadius: BorderRadius.circular(34),
+                                                          ),
+                                                          child: const Center(child: Icon(Icons.close_rounded, color: Colors.white, size: 24)),
+                                                        ),
+                                                  sh(6),
+                                                  Center(
+                                                    child: Column(
                                                       crossAxisAlignment: CrossAxisAlignment.center,
                                                       children: [
-                                                        svgIconPath == null
-                                                            ? Icon(
-                                                                Icons.cloud_upload_outlined,
-                                                                color: iconColor ?? themeData.pickerIconColor ?? const Color(0xFF02132B).withOpacity(0.41),
-                                                              )
-                                                            : SvgPicture.asset(
-                                                                svgIconPath!,
-                                                                color: iconColor ?? themeData.pickerIconColor ?? const Color(0xFF02132B).withOpacity(0.41),
-                                                              ),
-                                                        sw(7),
-                                                        Text(
-                                                          'Appuyez pour choisir une / des fichier(s)',
-                                                          style: textStyle ??
-                                                              themeData.fieldStyle ??
-                                                              TextStyle(
-                                                                fontSize: sp(13),
-                                                                fontWeight: FontWeight.w500,
+                                                        Row(
+                                                          mainAxisSize: MainAxisSize.max,
+                                                          children: [
+                                                            Opacity(
+                                                              opacity: 0,
+                                                              child: Icon(
+                                                                Icons.close,
                                                                 color: const Color(0xFF02132B).withOpacity(0.41),
                                                               ),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  ],
-                                          ),
-                                        ),
-                                      ]
-                                    : defaultFileName != null
-                                        ? [
-                                            Align(
-                                              alignment: Alignment.center,
-                                              child: Column(
-                                                mainAxisAlignment: MainAxisAlignment.start,
-                                                crossAxisAlignment: CrossAxisAlignment.center,
-                                                children: defaultFileName != null
-                                                    ? [
-                                                        sh(10),
-                                                        header != null
-                                                            ? header!
-                                                            : Center(
-                                                                child: Row(
-                                                                  mainAxisSize: MainAxisSize.max,
-                                                                  children: [
-                                                                    svgIconPath == null
-                                                                        ? Icon(
-                                                                            Icons.cloud_upload_outlined,
-                                                                            color: iconColor ?? themeData.pickerIconColor ?? const Color(0xFF02132B).withOpacity(0.41),
-                                                                          )
-                                                                        : SvgPicture.asset(
-                                                                            svgIconPath!,
-                                                                            color: iconColor ?? themeData.pickerIconColor ?? const Color(0xFF02132B).withOpacity(0.41),
-                                                                          ),
-                                                                    sw(4),
-                                                                    Expanded(
-                                                                      child: Text(
-                                                                        'Appuyez pour modifier le fichier',
-                                                                        textAlign: TextAlign.center,
-                                                                        style: textStyle ??
-                                                                            themeData.fieldStyle ??
-                                                                            TextStyle(fontSize: sp(13), fontWeight: FontWeight.w500, color: const Color(0xFF02132B).withOpacity(0.41)),
-                                                                      ),
-                                                                    ),
-                                                                  ],
+                                                            ),
+                                                            Expanded(
+                                                              child: Center(
+                                                                child: Text(
+                                                                  state.value!.name,
+                                                                  overflow: TextOverflow.ellipsis,
+                                                                  style: TextStyle(color: const Color(0xFF02132B), fontSize: sp(13), fontWeight: FontWeight.w500),
                                                                 ),
                                                               ),
-                                                        sh(10),
-                                                        Divider(height: .5, color: Colors.black.withOpacity(.15)),
-                                                        sh(20),
-                                                        isValid ?? true
-                                                            ? Container(
-                                                                width: formatWidth(34),
-                                                                height: formatWidth(34),
-                                                                decoration: BoxDecoration(
-                                                                  color: const Color(0xFF2BD184),
-                                                                  borderRadius: BorderRadius.circular(34),
-                                                                ),
-                                                                child: const Center(child: Icon(Icons.check_rounded, color: Colors.white, size: 24)),
-                                                              )
-                                                            : Container(
-                                                                width: formatWidth(34),
-                                                                height: formatWidth(34),
-                                                                decoration: BoxDecoration(
-                                                                  color: const Color(0xFFEA1C1C),
-                                                                  borderRadius: BorderRadius.circular(34),
-                                                                ),
-                                                                child: const Center(child: Icon(Icons.close_rounded, color: Colors.white, size: 24)),
-                                                              ),
-                                                        sh(6),
-                                                        Center(
-                                                          child: Column(
-                                                            crossAxisAlignment: CrossAxisAlignment.center,
-                                                            children: [
-                                                              Row(
-                                                                mainAxisSize: MainAxisSize.max,
-                                                                children: [
-                                                                  Opacity(
-                                                                    opacity: 0,
-                                                                    child: Icon(
-                                                                      Icons.close,
-                                                                      color: const Color(0xFF02132B).withOpacity(0.41),
-                                                                    ),
-                                                                  ),
-                                                                  Expanded(
-                                                                    child: Center(
-                                                                      child: Text(
-                                                                        defaultFileName!,
-                                                                        overflow: TextOverflow.ellipsis,
-                                                                        style: TextStyle(color: const Color(0xFF02132B), fontSize: sp(13), fontWeight: FontWeight.w500),
-                                                                      ),
-                                                                    ),
-                                                                  ),
-                                                                ],
-                                                              ),
-                                                            ],
-                                                          ),
-                                                        ),
-                                                      ]
-                                                    : [
-                                                        Column(
-                                                          mainAxisAlignment: MainAxisAlignment.center,
-                                                          crossAxisAlignment: CrossAxisAlignment.center,
-                                                          children: [
-                                                            svgIconPath == null
-                                                                ? Icon(
-                                                                    Icons.cloud_upload_outlined,
-                                                                    color: iconColor ?? themeData.pickerIconColor ?? const Color(0xFF02132B).withOpacity(0.41),
-                                                                  )
-                                                                : SvgPicture.asset(
-                                                                    svgIconPath!,
-                                                                    color: iconColor ?? themeData.pickerIconColor ?? const Color(0xFF02132B).withOpacity(0.41),
-                                                                  ),
-                                                            sw(7),
-                                                            Text(
-                                                              'Appuyez pour choisir une / des fichier(s)',
-                                                              style: textStyle ??
-                                                                  themeData.fieldStyle ??
-                                                                  TextStyle(
-                                                                    fontSize: sp(13),
-                                                                    fontWeight: FontWeight.w500,
-                                                                    color: const Color(0xFF02132B).withOpacity(0.41),
-                                                                  ),
+                                                            ),
+                                                            InkWell(
+                                                              onTap: () {
+                                                                state.value = null;
+                                                                if (onChanged != null) onChanged!(state.value);
+                                                              },
+                                                              child: const Icon(Icons.close, color: Color(0xFF02132B)),
                                                             ),
                                                           ],
                                                         ),
                                                       ],
-                                              ),
-                                            ),
-                                          ]
-                                        : [
-                                            Align(
-                                              alignment: Alignment.center,
-                                              child: Column(
-                                                mainAxisAlignment: MainAxisAlignment.center,
-                                                crossAxisAlignment: CrossAxisAlignment.center,
-                                                children: [
-                                                  svgIconPath == null
-                                                      ? Icon(
-                                                          Icons.cloud_upload_outlined,
-                                                          color: iconColor ?? themeData.pickerIconColor ?? const Color(0xFF02132B).withOpacity(0.41),
-                                                        )
-                                                      : SvgPicture.asset(
-                                                          svgIconPath!,
-                                                          color: iconColor ?? themeData.pickerIconColor ?? const Color(0xFF02132B).withOpacity(0.41),
-                                                        ),
-                                                  sh(7),
-                                                  Text(
-                                                    'Appuyez pour choisir un fichier',
-                                                    style: textStyle ??
-                                                        themeData.hintStyle ??
-                                                        TextStyle(
-                                                          fontSize: 13,
-                                                          fontWeight: FontWeight.w500,
-                                                          color: const Color(0xFF02132B).withOpacity(0.41),
-                                                        ),
+                                                    ),
+                                                  ),
+                                                ]
+                                              : [
+                                                  Column(
+                                                    mainAxisAlignment: MainAxisAlignment.center,
+                                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                                    children: [
+                                                      svgIconPath == null
+                                                          ? Icon(
+                                                              Icons.cloud_upload_outlined,
+                                                              color: iconColor ?? themeData.pickerIconColor ?? const Color(0xFF02132B).withOpacity(0.41),
+                                                            )
+                                                          : SvgPicture.asset(
+                                                              svgIconPath!,
+                                                              color: iconColor ?? themeData.pickerIconColor ?? const Color(0xFF02132B).withOpacity(0.41),
+                                                            ),
+                                                      sw(7),
+                                                      Text(
+                                                        'Appuyez pour choisir une / des fichier(s)',
+                                                        style: textStyle ??
+                                                            themeData.fieldStyle ??
+                                                            TextStyle(
+                                                              fontSize: sp(13),
+                                                              fontWeight: FontWeight.w500,
+                                                              color: const Color(0xFF02132B).withOpacity(0.41),
+                                                            ),
+                                                      ),
+                                                    ],
                                                   ),
                                                 ],
-                                              ),
+                                        ),
+                                      ),
+                                    ]
+                                  : defaultFileName != null
+                                      ? [
+                                          Align(
+                                            alignment: Alignment.center,
+                                            child: Column(
+                                              mainAxisAlignment: MainAxisAlignment.start,
+                                              crossAxisAlignment: CrossAxisAlignment.center,
+                                              children: defaultFileName != null
+                                                  ? [
+                                                      sh(10),
+                                                      header != null
+                                                          ? header!
+                                                          : Center(
+                                                              child: Row(
+                                                                mainAxisSize: MainAxisSize.max,
+                                                                children: [
+                                                                  svgIconPath == null
+                                                                      ? Icon(
+                                                                          Icons.cloud_upload_outlined,
+                                                                          color: iconColor ?? themeData.pickerIconColor ?? const Color(0xFF02132B).withOpacity(0.41),
+                                                                        )
+                                                                      : SvgPicture.asset(
+                                                                          svgIconPath!,
+                                                                          color: iconColor ?? themeData.pickerIconColor ?? const Color(0xFF02132B).withOpacity(0.41),
+                                                                        ),
+                                                                  sw(4),
+                                                                  Expanded(
+                                                                    child: Text(
+                                                                      'Appuyez pour modifier le fichier',
+                                                                      textAlign: TextAlign.center,
+                                                                      style: textStyle ??
+                                                                          themeData.fieldStyle ??
+                                                                          TextStyle(fontSize: sp(13), fontWeight: FontWeight.w500, color: const Color(0xFF02132B).withOpacity(0.41)),
+                                                                    ),
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                            ),
+                                                      sh(10),
+                                                      Divider(height: .5, color: Colors.black.withOpacity(.15)),
+                                                      sh(20),
+                                                      isValid ?? true
+                                                          ? Container(
+                                                              width: formatWidth(34),
+                                                              height: formatWidth(34),
+                                                              decoration: BoxDecoration(
+                                                                color: const Color(0xFF2BD184),
+                                                                borderRadius: BorderRadius.circular(34),
+                                                              ),
+                                                              child: const Center(child: Icon(Icons.check_rounded, color: Colors.white, size: 24)),
+                                                            )
+                                                          : Container(
+                                                              width: formatWidth(34),
+                                                              height: formatWidth(34),
+                                                              decoration: BoxDecoration(
+                                                                color: const Color(0xFFEA1C1C),
+                                                                borderRadius: BorderRadius.circular(34),
+                                                              ),
+                                                              child: const Center(child: Icon(Icons.close_rounded, color: Colors.white, size: 24)),
+                                                            ),
+                                                      sh(6),
+                                                      Center(
+                                                        child: Column(
+                                                          crossAxisAlignment: CrossAxisAlignment.center,
+                                                          children: [
+                                                            Row(
+                                                              mainAxisSize: MainAxisSize.max,
+                                                              children: [
+                                                                Opacity(
+                                                                  opacity: 0,
+                                                                  child: Icon(
+                                                                    Icons.close,
+                                                                    color: const Color(0xFF02132B).withOpacity(0.41),
+                                                                  ),
+                                                                ),
+                                                                Expanded(
+                                                                  child: Center(
+                                                                    child: Text(
+                                                                      defaultFileName!,
+                                                                      overflow: TextOverflow.ellipsis,
+                                                                      style: TextStyle(color: const Color(0xFF02132B), fontSize: sp(13), fontWeight: FontWeight.w500),
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                              ],
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    ]
+                                                  : [
+                                                      Column(
+                                                        mainAxisAlignment: MainAxisAlignment.center,
+                                                        crossAxisAlignment: CrossAxisAlignment.center,
+                                                        children: [
+                                                          svgIconPath == null
+                                                              ? Icon(
+                                                                  Icons.cloud_upload_outlined,
+                                                                  color: iconColor ?? themeData.pickerIconColor ?? const Color(0xFF02132B).withOpacity(0.41),
+                                                                )
+                                                              : SvgPicture.asset(
+                                                                  svgIconPath!,
+                                                                  color: iconColor ?? themeData.pickerIconColor ?? const Color(0xFF02132B).withOpacity(0.41),
+                                                                ),
+                                                          sw(7),
+                                                          Text(
+                                                            'Appuyez pour choisir une / des fichier(s)',
+                                                            style: textStyle ??
+                                                                themeData.fieldStyle ??
+                                                                TextStyle(
+                                                                  fontSize: sp(13),
+                                                                  fontWeight: FontWeight.w500,
+                                                                  color: const Color(0xFF02132B).withOpacity(0.41),
+                                                                ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ],
                                             ),
-                                            if (desc != null)
-                                              Positioned(
-                                                bottom: 0,
-                                                left: 0,
-                                                right: 0,
-                                                child: Text(desc!, textAlign: TextAlign.center, style: TextStyle(fontSize: sp(11), fontWeight: FontWeight.w500, color: const Color(0xFF02132B))),
-                                              )
-                                          ],
-                              ),
+                                          ),
+                                        ]
+                                      : [
+                                          Align(
+                                            alignment: Alignment.center,
+                                            child: Column(
+                                              mainAxisAlignment: MainAxisAlignment.center,
+                                              crossAxisAlignment: CrossAxisAlignment.center,
+                                              children: [
+                                                svgIconPath == null
+                                                    ? Icon(
+                                                        Icons.cloud_upload_outlined,
+                                                        color: iconColor ?? themeData.pickerIconColor ?? const Color(0xFF02132B).withOpacity(0.41),
+                                                      )
+                                                    : SvgPicture.asset(
+                                                        svgIconPath!,
+                                                        color: iconColor ?? themeData.pickerIconColor ?? const Color(0xFF02132B).withOpacity(0.41),
+                                                      ),
+                                                sh(7),
+                                                Text(
+                                                  'Appuyez pour choisir un fichier',
+                                                  style: textStyle ??
+                                                      themeData.hintStyle ??
+                                                      TextStyle(
+                                                        fontSize: 13,
+                                                        fontWeight: FontWeight.w500,
+                                                        color: const Color(0xFF02132B).withOpacity(0.41),
+                                                      ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          if (desc != null)
+                                            Positioned(
+                                              bottom: 0,
+                                              left: 0,
+                                              right: 0,
+                                              child: Text(desc!, textAlign: TextAlign.center, style: TextStyle(fontSize: sp(11), fontWeight: FontWeight.w500, color: const Color(0xFF02132B))),
+                                            )
+                                        ],
                             ),
                           ),
                         ),
                       ),
-                      if ((desc?.isEmpty ?? true) && (pdfOnly ?? false)) ...[
-                        Text("Format PDF", textAlign: TextAlign.center, style: TextStyle(fontSize: sp(11), fontWeight: FontWeight.w500, color: const Color(0xFF02132B))),
-                        sh(10)
-                      ]
-                    ],
-                  ),
+                    ),
+                    if ((desc?.isEmpty ?? true) && (pdfOnly ?? false)) ...[
+                      Text("Format PDF", textAlign: TextAlign.center, style: TextStyle(fontSize: sp(11), fontWeight: FontWeight.w500, color: const Color(0xFF02132B))),
+                      sh(10)
+                    ]
+                  ],
                 ),
-              )),
+              ),
+            )),
       ],
     );
   }
