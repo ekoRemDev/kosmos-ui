@@ -119,6 +119,7 @@ abstract class CTA extends HookWidget {
     final bool? isEnabled,
     final double? radius,
     final Function? onTap,
+    final double? width,
     final VoidCallback? onDoubleTap,
     final IconData? backIcon,
     final Color backgroundColor,
@@ -470,6 +471,7 @@ class _Back extends CTA {
     final double? height,
     final double? radius,
     final bool? isEnabled,
+    final double? width,
     final IconData? backIcon,
     final Function? onTap,
     final VoidCallback? onDoubleTap,
@@ -482,6 +484,7 @@ class _Back extends CTA {
   }) : super(
           height: height,
           isEnabled: isEnabled,
+          width: width,
           radius: radius,
           onTap: onTap,
           onDoubleTap: onDoubleTap,
