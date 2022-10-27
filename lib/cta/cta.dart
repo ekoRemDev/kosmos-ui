@@ -116,7 +116,6 @@ abstract class CTA extends HookWidget {
 
   const factory CTA.back({
     final double? height,
-    final double? width,
     final bool? isEnabled,
     final double? radius,
     final Function? onTap,
@@ -469,7 +468,6 @@ class _Tiers extends CTA {
 class _Back extends CTA {
   const _Back({
     final double? height,
-    final double? width,
     final double? radius,
     final bool? isEnabled,
     final IconData? backIcon,
@@ -483,7 +481,6 @@ class _Back extends CTA {
     final Color? iconColor,
   }) : super(
           height: height,
-          width: width,
           isEnabled: isEnabled,
           radius: radius,
           onTap: onTap,
@@ -513,8 +510,8 @@ class _Back extends CTA {
                 : null,
             onDoubleTap: onDoubleTap,
             child: Container(
-              height: formatHeight(height ?? themeData.height ?? getResponsiveValue(context, defaultValue: 47, desktop: themeData.heightInWeb, phone: themeData.heightInMobile)),
-              width: formatWidth(height ?? themeData.height ?? getResponsiveValue(context, defaultValue: 47, desktop: themeData.widthInWeb, phone: themeData.widthInMobile)),
+              height: (height ?? themeData.height ?? getResponsiveValue(context, defaultValue: formatWidth(50), desktop: themeData.heightInWeb, phone: themeData.heightInMobile)),
+              width: (height ?? themeData.height ?? getResponsiveValue(context, defaultValue: formatWidth(50), desktop: themeData.widthInWeb, phone: themeData.widthInMobile)),
               decoration: BoxDecoration(
                 color: backgroundColor ?? themeData.backgroundColor ?? Colors.transparent,
                 gradient: gradient ?? gradient,
