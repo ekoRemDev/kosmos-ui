@@ -16,6 +16,7 @@ class TextFormUpdated extends HookWidget {
   final TextEditingController? controller;
   final double? radius;
   final String? hintText;
+  final bool? isEnabled;
   final String? fieldName;
   final TextStyle? fieldNameStyle;
   final String? fieldPostRedirection;
@@ -79,6 +80,7 @@ class TextFormUpdated extends HookWidget {
     this.theme,
     this.focusNode,
     this.controller,
+    this.isEnabled,
     this.fieldName,
     this.hintText,
     this.isUpdatable,
@@ -156,6 +158,7 @@ class TextFormUpdated extends HookWidget {
     final bool? error,
     final bool? isUpdatable,
     final bool? filled,
+    final bool? isEnabled,
     final String? Function(String?)? validator,
     final Function(String)? onFieldSubmitted,
     final String? errorMessage,
@@ -340,6 +343,7 @@ class _Classic extends TextFormUpdated {
     final Color? backgroundColor,
     final Color? cursorColor,
     final String? hintText,
+    final bool? isEnabled,
     final double? radius,
     final EdgeInsets? contentPadding,
     final TextStyle? fieldNameStyle,
@@ -381,6 +385,7 @@ class _Classic extends TextFormUpdated {
           defaultValue: defaultValue,
           onChanged: onChanged,
           controller: controller,
+          isEnabled:isEnabled,
           fieldName: fieldName,
           cursorColor: cursorColor,
           focusedErrorBorder: focusedErrorBorder,
@@ -462,6 +467,7 @@ class _Classic extends TextFormUpdated {
         ),
         sh(7),
         TextFormField(
+          enabled: isEnabled,
           minLines: minLine ?? themeData.minLine ?? 1,
           maxLines: maxLine ?? themeData.maxLine ?? 1,
           textInputAction: (maxLine ?? 1) > 1 ? TextInputAction.newline : textInputAction,
