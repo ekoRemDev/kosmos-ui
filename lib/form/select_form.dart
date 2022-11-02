@@ -88,6 +88,7 @@ class SelectForm<T> extends HookWidget {
         DropdownButtonFormField<T>(
           borderRadius: BorderRadius.circular(radiusDropDown ?? themeData.selectRadiusDropDown ?? 7),
           elevation: 0,
+          dropdownColor: backgroundColor ?? themeData.backgroundColor,
           hint: Text(
             hintText ?? "Sélectionner",
             style: hintTextStyle ?? themeData.hintStyle ?? const TextStyle(color: Color(0xFF9299A4), fontSize: 13, fontWeight: FontWeight.w500),
