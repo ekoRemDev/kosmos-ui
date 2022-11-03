@@ -273,8 +273,7 @@ class _OneImage extends Input {
                     },
                     onDoubleTap: onDoubleTap,
                     child: Padding(
-                      padding:
-                          state.value != null || imageMobile != null || urlImage != null ? (contentPadding ?? themeData.contentPadding ?? const EdgeInsets.fromLTRB(7, 6, 30, 6)) : EdgeInsets.zero,
+                      padding: state.value != null || imageMobile != null || urlImage != null ? (contentPadding ?? themeData.contentPadding ?? const EdgeInsets.fromLTRB(7, 6, 30, 6)) : EdgeInsets.zero,
                       child: Stack(
                         alignment: Alignment.centerLeft,
                         children: state.value != null || imageMobile != null || urlImage != null || image != null || child != null
@@ -462,8 +461,7 @@ class _MultipleFile extends Input {
             // type: MaterialType.transparency,
             child: Container(
           constraints: themeData.pickerConstraints ?? const BoxConstraints(minHeight: 108),
-          decoration:
-              boxDecoration ?? themeData.pickerDecoration ?? BoxDecoration(color: themeData.backgroundColor ?? const Color(0xFF02132B).withOpacity(0.03), borderRadius: BorderRadius.circular(7)),
+          decoration: boxDecoration ?? themeData.pickerDecoration ?? BoxDecoration(color: themeData.backgroundColor ?? const Color(0xFF02132B).withOpacity(0.03), borderRadius: BorderRadius.circular(7)),
           child: Material(
             type: MaterialType.transparency,
             child: InkWell(
@@ -531,8 +529,7 @@ class _MultipleFile extends Input {
                                                   child: Text(
                                                     'Appuyez pour modifier la / les fichier(s)',
                                                     textAlign: TextAlign.center,
-                                                    style:
-                                                        textStyle ?? themeData.fieldStyle ?? TextStyle(fontSize: sp(13), fontWeight: FontWeight.w500, color: const Color(0xFF02132B).withOpacity(0.41)),
+                                                    style: textStyle ?? themeData.fieldStyle ?? TextStyle(fontSize: sp(13), fontWeight: FontWeight.w500, color: const Color(0xFF02132B).withOpacity(0.41)),
                                                   ),
                                                 ),
                                               ],
@@ -712,8 +709,7 @@ class _ValidatedFile extends Input {
             child: Container(
               height: height,
               constraints: themeData.pickerConstraints ?? const BoxConstraints(minHeight: 108),
-              decoration:
-                  boxDecoration ?? themeData.pickerDecoration ?? BoxDecoration(color: theme?.backgroundColor ?? const Color(0xFF02132B).withOpacity(0.03), borderRadius: BorderRadius.circular(7)),
+              decoration: boxDecoration ?? themeData.pickerDecoration ?? BoxDecoration(color: theme?.backgroundColor ?? const Color(0xFF02132B).withOpacity(0.03), borderRadius: BorderRadius.circular(7)),
               child: Material(
                 type: MaterialType.transparency,
                 child: Column(
@@ -725,8 +721,7 @@ class _ValidatedFile extends Input {
                           borderRadius: BorderRadius.circular(inkRadius ?? 7),
                           onTap: () async {
                             if (onTap != null) onTap!();
-                            FilePickerResult? result =
-                                await FilePicker.platform.pickFiles(allowedExtensions: pdfOnly == true ? ["pdf", "PDF"] : null, type: pdfOnly == true ? FileType.custom : FileType.any);
+                            FilePickerResult? result = await FilePicker.platform.pickFiles(allowedExtensions: pdfOnly == true ? ["pdf", "PDF"] : null, type: pdfOnly == true ? FileType.custom : FileType.any);
 
                             if (result != null) {
                               state.value = result.files.single;
@@ -768,9 +763,7 @@ class _ValidatedFile extends Input {
                                                                 child: Text(
                                                                   'Appuyez pour modifier le fichier',
                                                                   textAlign: TextAlign.center,
-                                                                  style: textStyle ??
-                                                                      themeData.fieldStyle ??
-                                                                      TextStyle(fontSize: sp(13), fontWeight: FontWeight.w500, color: const Color(0xFF02132B).withOpacity(0.41)),
+                                                                  style: textStyle ?? themeData.fieldStyle ?? TextStyle(fontSize: sp(13), fontWeight: FontWeight.w500, color: const Color(0xFF02132B).withOpacity(0.41)),
                                                                 ),
                                                               ),
                                                             ],
@@ -896,9 +889,7 @@ class _ValidatedFile extends Input {
                                                                     child: Text(
                                                                       'Appuyez pour modifier le fichier',
                                                                       textAlign: TextAlign.center,
-                                                                      style: textStyle ??
-                                                                          themeData.fieldStyle ??
-                                                                          TextStyle(fontSize: sp(13), fontWeight: FontWeight.w500, color: const Color(0xFF02132B).withOpacity(0.41)),
+                                                                      style: textStyle ?? themeData.fieldStyle ?? TextStyle(fontSize: sp(13), fontWeight: FontWeight.w500, color: const Color(0xFF02132B).withOpacity(0.41)),
                                                                     ),
                                                                   ),
                                                                 ],
@@ -946,7 +937,7 @@ class _ValidatedFile extends Input {
                                                                     child: Text(
                                                                       defaultFileName!,
                                                                       overflow: TextOverflow.ellipsis,
-                                                                      style: TextStyle(color: const Color(0xFF02132B), fontSize: sp(13), fontWeight: FontWeight.w500),
+                                                                      style: textStyle ?? themeData.fieldStyle ?? TextStyle(color: const Color(0xFF02132B), fontSize: sp(13), fontWeight: FontWeight.w500),
                                                                     ),
                                                                   ),
                                                                 ),
@@ -1030,10 +1021,7 @@ class _ValidatedFile extends Input {
                         ),
                       ),
                     ),
-                    if ((desc?.isEmpty ?? true) && (pdfOnly ?? false)) ...[
-                      Text("Format PDF", textAlign: TextAlign.center, style: TextStyle(fontSize: sp(11), fontWeight: FontWeight.w500, color: const Color(0xFF02132B))),
-                      sh(10)
-                    ]
+                    if ((desc?.isEmpty ?? true) && (pdfOnly ?? false)) ...[Text("Format PDF", textAlign: TextAlign.center, style: TextStyle(fontSize: sp(11), fontWeight: FontWeight.w500, color: const Color(0xFF02132B))), sh(10)]
                   ],
                 ),
               ),
