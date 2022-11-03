@@ -149,6 +149,7 @@ abstract class Input extends HookWidget {
     final VoidCallback? postFieldOnClick,
     final TextStyle? textStyle,
     final Color? iconColor,
+    final String? contentTitle,
     final double? widthImage,
     final CustomFormFieldThemeData? theme,
     final Function(PlatformFile?)? onChanged,
