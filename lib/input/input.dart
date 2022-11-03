@@ -112,6 +112,7 @@ abstract class Input extends HookWidget {
     final PlatformFile? defaultFile,
     final File? imageMobile,
     final Widget? child,
+    final String? contentTitle,
   }) = _OneImage;
 
   const factory Input.files({
@@ -132,6 +133,7 @@ abstract class Input extends HookWidget {
     final CustomFormFieldThemeData? theme,
     final List<PlatformFile>? defaultFileList,
     final Function(List<PlatformFile>?)? onMultipleChanged,
+    final String? contentTitle,
   }) = _MultipleFile;
 
   const factory Input.validatedFile({
@@ -192,6 +194,7 @@ class _OneImage extends Input {
     final Function(PlatformFile?)? onChanged,
     final PlatformFile? defaultFile,
     final File? imageMobile,
+    final String? contentTitle,
   }) : super(
           height: height,
           svgIconPath: svgIconPath,
@@ -216,6 +219,7 @@ class _OneImage extends Input {
           onChanged: onChanged,
           defaultFile: defaultFile,
           imageMobile: imageMobile,
+          contentTitle: contentTitle,
         );
   @override
   Widget build(BuildContext context) {
@@ -364,7 +368,8 @@ class _OneImage extends Input {
                                             ),
                                       sh(7),
                                       Text(
-                                        'Appuyez pour choisir une photo',
+                                        contentTitle ?? 'Appuyez pour choisir une photo',
+                                        textAlign: TextAlign.center,
                                         style: textStyle ??
                                             themeData.hintStyle ??
                                             TextStyle(
@@ -405,6 +410,7 @@ class _MultipleFile extends Input {
     final CustomFormFieldThemeData? theme,
     final List<PlatformFile>? defaultFileList,
     final Function(List<PlatformFile>?)? onMultipleChanged,
+    final String? contentTitle,
   }) : super(
           svgIconPath: svgIconPath,
           onTap: onTap,
@@ -423,6 +429,7 @@ class _MultipleFile extends Input {
           theme: theme,
           defaultFileList: defaultFileList,
           onMultipleChanged: onMultipleChanged,
+          contentTitle: contentTitle,
         );
   @override
   Widget build(BuildContext context) {
@@ -590,7 +597,8 @@ class _MultipleFile extends Input {
                                         ),
                                   sh(7),
                                   Text(
-                                    'Appuyez pour choisir un fichier',
+                                    contentTitle ?? 'Appuyez pour choisir un fichier',
+                                    textAlign: TextAlign.center,
                                     style: textStyle ??
                                         themeData.hintStyle ??
                                         TextStyle(
@@ -598,7 +606,6 @@ class _MultipleFile extends Input {
                                           fontWeight: FontWeight.w500,
                                           color: const Color(0xFF02132B).withOpacity(0.41),
                                         ),
-                                    // textAlign: TextAlign.,
                                   ),
                                 ],
                               ),
