@@ -1008,6 +1008,7 @@ class _ValidatedFile extends Input {
                                                 sh(7),
                                                 Text(
                                                   contentTitle ?? 'Appuyez pour choisir un fichier',
+                                                  textAlign: TextAlign.center,
                                                   style: textStyle ??
                                                       themeData.hintStyle ??
                                                       TextStyle(
