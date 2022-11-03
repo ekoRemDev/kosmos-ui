@@ -30,6 +30,7 @@ abstract class Input extends HookWidget {
   final TextStyle? textStyle;
   final Color? iconColor;
   final double? widthImage;
+  final String? contentTitle;
 
   final CustomFormFieldThemeData? theme;
 
@@ -64,6 +65,7 @@ abstract class Input extends HookWidget {
     this.imageRadius,
     this.textStyle,
     this.iconColor,
+    this.contentTitle,
     this.widthImage,
     this.urlImage,
     this.listNameFiles,
@@ -627,6 +629,7 @@ class _ValidatedFile extends Input {
     final TextStyle? textStyle,
     final Color? iconColor,
     final double? height,
+    final String? contentTitle,
     final double? widthImage,
     final CustomFormFieldThemeData? theme,
     final Function(PlatformFile?)? onChanged,
@@ -653,6 +656,7 @@ class _ValidatedFile extends Input {
           postFieldOnClick: postFieldOnClick,
           textStyle: textStyle,
           iconColor: iconColor,
+          contentTitle: contentTitle,
           widthImage: widthImage,
           theme: theme,
           onChanged: onChanged,
@@ -1001,7 +1005,7 @@ class _ValidatedFile extends Input {
                                                       ),
                                                 sh(7),
                                                 Text(
-                                                  'Appuyez pour choisir un fichier',
+                                                  contentTitle ?? 'Appuyez pour choisir un fichier',
                                                   style: textStyle ??
                                                       themeData.hintStyle ??
                                                       TextStyle(

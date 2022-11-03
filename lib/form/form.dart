@@ -75,6 +75,7 @@ class TextFormUpdated extends HookWidget {
   final bool? isUpdatable;
   final int? minLine;
   final int? maxLine;
+  final int? maxCharacter;
 
   const TextFormUpdated({
     this.theme,
@@ -114,6 +115,7 @@ class TextFormUpdated extends HookWidget {
     this.fieldPostRedirectionStyle,
     this.subFieldText,
     this.phoneValidate,
+    this.maxCharacter,
 
     //SELECT FORM
     this.icon,
@@ -328,6 +330,7 @@ class TextFormUpdated extends HookWidget {
     final String? initialValue,
     final String? Function(String?)? validator,
     final String? subFieldText,
+    final int? maxCharacter,
   }) = _TextArea;
 
   @override
@@ -385,7 +388,7 @@ class _Classic extends TextFormUpdated {
           defaultValue: defaultValue,
           onChanged: onChanged,
           controller: controller,
-          isEnabled:isEnabled,
+          isEnabled: isEnabled,
           fieldName: fieldName,
           cursorColor: cursorColor,
           focusedErrorBorder: focusedErrorBorder,
@@ -1243,6 +1246,7 @@ class _TextArea extends TextFormUpdated {
     final int? maxLine,
     final int? minLine,
     final String? Function(String?)? validator,
+    final int? maxCharacter,
     String? subFieldText,
   }) : super(
           theme: theme,
@@ -1272,6 +1276,7 @@ class _TextArea extends TextFormUpdated {
           nextFocusNode: nextFocusNode,
           minLine: minLine,
           maxLine: maxLine,
+          maxCharacter: maxCharacter,
           subFieldText: subFieldText,
         );
   @override
@@ -1293,6 +1298,7 @@ class _TextArea extends TextFormUpdated {
           keyboardType: TextInputType.multiline,
           focusNode: focusNode,
           initialValue: defaultValue,
+          maxLength: maxCharacter,
           maxLines: maxLine?.toInt() ?? themeData.maxLine?.toInt() ?? 4,
           minLines: maxLine?.toInt() ?? themeData.maxLine?.toInt(),
           onFieldSubmitted: (String val) {
