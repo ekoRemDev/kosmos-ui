@@ -168,7 +168,8 @@ class SettingsCellule extends StatelessWidget {
                       size: (themeData.imageWidth ?? 37) - 17,
                     ),
                   )
-                : switchNotif!
+                : switchNotif!,
+            sw(14),
           ],
         ),
       ),
