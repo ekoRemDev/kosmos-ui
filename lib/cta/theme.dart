@@ -16,6 +16,7 @@ class CtaThemeData {
   final BoxBorder? border;
   final LinearGradient? gradient;
   final Color? loaderColor;
+  final List<BoxShadow>? shadows;
 
   const CtaThemeData({
     this.width,
@@ -33,5 +34,6 @@ class CtaThemeData {
     this.border,
     this.gradient,
     this.loaderColor,
+    this.shadows,
   });
 }

@@ -23,6 +23,7 @@ abstract class CTA extends HookWidget {
   final Icon? icon;
   final CtaThemeData? theme;
   final String? themeName;
+  final List<BoxShadow>? shadows;
   final BoxBorder? border;
   final LinearGradient? gradient;
   final bool loading;
@@ -51,6 +52,7 @@ abstract class CTA extends HookWidget {
     this.gradient,
     this.loading = false,
     this.iconColor,
+    this.shadows,
     Key? key,
   }) : super(key: key);
 
@@ -73,6 +75,7 @@ abstract class CTA extends HookWidget {
     final BoxBorder? border,
     final LinearGradient? gradient,
     final bool loading,
+    final List<BoxShadow>? shadows,
   }) = _Primary;
 
   const factory CTA.secondary({
@@ -152,6 +155,7 @@ class _Primary extends CTA {
     final String? themeName,
     final BoxBorder? border,
     final LinearGradient? gradient,
+    final List<BoxShadow>? shadows,
     final bool loading = false,
   }) : super(
           height: height,
@@ -172,6 +176,7 @@ class _Primary extends CTA {
           border: border,
           gradient: gradient,
           loading: loading,
+          shadows: shadows,
         );
 
   @override
@@ -198,10 +203,12 @@ class _Primary extends CTA {
             width: formatWidth(width ?? getResponsiveValue(context, defaultValue: double.infinity, desktop: themeData.widthInWeb, phone: themeData.widthInMobile)),
             constraints: themeData.constraints,
             decoration: BoxDecoration(
-                color: backgroundColor ?? themeData.backgroundColor ?? (gradient != null ? null : Theme.of(context).primaryColor),
-                gradient: gradient ?? themeData.gradient,
-                borderRadius: BorderRadius.circular(radius ?? themeData.borderRadius ?? 7),
-                border: border ?? themeData.border),
+              color: backgroundColor ?? themeData.backgroundColor ?? (gradient != null ? null : Theme.of(context).primaryColor),
+              gradient: gradient ?? themeData.gradient,
+              borderRadius: BorderRadius.circular(radius ?? themeData.borderRadius ?? 7),
+              border: border ?? themeData.border,
+              boxShadow: shadows ?? themeData.shadows,
+            ),
             child: Material(
               type: MaterialType.transparency,
               child: InkWell(
