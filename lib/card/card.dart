@@ -1193,6 +1193,7 @@ class _Six extends StatelessWidget implements Cards {
                                   ),
                               SizedBox(width: formatWidth(6)),
                               Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(miniTitle, style: miniTitleStyle ?? themeData.miniTitleStyle ?? TextStyle(fontSize: sp(9), fontWeight: FontWeight.w400, color: const Color(0xFF02132B))),
                                   Row(
