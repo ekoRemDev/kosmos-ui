@@ -76,7 +76,10 @@ class _MyHomePageState extends State<MyHomePage> {
               const TextFormUpdated.classic(
                 textInputAction: TextInputAction.newline,
                 maxLine: 5,
-              )
+              ),
+              const Cards.six(
+                boxShadow: false,
+              ),
             ],
           ),
         ),
