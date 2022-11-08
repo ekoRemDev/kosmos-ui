@@ -142,6 +142,7 @@ abstract class Cards extends StatelessWidget {
     final bool withIconButton,
     final bool withStatus,
     final bool boxShadow,
+    final bool threeDots,
     final Widget? iconButton,
     final BoxConstraints boxConstraints,
     final VoidCallback? onTap,
@@ -1052,6 +1053,7 @@ class _Six extends StatelessWidget implements Cards {
   final bool withIconButton;
   final bool withStatus;
   final bool boxShadow;
+  final bool threeDots;
   final Widget? iconButton;
   final BoxConstraints? boxConstraints;
   final VoidCallback? onTap;
@@ -1084,6 +1086,7 @@ class _Six extends StatelessWidget implements Cards {
     this.withIconButton = true,
     this.withStatus = true,
     this.boxShadow = false,
+    this.threeDots = false,
     this.iconButton,
     this.boxConstraints,
     this.onTap,
@@ -1124,7 +1127,7 @@ class _Six extends StatelessWidget implements Cards {
                 borderRadius: BorderRadius.circular(radius ?? themeData.radius ?? formatWidth(10)),
                 child: Stack(
                   children: [
-                    Align(
+                     if (threeDots) Align(
                       alignment: Alignment.topRight,
                       child: Padding(
                         padding: threePointWidgetPadding ?? themeData.paddingTriplePoint ?? EdgeInsets.only(top: formatHeight(7), right: formatWidth(4)),
