@@ -79,6 +79,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
               const Cards.six(
                 boxShadow: false,
+                threeDots: true,
               ),
             ],
           ),
