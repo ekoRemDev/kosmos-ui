@@ -1115,7 +1115,7 @@ class _Six extends StatelessWidget implements Cards {
         child: Container(
           constraints: boxConstraints ?? themeData.constraints ?? BoxConstraints(minHeight: formatHeight(125), minWidth: formatWidth(315), maxHeight: formatHeight(125), maxWidth: formatWidth(315)),
           decoration: BoxDecoration(
-            boxShadow: boxShadow ? [BoxShadow(color: Colors.grey.withOpacity(0.15), blurRadius: 10, spreadRadius: 10)] : null,
+            boxShadow: boxShadow ? [BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 10, offset: const Offset(0, 10))] : null,
             color: backgroundColor ?? themeData.backgroundColor ?? Colors.white,
             borderRadius: BorderRadius.circular(radius ?? themeData.radius ?? formatWidth(10)),
           ),
