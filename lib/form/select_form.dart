@@ -86,6 +86,8 @@ class SelectForm<T> extends HookWidget {
         ),
         const SizedBox(height: 7),
         DropdownButtonFormField<T>(
+          enableFeedback: isUpdatable ?? true,
+          
           borderRadius: BorderRadius.circular(radiusDropDown ?? themeData.selectRadiusDropDown ?? 7),
           elevation: 0,
           dropdownColor: backgroundColor ?? themeData.backgroundColor,
