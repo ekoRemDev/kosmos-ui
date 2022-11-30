@@ -286,7 +286,9 @@ class _OneImage extends Input {
                     },
                     onDoubleTap: onDoubleTap,
                     child: Padding(
-                      padding: state.value != null || imageMobile != null || urlImage != null ? (contentPadding ?? themeData.contentPadding ?? const EdgeInsets.fromLTRB(7, 6, 30, 6)) : EdgeInsets.zero,
+                      padding: state.value != null || imageMobile != null || urlImage != null
+                          ? (contentPadding ?? themeData.contentPadding ?? const EdgeInsets.fromLTRB(7, 6, 30, 6))
+                          : EdgeInsets.zero,
                       child: Stack(
                         alignment: Alignment.centerLeft,
                         children: state.value != null || imageMobile != null || urlImage != null || image != null || child != null
@@ -352,7 +354,9 @@ class _OneImage extends Input {
                                           child: Text(
                                             'Appuyez pour modifier la photo',
                                             textAlign: TextAlign.right,
-                                            style: textStyle ?? themeData.hintStyle ?? TextStyle(fontSize: sp(13), fontWeight: FontWeight.w500, color: const Color(0xFF02132B).withOpacity(0.41)),
+                                            style: textStyle ??
+                                                themeData.hintStyle ??
+                                                TextStyle(fontSize: sp(13), fontWeight: FontWeight.w500, color: const Color(0xFF02132B).withOpacity(0.41)),
                                           )),
                                     ],
                                   ),
@@ -441,7 +445,6 @@ class _MultipleFile extends Input {
   @override
   Widget build(BuildContext context) {
     final themeData = loadThemeData(theme, "input_field", () => const CustomFormFieldThemeData())!;
-    final state = useState<List<PlatformFile>?>(defaultFileList);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -477,46 +480,50 @@ class _MultipleFile extends Input {
             // type: MaterialType.transparency,
             child: Container(
           constraints: themeData.pickerConstraints ?? const BoxConstraints(minHeight: 108),
-          decoration: boxDecoration ?? themeData.pickerDecoration ?? BoxDecoration(color: themeData.backgroundColor ?? const Color(0xFF02132B).withOpacity(0.03), borderRadius: BorderRadius.circular(7)),
+          decoration: boxDecoration ??
+              themeData.pickerDecoration ??
+              BoxDecoration(color: themeData.backgroundColor ?? const Color(0xFF02132B).withOpacity(0.03), borderRadius: BorderRadius.circular(7)),
           child: Material(
             type: MaterialType.transparency,
             child: InkWell(
                 borderRadius: BorderRadius.circular(inkRadius ?? 7),
                 onTap: () {
                   if (onTap != null) onTap!();
-                  //TODO picker files
-                  if (onMultipleChanged != null) onMultipleChanged!(state.value);
+                  // if (onMultipleChanged != null) onMultipleChanged!(state.value);
                 },
                 onDoubleTap: onDoubleTap,
                 child: Padding(
                   padding: contentPadding ?? themeData.contentPadding ?? const EdgeInsets.fromLTRB(26, 6, 26, 6),
                   child: Stack(
                     alignment: Alignment.center,
-                    children: (state.value != null && state.value!.isNotEmpty)
+                    children: (defaultFileList != null && defaultFileList!.isNotEmpty)
                         ? [
                             Align(
                               alignment: Alignment.center,
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 crossAxisAlignment: CrossAxisAlignment.center,
-                                children: state.value != null
+                                children: defaultFileList != null
                                     ? [
-                                        ...state.value!.map((e) {
+                                        ...defaultFileList!.map((e) {
                                           return Row(
                                             children: [
                                               FileNameItem(
                                                 fileName: e.name,
                                                 onClear: () {
-                                                  if (state.value == null) return;
-                                                  if ((state.value?.length ?? 0) == 1) {
-                                                    state.value = null;
+                                                  if (defaultFileList == null) return;
+                                                  List<PlatformFile>? tmp = List.from(defaultFileList!);
+                                                  if ((tmp.length) == 1) {
+                                                    tmp = null;
+                                                    if (onMultipleChanged != null) onMultipleChanged!(tmp);
                                                     return;
                                                   }
                                                   List<PlatformFile>? ret = [];
-                                                  for (final t in state.value!) {
+                                                  for (final t in tmp) {
                                                     if (e != t) ret.add(t);
                                                   }
-                                                  state.value = ret;
+                                                  tmp = ret;
+                                                  if (onMultipleChanged != null) onMultipleChanged!(tmp);
                                                 },
                                               ),
                                               sw(3),
@@ -545,7 +552,10 @@ class _MultipleFile extends Input {
                                                   child: Text(
                                                     'Appuyez pour modifier la / les fichier(s)',
                                                     textAlign: TextAlign.center,
-                                                    style: textStyle ?? themeData.fieldStyle ?? TextStyle(fontSize: sp(13), fontWeight: FontWeight.w500, color: const Color(0xFF02132B).withOpacity(0.41)),
+                                                    style: textStyle ??
+                                                        themeData.fieldStyle ??
+                                                        TextStyle(
+                                                            fontSize: sp(13), fontWeight: FontWeight.w500, color: const Color(0xFF02132B).withOpacity(0.41)),
                                                   ),
                                                 ),
                                               ],
@@ -725,7 +735,9 @@ class _ValidatedFile extends Input {
             child: Container(
               height: height,
               constraints: themeData.pickerConstraints ?? const BoxConstraints(minHeight: 108),
-              decoration: boxDecoration ?? themeData.pickerDecoration ?? BoxDecoration(color: theme?.backgroundColor ?? const Color(0xFF02132B).withOpacity(0.03), borderRadius: BorderRadius.circular(7)),
+              decoration: boxDecoration ??
+                  themeData.pickerDecoration ??
+                  BoxDecoration(color: theme?.backgroundColor ?? const Color(0xFF02132B).withOpacity(0.03), borderRadius: BorderRadius.circular(7)),
               child: Material(
                 type: MaterialType.transparency,
                 child: Column(
@@ -737,7 +749,8 @@ class _ValidatedFile extends Input {
                           borderRadius: BorderRadius.circular(inkRadius ?? 7),
                           onTap: () async {
                             if (onTap != null) onTap!();
-                            FilePickerResult? result = await FilePicker.platform.pickFiles(allowedExtensions: pdfOnly == true ? ["pdf", "PDF"] : null, type: pdfOnly == true ? FileType.custom : FileType.any);
+                            FilePickerResult? result = await FilePicker.platform
+                                .pickFiles(allowedExtensions: pdfOnly == true ? ["pdf", "PDF"] : null, type: pdfOnly == true ? FileType.custom : FileType.any);
 
                             if (result != null) {
                               state.value = result.files.single;
@@ -768,18 +781,25 @@ class _ValidatedFile extends Input {
                                                               svgIconPath == null
                                                                   ? Icon(
                                                                       Icons.cloud_upload_outlined,
-                                                                      color: iconColor ?? themeData.pickerIconColor ?? const Color(0xFF02132B).withOpacity(0.41),
+                                                                      color:
+                                                                          iconColor ?? themeData.pickerIconColor ?? const Color(0xFF02132B).withOpacity(0.41),
                                                                     )
                                                                   : SvgPicture.asset(
                                                                       svgIconPath!,
-                                                                      color: iconColor ?? themeData.pickerIconColor ?? const Color(0xFF02132B).withOpacity(0.41),
+                                                                      color:
+                                                                          iconColor ?? themeData.pickerIconColor ?? const Color(0xFF02132B).withOpacity(0.41),
                                                                     ),
                                                               sw(4),
                                                               Expanded(
                                                                 child: Text(
                                                                   'Appuyez pour modifier le fichier',
                                                                   textAlign: TextAlign.center,
-                                                                  style: textStyle ?? themeData.fieldStyle ?? TextStyle(fontSize: sp(13), fontWeight: FontWeight.w500, color: const Color(0xFF02132B).withOpacity(0.41)),
+                                                                  style: textStyle ??
+                                                                      themeData.fieldStyle ??
+                                                                      TextStyle(
+                                                                          fontSize: sp(13),
+                                                                          fontWeight: FontWeight.w500,
+                                                                          color: const Color(0xFF02132B).withOpacity(0.41)),
                                                                 ),
                                                               ),
                                                             ],
@@ -827,7 +847,8 @@ class _ValidatedFile extends Input {
                                                                 child: Text(
                                                                   state.value!.name,
                                                                   overflow: TextOverflow.ellipsis,
-                                                                  style: TextStyle(color: const Color(0xFF02132B), fontSize: sp(13), fontWeight: FontWeight.w500),
+                                                                  style:
+                                                                      TextStyle(color: const Color(0xFF02132B), fontSize: sp(13), fontWeight: FontWeight.w500),
                                                                 ),
                                                               ),
                                                             ),
@@ -894,18 +915,27 @@ class _ValidatedFile extends Input {
                                                                   svgIconPath == null
                                                                       ? Icon(
                                                                           Icons.cloud_upload_outlined,
-                                                                          color: iconColor ?? themeData.pickerIconColor ?? const Color(0xFF02132B).withOpacity(0.41),
+                                                                          color: iconColor ??
+                                                                              themeData.pickerIconColor ??
+                                                                              const Color(0xFF02132B).withOpacity(0.41),
                                                                         )
                                                                       : SvgPicture.asset(
                                                                           svgIconPath!,
-                                                                          color: iconColor ?? themeData.pickerIconColor ?? const Color(0xFF02132B).withOpacity(0.41),
+                                                                          color: iconColor ??
+                                                                              themeData.pickerIconColor ??
+                                                                              const Color(0xFF02132B).withOpacity(0.41),
                                                                         ),
                                                                   sw(4),
                                                                   Expanded(
                                                                     child: Text(
                                                                       'Appuyez pour modifier le fichier',
                                                                       textAlign: TextAlign.center,
-                                                                      style: textStyle ?? themeData.fieldStyle ?? TextStyle(fontSize: sp(13), fontWeight: FontWeight.w500, color: const Color(0xFF02132B).withOpacity(0.41)),
+                                                                      style: textStyle ??
+                                                                          themeData.fieldStyle ??
+                                                                          TextStyle(
+                                                                              fontSize: sp(13),
+                                                                              fontWeight: FontWeight.w500,
+                                                                              color: const Color(0xFF02132B).withOpacity(0.41)),
                                                                     ),
                                                                   ),
                                                                 ],
@@ -953,7 +983,10 @@ class _ValidatedFile extends Input {
                                                                     child: Text(
                                                                       defaultFileName!,
                                                                       overflow: TextOverflow.ellipsis,
-                                                                      style: textStyle ?? themeData.fieldStyle ?? TextStyle(color: const Color(0xFF02132B), fontSize: sp(13), fontWeight: FontWeight.w500),
+                                                                      style: textStyle ??
+                                                                          themeData.fieldStyle ??
+                                                                          TextStyle(
+                                                                              color: const Color(0xFF02132B), fontSize: sp(13), fontWeight: FontWeight.w500),
                                                                     ),
                                                                   ),
                                                                 ),
@@ -1030,7 +1063,9 @@ class _ValidatedFile extends Input {
                                               bottom: 0,
                                               left: 0,
                                               right: 0,
-                                              child: Text(desc!, textAlign: TextAlign.center, style: TextStyle(fontSize: sp(11), fontWeight: FontWeight.w500, color: const Color(0xFF02132B))),
+                                              child: Text(desc!,
+                                                  textAlign: TextAlign.center,
+                                                  style: TextStyle(fontSize: sp(11), fontWeight: FontWeight.w500, color: const Color(0xFF02132B))),
                                             )
                                         ],
                             ),
@@ -1038,7 +1073,11 @@ class _ValidatedFile extends Input {
                         ),
                       ),
                     ),
-                    if ((desc?.isEmpty ?? true) && (pdfOnly ?? false)) ...[Text("Format PDF", textAlign: TextAlign.center, style: TextStyle(fontSize: sp(11), fontWeight: FontWeight.w500, color: const Color(0xFF02132B))), sh(10)]
+                    if ((desc?.isEmpty ?? true) && (pdfOnly ?? false)) ...[
+                      Text("Format PDF",
+                          textAlign: TextAlign.center, style: TextStyle(fontSize: sp(11), fontWeight: FontWeight.w500, color: const Color(0xFF02132B))),
+                      sh(10)
+                    ]
                   ],
                 ),
               ),
