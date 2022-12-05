@@ -1,8 +1,9 @@
 import 'package:core_kosmos/core_kosmos.dart';
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:ui_kosmos_v4/settings_cellule/theme.dart';
 
-class SettingsCellule extends StatelessWidget {
+class SettingsCellule extends ConsumerWidget {
   final String? title;
   final String? subtitle;
   final TextStyle? titleStyle;
@@ -11,6 +12,7 @@ class SettingsCellule extends StatelessWidget {
   final TextStyle? activeSubtitleStyle;
   final VoidCallback onClick;
   final Widget? switchNotif;
+  final bool Function(WidgetRef)? haveNotif;
 
   final ImageProvider? image;
 
@@ -62,11 +64,12 @@ class SettingsCellule extends StatelessWidget {
     this.theme,
     this.themeName,
     this.isActive = false,
+    this.haveNotif,
     Key? key,
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final themeData = loadThemeData(
         theme,
         themeName ?? "settings_cellule",
@@ -87,13 +90,17 @@ class SettingsCellule extends StatelessWidget {
             ),
         decoration: BoxDecoration(
           gradient: isActive
-              ? (activeBackgroundColor == null && themeData.activeBackgroundColor == null ? activeBackgroundGradient ?? themeData.activeBackgroundGradient : null)
+              ? (activeBackgroundColor == null && themeData.activeBackgroundColor == null
+                  ? activeBackgroundGradient ?? themeData.activeBackgroundGradient
+                  : null)
               : (backgroundColor == null && themeData.backgroundColor == null ? backgroundGradient ?? themeData.backgroundGradient : null),
           color: isActive
               ? activeBackgroundColor ??
                   themeData.activeBackgroundColor ??
                   (activeBackgroundGradient == null && themeData.activeBackgroundGradient == null ? const Color(0xFF02132B).withOpacity(0.03) : null)
-              : backgroundColor ?? themeData.backgroundColor ?? (backgroundGradient == null && themeData.backgroundGradient == null ? const Color(0xFF02132B).withOpacity(0.03) : null),
+              : backgroundColor ??
+                  themeData.backgroundColor ??
+                  (backgroundGradient == null && themeData.backgroundGradient == null ? const Color(0xFF02132B).withOpacity(0.03) : null),
           borderRadius: BorderRadius.circular((radius ?? 7)),
         ),
         clipBehavior: Clip.hardEdge,
@@ -111,15 +118,23 @@ class SettingsCellule extends StatelessWidget {
                           : BoxDecoration(
                               shape: BoxShape.circle,
                               gradient: isActive
-                                  ? (activeIconBackgroundColor == null && themeData.activeIconBackgroundColor == null ? activeIconBackgroundGradient ?? themeData.activeIconBackgroundGradient : null)
-                                  : (iconBackgroundColor == null && themeData.iconBackgroundColor == null ? iconBackgroundGradient ?? themeData.iconBackgroundGradient : null),
+                                  ? (activeIconBackgroundColor == null && themeData.activeIconBackgroundColor == null
+                                      ? activeIconBackgroundGradient ?? themeData.activeIconBackgroundGradient
+                                      : null)
+                                  : (iconBackgroundColor == null && themeData.iconBackgroundColor == null
+                                      ? iconBackgroundGradient ?? themeData.iconBackgroundGradient
+                                      : null),
                               color: isActive
                                   ? activeIconBackgroundColor ??
                                       themeData.activeIconBackgroundColor ??
-                                      (activeIconBackgroundGradient == null && themeData.activeIconBackgroundGradient == null ? const Color(0xFF02132B).withOpacity(0.03) : null)
+                                      (activeIconBackgroundGradient == null && themeData.activeIconBackgroundGradient == null
+                                          ? const Color(0xFF02132B).withOpacity(0.03)
+                                          : null)
                                   : iconBackgroundColor ??
                                       themeData.iconBackgroundColor ??
-                                      (iconBackgroundGradient == null && themeData.iconBackgroundGradient == null ? const Color(0xFF02132B).withOpacity(0.03) : null)),
+                                      (iconBackgroundGradient == null && themeData.iconBackgroundGradient == null
+                                          ? const Color(0xFF02132B).withOpacity(0.03)
+                                          : null)),
                       child: isActive ? activeIcon ?? icon : icon,
                     )
                   : const SizedBox(),
@@ -134,7 +149,9 @@ class SettingsCellule extends StatelessWidget {
                         child: Text(
                           title ?? 'Titre',
                           style: isActive
-                              ? activeTitleStyle ?? themeData.activeTitleStyle ?? const TextStyle(color: Color(0xFF02132B), fontSize: 13, fontWeight: FontWeight.w500)
+                              ? activeTitleStyle ??
+                                  themeData.activeTitleStyle ??
+                                  const TextStyle(color: Color(0xFF02132B), fontSize: 13, fontWeight: FontWeight.w500)
                               : titleStyle ?? themeData.titleStyle ?? const TextStyle(color: Color(0xFF02132B), fontSize: 13, fontWeight: FontWeight.w500),
                         ),
                       ),
@@ -144,13 +161,22 @@ class SettingsCellule extends StatelessWidget {
                       ? Text(
                           subtitle!,
                           style: isActive
-                              ? activeSubtitleStyle ?? themeData.activeSubtitleStyle ?? TextStyle(color: const Color(0xFF02132B).withOpacity(0.65), fontSize: 11, fontWeight: FontWeight.w500)
-                              : subtitleStyle ?? themeData.subtitleStyle ?? TextStyle(color: const Color(0xFF02132B).withOpacity(0.65), fontSize: 11, fontWeight: FontWeight.w500),
+                              ? activeSubtitleStyle ??
+                                  themeData.activeSubtitleStyle ??
+                                  TextStyle(color: const Color(0xFF02132B).withOpacity(0.65), fontSize: 11, fontWeight: FontWeight.w500)
+                              : subtitleStyle ??
+                                  themeData.subtitleStyle ??
+                                  TextStyle(color: const Color(0xFF02132B).withOpacity(0.65), fontSize: 11, fontWeight: FontWeight.w500),
                         )
                       : const SizedBox(),
                 ],
               ),
             ),
+            if (haveNotif?.call(ref) ?? false) ...[
+              sw(7.5),
+              Container(height: formatWidth(7), width: formatWidth(7), decoration: const BoxDecoration(shape: BoxShape.circle, color: Color(0xFFE35050))),
+              sw(7.5),
+            ],
             switchNotif == null
                 ? execInCaseOfPlatfom(
                     () => getResponsiveValue(
