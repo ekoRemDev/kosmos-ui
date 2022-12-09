@@ -381,10 +381,10 @@ class _ProgressSeparated extends ProgressBar {
                             items![i],
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
-                            style: themeData.style?.copyWith(fontSize: sp(12)) ??
+                            style: themeData.style?.copyWith(fontSize: getResponsiveValue(context, defaultValue: sp(12), phone: sp(9))) ??
                                 TextStyle(
                                   color: const Color(0xFF02132B),
-                                  fontSize: sp(12),
+                                  fontSize: getResponsiveValue(context, defaultValue: sp(12), phone: sp(9)),
                                   fontWeight: FontWeight.w400,
                                 ),
                           ),
