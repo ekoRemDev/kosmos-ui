@@ -188,7 +188,7 @@ class TextFormUpdated extends HookWidget {
     final int? maxLine,
     final int? minLine,
   }) = _Classic;
-  
+
   const factory TextFormUpdated.number({
     final CustomFormFieldThemeData? theme,
     final String? fieldName,
@@ -491,7 +491,8 @@ class _Classic extends TextFormUpdated {
                 : fieldName != null
                     ? Text(
                         fieldName!,
-                        style: fieldNameStyle ?? themeData.fieldNameStyle ?? const TextStyle(color: Color(0xFF02132B), fontSize: 12, fontWeight: FontWeight.w500),
+                        style:
+                            fieldNameStyle ?? themeData.fieldNameStyle ?? const TextStyle(color: Color(0xFF02132B), fontSize: 12, fontWeight: FontWeight.w500),
                       )
                     : Container(),
             fieldPostRedirection == null ? const SizedBox() : const Spacer(),
@@ -532,7 +533,9 @@ class _Classic extends TextFormUpdated {
           controller: controller,
           obscuringCharacter: themeData.obscuringCharacter ?? '*',
           initialValue: controller == null ? defaultValue : null,
-          style: textStyle ?? themeData.fieldStyle ?? const TextStyle(color: Color(0xFF02132B), fontSize: 13, fontWeight: FontWeight.w500).copyWith(color: const Color(0xFF02132B)),
+          style: textStyle ??
+              themeData.fieldStyle ??
+              const TextStyle(color: Color(0xFF02132B), fontSize: 13, fontWeight: FontWeight.w500).copyWith(color: const Color(0xFF02132B)),
           cursorColor: cursorColor ?? themeData.cursorColor ?? const Color(0xFF02132B),
           decoration: InputDecoration(
               errorStyle: const TextStyle(fontSize: 12, height: 0),
@@ -574,7 +577,8 @@ class _Classic extends TextFormUpdated {
         ),
         if (subFieldText != null) ...[
           sh(4),
-          Text(subFieldText!, style: themeData.subFieldTextStyle ?? TextStyle(fontSize: sp(11), color: Colors.black.withOpacity(.75), fontWeight: FontWeight.w500)),
+          Text(subFieldText!,
+              style: themeData.subFieldTextStyle ?? TextStyle(fontSize: sp(11), color: Colors.black.withOpacity(.75), fontWeight: FontWeight.w500)),
         ],
       ],
     );
@@ -689,7 +693,8 @@ class _Number extends TextFormUpdated {
                 : fieldName != null
                     ? Text(
                         fieldName!,
-                        style: fieldNameStyle ?? themeData.fieldNameStyle ?? const TextStyle(color: Color(0xFF02132B), fontSize: 12, fontWeight: FontWeight.w500),
+                        style:
+                            fieldNameStyle ?? themeData.fieldNameStyle ?? const TextStyle(color: Color(0xFF02132B), fontSize: 12, fontWeight: FontWeight.w500),
                       )
                     : Container(),
             fieldPostRedirection == null ? const SizedBox() : const Spacer(),
@@ -712,7 +717,6 @@ class _Number extends TextFormUpdated {
         ),
         sh(7),
         TextFormField(
-          
           enabled: isEnabled,
           minLines: minLine ?? themeData.minLine ?? 1,
           maxLines: maxLine ?? themeData.maxLine ?? 1,
@@ -728,13 +732,15 @@ class _Number extends TextFormUpdated {
           },
           inputFormatters: [
             FilteringTextInputFormatter.allow(RegExp(r'[0-9 ,.]')),
-            LengthLimitingTextInputFormatter(3)
+            NumericTextFormatter(),
           ],
           obscureText: stateObscure.value,
           controller: controller,
           obscuringCharacter: themeData.obscuringCharacter ?? '*',
           initialValue: controller == null ? defaultValue : null,
-          style: textStyle ?? themeData.fieldStyle ?? const TextStyle(color: Color(0xFF02132B), fontSize: 13, fontWeight: FontWeight.w500).copyWith(color: const Color(0xFF02132B)),
+          style: textStyle ??
+              themeData.fieldStyle ??
+              const TextStyle(color: Color(0xFF02132B), fontSize: 13, fontWeight: FontWeight.w500).copyWith(color: const Color(0xFF02132B)),
           cursorColor: cursorColor ?? themeData.cursorColor ?? const Color(0xFF02132B),
           decoration: InputDecoration(
               errorStyle: const TextStyle(fontSize: 12, height: 0),
@@ -776,7 +782,8 @@ class _Number extends TextFormUpdated {
         ),
         if (subFieldText != null) ...[
           sh(4),
-          Text(subFieldText!, style: themeData.subFieldTextStyle ?? TextStyle(fontSize: sp(11), color: Colors.black.withOpacity(.75), fontWeight: FontWeight.w500)),
+          Text(subFieldText!,
+              style: themeData.subFieldTextStyle ?? TextStyle(fontSize: sp(11), color: Colors.black.withOpacity(.75), fontWeight: FontWeight.w500)),
         ],
       ],
     );
@@ -970,7 +977,8 @@ class _PhoneNumber extends TextFormUpdated {
         ),
         if (subFieldText != null) ...[
           sh(4),
-          Text(subFieldText!, style: themeData.subFieldTextStyle ?? TextStyle(fontSize: sp(11), color: Colors.black.withOpacity(.75), fontWeight: FontWeight.w500)),
+          Text(subFieldText!,
+              style: themeData.subFieldTextStyle ?? TextStyle(fontSize: sp(11), color: Colors.black.withOpacity(.75), fontWeight: FontWeight.w500)),
         ],
       ],
     );
@@ -1133,7 +1141,9 @@ class _DateTime extends TextFormUpdated {
           validator: validatorDate,
           obscureText: obscuringText ?? false,
           initialValue: controller == null ? defaultDate : null,
-          style: textStyle ?? themeData.fieldStyle ?? const TextStyle(color: Color(0xFF02132B), fontSize: 12, fontWeight: FontWeight.w500).copyWith(color: const Color(0xFF02132B)),
+          style: textStyle ??
+              themeData.fieldStyle ??
+              const TextStyle(color: Color(0xFF02132B), fontSize: 12, fontWeight: FontWeight.w500).copyWith(color: const Color(0xFF02132B)),
           decoration: InputDecoration(
             prefixIcon: prefixChild,
             suffixIcon: error ?? false
@@ -1181,7 +1191,8 @@ class _DateTime extends TextFormUpdated {
         ),
         if (subFieldText != null) ...[
           sh(4),
-          Text(subFieldText!, style: themeData.subFieldTextStyle ?? TextStyle(fontSize: sp(11), color: Colors.black.withOpacity(.75), fontWeight: FontWeight.w500)),
+          Text(subFieldText!,
+              style: themeData.subFieldTextStyle ?? TextStyle(fontSize: sp(11), color: Colors.black.withOpacity(.75), fontWeight: FontWeight.w500)),
         ],
       ],
     );
@@ -1289,7 +1300,8 @@ class _Immatriculation extends TextFormUpdated {
                 : fieldName != null
                     ? Text(
                         fieldName!,
-                        style: fieldNameStyle ?? themeData.fieldNameStyle ?? const TextStyle(color: Color(0xFF02132B), fontSize: 12, fontWeight: FontWeight.w500),
+                        style:
+                            fieldNameStyle ?? themeData.fieldNameStyle ?? const TextStyle(color: Color(0xFF02132B), fontSize: 12, fontWeight: FontWeight.w500),
                       )
                     : Container(),
             fieldPostRedirection == null ? const SizedBox() : const Spacer(),
@@ -1367,7 +1379,8 @@ class _Immatriculation extends TextFormUpdated {
         ),
         if (subFieldText != null) ...[
           sh(4),
-          Text(subFieldText!, style: themeData.subFieldTextStyle ?? TextStyle(fontSize: sp(11), color: Colors.black.withOpacity(.75), fontWeight: FontWeight.w500)),
+          Text(subFieldText!,
+              style: themeData.subFieldTextStyle ?? TextStyle(fontSize: sp(11), color: Colors.black.withOpacity(.75), fontWeight: FontWeight.w500)),
         ],
       ],
     );
@@ -1410,7 +1423,9 @@ class _Immatriculation extends TextFormUpdated {
               : (_) {},
           obscureText: obscuringText ?? false,
           obscuringCharacter: themeData.obscuringCharacter ?? '*',
-          style: textStyle ?? themeData.fieldStyle ?? const TextStyle(color: Color(0xFF02132B), fontSize: 13, fontWeight: FontWeight.w500).copyWith(color: const Color(0xFF02132B)),
+          style: textStyle ??
+              themeData.fieldStyle ??
+              const TextStyle(color: Color(0xFF02132B), fontSize: 13, fontWeight: FontWeight.w500).copyWith(color: const Color(0xFF02132B)),
           cursorColor: cursorColor ?? themeData.cursorColor ?? const Color(0xFF02132B),
           decoration: InputDecoration(
               errorStyle: const TextStyle(fontSize: 12, height: 0),
@@ -1554,7 +1569,9 @@ class _TextArea extends TextFormUpdated {
           validator: validator,
           onChanged: onChanged,
           controller: controller,
-          style: textStyle ?? themeData.fieldStyle ?? const TextStyle(color: Color(0xFF02132B), fontSize: 13, fontWeight: FontWeight.w500).copyWith(color: const Color(0xFF02132B)),
+          style: textStyle ??
+              themeData.fieldStyle ??
+              const TextStyle(color: Color(0xFF02132B), fontSize: 13, fontWeight: FontWeight.w500).copyWith(color: const Color(0xFF02132B)),
           cursorColor: cursorColor ?? themeData.cursorColor ?? const Color(0xFF02132B),
           decoration: InputDecoration(
               errorStyle: const TextStyle(fontSize: 12, height: 0),
@@ -1603,9 +1620,30 @@ class _TextArea extends TextFormUpdated {
         ),
         if (subFieldText != null) ...[
           sh(4),
-          Text(subFieldText!, style: themeData.subFieldTextStyle ?? TextStyle(fontSize: sp(11), color: Colors.black.withOpacity(.75), fontWeight: FontWeight.w500)),
+          Text(subFieldText!,
+              style: themeData.subFieldTextStyle ?? TextStyle(fontSize: sp(11), color: Colors.black.withOpacity(.75), fontWeight: FontWeight.w500)),
         ],
       ],
     );
+  }
+}
+
+class NumericTextFormatter extends TextInputFormatter {
+  @override
+  TextEditingValue formatEditUpdate(TextEditingValue oldValue, TextEditingValue newValue) {
+    if (newValue.text.isEmpty) {
+      return newValue.copyWith(text: '');
+    } else if (newValue.text.compareTo(oldValue.text) != 0) {
+      final int selectionIndexFromTheRight = newValue.text.length - newValue.selection.end;
+      final f = NumberFormat("#,###");
+      final number = int.parse(newValue.text.replaceAll(f.symbols.GROUP_SEP, ''));
+      final newString = f.format(number);
+      return TextEditingValue(
+        text: newString,
+        selection: TextSelection.collapsed(offset: newString.length - selectionIndexFromTheRight),
+      );
+    } else {
+      return newValue;
+    }
   }
 }
