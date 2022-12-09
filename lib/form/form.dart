@@ -188,6 +188,50 @@ class TextFormUpdated extends HookWidget {
     final int? maxLine,
     final int? minLine,
   }) = _Classic;
+  
+  const factory TextFormUpdated.number({
+    final CustomFormFieldThemeData? theme,
+    final String? fieldName,
+    final Color? backgroundColor,
+    final Color? cursorColor,
+    final String? hintText,
+    final double? radius,
+    final Widget? suffixChildActive,
+    final EdgeInsets? contentPadding,
+    final TextStyle? fieldNameStyle,
+    final TextStyle? hintTextStyle,
+    final TextStyle? textStyle,
+    final bool? error,
+    final bool? isUpdatable,
+    final bool? filled,
+    final bool? isEnabled,
+    final String? Function(String?)? validator,
+    final Function(String)? onFieldSubmitted,
+    final String? errorMessage,
+    final String? fieldPostRedirection,
+    final VoidCallback? postFieldOnClick,
+    final TextStyle? fieldPostRedirectionStyle,
+    final FocusNode? focusNode,
+    final FocusNode? nextFocusNode,
+    final BoxConstraints? prefixChildBoxConstraint,
+    final BoxConstraints? suffixChildBoxConstraint,
+    final Widget? suffixChild,
+    final Widget? prefixChild,
+    final TextInputAction? textInputAction,
+    final bool? obscuringText,
+    final InputBorder? focusedErrorBorder,
+    final InputBorder? errorBorder,
+    final InputBorder? focusedBorder,
+    final InputBorder? border,
+    final TextEditingController? controller,
+    final List<TextInputFormatter>? inputFormatters,
+    final TextInputType? textInputType,
+    final String? defaultValue,
+    final Function(String)? onChanged,
+    final String? subFieldText,
+    final int? maxLine,
+    final int? minLine,
+  }) = _Number;
 
   const factory TextFormUpdated.phoneNumber({
     final CustomFormFieldThemeData? theme,
@@ -484,6 +528,208 @@ class _Classic extends TextFormUpdated {
             FocusScope.of(context).requestFocus(nextFocusNode);
           },
           inputFormatters: inputFormatters,
+          obscureText: stateObscure.value,
+          controller: controller,
+          obscuringCharacter: themeData.obscuringCharacter ?? '*',
+          initialValue: controller == null ? defaultValue : null,
+          style: textStyle ?? themeData.fieldStyle ?? const TextStyle(color: Color(0xFF02132B), fontSize: 13, fontWeight: FontWeight.w500).copyWith(color: const Color(0xFF02132B)),
+          cursorColor: cursorColor ?? themeData.cursorColor ?? const Color(0xFF02132B),
+          decoration: InputDecoration(
+              errorStyle: const TextStyle(fontSize: 12, height: 0),
+              prefixIcon: prefixChild,
+              suffixIcon: isUpdatable == true
+                  ? InkWell(
+                      child: !stateObscure.value ? (suffixChild ?? const SizedBox()) : suffixChildActive ?? suffixChild ?? const SizedBox(),
+                      onTap: () {
+                        stateObscure.value = !stateObscure.value;
+                      },
+                    )
+                  : suffixChild,
+              prefixIconConstraints: prefixChildBoxConstraint ?? themeData.prefixChildBoxConstraint,
+              suffixIconConstraints: suffixChildBoxConstraint ?? themeData.suffixChildBoxConstraint,
+              filled: filled ?? true,
+              fillColor: backgroundColor ?? themeData.backgroundColor ?? const Color(0xFF02132B).withOpacity(0.03),
+              contentPadding: contentPadding ?? themeData.contentPadding ?? const EdgeInsets.fromLTRB(9.5, 17.5, 9.5, 17.5),
+              focusedErrorBorder: focusedErrorBorder ??
+                  themeData.focusedErrorBorder ??
+                  OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(radius ?? 6),
+                      borderSide: const BorderSide(
+                        color: Colors.redAccent,
+                        width: 0.5,
+                      )),
+              errorBorder: errorBorder ??
+                  themeData.errorBorder ??
+                  OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(radius ?? 6),
+                      borderSide: const BorderSide(
+                        color: Colors.red,
+                        width: 0.5,
+                      )),
+              focusedBorder: focusedBorder ?? themeData.focusedBorder,
+              border: border ?? themeData.border ?? UnderlineInputBorder(borderRadius: BorderRadius.circular(radius ?? 6), borderSide: BorderSide.none),
+              enabledBorder: border ?? themeData.border ?? UnderlineInputBorder(borderRadius: BorderRadius.circular(radius ?? 6), borderSide: BorderSide.none),
+              hintText: hintText ?? "Placeholder",
+              hintStyle: hintTextStyle ?? themeData.hintStyle ?? const TextStyle(color: Color(0xFF9299A4), fontSize: 13, fontWeight: FontWeight.w500)),
+        ),
+        if (subFieldText != null) ...[
+          sh(4),
+          Text(subFieldText!, style: themeData.subFieldTextStyle ?? TextStyle(fontSize: sp(11), color: Colors.black.withOpacity(.75), fontWeight: FontWeight.w500)),
+        ],
+      ],
+    );
+  }
+}
+
+class _Number extends TextFormUpdated {
+  const _Number({
+    final CustomFormFieldThemeData? theme,
+    final String? fieldName,
+    final Color? backgroundColor,
+    final Color? cursorColor,
+    final String? hintText,
+    final bool? isEnabled,
+    final double? radius,
+    final EdgeInsets? contentPadding,
+    final TextStyle? fieldNameStyle,
+    final TextStyle? hintTextStyle,
+    final TextStyle? textStyle,
+    final bool? error,
+    final bool? filled,
+    final String? errorMessage,
+    final bool? isUpdatable,
+    final String? fieldPostRedirection,
+    final VoidCallback? postFieldOnClick,
+    final void Function(String)? onFieldSubmitted,
+    final TextStyle? fieldPostRedirectionStyle,
+    final FocusNode? focusNode,
+    final FocusNode? nextFocusNode,
+    final BoxConstraints? prefixChildBoxConstraint,
+    final BoxConstraints? suffixChildBoxConstraint,
+    final Widget? suffixChild,
+    final Widget? prefixChild,
+    final String? Function(String?)? validator,
+    final TextInputAction? textInputAction,
+    final bool? obscuringText,
+    final InputBorder? focusedErrorBorder,
+    final InputBorder? errorBorder,
+    final InputBorder? focusedBorder,
+    final InputBorder? border,
+    final TextEditingController? controller,
+    final List<TextInputFormatter>? inputFormatters,
+    final TextInputType? textInputType,
+    final String? defaultValue,
+    final Widget? suffixChildActive,
+    final Function(String)? onChanged,
+    final String? subFieldText,
+    final int? maxLine,
+    final int? minLine,
+  }) : super(
+          inputFormatters: inputFormatters,
+          textInputType: textInputType,
+          defaultValue: defaultValue,
+          onChanged: onChanged,
+          controller: controller,
+          isEnabled: isEnabled,
+          fieldName: fieldName,
+          cursorColor: cursorColor,
+          focusedErrorBorder: focusedErrorBorder,
+          errorBorder: errorBorder,
+          focusedBorder: focusedBorder,
+          border: border,
+          error: error,
+          errorMessage: errorMessage,
+          fieldPostRedirectionStyle: fieldPostRedirectionStyle,
+          fieldPostRedirection: fieldPostRedirection,
+          postFieldOnClick: postFieldOnClick,
+          onFieldSubmitted: onFieldSubmitted,
+          focusNode: focusNode,
+          isUpdatable: isUpdatable,
+          suffixChildActive: suffixChildActive,
+          nextFocusNode: nextFocusNode,
+          prefixChildBoxConstraint: prefixChildBoxConstraint,
+          suffixChildBoxConstraint: suffixChildBoxConstraint,
+          suffixChild: suffixChild,
+          prefixChild: prefixChild,
+          textInputAction: textInputAction,
+          obscuringText: obscuringText,
+          filled: filled,
+          validator: validator,
+          backgroundColor: backgroundColor,
+          hintText: hintText,
+          radius: radius,
+          contentPadding: contentPadding,
+          fieldNameStyle: fieldNameStyle,
+          hintTextStyle: hintTextStyle,
+          textStyle: textStyle,
+          theme: theme,
+          subFieldText: subFieldText,
+          maxLine: maxLine,
+          minLine: minLine,
+        );
+
+  @override
+  Widget build(BuildContext context) {
+    final themeData = loadThemeData(theme, "input_field", () => const CustomFormFieldThemeData())!;
+    final state = useState(false);
+    final stateObscure = useState(obscuringText ?? false);
+
+    return Column(
+      crossAxisAlignment: themeData.fieldNameAlignment,
+      children: [
+        Row(
+          children: [
+            (error ?? false) && (errorMessage != null)
+                ? Text(
+                    errorMessage ?? "",
+                    style: fieldNameStyle?.copyWith(color: Colors.red) ??
+                        themeData.fieldNameStyle?.copyWith(color: Colors.red) ??
+                        const TextStyle(fontSize: 12, fontWeight: FontWeight.w400, color: Colors.red),
+                  )
+                : fieldName != null
+                    ? Text(
+                        fieldName!,
+                        style: fieldNameStyle ?? themeData.fieldNameStyle ?? const TextStyle(color: Color(0xFF02132B), fontSize: 12, fontWeight: FontWeight.w500),
+                      )
+                    : Container(),
+            fieldPostRedirection == null ? const SizedBox() : const Spacer(),
+            fieldPostRedirection == null
+                ? const SizedBox()
+                : InkWell(
+                    onTap: postFieldOnClick,
+                    child: Text(
+                      fieldPostRedirection!,
+                      style: fieldPostRedirectionStyle ??
+                          themeData.fieldPostRedirectionStyle ??
+                          const TextStyle(
+                            color: Color(0xFF02132B),
+                            fontSize: 12,
+                            fontWeight: FontWeight.w600,
+                            decoration: TextDecoration.underline,
+                          ),
+                    )),
+          ],
+        ),
+        sh(7),
+        TextFormField(
+          
+          enabled: isEnabled,
+          minLines: minLine ?? themeData.minLine ?? 1,
+          maxLines: maxLine ?? themeData.maxLine ?? 1,
+          textInputAction: (maxLine ?? 1) > 1 ? TextInputAction.newline : textInputAction,
+          validator: validator,
+          keyboardType: const TextInputType.numberWithOptions(decimal: true, signed: true),
+          focusNode: focusNode,
+          onChanged: onChanged,
+          onSaved: onSaved,
+          onFieldSubmitted: (String val) {
+            onFieldSubmitted != null ? onFieldSubmitted!(val) : null;
+            FocusScope.of(context).requestFocus(nextFocusNode);
+          },
+          inputFormatters: [
+            FilteringTextInputFormatter.allow(RegExp(r'[0-9 ,.]')),
+            LengthLimitingTextInputFormatter(3)
+          ],
           obscureText: stateObscure.value,
           controller: controller,
           obscuringCharacter: themeData.obscuringCharacter ?? '*',
