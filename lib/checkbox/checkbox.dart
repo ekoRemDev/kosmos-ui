@@ -15,6 +15,8 @@ abstract class CustomCheckbox extends StatelessWidget {
     final Color? borderColor,
     final IconData? iconData,
     final String? themeName,
+    final Gradient? gradient,
+    final Gradient? activeGradient,
     final CustomCheckBoxThemeData? theme,
   }) = _Square;
 
@@ -46,6 +48,8 @@ class _Square extends StatelessWidget implements CustomCheckbox {
   final IconData? iconData;
   final CustomCheckBoxThemeData? theme;
   final String? themeName;
+  final Gradient? gradient;
+  final Gradient? activeGradient;
 
   const _Square({
     this.isChecked = false,
@@ -60,6 +64,8 @@ class _Square extends StatelessWidget implements CustomCheckbox {
     this.borderColor,
     this.theme,
     this.themeName,
+    this.activeGradient,
+    this.gradient,
     Key? key,
   }) : super(key: key);
 
@@ -75,6 +81,7 @@ class _Square extends StatelessWidget implements CustomCheckbox {
         decoration: BoxDecoration(
             color: isChecked ? selectedColor ?? themeData.selectedColor ?? const Color(0xFF02132B) : themeData.defaultColor ?? const Color(0xFFEFF0F1),
             borderRadius: BorderRadius.circular((borderRadius ?? themeData.borderRadius ?? 5)),
+            gradient: isChecked ? activeGradient : gradient,
             border: isChecked
                 ? null
                 : borderWidth == 0
