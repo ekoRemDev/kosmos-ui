@@ -34,6 +34,7 @@ class CustomFormFieldThemeData {
   final double? pickerImageWidth;
   final double? pickerImageRadius;
   final Color? pickerIconColor;
+  final Color? suffixIconColor;
   final TextStyle? subFieldTextStyle;
 
   final int? minLine;
@@ -46,6 +47,7 @@ class CustomFormFieldThemeData {
     this.obscuringCharacter,
     this.fieldStyle,
     this.cursorColor,
+    this.suffixIconColor,
     this.prefixChildBoxConstraint,
     this.suffixChildBoxConstraint,
     this.backgroundColor,
