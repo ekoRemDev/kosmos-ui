@@ -807,7 +807,7 @@ class _Fourth extends StatelessWidget implements Cards {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(title, style: titleStyle ?? themeData.titleStyle ?? TextStyle(fontSize: sp(11), fontWeight: FontWeight.w600, color: const Color(0xFF02132B)), textAlign: TextAlign.left, maxLines:2, overflow: TextOverflow.ellipsis,),
-                                Text(subTitle, style: subTitleStyle ?? themeData.subTitleStyle ?? TextStyle(fontSize: sp(10), fontWeight: FontWeight.w400, color: const Color(0xFF5A6575)), textAlign: TextAlign.lef,tmaxLines:1, overflow: TextOverflow.ellipsis,),
+                                Text(subTitle, style: subTitleStyle ?? themeData.subTitleStyle ?? TextStyle(fontSize: sp(10), fontWeight: FontWeight.w400, color: const Color(0xFF5A6575)), textAlign: TextAlign.left,maxLines:1, overflow: TextOverflow.ellipsis,),
                               ],
                             ),
                           )
