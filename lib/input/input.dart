@@ -335,30 +335,33 @@ class _OneImage extends Input {
                                                     )),
                                 Align(
                                   alignment: Alignment.centerRight,
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    crossAxisAlignment: CrossAxisAlignment.end,
-                                    children: [
-                                      svgIconPath == null
-                                          ? Icon(
-                                              Icons.cloud_upload_outlined,
-                                              color: iconColor ?? themeData.pickerIconColor ?? const Color(0xFF02132B).withOpacity(0.41),
-                                            )
-                                          : SvgPicture.asset(
-                                              svgIconPath!,
-                                              color: iconColor ?? themeData.pickerIconColor ?? const Color(0xFF02132B).withOpacity(0.41),
-                                            ),
-                                      const SizedBox(height: 7),
-                                      SizedBox(
-                                          width: 120,
-                                          child: Text(
-                                            'Appuyez pour modifier la photo',
-                                            textAlign: TextAlign.right,
-                                            style: textStyle ??
-                                                themeData.hintStyle ??
-                                                TextStyle(fontSize: sp(13), fontWeight: FontWeight.w500, color: const Color(0xFF02132B).withOpacity(0.41)),
-                                          )),
-                                    ],
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(right: 7),
+                                    child: Column(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      crossAxisAlignment: CrossAxisAlignment.end,
+                                      children: [
+                                        svgIconPath == null
+                                            ? Icon(
+                                                Icons.cloud_upload_outlined,
+                                                color: iconColor ?? themeData.pickerIconColor ?? const Color(0xFF02132B).withOpacity(0.41),
+                                              )
+                                            : SvgPicture.asset(
+                                                svgIconPath!,
+                                                color: iconColor ?? themeData.pickerIconColor ?? const Color(0xFF02132B).withOpacity(0.41),
+                                              ),
+                                        const SizedBox(height: 7),
+                                        SizedBox(
+                                            width: 120,
+                                            child: Text(
+                                              'Appuyez pour modifier la photo',
+                                              textAlign: TextAlign.right,
+                                              style: textStyle ??
+                                                  themeData.hintStyle ??
+                                                  TextStyle(fontSize: sp(13), fontWeight: FontWeight.w500, color: const Color(0xFF02132B).withOpacity(0.41)),
+                                            )),
+                                      ],
+                                    ),
                                   ),
                                 ),
                               ]
