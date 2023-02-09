@@ -497,7 +497,8 @@ class _MultipleFile extends Input {
                 onDoubleTap: onDoubleTap,
                 child: Padding(
                   padding: contentPadding ?? themeData.contentPadding ?? const EdgeInsets.fromLTRB(26, 6, 26, 6),
-                  child: Stack(
+                  child: LayoutBuilder(builder: (_, c) {
+                    return Stack(
                     alignment: Alignment.center,
                     children: (defaultFileList != null && defaultFileList!.isNotEmpty)
                         ? [
@@ -509,30 +510,33 @@ class _MultipleFile extends Input {
                                 children: defaultFileList != null
                                     ? [
                                         ...defaultFileList!.map((e) {
-                                          return Row(
-                                            children: [
-                                              Expanded(
-                                                child: FileNameItem(
-                                                  fileName: e.name,
-                                                  onClear: () {
-                                                    if (defaultFileList == null) return;
-                                                    List<PlatformFile>? tmp = List.from(defaultFileList!);
-                                                    if ((tmp.length) == 1) {
-                                                      tmp = null;
+                                          return SizedBox(
+                                            width: c.maxWidth,
+                                            child: Row(
+                                              children: [
+                                                Expanded(
+                                                  child: FileNameItem(
+                                                    fileName: e.name,
+                                                    onClear: () {
+                                                      if (defaultFileList == null) return;
+                                                      List<PlatformFile>? tmp = List.from(defaultFileList!);
+                                                      if ((tmp.length) == 1) {
+                                                        tmp = null;
+                                                        if (onMultipleChanged != null) onMultipleChanged!(tmp);
+                                                        return;
+                                                      }
+                                                      List<PlatformFile>? ret = [];
+                                                      for (final t in tmp) {
+                                                        if (e != t) ret.add(t);
+                                                      }
+                                                      tmp = ret;
                                                       if (onMultipleChanged != null) onMultipleChanged!(tmp);
-                                                      return;
-                                                    }
-                                                    List<PlatformFile>? ret = [];
-                                                    for (final t in tmp) {
-                                                      if (e != t) ret.add(t);
-                                                    }
-                                                    tmp = ret;
-                                                    if (onMultipleChanged != null) onMultipleChanged!(tmp);
-                                                  },
+                                                    },
+                                                  ),
                                                 ),
-                                              ),
-                                              sw(3),
-                                            ],
+                                                sw(3),
+                                              ],
+                                            ),
                                           );
                                         }).toList(),
                                         SizedBox(
@@ -631,7 +635,8 @@ class _MultipleFile extends Input {
                               ),
                             ),
                           ],
-                  ),
+                  );
+                  }),
                 )),
           ),
         )),
