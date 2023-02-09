@@ -499,143 +499,143 @@ class _MultipleFile extends Input {
                   padding: contentPadding ?? themeData.contentPadding ?? const EdgeInsets.fromLTRB(26, 6, 26, 6),
                   child: LayoutBuilder(builder: (_, c) {
                     return Stack(
-                    alignment: Alignment.center,
-                    children: (defaultFileList != null && defaultFileList!.isNotEmpty)
-                        ? [
-                            Align(
-                              alignment: Alignment.center,
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: defaultFileList != null
-                                    ? [
-                                        ...defaultFileList!.map((e) {
-                                          return SizedBox(
-                                            width: c.maxWidth,
-                                            child: Row(
-                                              children: [
-                                                Expanded(
-                                                  child: FileNameItem(
-                                                    fileName: e.name,
-                                                    onClear: () {
-                                                      if (defaultFileList == null) return;
-                                                      List<PlatformFile>? tmp = List.from(defaultFileList!);
-                                                      if ((tmp.length) == 1) {
-                                                        tmp = null;
+                      alignment: Alignment.center,
+                      children: (defaultFileList != null && defaultFileList!.isNotEmpty)
+                          ? [
+                              Align(
+                                alignment: Alignment.center,
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: defaultFileList != null
+                                      ? [
+                                          ...defaultFileList!.map((e) {
+                                            return SizedBox(
+                                              width: c.maxWidth,
+                                              child: Row(
+                                                children: [
+                                                  Expanded(
+                                                    child: FileNameItem(
+                                                      fileName: e.name,
+                                                      onClear: () {
+                                                        if (defaultFileList == null) return;
+                                                        List<PlatformFile>? tmp = List.from(defaultFileList!);
+                                                        if ((tmp.length) == 1) {
+                                                          tmp = null;
+                                                          if (onMultipleChanged != null) onMultipleChanged!(tmp);
+                                                          return;
+                                                        }
+                                                        List<PlatformFile>? ret = [];
+                                                        for (final t in tmp) {
+                                                          if (e != t) ret.add(t);
+                                                        }
+                                                        tmp = ret;
                                                         if (onMultipleChanged != null) onMultipleChanged!(tmp);
-                                                        return;
-                                                      }
-                                                      List<PlatformFile>? ret = [];
-                                                      for (final t in tmp) {
-                                                        if (e != t) ret.add(t);
-                                                      }
-                                                      tmp = ret;
-                                                      if (onMultipleChanged != null) onMultipleChanged!(tmp);
-                                                    },
+                                                      },
+                                                    ),
                                                   ),
-                                                ),
-                                                sw(3),
-                                              ],
-                                            ),
-                                          );
-                                        }).toList(),
-                                        SizedBox(
-                                          width: 200,
-                                          child: Align(
-                                            alignment: Alignment.center,
-                                            child: Column(
-                                              mainAxisAlignment: MainAxisAlignment.center,
-                                              children: [
-                                                svgIconPath == null
-                                                    ? Icon(
-                                                        Icons.cloud_upload_outlined,
-                                                        color: iconColor ?? themeData.pickerIconColor ?? const Color(0xFF02132B).withOpacity(0.41),
-                                                      )
-                                                    : SvgPicture.asset(
-                                                        svgIconPath!,
-                                                        color: iconColor ?? themeData.pickerIconColor ?? const Color(0xFF02132B).withOpacity(0.41),
-                                                      ),
-                                                sh(7),
-                                                SizedBox(
-                                                  width: 100,
-                                                  child: Text(
-                                                    'Appuyez pour modifier la / les fichier(s)',
-                                                    textAlign: TextAlign.center,
-                                                    style: textStyle ??
-                                                        themeData.fieldStyle ??
-                                                        TextStyle(
-                                                            fontSize: sp(13), fontWeight: FontWeight.w500, color: const Color(0xFF02132B).withOpacity(0.41)),
+                                                  sw(3),
+                                                ],
+                                              ),
+                                            );
+                                          }).toList(),
+                                          SizedBox(
+                                            width: 200,
+                                            child: Align(
+                                              alignment: Alignment.center,
+                                              child: Column(
+                                                mainAxisAlignment: MainAxisAlignment.center,
+                                                children: [
+                                                  svgIconPath == null
+                                                      ? Icon(
+                                                          Icons.cloud_upload_outlined,
+                                                          color: iconColor ?? themeData.pickerIconColor ?? const Color(0xFF02132B).withOpacity(0.41),
+                                                        )
+                                                      : SvgPicture.asset(
+                                                          svgIconPath!,
+                                                          color: iconColor ?? themeData.pickerIconColor ?? const Color(0xFF02132B).withOpacity(0.41),
+                                                        ),
+                                                  sh(7),
+                                                  SizedBox(
+                                                    width: 100,
+                                                    child: Text(
+                                                      'Appuyez pour modifier la / les fichier(s)',
+                                                      textAlign: TextAlign.center,
+                                                      style: textStyle ??
+                                                          themeData.fieldStyle ??
+                                                          TextStyle(
+                                                              fontSize: sp(13), fontWeight: FontWeight.w500, color: const Color(0xFF02132B).withOpacity(0.41)),
+                                                    ),
                                                   ),
-                                                ),
-                                              ],
+                                                ],
+                                              ),
                                             ),
                                           ),
-                                        ),
-                                      ]
-                                    : [
-                                        Column(
-                                          mainAxisAlignment: MainAxisAlignment.center,
-                                          crossAxisAlignment: CrossAxisAlignment.center,
-                                          children: [
-                                            svgIconPath == null
-                                                ? Icon(
-                                                    Icons.cloud_upload_outlined,
-                                                    color: iconColor ?? themeData.pickerIconColor ?? const Color(0xFF02132B).withOpacity(0.41),
-                                                  )
-                                                : SvgPicture.asset(
-                                                    svgIconPath!,
-                                                    color: iconColor ?? themeData.pickerIconColor ?? const Color(0xFF02132B).withOpacity(0.41),
-                                                  ),
-                                            sw(7),
-                                            Text(
-                                              'Appuyez pour choisir une / des fichier(s)',
-                                              style: textStyle ??
-                                                  themeData.fieldStyle ??
-                                                  TextStyle(
-                                                    fontSize: sp(13),
-                                                    fontWeight: FontWeight.w500,
-                                                    color: const Color(0xFF02132B).withOpacity(0.41),
-                                                  ),
-                                            ),
-                                          ],
-                                        ),
-                                      ],
+                                        ]
+                                      : [
+                                          Column(
+                                            mainAxisAlignment: MainAxisAlignment.center,
+                                            crossAxisAlignment: CrossAxisAlignment.center,
+                                            children: [
+                                              svgIconPath == null
+                                                  ? Icon(
+                                                      Icons.cloud_upload_outlined,
+                                                      color: iconColor ?? themeData.pickerIconColor ?? const Color(0xFF02132B).withOpacity(0.41),
+                                                    )
+                                                  : SvgPicture.asset(
+                                                      svgIconPath!,
+                                                      color: iconColor ?? themeData.pickerIconColor ?? const Color(0xFF02132B).withOpacity(0.41),
+                                                    ),
+                                              sw(7),
+                                              Text(
+                                                'Appuyez pour choisir une / des fichier(s)',
+                                                style: textStyle ??
+                                                    themeData.fieldStyle ??
+                                                    TextStyle(
+                                                      fontSize: sp(13),
+                                                      fontWeight: FontWeight.w500,
+                                                      color: const Color(0xFF02132B).withOpacity(0.41),
+                                                    ),
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                ),
                               ),
-                            ),
-                          ]
-                        : [
-                            Align(
-                              alignment: Alignment.center,
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  svgIconPath == null
-                                      ? Icon(
-                                          Icons.cloud_upload_outlined,
-                                          color: iconColor ?? themeData.pickerIconColor ?? const Color(0xFF02132B).withOpacity(0.41),
-                                        )
-                                      : SvgPicture.asset(
-                                          svgIconPath!,
-                                          color: iconColor ?? themeData.pickerIconColor ?? const Color(0xFF02132B).withOpacity(0.41),
-                                        ),
-                                  sh(7),
-                                  Text(
-                                    contentTitle ?? 'Appuyez pour choisir un fichier',
-                                    textAlign: TextAlign.center,
-                                    style: textStyle ??
-                                        themeData.hintStyle ??
-                                        TextStyle(
-                                          fontSize: 13,
-                                          fontWeight: FontWeight.w500,
-                                          color: const Color(0xFF02132B).withOpacity(0.41),
-                                        ),
-                                  ),
-                                ],
+                            ]
+                          : [
+                              Align(
+                                alignment: Alignment.center,
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    svgIconPath == null
+                                        ? Icon(
+                                            Icons.cloud_upload_outlined,
+                                            color: iconColor ?? themeData.pickerIconColor ?? const Color(0xFF02132B).withOpacity(0.41),
+                                          )
+                                        : SvgPicture.asset(
+                                            svgIconPath!,
+                                            color: iconColor ?? themeData.pickerIconColor ?? const Color(0xFF02132B).withOpacity(0.41),
+                                          ),
+                                    sh(7),
+                                    Text(
+                                      contentTitle ?? 'Appuyez pour choisir un fichier',
+                                      textAlign: TextAlign.center,
+                                      style: textStyle ??
+                                          themeData.hintStyle ??
+                                          TextStyle(
+                                            fontSize: 13,
+                                            fontWeight: FontWeight.w500,
+                                            color: const Color(0xFF02132B).withOpacity(0.41),
+                                          ),
+                                    ),
+                                  ],
+                                ),
                               ),
-                            ),
-                          ],
-                  );
+                            ],
+                    );
                   }),
                 )),
           ),
@@ -1113,12 +1113,14 @@ class FileNameItem extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(
-              fileName,
-              style: const TextStyle(
-                fontSize: 13,
-                fontWeight: FontWeight.w500,
-                color: Color(0xFF02132B),
+            Expanded(
+              child: Text(
+                fileName,
+                style: const TextStyle(
+                  fontSize: 13,
+                  fontWeight: FontWeight.w500,
+                  color: Color(0xFF02132B),
+                ),
               ),
             ),
             IconButton(
