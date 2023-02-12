@@ -914,12 +914,12 @@ class _PhoneNumber extends TextFormUpdated {
           },
           onInputChanged: onInputChanged,
           spaceBetweenSelectorAndTextField: 0,
-          selectorConfig: const SelectorConfig(
+          selectorConfig: SelectorConfig(
             setSelectorButtonAsPrefixIcon: true,
             showFlags: true,
             useEmoji: true,
             leadingPadding: 15,
-            selectorType: PhoneInputSelectorType.BOTTOM_SHEET,
+            selectorType: themeData.phoneInputType ?? PhoneInputSelectorType.BOTTOM_SHEET,
           ),
           inputDecoration: InputDecoration(
             errorStyle: const TextStyle(fontSize: 12, height: 0),

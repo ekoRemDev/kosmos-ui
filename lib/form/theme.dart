@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:ui_kosmos_v4/ui_kosmos_v4.dart';
 
 class CustomFormFieldThemeData {
@@ -36,6 +37,7 @@ class CustomFormFieldThemeData {
   final Color? pickerIconColor;
   final Color? suffixIconColor;
   final TextStyle? subFieldTextStyle;
+  final PhoneInputSelectorType? phoneInputType;
 
   final int? minLine;
   final int? maxLine;
@@ -70,5 +72,6 @@ class CustomFormFieldThemeData {
     this.maxLine,
     this.minLine,
     this.subFieldTextStyle,
+    this.phoneInputType,
   });
 }
