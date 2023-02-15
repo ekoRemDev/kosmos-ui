@@ -17,6 +17,7 @@ class CtaThemeData {
   final LinearGradient? gradient;
   final Color? loaderColor;
   final List<BoxShadow>? shadows;
+  final double? iconSize;
 
   const CtaThemeData({
     this.width,
@@ -35,5 +36,8 @@ class CtaThemeData {
     this.gradient,
     this.loaderColor,
     this.shadows,
+    this.iconSize,
   });
+
+
 }

@@ -538,7 +538,7 @@ class _Back extends CTA {
                           }
                         : null,
                     onDoubleTap: onDoubleTap,
-                    child: Icon(backIcon ?? Icons.arrow_back_ios_new_rounded, color: iconColor ?? themeData.iconColor ?? Colors.black)),
+                    child: Icon(backIcon ?? Icons.arrow_back_ios_new_rounded, color: iconColor ?? themeData.iconColor ?? Colors.black, size: themeData.iconSize ?? formatWidth(20),)),
               ),
             ),
           ),
