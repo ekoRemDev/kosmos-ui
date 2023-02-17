@@ -48,6 +48,7 @@ class TextFormUpdated extends HookWidget {
   final Color? cursorColor;
   final String? subFieldText;
   final AutovalidateMode? phoneValidate;
+  final bool? autoFocus;
 
   //SELECT FORM
   final String? value;
@@ -84,6 +85,7 @@ class TextFormUpdated extends HookWidget {
     this.isEnabled,
     this.fieldName,
     this.hintText,
+    this.autoFocus,
     this.isUpdatable,
     this.radius,
     this.contentPadding,
@@ -160,6 +162,7 @@ class TextFormUpdated extends HookWidget {
     final bool? error,
     final bool? isUpdatable,
     final bool? filled,
+    final bool? autoFocus,
     final bool? isEnabled,
     final String? Function(String?)? validator,
     final Function(String)? onFieldSubmitted,
@@ -391,6 +394,7 @@ class _Classic extends TextFormUpdated {
     final Color? cursorColor,
     final String? hintText,
     final bool? isEnabled,
+    final bool? autoFocus,
     final double? radius,
     final EdgeInsets? contentPadding,
     final TextStyle? fieldNameStyle,
@@ -436,6 +440,7 @@ class _Classic extends TextFormUpdated {
           fieldName: fieldName,
           cursorColor: cursorColor,
           focusedErrorBorder: focusedErrorBorder,
+          autoFocus: autoFocus,
           errorBorder: errorBorder,
           focusedBorder: focusedBorder,
           border: border,
@@ -522,6 +527,7 @@ class _Classic extends TextFormUpdated {
           validator: validator,
           keyboardType: textInputType,
           focusNode: focusNode,
+          autofocus: autoFocus ?? false,
           onChanged: onChanged,
           onSaved: onSaved,
           onFieldSubmitted: (String val) {
